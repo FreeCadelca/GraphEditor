@@ -64,6 +64,8 @@ public:
 
     void print_graph(Gtk::Button *btn);
 
+    void run_bfs(char start_vertex);
+
 };
 
 

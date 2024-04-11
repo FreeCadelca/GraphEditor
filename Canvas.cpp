@@ -9,6 +9,7 @@
 #include <string>
 #include <cmath>
 #include <map>
+#include <queue>
 
 std::map<char, std::vector<char>> adjacent;//словарь смежности
 
@@ -333,4 +334,51 @@ void Canvas::print_graph(Gtk::Button *btn) {//функция распечаты�
         this->printed_graph_label->hide();
         btn->set_label("Print Graph");
     }
+}
+
+void Canvas::run_bfs(char start_vertex) {
+
+    // Проверяем, есть ли данные о вершинах и ребрах в графе
+    if (coords.empty()) {
+        printed_graph_label->set_text("Error: Graph is empty");
+        printed_graph_label->show();
+        return;
+    }
+
+    // Создаем строковый поток для формирования результата BFS
+    std::stringstream result;
+    result << "Обход в ширину начиная с вершины " << start_vertex << ":\n";
+    result << "Посещенные вершины: ";
+
+    // Очередь для обхода графа в ширину
+    std::queue<char> q;
+    // Множество для отслеживания посещенных вершин
+    std::set<char> visited;
+
+    // Начинаем обход с заданной начальной вершины
+    q.push(start_vertex);
+    visited.insert(start_vertex);
+
+    // Пока очередь не пуста, обходим граф в ширину
+    while (!q.empty()) {
+        char current_vertex = q.front();
+        q.pop();
+
+        // Добавляем текущую вершину в результат обхода
+        result << current_vertex << " ";
+
+        // Получаем соседей текущей вершины из таблицы смежности
+        auto neighbors = adjacent[current_vertex];
+        // Для каждого соседа, если он еще не посещен, добавляем его в очередь и отмечаем как посещенный
+        for (char neighbor : neighbors) {
+            if (visited.find(neighbor) == visited.end()) {
+                q.push(neighbor);
+                visited.insert(neighbor);
+            }
+        }
+    }
+
+    // Выводим результат BFS в программное окно
+    printed_graph_label->set_text(result.str());
+    printed_graph_label->show();
 }

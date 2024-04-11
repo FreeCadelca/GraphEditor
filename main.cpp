@@ -1,8 +1,5 @@
 #include "gtkmm.h"
 #include "cairomm/context.h"
-#include <cstdlib>
-#include <string>
-#include <cmath>
 #include <map>
 #include "Canvas.h"
 
@@ -64,6 +61,16 @@ int main(int argc, char **argv) {
             )
 
     );
+
+    // ...
+
+    Gtk::Button *bfs_button; // Объявление кнопки для запуска алгоритма BFS
+    ui->get_widget("bfs_button", bfs_button);
+
+    bfs_button->signal_clicked().connect(sigc::bind(sigc::mem_fun(*canvas, &Canvas::run_bfs), 'A')); // Предположим, что стартовая вершина 'A'
+
+// ...
+
 
     return app->run(*window);//вызов окна
 }
