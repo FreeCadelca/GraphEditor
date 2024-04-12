@@ -69,6 +69,17 @@ int main(int argc, char **argv) {
 
     bfs_button->signal_clicked().connect(sigc::bind(sigc::mem_fun(*canvas, &Canvas::run_bfs), 'A')); // Предположим, что стартовая вершина 'A'
 
+    // Предположим, что у вас есть указатель на объект Canvas с именем canvas
+
+    Gtk::Button *dfs_button; // Объявление кнопки для запуска алгоритма DFS
+    ui->get_widget("dfs_button", dfs_button);
+
+    dfs_button->signal_clicked().connect([canvas]() {
+        canvas->run_dfs('A'); // Предположим, что стартовая вершина 'A'
+    });
+
+
+
 // ...
 
 

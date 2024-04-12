@@ -382,3 +382,47 @@ void Canvas::run_bfs(char start_vertex) {
     printed_graph_label->set_text(result.str());
     printed_graph_label->show();
 }
+
+void Canvas::run_dfs(char start_vertex) {
+    // Проверяем, есть ли данные о вершинах и ребрах в графе
+    if (coords.empty()) {
+        printed_graph_label->set_text("Error: Graph is empty");
+        printed_graph_label->show();
+        return;
+    }
+
+    // Создаем строковый поток для формирования результата DFS
+    std::stringstream result;
+    result << "Обход в глубину начиная с вершины " << start_vertex << ":\n";
+    result << "Посещенные вершины: ";
+
+    // Множество для отслеживания посещенных вершин
+    std::set<char> visited;
+
+    // Запускаем рекурсивную функцию DFS для поиска в глубину
+    dfs_util(start_vertex, visited, result);
+
+    // Выводим результат DFS в программное окно
+    printed_graph_label->set_text(result.str());
+    printed_graph_label->show();
+}
+
+// Вспомогательная функция для рекурсивного обхода графа в глубину
+void Canvas::dfs_util(char vertex, std::set<char>& visited, std::stringstream& result) {
+    // Помечаем текущую вершину как посещенную
+    visited.insert(vertex);
+
+    // Добавляем текущую вершину в результат
+    result << vertex << " ";
+
+    // Получаем соседей текущей вершины из таблицы смежности
+    auto neighbors = adjacent[vertex];
+
+    // Для каждого соседа, если он еще не посещен, рекурсивно запускаем обход в глубину
+    for (char neighbor : neighbors) {
+        if (visited.find(neighbor) == visited.end()) {
+            dfs_util(neighbor, visited, result);
+        }
+    }
+}
+

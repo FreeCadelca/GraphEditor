@@ -66,6 +66,10 @@ public:
 
     void run_bfs(char start_vertex);
 
+    void dfs_util(char vertex, std::set<char>& visited, std::stringstream& result);
+
+    void run_dfs(char start_vertex);
+
 };
 
 
