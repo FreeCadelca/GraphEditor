@@ -29,7 +29,7 @@ private:
     bool need_fix_temp_buffer;
 
     Gtk::ColorChooserDialog *color_chooser_dialog;
-    Gtk::Label *printed_graph_label;//распечатка графа
+    Glib::RefPtr<Gtk::Label> printed_graph_label;//распечатка графа
 
     std::map<char, std::pair<int, int>> coords;//координаты вершин
 public:
@@ -38,7 +38,7 @@ public:
     static const int VERTEX = 1 << 2;
     static const int EDGE = 1 << 3;
 
-    Canvas(Gtk::Label *printed_graph_label);
+    Canvas(Glib::RefPtr<Gtk::Label> &printed_graph_label);
 
     void choose_color_response(int response_id);
 
@@ -62,7 +62,7 @@ public:
 
     static std::string graph_output();
 
-    void print_graph(Gtk::Button *btn);
+    void print_graph(Glib::RefPtr<Gtk::Button> &btn);
 
 };
 

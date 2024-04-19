@@ -15,7 +15,7 @@ std::map<char, std::vector<char>> adjacent;//словарь смежности
 std::string TITLES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//названия вершин
 int ID_NEXT_TITLE = 0;//номер следующей вершины для выбора
 
-Canvas::Canvas(Gtk::Label *printed_graph_label) : state(DEFAULT | VERTEX), color(0, 0, 0, 1), buffer_width(1920),
+Canvas::Canvas(Glib::RefPtr<Gtk::Label> &printed_graph_label) : state(DEFAULT | VERTEX), color(0, 0, 0, 1), buffer_width(1920),
                                                   buffer_height(1080),
                                                   need_fix_temp_buffer(false) {
     //конструктор. В него пришлось передавать лейбл распечатки, потому что по-другому не получилось.
@@ -324,7 +324,7 @@ std::string Canvas::graph_output() {//функция формирования с
     return output;
 }
 
-void Canvas::print_graph(Gtk::Button *btn) {//функция распечатывания графа
+void Canvas::print_graph(Glib::RefPtr<Gtk::Button> &btn) {//функция распечатывания графа
     if (btn->get_label() == "Print Graph") {//"развёртывание" лейбла с распечаткой
         this->printed_graph_label->set_text(graph_output());
         this->printed_graph_label->show();
