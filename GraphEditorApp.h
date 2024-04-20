@@ -13,7 +13,8 @@ class GraphEditorApp : public Gtk::ApplicationWindow  {
     Canvas *canvas;
     int nextWeight = 1;
 
-    Glib::RefPtr<Gtk::Label> printed_graph_label;
+    Glib::RefPtr<Gtk::Label> printed_graph_label_left;
+    Glib::RefPtr<Gtk::Label> printed_graph_label_right;
     Glib::RefPtr<Gtk::ToolButton> tool_choose_color;
     Glib::RefPtr<Gtk::ToolButton> tool_add_vertex;
     Glib::RefPtr<Gtk::ToolButton> tool_add_edge;

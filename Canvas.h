@@ -11,6 +11,7 @@
 #include <string>
 #include <cmath>
 #include <map>
+#include "Graph.h"
 
 struct Color {//структура типа данных "цвет"
     double r, g, b, a;
@@ -29,16 +30,18 @@ private:
     bool need_fix_temp_buffer;
 
     Gtk::ColorChooserDialog *color_chooser_dialog;
-    Glib::RefPtr<Gtk::Label> printed_graph_label;//распечатка графа
+    Glib::RefPtr<Gtk::Label> printed_graph_label_left; //распечатка графа
+    Glib::RefPtr<Gtk::Label> printed_graph_label_right; //распечатка графа
 
-    std::map<char, std::pair<int, int>> coords;//координаты вершин
 public:
+    Graph *graph;
+
     static const int DEFAULT = 1 << 0;//состояния программы
     static const int DRAWING = 1 << 1;
     static const int VERTEX = 1 << 2;
     static const int EDGE = 1 << 3;
 
-    Canvas(Glib::RefPtr<Gtk::Label> &printed_graph_label);
+    Canvas(Glib::RefPtr<Gtk::Label> &printed_graph_label_left, Glib::RefPtr<Gtk::Label> &printed_graph_label_right);
 
     void choose_color_response(int response_id);
 
@@ -59,8 +62,6 @@ public:
     bool on_draw(const Cairo::RefPtr <Cairo::Context> &cr) override;
 
     void change_tool(int tool);
-
-    static std::string graph_output();
 
     void print_graph(Glib::RefPtr<Gtk::Button> &btn);
 

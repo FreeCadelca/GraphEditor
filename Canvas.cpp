@@ -3,21 +3,23 @@
 //
 
 #include "Canvas.h"
-#include "gtkmm.h"
-#include "cairomm/context.h"
 #include <cstdlib>
 #include <string>
 #include <cmath>
 #include <map>
 
-std::map<char, std::vector<char>> adjacent;//словарь смежности
+//std::map<char, std::vector<char>> adjacent; //словарь смежности
+//
+//std::string TITLES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//названия вершин
+//int ID_NEXT_TITLE = 0;//номер следующей вершины для выбора
+// !Legacy!
 
-std::string TITLES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//названия вершин
-int ID_NEXT_TITLE = 0;//номер следующей вершины для выбора
-
-Canvas::Canvas(Glib::RefPtr<Gtk::Label> &printed_graph_label) : state(DEFAULT | VERTEX), color(0, 0, 0, 1), buffer_width(1920),
-                                                  buffer_height(1080),
-                                                  need_fix_temp_buffer(false) {
+Canvas::Canvas(Glib::RefPtr<Gtk::Label> &printed_graph_label_left, Glib::RefPtr<Gtk::Label> &printed_graph_label_right)
+: state(DEFAULT | VERTEX),
+color(0, 0, 0, 1),
+buffer_width(1920),
+buffer_height(1080),
+need_fix_temp_buffer(false) {
     //конструктор. В него пришлось передавать лейбл распечатки, потому что по-другому не получилось.
     // Остальные параметры понятны по названию
     this->signal_draw().connect(sigc::mem_fun(*this, &Canvas::on_draw));
@@ -38,7 +40,10 @@ Canvas::Canvas(Glib::RefPtr<Gtk::Label> &printed_graph_label) : state(DEFAULT | 
     this->color_chooser_dialog->set_modal(true);
     this->color_chooser_dialog->signal_response().connect(sigc::mem_fun(*this, &Canvas::choose_color_response));
 
-    this->printed_graph_label = printed_graph_label;
+    this->printed_graph_label_left = printed_graph_label_left;
+    this->printed_graph_label_right = printed_graph_label_right;
+
+    this->graph = new Graph();
 }
 
 
@@ -68,8 +73,8 @@ bool Canvas::on_mouse_press(GdkEventButton *event) {//прописывание �
 bool Canvas::on_mouse_move(GdkEventMotion *event) {//прописывание функционала при двигающейся мыши
     this->state &= ~DEFAULT;//замена состояния
     this->state |= DRAWING;
-    if ((this->state & VERTEX) ==
-        0) {//если мы рисуем вершину, то нарисовав ее в начале, нам не надо дальше рисовать их, пока зажата мышь
+    if ((this->state & VERTEX) == 0) {
+        //если мы рисуем вершину, то нарисовав ее в начале, нам не надо дальше рисовать их, пока зажата мышь
         this->drawing(event->x, event->y);
         return true;
     }
@@ -132,18 +137,16 @@ void Canvas::drawing(double x, double y) {//функция состояния р
         this->need_fix_temp_buffer = true;
         if (this->state & VERTEX) {//рисование вершины
             bool can_draw = true;
-            for (auto i: this->coords) {//проверка на дальность от других вершин для защиты от наложения
+            for (auto i: this->graph->coords) {//проверка на дальность от других вершин для защиты от наложения
                 if (abs(i.second.first - x) <= 80 and abs(i.second.second - y) <= 80) {
                     can_draw = false;
                     break;
                 }
             }
-            if (can_draw and
-                ID_NEXT_TITLE != TITLES.size()) {//+проверка на максимальное кол-во вершин, иначе не рисуем
-                char next_char = TITLES[ID_NEXT_TITLE];
-                ID_NEXT_TITLE++;
-                this->coords[next_char] = {x, y};//добавляем новую вершину туда, куда нужно
-                adjacent[next_char] = {};
+            if (can_draw and this->graph->ID_NEXT_TITLE != this->graph->TITLES.size()) {
+                //+проверка на максимальное кол-во вершин, иначе не рисуем
+                char next_char = this->graph->TITLES[this->graph->ID_NEXT_TITLE];
+                this->graph->addVertex(x, y);
 
                 drawing_vertex(x, y, next_char);//отрисовываем вершину
             }
@@ -153,7 +156,7 @@ void Canvas::drawing(double x, double y) {//функция состояния р
             context->set_line_width(2);
 
             char sticking_from_vertex = '-';//"прилипание" к начальной вершине ребра
-            for (auto i: this->coords) {
+            for (auto i: this->graph->coords) {
                 if (abs(i.second.first - start_x) <= 40 and abs(i.second.second - start_y) <= 40) {
                     start_x = i.second.first;
                     start_y = i.second.second;
@@ -161,11 +164,11 @@ void Canvas::drawing(double x, double y) {//функция состояния р
                     break;
                 }
             }
-            if (sticking_from_vertex !=
-                '-') {//если ребро рисуется не из воздуха, а из существующей вершины, то продолжаем
+            if (sticking_from_vertex != '-') {
+                //если ребро рисуется не из воздуха, а из существующей вершины, то продолжаем
                 char sticking_to_vertex = '-';//проверка на "прилипание" к конечной вершине ребра
 
-                for (auto i: this->coords) {
+                for (auto i: this->graph->coords) {
                     if (abs(i.second.first - x) <= 40 and abs(i.second.second - y) <= 40) {
                         x = i.second.first;
                         y = i.second.second;
@@ -176,14 +179,14 @@ void Canvas::drawing(double x, double y) {//функция состояния р
                 if (sticking_to_vertex != sticking_from_vertex and sticking_to_vertex != '-') {
                     //если начальная вершина не совпадает с конечной и конечная не в воздухе, то рисуем
                     bool edge_exist = false;//проверка на существование ребра
-                    for (auto i: adjacent[sticking_from_vertex]) {
+                    for (auto i: this->graph->adjacent_list[sticking_from_vertex]) {
                         if (sticking_to_vertex == i) {
                             edge_exist = true;
                             break;
                         }
                     }
                     if (!edge_exist) {//если ребро не существует, добавляем его в словарь смежности
-                        adjacent[sticking_from_vertex].push_back(sticking_to_vertex);
+                        this->graph->addEdge(sticking_from_vertex, sticking_to_vertex);
                     }
                     context->move_to(this->start_x, this->start_y);//рисование самой линии
                     context->line_to(x, y);
@@ -206,7 +209,8 @@ void Canvas::drawing(double x, double y) {//функция состояния р
                     int length_arrow_inclined = round(
                             (double) length_arrow_straight / sqrt(2));//длина наклонной палочки стрелки
 
-                    //все ифы определяют, в какую сторону будут направлены палочки у стрелки в зависимости от угла наклона линии
+                    //все ифы определяют, в какую сторону будут направлены
+                    //палочки у стрелки в зависимости от угла наклона линии
                     if (a >= 0 and a < 15 or a >= 345 and a < 360) {
                         context->line_to(x - length_arrow_inclined, y + length_arrow_inclined);
                         context->move_to(x, y);
@@ -305,32 +309,16 @@ void Canvas::change_tool(int tool) {//функция смены инструме
     }
 }
 
-std::string Canvas::graph_output() {//функция формирования словаря смежности для вывода
-    std::string output;
-    int count_vertexes = (int) adjacent.size();
-    for (auto i: adjacent) {
-        char vertex = i.first;
-        output.push_back(vertex);
-        output += ":";
-        for (auto edge: i.second) {
-            output += " ";
-            output.push_back(edge);
-        }
-        if (i.second.empty()) {
-            output += " None";
-        }
-        output += ";\n";
-    }
-    return output;
-}
-
 void Canvas::print_graph(Glib::RefPtr<Gtk::Button> &btn) {//функция распечатывания графа
     if (btn->get_label() == "Print Graph") {//"развёртывание" лейбла с распечаткой
-        this->printed_graph_label->set_text(graph_output());
-        this->printed_graph_label->show();
+        this->printed_graph_label_left->set_text(this->graph->getPrintoutAdjList());
+        this->printed_graph_label_right->set_text(this->graph->getPrintoutAdjMatrix());
+        this->printed_graph_label_left->show();
+        this->printed_graph_label_right->show();
         btn->set_label("Close printout");
-    } else {//"свёртывание" лейбла с распечаткой
-        this->printed_graph_label->hide();
+    } else { //"свёртывание" лейбла с распечаткой
+        this->printed_graph_label_left->hide();
+        this->printed_graph_label_right->hide();
         btn->set_label("Print Graph");
     }
 }

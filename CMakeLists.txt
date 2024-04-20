@@ -10,6 +10,8 @@ add_executable(
         Canvas.cpp
         GraphEditorApp.cpp
         GraphEditorApp.h
+        Graph.cpp
+        Graph.h
 )
 
 find_package(PkgConfig)
