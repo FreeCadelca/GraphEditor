@@ -14,7 +14,9 @@
 //int ID_NEXT_TITLE = 0;//номер следующей вершины для выбора
 // !Legacy!
 
-Canvas::Canvas(Glib::RefPtr<Gtk::Label> &printed_graph_label_left, Glib::RefPtr<Gtk::Label> &printed_graph_label_right)
+Canvas::Canvas(Glib::RefPtr<Gtk::Label> &printed_graph_label_left,
+               Glib::RefPtr<Gtk::Label> &printed_graph_label_right,
+               Glib::RefPtr<Gtk::Label> &printed_algorithm_label)
 : state(DEFAULT | VERTEX),
 color(0, 0, 0, 1),
 buffer_width(1920),
@@ -42,6 +44,7 @@ need_fix_temp_buffer(false) {
 
     this->printed_graph_label_left = printed_graph_label_left;
     this->printed_graph_label_right = printed_graph_label_right;
+    this->printed_algorithm_label = printed_algorithm_label;
 
     this->graph = new Graph();
 }
@@ -308,17 +311,17 @@ void Canvas::change_tool(int tool) {//функция смены инструме
 
     }
 }
-
-void Canvas::print_graph(Glib::RefPtr<Gtk::Button> &btn) {//функция распечатывания графа
-    if (btn->get_label() == "Print Graph") {//"развёртывание" лейбла с распечаткой
-        this->printed_graph_label_left->set_text(this->graph->getPrintoutAdjList());
-        this->printed_graph_label_right->set_text(this->graph->getPrintoutAdjMatrix());
-        this->printed_graph_label_left->show();
-        this->printed_graph_label_right->show();
-        btn->set_label("Close printout");
-    } else { //"свёртывание" лейбла с распечаткой
-        this->printed_graph_label_left->hide();
-        this->printed_graph_label_right->hide();
-        btn->set_label("Print Graph");
-    }
-}
+//
+//void Canvas::print_graph(Glib::RefPtr<Gtk::Button> &btn) {//функция распечатывания графа
+//    if (btn->get_label() == "Print Graph") {//"развёртывание" лейбла с распечаткой
+//        this->printed_graph_label_left->set_text(this->graph->getPrintoutAdjList());
+//        this->printed_graph_label_right->set_text(this->graph->getPrintoutAdjMatrix());
+//        this->printed_graph_label_left->show();
+//        this->printed_graph_label_right->show();
+//        btn->set_label("Close printout");
+//    } else { //"свёртывание" лейбла с распечаткой
+//        this->printed_graph_label_left->hide();
+//        this->printed_graph_label_right->hide();
+//        btn->set_label("Print Graph");
+//    }
+//}

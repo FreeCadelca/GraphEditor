@@ -16,7 +16,10 @@ GraphEditorApp::GraphEditorApp() : ui{Gtk::Builder::create_from_file("design_new
         this->printed_graph_label_right = Glib::RefPtr<Gtk::Label>::cast_dynamic(
                 ui->get_object("printed_graph_label_right")
         );
-        this->canvas = new Canvas(this->printed_graph_label_left, this->printed_graph_label_right);
+        this->printed_algorithm_label = Glib::RefPtr<Gtk::Label>::cast_dynamic(
+                ui->get_object("printed_algorithm_label")
+        );
+        this->canvas = new Canvas(this->printed_graph_label_left, this->printed_graph_label_right, this->printed_algorithm_label);
         this->main_box->add(*canvas);
         canvas->show();
 
@@ -41,13 +44,21 @@ GraphEditorApp::GraphEditorApp() : ui{Gtk::Builder::create_from_file("design_new
         this->print_graph_button = Glib::RefPtr<Gtk::Button>::cast_dynamic(ui->get_object("print_graph_button"));
         //выцепление виджета кнопки разворачивания распечатки графа
         this->print_graph_button->signal_clicked().connect(
-                sigc::bind(sigc::mem_fun(*this->canvas, &Canvas::print_graph), this->print_graph_button)
+                sigc::mem_fun(*this, &GraphEditorApp::print_graph_data)
+        );
+
+        this->run_algorithm_button = Glib::RefPtr<Gtk::Button>::cast_dynamic(ui->get_object("run_algorithm_button"));
+        //выцепление виджета кнопки разворачивания распечатки графа
+        this->run_algorithm_button->signal_clicked().connect(
+                sigc::mem_fun(*this, &GraphEditorApp::print_algorithm)
         );
 
         this->entry_for_weight = Glib::RefPtr<Gtk::Entry>::cast_dynamic(ui->get_object("entry_for_weight"));
 //        this->entry_for_weight->signal_activate().connect(sigc::mem_fun(*this, &GraphEditorApp::on_change_weight_release));
         this->entry_for_weight->signal_changed().connect(
                 sigc::mem_fun(*this, &GraphEditorApp::on_change_weight_release));
+
+        this->choose_algorithm_cb = Glib::RefPtr<Gtk::ComboBox>::cast_dynamic(ui->get_object("choose_algorithm_cb"));
 
         this->set_resize_mode(Gtk::RESIZE_QUEUE);
         this->add(*this->main_box);
@@ -77,3 +88,30 @@ void GraphEditorApp::on_change_weight_release() {
         this->entry_for_weight->set_text(std::to_string(this->nextWeight));
     }
 };
+
+void GraphEditorApp::print_graph_data() {//функция распечатывания графа
+    if (this->print_graph_button->get_label() == "Print Graph") {//"развёртывание" лейбла с распечаткой
+        this->printed_graph_label_left->set_text(this->canvas->graph->getPrintoutAdjList());
+        this->printed_graph_label_right->set_text(this->canvas->graph->getPrintoutAdjMatrix());
+        this->printed_graph_label_left->show();
+        this->printed_graph_label_right->show();
+        this->print_graph_button->set_label("Close printout");
+    } else { //"свёртывание" лейбла с распечаткой
+        this->printed_graph_label_left->hide();
+        this->printed_graph_label_right->hide();
+        this->print_graph_button->set_label("Print Graph");
+    }
+}
+
+void GraphEditorApp::print_algorithm() {//функция распечатывания алгоритма на графе
+    if (this->run_algorithm_button->get_label() == "Run algorithm") { //"развёртывание" лейбла с распечаткой
+        this->printed_algorithm_label->set_text("this is algorithm)");
+        this->printed_algorithm_label->show();
+        this->run_algorithm_button->set_label("Close algorithm");
+    } else { //"свёртывание" лейбла с распечаткой
+        this->printed_algorithm_label->hide();
+        this->printed_algorithm_label->hide();
+        this->run_algorithm_button->set_label("Run algorithm");
+    }
+}
+

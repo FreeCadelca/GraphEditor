@@ -32,6 +32,7 @@ private:
     Gtk::ColorChooserDialog *color_chooser_dialog;
     Glib::RefPtr<Gtk::Label> printed_graph_label_left; //распечатка графа
     Glib::RefPtr<Gtk::Label> printed_graph_label_right; //распечатка графа
+    Glib::RefPtr<Gtk::Label> printed_algorithm_label; //распечатка графа
 
 public:
     Graph *graph;
@@ -41,7 +42,9 @@ public:
     static const int VERTEX = 1 << 2;
     static const int EDGE = 1 << 3;
 
-    Canvas(Glib::RefPtr<Gtk::Label> &printed_graph_label_left, Glib::RefPtr<Gtk::Label> &printed_graph_label_right);
+    Canvas(Glib::RefPtr<Gtk::Label> &printed_graph_label_left,
+           Glib::RefPtr<Gtk::Label> &printed_graph_label_right,
+           Glib::RefPtr<Gtk::Label> &printed_algorithm_label);
 
     void choose_color_response(int response_id);
 
@@ -63,7 +66,7 @@ public:
 
     void change_tool(int tool);
 
-    void print_graph(Glib::RefPtr<Gtk::Button> &btn);
+//    void print_graph(Glib::RefPtr<Gtk::Button> &btn);
 
 };
 
