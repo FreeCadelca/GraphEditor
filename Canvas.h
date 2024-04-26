@@ -30,10 +30,6 @@ private:
     bool need_fix_temp_buffer;
 
     Gtk::ColorChooserDialog *color_chooser_dialog;
-    Glib::RefPtr<Gtk::Label> printed_graph_label_left; //распечатка графа
-    Glib::RefPtr<Gtk::Label> printed_graph_label_right; //распечатка графа
-    Glib::RefPtr<Gtk::Label> printed_algorithm_label; //распечатка графа
-
 public:
     Graph *graph;
 
@@ -42,9 +38,7 @@ public:
     static const int VERTEX = 1 << 2;
     static const int EDGE = 1 << 3;
 
-    Canvas(Glib::RefPtr<Gtk::Label> &printed_graph_label_left,
-           Glib::RefPtr<Gtk::Label> &printed_graph_label_right,
-           Glib::RefPtr<Gtk::Label> &printed_algorithm_label);
+    Canvas();
 
     void choose_color_response(int response_id);
 
@@ -65,8 +59,6 @@ public:
     bool on_draw(const Cairo::RefPtr <Cairo::Context> &cr) override;
 
     void change_tool(int tool);
-
-//    void print_graph(Glib::RefPtr<Gtk::Button> &btn);
 
 };
 

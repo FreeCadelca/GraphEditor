@@ -14,14 +14,8 @@
 //int ID_NEXT_TITLE = 0;//номер следующей вершины для выбора
 // !Legacy!
 
-Canvas::Canvas(Glib::RefPtr<Gtk::Label> &printed_graph_label_left,
-               Glib::RefPtr<Gtk::Label> &printed_graph_label_right,
-               Glib::RefPtr<Gtk::Label> &printed_algorithm_label)
-: state(DEFAULT | VERTEX),
-color(0, 0, 0, 1),
-buffer_width(1920),
-buffer_height(1080),
-need_fix_temp_buffer(false) {
+Canvas::Canvas() : state(DEFAULT | VERTEX), color(0, 0, 0, 1), buffer_width(1920), buffer_height(1080),
+                   need_fix_temp_buffer(false) {
     //конструктор. В него пришлось передавать лейбл распечатки, потому что по-другому не получилось.
     // Остальные параметры понятны по названию
     this->signal_draw().connect(sigc::mem_fun(*this, &Canvas::on_draw));
@@ -41,10 +35,6 @@ need_fix_temp_buffer(false) {
     this->color_chooser_dialog = new Gtk::ColorChooserDialog;//настройка диалога выбора цвета
     this->color_chooser_dialog->set_modal(true);
     this->color_chooser_dialog->signal_response().connect(sigc::mem_fun(*this, &Canvas::choose_color_response));
-
-    this->printed_graph_label_left = printed_graph_label_left;
-    this->printed_graph_label_right = printed_graph_label_right;
-    this->printed_algorithm_label = printed_algorithm_label;
 
     this->graph = new Graph();
 }
@@ -208,9 +198,10 @@ void Canvas::drawing(double x, double y) {//функция состояния р
                     x = (x + start_x) / 2;//переход к середине отрезка
                     y = (y + start_y) / 2;
                     context->move_to(x, y);
-                    int length_arrow_straight = 10;//длина прямой палочки стрелки
-                    int length_arrow_inclined = round(
-                            (double) length_arrow_straight / sqrt(2));//длина наклонной палочки стрелки
+                    //длина прямой палочки стрелки
+                    int length_arrow_straight = 10;
+                    //длина наклонной палочки стрелки
+                    int length_arrow_inclined = (int) round((double) length_arrow_straight / sqrt(2));
 
                     //все ифы определяют, в какую сторону будут направлены
                     //палочки у стрелки в зависимости от угла наклона линии
@@ -311,17 +302,3 @@ void Canvas::change_tool(int tool) {//функция смены инструме
 
     }
 }
-//
-//void Canvas::print_graph(Glib::RefPtr<Gtk::Button> &btn) {//функция распечатывания графа
-//    if (btn->get_label() == "Print Graph") {//"развёртывание" лейбла с распечаткой
-//        this->printed_graph_label_left->set_text(this->graph->getPrintoutAdjList());
-//        this->printed_graph_label_right->set_text(this->graph->getPrintoutAdjMatrix());
-//        this->printed_graph_label_left->show();
-//        this->printed_graph_label_right->show();
-//        btn->set_label("Close printout");
-//    } else { //"свёртывание" лейбла с распечаткой
-//        this->printed_graph_label_left->hide();
-//        this->printed_graph_label_right->hide();
-//        btn->set_label("Print Graph");
-//    }
-//}

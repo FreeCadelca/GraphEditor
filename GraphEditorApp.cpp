@@ -19,7 +19,7 @@ GraphEditorApp::GraphEditorApp() : ui{Gtk::Builder::create_from_file("design_new
         this->printed_algorithm_label = Glib::RefPtr<Gtk::Label>::cast_dynamic(
                 ui->get_object("printed_algorithm_label")
         );
-        this->canvas = new Canvas(this->printed_graph_label_left, this->printed_graph_label_right, this->printed_algorithm_label);
+        this->canvas = new Canvas();
         this->main_box->add(*canvas);
         canvas->show();
 
