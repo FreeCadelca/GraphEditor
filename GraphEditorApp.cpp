@@ -105,7 +105,9 @@ void GraphEditorApp::print_graph_data() {//функция распечатыва
 
 void GraphEditorApp::print_algorithm() {//функция распечатывания алгоритма на графе
     if (this->run_algorithm_button->get_label() == "Run algorithm") { //"развёртывание" лейбла с распечаткой
-        this->printed_algorithm_label->set_text("this is algorithm)");
+        std::string algorithm = this->choose_algorithm_cb->get_active_id();
+        this->canvas->graph->runAlgorithm(this->choose_algorithm_cb->get_active_id());
+        this->printed_algorithm_label->set_text(this->canvas->graph->getPrintoutAlgorithm());
         this->printed_algorithm_label->show();
         this->run_algorithm_button->set_label("Close algorithm");
     } else { //"свёртывание" лейбла с распечаткой

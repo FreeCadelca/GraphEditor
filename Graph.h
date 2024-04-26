@@ -7,7 +7,11 @@
 
 #include <map>
 #include <vector>
+#include <queue>
+#include <set>
 #include <string>
+#include <cstdlib>
+#include <sstream>
 
 
 class Graph {
@@ -22,6 +26,10 @@ private:
 //        char v_to;
 //        int weight;
 //    };
+    std::string printoutAlgorithm;
+    void run_bfs(char start_vertex);
+    void dfs_util(char vertex, std::set<char>& visited, std::stringstream& result);
+    void run_dfs(char start_vertex);
 public:
     std::map<char, std::vector<char>> adjacent_list; // список смежности
 //    std::map<char, std::map<char, int>> adjacent_matrix; // матрица смежности
@@ -38,7 +46,8 @@ public:
     std::string getPrintoutAdjList();
     std::string getPrintoutAdjMatrix();
 //    std::string getPrintoutEdgeList();
-
+    std::string getPrintoutAlgorithm();
+    void runAlgorithm(const std::string& algorithm);
 };
 
 

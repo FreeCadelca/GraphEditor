@@ -59,13 +59,6 @@ public:
     bool on_draw(const Cairo::RefPtr <Cairo::Context> &cr) override;
 
     void change_tool(int tool);
-
-    void run_bfs(char start_vertex);
-
-    void dfs_util(char vertex, std::set<char>& visited, std::stringstream& result);
-
-    void run_dfs(char start_vertex);
-
 };
 
 
