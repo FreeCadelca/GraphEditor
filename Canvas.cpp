@@ -305,7 +305,6 @@ void Canvas::change_tool(int tool) {//функция смены инструме
 }
 
 void Canvas::run_bfs(char start_vertex) {
-
     // Проверяем, есть ли данные о вершинах и ребрах в графе
     if (coords.empty()) {
         printed_graph_label->set_text("Error: Graph is empty");
