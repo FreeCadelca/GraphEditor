@@ -39,6 +39,11 @@ public:
     static const int EDGE = 1 << 3;
 
     Canvas();
+    void drawing_arrow(const double x1, const double y1, const double x2, const double y2);
+
+    void animate_bfs(const std::string &bfs_result);
+
+    void visualize_vertex(char vertex, const Gdk::RGBA &color);
 
     void choose_color_response(int response_id);
 
