@@ -33,5 +33,5 @@ public:
     void print_algorithm();
 };
 
-
+//
 #endif //GRAPHEDITOR_GRAPHEDITORAPP_H

@@ -52,7 +52,7 @@ std::string Graph::getPrintoutAdjList() {
     }
     return output;
 }
-
+//
 std::string Graph::getPrintoutAdjMatrix() {
     int count_vertexes = (int) this->adjacent_list.size();
     std::string output = "    ";

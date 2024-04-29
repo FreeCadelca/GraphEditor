@@ -18,7 +18,7 @@ struct Color {//структура типа данных "цвет"
 
     Color(double r, double g, double b, double a) : r(r), g(g), b(b), a(a) {}
 };
-
+//
 class Canvas : public Gtk::DrawingArea {
 private:
     int state;

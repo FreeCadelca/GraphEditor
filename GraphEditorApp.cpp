@@ -88,7 +88,7 @@ void GraphEditorApp::on_change_weight_release() {
         this->entry_for_weight->set_text(std::to_string(this->nextWeight));
     }
 };
-
+//
 void GraphEditorApp::print_graph_data() {//функция распечатывания графа
     if (this->print_graph_button->get_label() == "Print Graph") {//"развёртывание" лейбла с распечаткой
         this->printed_graph_label_left->set_text(this->canvas->graph->getPrintoutAdjList());

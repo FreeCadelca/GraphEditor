@@ -296,7 +296,7 @@ bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
     }
     return true;
 }
-
+//
 void Canvas::change_tool(int tool) {//функция смены инструмента
     this->state = Canvas::DEFAULT | tool;
     if (tool == VERTEX) {
