@@ -12,6 +12,8 @@ add_executable(
         GraphEditorApp.h
         Graph.cpp
         Graph.h
+        ChooseWeightApp.cpp
+        ChooseWeightApp.h
 )
 
 find_package(PkgConfig)
