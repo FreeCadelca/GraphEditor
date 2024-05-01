@@ -1,19 +1,21 @@
 //
 // Created by Dmitriy on 02.04.2024.
 //
-#include <unistd.h>
 #include "Canvas.h"
-#include <cstdlib>
-#include <string>
-#include <cmath>
-#include <map>
-#include <queue>
 
 //std::map<char, std::vector<char>> adjacent; //словарь смежности
 //
 //std::string TITLES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//названия вершин
 //int ID_NEXT_TITLE = 0;//номер следующей вершины для выбора
 // !Legacy!
+Canvas* Canvas::instance = nullptr;
+
+Canvas* Canvas::getInstance() {
+    if (instance == nullptr) {
+        instance = new Canvas();
+    }
+    return instance;
+}
 
 Canvas::Canvas() : state(DEFAULT | VERTEX), color(0, 0, 0, 1), buffer_width(1920), buffer_height(1080),
                    need_fix_temp_buffer(false) {
@@ -36,10 +38,7 @@ Canvas::Canvas() : state(DEFAULT | VERTEX), color(0, 0, 0, 1), buffer_width(1920
     this->color_chooser_dialog = new Gtk::ColorChooserDialog;//настройка диалога выбора цвета
     this->color_chooser_dialog->set_modal(true);
     this->color_chooser_dialog->signal_response().connect(sigc::mem_fun(*this, &Canvas::choose_color_response));
-
-    this->graph = new Graph();
 }
-
 
 void Canvas::choose_color_response(int response_id) {//настройка цвета, выбранного через диалог
     if (response_id == Gtk::RESPONSE_OK) {
@@ -181,27 +180,21 @@ void Canvas::drawing_arrow(double start_x, double start_y, double end_x, double 
     }
 }
 
-
-
-
-
-
-
 void Canvas::drawing(double x, double y) {
     if (this->state & DRAWING) {
         this->need_fix_temp_buffer = true;
         if (this->state & VERTEX) {
             // Drawing vertex
             bool can_draw = true;
-            for (auto i : this->graph->coords) {
+            for (auto i : Graph::getInstance()->coords) {
                 if (abs(i.second.first - x) <= 80 and abs(i.second.second - y) <= 80) {
                     can_draw = false;
                     break;
                 }
             }
-            if (can_draw and this->graph->ID_NEXT_TITLE != this->graph->TITLES.size()) {
-                char next_char = this->graph->TITLES[this->graph->ID_NEXT_TITLE];
-                this->graph->addVertex(x, y);
+            if (can_draw and Graph::getInstance()->ID_NEXT_TITLE != Graph::getInstance()->TITLES.size()) {
+                char next_char = Graph::getInstance()->TITLES[Graph::getInstance()->ID_NEXT_TITLE];
+                Graph::getInstance()->addVertex(x, y);
 
                 drawing_vertex(x, y, next_char);
             }
@@ -209,7 +202,7 @@ void Canvas::drawing(double x, double y) {
         if (this->state & EDGE) {
             // Drawing edge
             char sticking_from_vertex = '-';
-            for (auto i : this->graph->coords) {
+            for (auto i : Graph::getInstance()->coords) {
                 if (abs(i.second.first - start_x) <= 40 and abs(i.second.second - start_y) <= 40) {
                     start_x = i.second.first;
                     start_y = i.second.second;
@@ -219,7 +212,7 @@ void Canvas::drawing(double x, double y) {
             }
             if (sticking_from_vertex != '-') {
                 char sticking_to_vertex = '-';
-                for (auto i : this->graph->coords) {
+                for (auto i : Graph::getInstance()->coords) {
                     if (abs(i.second.first - x) <= 40 and abs(i.second.second - y) <= 40) {
                         x = i.second.first;
                         y = i.second.second;
@@ -229,14 +222,14 @@ void Canvas::drawing(double x, double y) {
                 }
                 if (sticking_to_vertex != sticking_from_vertex and sticking_to_vertex != '-') {
                     bool edge_exist = false;
-                    for (auto i : this->graph->adjacent_list[sticking_from_vertex]) {
+                    for (auto i : Graph::getInstance()->adjacent_list[sticking_from_vertex]) {
                         if (sticking_to_vertex == i) {
                             edge_exist = true;
                             break;
                         }
                     }
                     if (!edge_exist) {
-                        this->graph->addEdge(sticking_from_vertex, sticking_to_vertex);
+                        Graph::getInstance()->addEdge(sticking_from_vertex, sticking_to_vertex);
                     }
                     drawing_arrow(start_x, start_y, x, y);
                 }
@@ -269,16 +262,17 @@ void Canvas::change_tool(int tool) {//функция смены инструме
     }
 }
 
-void Canvas::visualize_vertex(char vertex, const Gdk::RGBA& color) {
+//useless (просто не удаляю на всякий случай)
+void Canvas::visualize_vertex(char vertex, Color color) {
     // Найти координаты вершины на холсте по ее метке
-    double x = this->graph->coords[vertex].first;
-    double y = this->graph->coords[vertex].second;
+    double x = Graph::getInstance()->coords[vertex].first;
+    double y = Graph::getInstance()->coords[vertex].second;
 
     // Получить контекст рисования
     auto context = this->get_context(temp_buffer, true);
 
     // Установить цвет для рисования
-    context->set_source_rgba(color.get_red(), color.get_green(), color.get_blue(), color.get_alpha());
+    context->set_source_rgba(color.r, color.g, color.b, color.a);
 
     // Рисовать вершину
     drawing_vertex(x, y, vertex);
@@ -287,7 +281,7 @@ void Canvas::visualize_vertex(char vertex, const Gdk::RGBA& color) {
     this->queue_draw();
 }
 
-
+//useless (просто не удаляю на всякий случай)
 void Canvas::animate_bfs(const std::string& bfs_result) {
     // Очистка предыдущей анимации (если есть)
     //clear_animation();
@@ -304,11 +298,38 @@ void Canvas::animate_bfs(const std::string& bfs_result) {
 
     // Запуск анимации посещения вершин
     for (char vertex : visited_vertices) {
-        visualize_vertex(vertex, Gdk::RGBA("red"));
+        visualize_vertex(vertex, Color(255, 0, 0, 255));
         usleep(500000); // Задержка в 0.5 секунды (500000 микросекунд)
     }
 }
 
+void Canvas::outline_vertex(char vertex, Color outline_color) {
+    // Функция для обводки вершины.
+    // Если не получится сделать прозрачную дугу с заданной шириной,
+    // то придется рисовать сначала круг внешнего радиуса обводки,
+    // потом белый круг внутреннего радиуса обводки,
+    // потом снова рисуем эту же вершину (потому что раньше мы ее перекрыли).
+    // Цвет вершины пока что черный по дефолту, пока что мы не запоминали цвет
 
+    // P.s. если найдешь способ получше - отлично, я не идеален, ты можешь что-то лучше придумать, я не отрицаю))
+}
+
+void Canvas::fill_vertex(char vertex, Color fill_color) {
+    // Функция для залифки заднего фона вершины. Есть 2 (стула) способа.
+    // Либо поверх вершины рисуем полупрозрачный круг,
+    // либо сначала обычный круг радиуса вершины (перекрываем её), а потом снова рисуем эту вершину
+
+    // P.s. тут тоже если найдешь способ получше - отлично
+}
+
+void Canvas::outline_edge(char v1, char v2, Color outline_color) {
+    // Функция для обводки ребра, заданного двумя вершинами
+
+    // Тут у меня только одна идея - отрисовать сначала 2 толстые линии по
+    // краям стрелки (с отступами по пикселю по нормали к ребру) толщиной в 3 пикселя,
+    // потом поверх неё нарисовать ребро (потому что хвостики стрелочек испортятся, новые линии наложатся на них)
+
+    // P.s. тот же самый ps)
+}
 
 

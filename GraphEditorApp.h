@@ -11,7 +11,6 @@
 
 class GraphEditorApp : public Gtk::ApplicationWindow  {
     Gtk::Box *main_box;
-    Canvas *canvas;
     int nextWeight = 1;
 
     Glib::RefPtr<Gtk::Label> printed_graph_label_left;

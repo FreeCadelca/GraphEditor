@@ -5,6 +5,7 @@
 #include "GraphEditorApp.h"
 #include <iostream>
 #include "Canvas.h"
+#include "Graph.h"
 
 
 GraphEditorApp::GraphEditorApp() : ui{Gtk::Builder::create_from_file("design_new.glade")} {
@@ -19,26 +20,25 @@ GraphEditorApp::GraphEditorApp() : ui{Gtk::Builder::create_from_file("design_new
         this->printed_algorithm_label = Glib::RefPtr<Gtk::Label>::cast_dynamic(
                 ui->get_object("printed_algorithm_label")
         );
-        this->canvas = new Canvas();
-        this->main_box->add(*canvas);
-        canvas->show();
+        this->main_box->add(*Canvas::getInstance());
+        Canvas::getInstance()->show();
 
         this->tool_choose_color = Glib::RefPtr<Gtk::ToolButton>::cast_dynamic(ui->get_object("tool_choose_color"));
         //выцепление виджета инструмента выбора цвета
-        this->tool_choose_color->signal_clicked().connect(sigc::mem_fun(*this->canvas, &Canvas::choose_color));
+        this->tool_choose_color->signal_clicked().connect(sigc::mem_fun(*Canvas::getInstance(), &Canvas::choose_color));
         //подключение функционала при нажатии
 
         this->tool_add_vertex = Glib::RefPtr<Gtk::ToolButton>::cast_dynamic(ui->get_object("tool_add_vertex"));
         //выцепление виджета инструмента рисования вершин
         //подключение функционала при нажатии
         this->tool_add_vertex->signal_clicked().connect(
-                sigc::bind(sigc::mem_fun(*this->canvas, &Canvas::change_tool), Canvas::VERTEX)
+                sigc::bind(sigc::mem_fun(*Canvas::getInstance(), &Canvas::change_tool), Canvas::VERTEX)
         );
 
         this->tool_add_edge = Glib::RefPtr<Gtk::ToolButton>::cast_dynamic(ui->get_object("tool_add_edge"));
         //выцепление виджета инструмента рисования рёбер
         this->tool_add_edge->signal_clicked().connect(
-                sigc::bind(sigc::mem_fun(*this->canvas, &Canvas::change_tool), Canvas::EDGE)
+                sigc::bind(sigc::mem_fun(*Canvas::getInstance(), &Canvas::change_tool), Canvas::EDGE)
         );
 
         this->print_graph_button = Glib::RefPtr<Gtk::Button>::cast_dynamic(ui->get_object("print_graph_button"));
@@ -83,7 +83,7 @@ void GraphEditorApp::on_change_weight_release() {
     }
     if (is_number) {
         std::cout << new_weight << "\n";
-        this->canvas->graph->nextWeight = std::stoi(new_weight);
+        Graph::getInstance()->nextWeight = std::stoi(new_weight);
     } else {
         this->entry_for_weight->set_text(std::to_string(this->nextWeight));
     }
@@ -91,8 +91,8 @@ void GraphEditorApp::on_change_weight_release() {
 //
 void GraphEditorApp::print_graph_data() {//функция распечатывания графа
     if (this->print_graph_button->get_label() == "Print Graph") {//"развёртывание" лейбла с распечаткой
-        this->printed_graph_label_left->set_text(this->canvas->graph->getPrintoutAdjList());
-        this->printed_graph_label_right->set_text(this->canvas->graph->getPrintoutAdjMatrix());
+        this->printed_graph_label_left->set_text(Graph::getInstance()->getPrintoutAdjList());
+        this->printed_graph_label_right->set_text(Graph::getInstance()->getPrintoutAdjMatrix());
         this->printed_graph_label_left->show();
         this->printed_graph_label_right->show();
         this->print_graph_button->set_label("Close printout");
@@ -106,8 +106,8 @@ void GraphEditorApp::print_graph_data() {//функция распечатыва
 void GraphEditorApp::print_algorithm() {//функция распечатывания алгоритма на графе
     if (this->run_algorithm_button->get_label() == "Run algorithm") { //"развёртывание" лейбла с распечаткой
         std::string algorithm = this->choose_algorithm_cb->get_active_id();
-        this->canvas->graph->runAlgorithm(this->choose_algorithm_cb->get_active_id());
-        this->printed_algorithm_label->set_text(this->canvas->graph->getPrintoutAlgorithm());
+        Graph::getInstance()->runAlgorithm(this->choose_algorithm_cb->get_active_id());
+        this->printed_algorithm_label->set_text(Graph::getInstance()->getPrintoutAlgorithm());
         this->printed_algorithm_label->show();
         this->run_algorithm_button->set_label("Close algorithm");
     } else { //"свёртывание" лейбла с распечаткой
