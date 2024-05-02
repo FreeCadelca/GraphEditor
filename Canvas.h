@@ -11,16 +11,18 @@
 #include <string>
 #include <cmath>
 #include <map>
+#include <unistd.h>
+#include <queue>
+#include <iostream>
 #include "Graph.h"
+#include "Color.h"
 
-struct Color {//структура типа данных "цвет"
-    double r, g, b, a;
-
-    Color(double r, double g, double b, double a) : r(r), g(g), b(b), a(a) {}
-};
 
 class Canvas : public Gtk::DrawingArea {
 private:
+    static Canvas* instance;
+    Canvas();
+
     int state;
     Color color;
     Cairo::RefPtr <Cairo::Surface> buffer;
@@ -31,14 +33,14 @@ private:
 
     Gtk::ColorChooserDialog *color_chooser_dialog;
 public:
-    Graph *graph;
+    static Canvas* getInstance();
 
     static const int DEFAULT = 1 << 0;//состояния программы
     static const int DRAWING = 1 << 1;
     static const int VERTEX = 1 << 2;
     static const int EDGE = 1 << 3;
 
-    Canvas();
+    void drawing_arrow(const double x1, const double y1, const double x2, const double y2);
 
     void choose_color_response(int response_id);
 
@@ -59,6 +61,18 @@ public:
     bool on_draw(const Cairo::RefPtr <Cairo::Context> &cr) override;
 
     void change_tool(int tool);
+
+    //useless
+    void animate_bfs(const std::string &bfs_result);
+
+    //useless
+    void visualize_vertex(char vertex, Color color);
+
+    void outline_vertex(char vertex, Color outline_color);
+
+    void fill_vertex(char vertex, Color fill_color);
+
+    void outline_edge(char v1, char v2, Color outline_color);
 };
 
 
