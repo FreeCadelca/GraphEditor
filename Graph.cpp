@@ -243,10 +243,17 @@ void Graph::bellman_ford(char start_vertex) {
     distances[start_vertex - 'A'] = 0;
 
     // Проходимся по всем рёбрам графа |V| - 1 раз для нахождения кратчайших расстояний
+    // Проходим по всем вершинам графа для обновления расстояний на каждой итерации
     for (int i = 0; i < TITLES.size() - 1; ++i) {
+        // Внутренний цикл: перебираем все вершины графа
         for (char v_from : TITLES) {
+            // Для каждой вершины перебираем все смежные с ней вершины
             for (char v_to : adjacent_list[v_from]) {
+                // Получаем вес ребра между вершинами v_from и v_to
                 int weight = adjacent_matrix[v_from - 'A'][v_to - 'A'];
+
+                // Проверяем, что расстояние до вершины v_from не равно бесконечности
+                // и обновляем расстояние до вершины v_to, если новое расстояние меньше текущего
                 if (distances[v_from - 'A'] != std::numeric_limits<int>::max() &&
                     distances[v_from - 'A'] + weight < distances[v_to - 'A']) {
                     distances[v_to - 'A'] = distances[v_from - 'A'] + weight;
