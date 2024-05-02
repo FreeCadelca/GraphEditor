@@ -3,12 +3,14 @@
 //
 
 #include "Graph.h"
+#include <stack>
+#include <functional>
 
-Graph* Graph::instance = nullptr;
+Graph *Graph::instance = nullptr;
 
 Graph::Graph() = default;
 
-Graph* Graph::getInstance() {
+Graph *Graph::getInstance() {
     if (instance == nullptr) {
         instance = new Graph();
     }
@@ -61,6 +63,7 @@ std::string Graph::getPrintoutAdjList() {
     }
     return output;
 }
+
 //
 std::string Graph::getPrintoutAdjMatrix() {
     int count_vertexes = (int) this->adjacent_list.size();
@@ -73,7 +76,7 @@ std::string Graph::getPrintoutAdjMatrix() {
     for (int i = 0; i < count_vertexes; i++) {
         output += this->TITLES[i];
         output += ": ";
-        for (auto j : this->adjacent_matrix[i]) {
+        for (auto j: this->adjacent_matrix[i]) {
             output += std::to_string(j) + " ";
         }
         output += '\n';
@@ -106,18 +109,17 @@ void Graph::run_bfs(char start_vertex) {
     q.push(start_vertex);
     visited.insert(start_vertex);
 
-    // Обводка вершины и уход в слип
-    Canvas::getInstance()->outline_vertex(start_vertex, Color(0.6, 1, 0.6, 0.5));
-    usleep(100000);
+    // Отрисовка первой вершины
+    Canvas::getInstance()->outline_vertex(start_vertex, Color(0.6, 1, 0.6, 1));
+    usleep(400000); // Добавим небольшую задержку перед началом анимации
 
-    // Пока очередь не пуста, обходим граф в ширину
+    // Задержка между отрисовками вершин (в миллисекундах)
+    int delay_ms = 400;
+
+    // Обработка вершин с задержкой
     while (!q.empty()) {
         char current_vertex = q.front();
         q.pop();
-
-        // Обводка вершины и уход в слип
-        Canvas::getInstance()->outline_vertex(current_vertex, Color(0.6, 1, 0.6, 0.5));
-        usleep(100000);
 
         // Добавляем текущую вершину в результат обхода
         result << current_vertex << " ";
@@ -125,14 +127,19 @@ void Graph::run_bfs(char start_vertex) {
         // Получаем соседей текущей вершины из таблицы смежности
         auto neighbors = this->adjacent_list[current_vertex];
         // Для каждого соседа, если он еще не посещен, добавляем его в очередь и отмечаем как посещенный
-        for (char neighbor : neighbors) {
+        for (char neighbor: neighbors) {
             if (visited.find(neighbor) == visited.end()) {
                 q.push(neighbor);
                 visited.insert(neighbor);
 
-                // Обводка вершины и уход в слип
-                Canvas::getInstance()->outline_vertex(neighbor, Color(0.6, 1, 0.6, 0.5));
-                usleep(100000);
+                // Создаем таймер для отложенной отрисовки вершины
+                Glib::signal_timeout().connect([=]() {
+                    Canvas::getInstance()->outline_vertex(neighbor, Color(0.6, 1, 0.6, 1));
+                    return false; // Отключаем таймер после одного выполнения
+                }, delay_ms);
+
+                // Увеличиваем задержку перед следующей отрисовкой
+                delay_ms += 400;
             }
         }
     }
@@ -141,25 +148,18 @@ void Graph::run_bfs(char start_vertex) {
     this->printoutAlgorithm = result.str();
 }
 
-void Graph::dfs_util(char vertex, std::set<char>& visited, std::stringstream& result) {
-    // Помечаем текущую вершину как посещенную
-    visited.insert(vertex);
+#include <functional>
 
-    // Добавляем текущую вершину в результат
-    result << vertex << " ";
+#include <gtkmm/main.h>
+#include <glibmm/main.h>
+#include <iostream>
+#include <sstream>
+#include <stack>
+#include <set>
+#include <queue>
+#include <functional>
+#include <unistd.h> // Для usleep
 
-    // Получаем соседей текущей вершины из таблицы смежности
-    auto neighbors = this->adjacent_list[vertex];
-
-    // Для каждого соседа, если он еще не посещен, рекурсивно запускаем обход в глубину
-    for (char neighbor : neighbors) {
-        if (visited.find(neighbor) == visited.end()) {
-            dfs_util(neighbor, visited, result);
-        }
-    }
-}
-
-// Вспомогательная функция для рекурсивного обхода графа в глубину
 void Graph::run_dfs(char start_vertex) {
     // Проверяем, есть ли данные о вершинах и ребрах в графе
     if (coords.empty()) {
@@ -175,14 +175,50 @@ void Graph::run_dfs(char start_vertex) {
     // Множество для отслеживания посещенных вершин
     std::set<char> visited;
 
-    // Запускаем рекурсивную функцию DFS для поиска в глубину
-    dfs_util(start_vertex, visited, result);
+    // Стек для обхода графа в глубину
+    std::stack<char> stack;
+
+    // Создаем список вершин для посещения
+    std::vector<char> visit_order;
+
+    // Функция для обхода графа в глубину и формирования списка вершин для посещения
+    std::function<void(char)> dfs_visit = [&](char vertex) {
+        visited.insert(vertex);
+        visit_order.push_back(vertex);
+        auto neighbors = this->adjacent_list[vertex];
+        for (char neighbor: neighbors) {
+            if (visited.find(neighbor) == visited.end()) {
+                stack.push(neighbor);
+                dfs_visit(neighbor);
+            }
+        }
+    };
+
+    // Начинаем обход с заданной начальной вершины
+    stack.push(start_vertex);
+    dfs_visit(start_vertex);
 
     // Выводим результат DFS в программное окно
+    for (char vertex: visit_order) {
+        result << vertex << " ";
+    }
     this->printoutAlgorithm = result.str();
+
+    // Анимация посещения вершин
+    int delay_ms = 400; // Задержка между отрисовками вершин (в миллисекундах)
+    for (char vertex: visit_order) {
+        // Создаем таймер для отрисовки вершины с задержкой
+        Glib::signal_timeout().connect_once([=]() {
+            Canvas::getInstance()->outline_vertex(vertex, Color(0.6, 1, 0.6, 1));
+            // Отключаем таймер после одного выполнения
+        }, delay_ms);
+        // Увеличиваем задержку перед следующей отрисовкой
+        delay_ms += 400;
+    }
 }
 
-void Graph::runAlgorithm(const std::string& algorithm) {
+
+void Graph::runAlgorithm(const std::string &algorithm) {
     if (algorithm == "BFS") {
         this->run_bfs('A');
     } else if (algorithm == "DFS") {

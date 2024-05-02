@@ -8,9 +8,9 @@
 //std::string TITLES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//названия вершин
 //int ID_NEXT_TITLE = 0;//номер следующей вершины для выбора
 // !Legacy!
-Canvas* Canvas::instance = nullptr;
+Canvas *Canvas::instance = nullptr;
 
-Canvas* Canvas::getInstance() {
+Canvas *Canvas::getInstance() {
     if (instance == nullptr) {
         instance = new Canvas();
     }
@@ -81,7 +81,7 @@ bool Canvas::on_mouse_release(GdkEventButton *event) {//прописывание
     return true;
 }
 
-Cairo::RefPtr<Cairo::Context> Canvas::get_context(Cairo::RefPtr<Cairo::Surface> &surface, bool need_clear) {
+Cairo::RefPtr <Cairo::Context> Canvas::get_context(Cairo::RefPtr <Cairo::Surface> &surface, bool need_clear) {
     //функция "вытаскивания" контекста (раньше мы называли его "cr") для рисования
     auto context = Cairo::Context::create(surface);
     if (need_clear) {//очищаем контекст при надобности
@@ -186,7 +186,7 @@ void Canvas::drawing(double x, double y) {
         if (this->state & VERTEX) {
             // Drawing vertex
             bool can_draw = true;
-            for (auto i : Graph::getInstance()->coords) {
+            for (auto i: Graph::getInstance()->coords) {
                 if (abs(i.second.first - x) <= 80 and abs(i.second.second - y) <= 80) {
                     can_draw = false;
                     break;
@@ -202,7 +202,7 @@ void Canvas::drawing(double x, double y) {
         if (this->state & EDGE) {
             // Drawing edge
             char sticking_from_vertex = '-';
-            for (auto i : Graph::getInstance()->coords) {
+            for (auto i: Graph::getInstance()->coords) {
                 if (abs(i.second.first - start_x) <= 40 and abs(i.second.second - start_y) <= 40) {
                     start_x = i.second.first;
                     start_y = i.second.second;
@@ -212,7 +212,7 @@ void Canvas::drawing(double x, double y) {
             }
             if (sticking_from_vertex != '-') {
                 char sticking_to_vertex = '-';
-                for (auto i : Graph::getInstance()->coords) {
+                for (auto i: Graph::getInstance()->coords) {
                     if (abs(i.second.first - x) <= 40 and abs(i.second.second - y) <= 40) {
                         x = i.second.first;
                         y = i.second.second;
@@ -222,7 +222,7 @@ void Canvas::drawing(double x, double y) {
                 }
                 if (sticking_to_vertex != sticking_from_vertex and sticking_to_vertex != '-') {
                     bool edge_exist = false;
-                    for (auto i : Graph::getInstance()->adjacent_list[sticking_from_vertex]) {
+                    for (auto i: Graph::getInstance()->adjacent_list[sticking_from_vertex]) {
                         if (sticking_to_vertex == i) {
                             edge_exist = true;
                             break;
@@ -245,7 +245,7 @@ void Canvas::drawing(double x, double y) {
     }
 }
 
-bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
+bool Canvas::on_draw(const Cairo::RefPtr <Cairo::Context> &cr) {
     cr->set_source(this->buffer, 0, 0);
     cr->paint();
     if (this->state & DRAWING) {
@@ -282,7 +282,7 @@ void Canvas::visualize_vertex(char vertex, Color color) {
 }
 
 //useless (просто не удаляю на всякий случай)
-void Canvas::animate_bfs(const std::string& bfs_result) {
+void Canvas::animate_bfs(const std::string &bfs_result) {
     // Очистка предыдущей анимации (если есть)
     //clear_animation();
 
@@ -297,22 +297,35 @@ void Canvas::animate_bfs(const std::string& bfs_result) {
     }
 
     // Запуск анимации посещения вершин
-    for (char vertex : visited_vertices) {
+    for (char vertex: visited_vertices) {
         visualize_vertex(vertex, Color(255, 0, 0, 255));
         usleep(500000); // Задержка в 0.5 секунды (500000 микросекунд)
     }
 }
 
 void Canvas::outline_vertex(char vertex, Color outline_color) {
-    // Функция для обводки вершины.
-    // Если не получится сделать прозрачную дугу с заданной шириной,
-    // то придется рисовать сначала круг внешнего радиуса обводки,
-    // потом белый круг внутреннего радиуса обводки,
-    // потом снова рисуем эту же вершину (потому что раньше мы ее перекрыли).
-    // Цвет вершины пока что черный по дефолту, пока что мы не запоминали цвет
+    // Получаем координаты вершины
+    double x = Graph::getInstance()->coords[vertex].first;
+    double y = Graph::getInstance()->coords[vertex].second;
 
-    // P.s. если найдешь способ получше - отлично, я не идеален, ты можешь что-то лучше придумать, я не отрицаю))
+    // Получаем контекст рисования для временного буфера
+    auto context = this->get_context(temp_buffer);
+
+    // Начинаем рисование окружности с обводкой
+    context->set_source_rgba(outline_color.r, outline_color.g, outline_color.b, outline_color.a);
+    context->arc(x, y, 27, 0, M_PI * 2);
+    context->set_line_width(8); // Устанавливаем толщину обводки
+    context->stroke();
+
+    // Применяем изменения из temp_buffer в основной буфер buffer
+    auto main_context = this->get_context(buffer);
+    main_context->set_source(temp_buffer, 0, 0);
+    main_context->paint();
+
+    // Перерисовываем холст, чтобы отобразить изменения
+    this->queue_draw();
 }
+
 
 void Canvas::fill_vertex(char vertex, Color fill_color) {
     // Функция для залифки заднего фона вершины. Есть 2 (стула) способа.
