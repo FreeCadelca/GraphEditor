@@ -176,6 +176,8 @@ void Graph::dijkstra(char start_vertex) {
     // Инициализируем расстояния для всех вершин как бесконечность,
     // кроме стартовой вершины, расстояние до которой равно 0
     std::vector<int> distances(TITLES.size(), std::numeric_limits<int>::max());
+    //Здесь 'A' используется для того, чтобы привести символ start_vertex к
+    // числовому значению, чтобы его можно было использовать как индекс в массиве distances
     distances[start_vertex - 'A'] = 0;
 
     // Множество для отслеживания посещенных вершин
@@ -187,8 +189,8 @@ void Graph::dijkstra(char start_vertex) {
         char current_vertex = '\0';
         int min_distance = std::numeric_limits<int>::max();
         for (char v : TITLES) {
-            if (visited.find(v) == visited.end() && distances[v - 'A'] < min_distance) {
-                min_distance = distances[v - 'A'];
+            if (visited.find(v) == visited.end() && distances[v - start_vertex] < min_distance) {
+                min_distance = distances[v - start_vertex];
                 current_vertex = v;
             }
         }
@@ -203,24 +205,25 @@ void Graph::dijkstra(char start_vertex) {
 
         // Обновляем расстояния до всех соседей текущей вершины
         for (char neighbor : adjacent_list[current_vertex]) {
-            int weight = adjacent_matrix[current_vertex - 'A'][neighbor - 'A'];
-            if (distances[current_vertex - 'A'] != std::numeric_limits<int>::max() &&
-                distances[current_vertex - 'A'] + weight < distances[neighbor - 'A']) {
-                distances[neighbor - 'A'] = distances[current_vertex - 'A'] + weight;
+            int weight = adjacent_matrix[current_vertex - start_vertex][neighbor - start_vertex];
+            if (distances[current_vertex - start_vertex] != std::numeric_limits<int>::max() &&
+                distances[current_vertex - start_vertex] + weight < distances[neighbor - start_vertex]) {
+                distances[neighbor - start_vertex] = distances[current_vertex - start_vertex] + weight;
             }
         }
     }
 
     // Формируем строку с минимальными расстояниями только для тех вершин, до которых существует путь
     for (char v : TITLES) {
-        if (distances[v - 'A'] != std::numeric_limits<int>::max()) {
-            result << v << ": " << distances[v - 'A'] << "\n";
+        if (distances[v - start_vertex] != std::numeric_limits<int>::max()) {
+            result << v << ": " << distances[v - start_vertex] << "\n";
         }
     }
 
     // Выводим результат алгоритма Дейкстры в программное окно
     this->printoutAlgorithm = result.str();
 }
+
 
 void Graph::bellman_ford(char start_vertex) {
     // Проверяем, есть ли данные о вершинах и ребрах в графе
