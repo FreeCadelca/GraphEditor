@@ -5,6 +5,7 @@
 #ifndef GRAPHEDITOR_GRAPH_H
 #define GRAPHEDITOR_GRAPH_H
 
+#include <unistd.h>
 #include <map>
 #include <vector>
 #include <queue>
@@ -12,10 +13,14 @@
 #include <string>
 #include <cstdlib>
 #include <sstream>
+#include "Color.h"
+#include "Canvas.h"
 
 
 class Graph {
 private:
+    static Graph* instance;
+    Graph();
 //    struct WeightedEdge {
 //        char v_from;
 //        char v_to;
@@ -26,10 +31,12 @@ private:
 //        char v_to;
 //        int weight;
 //    };
+//
     std::string printoutAlgorithm;
     void run_bfs(char start_vertex);
     void dfs_util(char vertex, std::set<char>& visited, std::stringstream& result);
     void run_dfs(char start_vertex);
+//    void (*outline_vertex)(char vertex, Color outline_color);
 public:
     std::map<char, std::vector<char>> adjacent_list; // список смежности
 //    std::map<char, std::map<char, int>> adjacent_matrix; // матрица смежности
@@ -40,7 +47,7 @@ public:
     std::map<char, std::pair<int, int>> coords; //координаты вершин
     int nextWeight = 1;
 
-    Graph();
+    static Graph* getInstance();
     void addVertex(double x, double y);
     void addEdge(char v_from, char v_to);
     std::string getPrintoutAdjList();

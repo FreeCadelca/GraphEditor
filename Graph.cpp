@@ -4,7 +4,16 @@
 
 #include "Graph.h"
 
+Graph* Graph::instance = nullptr;
+
 Graph::Graph() = default;
+
+Graph* Graph::getInstance() {
+    if (instance == nullptr) {
+        instance = new Graph();
+    }
+    return instance;
+}
 
 void Graph::addVertex(double x, double y) {
     this->coords[TITLES[ID_NEXT_TITLE]] = {x, y};//добавляем новую вершину туда, куда нужно
@@ -52,7 +61,7 @@ std::string Graph::getPrintoutAdjList() {
     }
     return output;
 }
-
+//
 std::string Graph::getPrintoutAdjMatrix() {
     int count_vertexes = (int) this->adjacent_list.size();
     std::string output = "    ";
@@ -97,10 +106,18 @@ void Graph::run_bfs(char start_vertex) {
     q.push(start_vertex);
     visited.insert(start_vertex);
 
+    // Обводка вершины и уход в слип
+    Canvas::getInstance()->outline_vertex(start_vertex, Color(0.6, 1, 0.6, 0.5));
+    usleep(100000);
+
     // Пока очередь не пуста, обходим граф в ширину
     while (!q.empty()) {
         char current_vertex = q.front();
         q.pop();
+
+        // Обводка вершины и уход в слип
+        Canvas::getInstance()->outline_vertex(current_vertex, Color(0.6, 1, 0.6, 0.5));
+        usleep(100000);
 
         // Добавляем текущую вершину в результат обхода
         result << current_vertex << " ";
@@ -112,6 +129,10 @@ void Graph::run_bfs(char start_vertex) {
             if (visited.find(neighbor) == visited.end()) {
                 q.push(neighbor);
                 visited.insert(neighbor);
+
+                // Обводка вершины и уход в слип
+                Canvas::getInstance()->outline_vertex(neighbor, Color(0.6, 1, 0.6, 0.5));
+                usleep(100000);
             }
         }
     }
