@@ -40,6 +40,10 @@ Canvas::Canvas() : state(DEFAULT | VERTEX), color(0, 0, 0, 1), buffer_width(1920
     this->color_chooser_dialog->signal_response().connect(sigc::mem_fun(*this, &Canvas::choose_color_response));
 }
 
+int Canvas::getState() const {
+    return state;
+}
+
 void Canvas::choose_color_response(int response_id) {//настройка цвета, выбранного через диалог
     if (response_id == Gtk::RESPONSE_OK) {
         auto res = this->color_chooser_dialog->get_rgba();
@@ -192,7 +196,13 @@ void Canvas::drawing(double x, double y) {
                     break;
                 }
             }
+
             if (can_draw and Graph::getInstance()->ID_NEXT_TITLE != Graph::getInstance()->TITLES.size()) {
+//                WeightEntryDialog dialog;
+//                int result = dialog.run();
+//                if (result == Gtk::RESPONSE_OK) {
+//                    std::cout << "Entered text: " << dialog.get_text() << std::endl;
+//                }
                 char next_char = Graph::getInstance()->TITLES[Graph::getInstance()->ID_NEXT_TITLE];
                 Graph::getInstance()->addVertex(x, y);
 
@@ -259,47 +269,6 @@ void Canvas::change_tool(int tool) {//функция смены инструме
     this->state = Canvas::DEFAULT | tool;
     if (tool == VERTEX) {
 
-    }
-}
-
-//useless (просто не удаляю на всякий случай)
-void Canvas::visualize_vertex(char vertex, Color color) {
-    // Найти координаты вершины на холсте по ее метке
-    double x = Graph::getInstance()->coords[vertex].first;
-    double y = Graph::getInstance()->coords[vertex].second;
-
-    // Получить контекст рисования
-    auto context = this->get_context(temp_buffer, true);
-
-    // Установить цвет для рисования
-    context->set_source_rgba(color.r, color.g, color.b, color.a);
-
-    // Рисовать вершину
-    drawing_vertex(x, y, vertex);
-
-    // Перерисовать холст с новым содержимым
-    this->queue_draw();
-}
-
-//useless (просто не удаляю на всякий случай)
-void Canvas::animate_bfs(const std::string& bfs_result) {
-    // Очистка предыдущей анимации (если есть)
-    //clear_animation();
-
-    // Разбиение результата на посещенные вершины
-    std::vector<char> visited_vertices;
-    std::istringstream iss(bfs_result);
-    std::string token;
-    while (std::getline(iss, token, ' ')) {
-        if (!token.empty()) {
-            visited_vertices.push_back(token[0]);
-        }
-    }
-
-    // Запуск анимации посещения вершин
-    for (char vertex : visited_vertices) {
-        visualize_vertex(vertex, Color(255, 0, 0, 255));
-        usleep(500000); // Задержка в 0.5 секунды (500000 микросекунд)
     }
 }
 
