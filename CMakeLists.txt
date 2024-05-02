@@ -1,7 +1,9 @@
-cmake_minimum_required(VERSION 3.27)
-project(GraphEditor)
+cmake_minimum_required(VERSION 3.17)
 
-set(CMAKE_CXX_STANDARD 14)
+project(GraphEditor LANGUAGES CXX)
+
+find_package(PkgConfig)
+pkg_check_modules(GTKMM gtkmm-3.0)
 
 add_executable(
         GraphEditor
@@ -11,14 +13,15 @@ add_executable(
         GraphEditorApp.cpp
         GraphEditorApp.h
         Graph.cpp
-        Graph.h
-)
+        Graph.h)
 
-find_package(PkgConfig)
-pkg_check_modules(GTKMM gtkmm-3.0)
+target_compile_features(GraphEditor PRIVATE cxx_std_17)
 
-include_directories(${GTKMM_INCLUDE_DIRS})
-link_directories(${GTKMM_LIBRARY_DIRS})
+target_sources(GraphEditor PRIVATE main.cpp)
 
-set(SOURCE_FILES main.cpp)
-target_link_libraries(${CMAKE_PROJECT_NAME} ${GTKMM_LIBRARIES})
+target_include_directories(GraphEditor PRIVATE ${GTKMM_INCLUDE_DIRS})
+
+target_link_directories(GraphEditor PRIVATE ${GTKMM_LIBRARY_DIRS})
+
+target_link_libraries(GraphEditor PRIVATE ${GTKMM_LIBRARIES})
+target_link_libraries(GraphEditor PRIVATE ${GTKMM_LIBRARIES})
