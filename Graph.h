@@ -10,6 +10,7 @@
 #include <vector>
 #include <queue>
 #include <set>
+#include <stack>
 #include <string>
 #include <cstdlib>
 #include <sstream>

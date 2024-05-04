@@ -3,8 +3,6 @@
 //
 
 #include "Graph.h"
-#include <stack>
-#include <functional>
 
 Graph *Graph::instance = nullptr;
 
@@ -64,7 +62,6 @@ std::string Graph::getPrintoutAdjList() {
     return output;
 }
 
-//
 std::string Graph::getPrintoutAdjMatrix() {
     int count_vertexes = (int) this->adjacent_list.size();
     std::string output = "    ";
@@ -147,18 +144,6 @@ void Graph::run_bfs(char start_vertex) {
     // Выводим результат BFS в программное окно
     this->printoutAlgorithm = result.str();
 }
-
-#include <functional>
-
-#include <gtkmm/main.h>
-#include <glibmm/main.h>
-#include <iostream>
-#include <sstream>
-#include <stack>
-#include <set>
-#include <queue>
-#include <functional>
-#include <unistd.h> // Для usleep
 
 void Graph::run_dfs(char start_vertex) {
     // Проверяем, есть ли данные о вершинах и ребрах в графе
