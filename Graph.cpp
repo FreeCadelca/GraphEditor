@@ -265,7 +265,6 @@ void Graph::dijkstra(char start_vertex) {
     this->printoutAlgorithm = result.str();
 }
 
-
 void Graph::bellman_ford(char start_vertex) {
     // Проверяем, есть ли данные о вершинах и ребрах в графе
     if (coords.empty()) {
@@ -400,9 +399,6 @@ void Graph::kruskal(char start_vertex) {
     this->printoutAlgorithm = result.str();
 }
 
-
-
-
 void Graph::prim(char start_vertex) {
     // Проверка на наличие рёбер в графе
     if (adjacent_list.empty()) {
@@ -442,7 +438,6 @@ void Graph::prim(char start_vertex) {
         visited.insert(min_edge.v_to);
     }
 
-
     // Формирование строки с остовным деревом и его весом
     std::stringstream result;
     result << "Минимальное остовное дерево (алгоритм Прима):\n";
@@ -456,10 +451,6 @@ void Graph::prim(char start_vertex) {
     // Вывод результата в программное окно
     this->printoutAlgorithm = result.str();
 }
-
-
-
-
 
 void Graph::runAlgorithm(const std::string& algorithm) {
     if (algorithm == "BFS") {
