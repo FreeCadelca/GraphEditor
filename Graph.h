@@ -35,6 +35,16 @@ private:
         bool operator<(const Edge &other) const {
             return weight > other.weight; // Меняем знак, чтобы получить минимальную кучу
         }
+        /// акназар
+        // Операторы сравнения для сравнения рёбер
+        bool operator==(const Edge& other) const {
+            return v_from == other.v_from && v_to == other.v_to && weight == other.weight;
+        }
+
+        bool operator!=(const Edge& other) const {
+            return !(*this == other);
+        }
+        ///
     };
 
     std::string printoutAlgorithm;
