@@ -54,7 +54,7 @@ public:
     std::string getPrintoutAdjMatrix();
 //    std::string getPrintoutEdgeList();
     std::string getPrintoutAlgorithm();
-    void runAlgorithm(const std::string& algorithm);
+    void runAlgorithm(const std::string& algorithm, char start_vertex = 'A');
 };
 
 

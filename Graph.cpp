@@ -182,11 +182,11 @@ void Graph::run_dfs(char start_vertex) {
     this->printoutAlgorithm = result.str();
 }
 
-void Graph::runAlgorithm(const std::string& algorithm) {
+void Graph::runAlgorithm(const std::string& algorithm, char start_vertex) {
     if (algorithm == "BFS") {
-        this->run_bfs('A');
+        this->run_bfs(start_vertex);
     } else if (algorithm == "DFS") {
-        this->run_dfs('A');
+        this->run_dfs(start_vertex);
     } else {
         this->printoutAlgorithm = "Sorry, not avaible(";
     }

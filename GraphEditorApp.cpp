@@ -101,7 +101,7 @@ void GraphEditorApp::on_change_weight_release() {
     } else {
         this->entry_for_weight->set_text(std::to_string(this->nextWeight));
     }
-};
+}
 
 void GraphEditorApp::print_graph_data() {
     if (this->print_graph_button->get_label() == "Print Graph") {
@@ -119,7 +119,24 @@ void GraphEditorApp::print_graph_data() {
 
 void GraphEditorApp::print_algorithm() {
     if (this->run_algorithm_button->get_label() == "Run algorithm") {
-        std::string algorithm = this->choose_algorithm_cb->get_active_id();
+        if (this->choose_algorithm_cb->get_active_id() == "DFS"
+        or this->choose_algorithm_cb->get_active_id() == "BFS"
+        or this->choose_algorithm_cb->get_active_id() == "Bellman-Ford"
+        or this->choose_algorithm_cb->get_active_id() == "Djkstra") {
+            std::string algorithm = this->choose_algorithm_cb->get_active_id();
+            WeightEntryDialog dialog;
+            int result = dialog.run();
+            if (result == Gtk::RESPONSE_OK) {
+                std::cout << "Entered text: " << dialog.get_text() << std::endl;
+            } else {
+                std::cout << "Canceled" << std::endl;
+                return;
+            }
+            Graph::getInstance()->runAlgorithm(
+                    this->choose_algorithm_cb->get_active_id(),
+                    (char) dialog.get_text()[0]
+            );
+        }
         Graph::getInstance()->runAlgorithm(this->choose_algorithm_cb->get_active_id());
         this->printed_algorithm_label->set_text(Graph::getInstance()->getPrintoutAlgorithm());
         this->printed_algorithm_label->show();

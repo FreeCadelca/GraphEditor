@@ -8,6 +8,7 @@ WeightEntryDialog::WeightEntryDialog() : lbl("Please enter text:")  {
     get_content_area()->pack_start(lbl);
     get_content_area()->pack_start(entry);
     add_button("OK", Gtk::RESPONSE_OK);
+    add_button("Cancel", Gtk::RESPONSE_CANCEL);
     show_all_children();
 }
 
