@@ -10,6 +10,7 @@
 #include <vector>
 #include <queue>
 #include <set>
+#include <stack>
 #include <string>
 #include <cstdlib>
 #include <sstream>
@@ -21,22 +22,48 @@ class Graph {
 private:
     static Graph* instance;
     Graph();
-//    struct WeightedEdge {
-//        char v_from;
-//        char v_to;
-//        int weight;
-//    };
 
-//    struct WeightedEdgeToVertex {
-//        char v_to;
-//        int weight;
-//    };
-//
+    // Добавим структуру для представления ребра
+    struct Edge {
+        char v_from;
+        char v_to;
+        int weight;
+
+        Edge(char from, char to, int w) : v_from(from), v_to(to), weight(w) {}
+
+        bool operator<(const Edge &other) const {
+            return weight > other.weight; // Меняем знак, чтобы получить минимальную кучу
+        }
+        /// акназар
+        // Операторы сравнения для сравнения рёбер
+        bool operator==(const Edge& other) const {
+            return v_from == other.v_from && v_to == other.v_to && weight == other.weight;
+        }
+
+        bool operator!=(const Edge& other) const {
+            return !(*this == other);
+        }
+        ///
+    };
+
     std::string printoutAlgorithm;
+
     void run_bfs(char start_vertex);
-    void dfs_util(char vertex, std::set<char>& visited, std::stringstream& result);
+
     void run_dfs(char start_vertex);
-//    void (*outline_vertex)(char vertex, Color outline_color);
+
+    void dijkstra(char start_vertex);
+
+    void bellman_ford(char start_vertex);
+
+    void kruskal(char start_vertex);
+
+    char find(std::map<char, char> &parent, char vertex);
+
+    void union_sets(std::map<char, char> &parent, char u, char v);
+
+    void prim(char start_vertex);
+
 public:
     std::map<char, std::vector<char>> adjacent_list; // список смежности
 //    std::map<char, std::map<char, int>> adjacent_matrix; // матрица смежности
@@ -47,13 +74,18 @@ public:
     std::map<char, std::pair<int, int>> coords; //координаты вершин
     int nextWeight = 1;
 
-    static Graph* getInstance();
+    static Graph *getInstance();
+
     void addVertex(double x, double y);
+
     void addEdge(char v_from, char v_to);
+
     std::string getPrintoutAdjList();
+
     std::string getPrintoutAdjMatrix();
-//    std::string getPrintoutEdgeList();
+
     std::string getPrintoutAlgorithm();
+
     void runAlgorithm(const std::string& algorithm, char start_vertex = 'A');
 };
 

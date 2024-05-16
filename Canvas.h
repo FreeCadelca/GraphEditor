@@ -69,7 +69,9 @@ public:
 
     void fill_vertex(char vertex, Color fill_color);
 
-    void outline_edge(char v1, char v2, Color outline_color);
+    void redraw_edge(char vertex1, char vertex2, Color outline_color);
+
+    void draw_colored_arrow(double start_x, double start_y, double end_x, double end_y, Color outline_color);
 };
 
 
