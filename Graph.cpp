@@ -486,19 +486,18 @@ void Graph::prim(char start_vertex) {
 }
 
 void Graph::runAlgorithm(const std::string& algorithm, char start_vertex) {
+    printf("ran algorithm with st vertex: %c\n", start_vertex);
     if (algorithm == "BFS") {
         this->run_bfs(start_vertex);
     } else if (algorithm == "DFS") {
-        this->run_dfs('A');
+        this->run_dfs(start_vertex);
     } else if (algorithm == "Djkstra") {
-        this->dijkstra('A');
+        this->dijkstra(start_vertex);
     } else if (algorithm == "Bellman-Ford") {
-        this->bellman_ford('A');
+        this->bellman_ford(start_vertex);
     } else if (algorithm == "Kraskal") {
         this->kruskal('A');
-        this->kruskal('A');
     } else if (algorithm == "Prim") {
-        this->prim('A');
         this->prim('A');
     } else {
         this->printoutAlgorithm = "Sorry, not available(";

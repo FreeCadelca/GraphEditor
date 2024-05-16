@@ -136,8 +136,9 @@ void GraphEditorApp::print_algorithm() {
                     this->choose_algorithm_cb->get_active_id(),
                     (char) dialog.get_text()[0]
             );
+        } else {
+            Graph::getInstance()->runAlgorithm(this->choose_algorithm_cb->get_active_id());
         }
-        Graph::getInstance()->runAlgorithm(this->choose_algorithm_cb->get_active_id());
         this->printed_algorithm_label->set_text(Graph::getInstance()->getPrintoutAlgorithm());
         this->printed_algorithm_label->show();
         this->run_algorithm_button->set_label("Close algorithm");
