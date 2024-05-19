@@ -44,40 +44,58 @@ void Graph::addEdge(char v_from, char v_to) {
 }
 
 std::string Graph::getPrintoutAdjList() {
-    std::string output;
-    int count_vertexes = (int) this->adjacent_list.size();
-    for (auto i: this->adjacent_list) {
-        char vertex = i.first;
-        output.push_back(vertex);
-        output += ":";
-        for (auto edge: i.second) {
-            output += " ";
-            output.push_back(edge);
+    std::string output; // Инициализируем строку для вывода
+    int count_vertexes = (int) this->adjacent_list.size(); // Получаем количество вершин в графе
+
+    // Проходимся по списку смежности и формируем строку для каждой вершины
+    for (auto i : this->adjacent_list) {
+        char vertex = i.first; // Получаем текущую вершину
+        output.push_back(vertex); // Добавляем вершину в строку
+        output += ":"; // Добавляем разделитель после вершины
+
+        // Добавляем смежные вершины к текущей вершине
+        for (auto edge : i.second) {
+            output += " "; // Добавляем пробел перед каждой смежной вершиной
+            output.push_back(edge); // Добавляем смежную вершину в строку
         }
+
+        // Если список смежных вершин пуст, добавляем "None" в строку
         if (i.second.empty()) {
-            output += " None";
+            output += " None"; // Добавляем информацию о пустом списке смежности
         }
-        output += ";\n";
+
+        output += ";\n"; // Добавляем символ новой строки в конце строки смежности
     }
+
+    // Возвращаем сформированную строку списка смежности
     return output;
 }
 
 std::string Graph::getPrintoutAdjMatrix() {
+    // Получаем количество вершин в графе
     int count_vertexes = (int) this->adjacent_list.size();
+    // Инициализируем строку для вывода
     std::string output = "    ";
+
+    // Формируем заголовок матрицы смежности
     for (int i = 0; i < count_vertexes; i++) {
-        output += this->TITLES[i];
-        output += ' ';
+        output += this->TITLES[i]; // Добавляем заголовки вершин
+        output += ' '; // Добавляем пробел между заголовками
     }
-    output += '\n';
+    output += '\n'; // Переходим на следующую строку после заголовка
+
+    // Заполняем строки матрицы смежности
     for (int i = 0; i < count_vertexes; i++) {
-        output += this->TITLES[i];
-        output += ": ";
+        output += this->TITLES[i]; // Добавляем заголовок текущей вершины
+        output += ": "; // Добавляем разделитель
+        // Добавляем значения в строку, используя матрицу смежности
         for (auto j : this->adjacent_matrix[i]) {
-            output += std::to_string(j) + " ";
+            output += std::to_string(j) + " "; // Преобразуем числа в строки и добавляем их в вывод
         }
-        output += '\n';
+        output += '\n'; // Переходим на следующую строку после строки смежности текущей вершины
     }
+
+    // Возвращаем сформированную строку матрицы смежности
     return output;
 }
 
@@ -86,14 +104,16 @@ std::string Graph::getPrintoutAlgorithm() {
 }
 
 void Graph::run_bfs(char start_vertex) {
-    // Проверяем, есть ли данные о вершинах и ребрах в графе
+    // Проверяем, есть ли данные о вершинах и рёбрах в графе
     if (this->coords.empty()) {
+        // Если контейнер coords пуст, устанавливаем сообщение об ошибке и завершаем функцию.
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
 
-    // Создаем строковый поток для формирования результата BFS
+    // Создаем строковый поток для формирования результата обхода в ширину (BFS)
     std::stringstream result;
+    // Записываем информацию о начале выполнения алгоритма BFS с указанной стартовой вершиной в строковый поток.
     result << "Обход в ширину начиная с вершины " << start_vertex << ":\n";
     result << "Посещенные вершины: ";
 
@@ -106,15 +126,17 @@ void Graph::run_bfs(char start_vertex) {
     q.push(start_vertex);
     visited.insert(start_vertex);
 
-    // Отрисовка первой вершины
+    // Отрисовка первой вершины сразу
     Canvas::getInstance()->outline_vertex(start_vertex, Color(0.6, 1, 0.6, 1));
-    usleep(400000); // Добавим небольшую задержку перед началом анимации
+    // Добавляем небольшую задержку перед началом анимации
+    usleep(400000);
 
     // Задержка между отрисовками вершин (в миллисекундах)
     int delay_ms = 400;
 
     // Обработка вершин с задержкой
     while (!q.empty()) {
+        // Получаем текущую вершину из очереди
         char current_vertex = q.front();
         q.pop();
 
@@ -129,8 +151,9 @@ void Graph::run_bfs(char start_vertex) {
                 q.push(neighbor);
                 visited.insert(neighbor);
 
-                // Создаем таймер для отложенной отрисовки вершины
+                // Создаем таймер для отложенной отрисовки вершины с задержкой
                 Glib::signal_timeout().connect([=]() {
+                    // Вызываем метод outline_vertex класса Canvas для отображения посещенной вершины
                     Canvas::getInstance()->outline_vertex(neighbor, Color(0.6, 1, 0.6, 1));
                     return false; // Отключаем таймер после одного выполнения
                 }, delay_ms);
@@ -141,19 +164,21 @@ void Graph::run_bfs(char start_vertex) {
         }
     }
 
-    // Выводим результат BFS в программное окно
+    // Присваиваем строковое представление потока result переменной printoutAlgorithm для вывода результата обхода в ширину.
     this->printoutAlgorithm = result.str();
 }
 
 void Graph::run_dfs(char start_vertex) {
-    // Проверяем, есть ли данные о вершинах и ребрах в графе
+    // Проверяем, есть ли данные о вершинах и рёбрах в графе
     if (coords.empty()) {
+        // Если контейнер coords пуст, устанавливаем сообщение об ошибке и завершаем функцию.
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
 
-    // Создаем строковый поток для формирования результата DFS
+    // Создаем строковый поток для формирования результата обхода в глубину (DFS)
     std::stringstream result;
+    // Записываем информацию о начале выполнения алгоритма DFS с указанной стартовой вершиной в строковый поток.
     result << "Обход в глубину начиная с вершины " << start_vertex << ":\n";
     result << "Посещенные вершины: ";
 
@@ -168,12 +193,17 @@ void Graph::run_dfs(char start_vertex) {
 
     // Функция для обхода графа в глубину и формирования списка вершин для посещения
     std::function<void(char)> dfs_visit = [&](char vertex) {
+        // Помечаем вершину как посещенную и добавляем её в список посещенных вершин
         visited.insert(vertex);
         visit_order.push_back(vertex);
+        // Получаем список соседей текущей вершины
         auto neighbors = this->adjacent_list[vertex];
+        // Перебираем соседей
         for (char neighbor: neighbors) {
+            // Если соседняя вершина не была посещена ранее, добавляем её в стек для дальнейшего обхода
             if (visited.find(neighbor) == visited.end()) {
                 stack.push(neighbor);
+                // Рекурсивно вызываем функцию обхода для соседней вершины
                 dfs_visit(neighbor);
             }
         }
@@ -183,10 +213,12 @@ void Graph::run_dfs(char start_vertex) {
     stack.push(start_vertex);
     dfs_visit(start_vertex);
 
-    // Выводим результат DFS в программное окно
+    // Формируем строку с порядком посещения вершин
     for (char vertex: visit_order) {
         result << vertex << " ";
     }
+
+    // Присваиваем строковое представление потока result переменной printoutAlgorithm для вывода результата обхода в глубину.
     this->printoutAlgorithm = result.str();
 
     // Анимация посещения вершин
@@ -194,6 +226,7 @@ void Graph::run_dfs(char start_vertex) {
     for (char vertex: visit_order) {
         // Создаем таймер для отрисовки вершины с задержкой
         Glib::signal_timeout().connect_once([=]() {
+            // Вызываем метод outline_vertex класса Canvas для отображения посещенной вершины
             Canvas::getInstance()->outline_vertex(vertex, Color(0.6, 1, 0.6, 1));
             // Отключаем таймер после одного выполнения
         }, delay_ms);
@@ -203,21 +236,23 @@ void Graph::run_dfs(char start_vertex) {
 }
 
 void Graph::dijkstra(char start_vertex) {
-    // Проверяем, есть ли данные о вершинах и ребрах в графе
+    // Проверяем, есть ли данные о вершинах и рёбрах в графе
     if (coords.empty()) {
+        // Если контейнер coords пуст, устанавливаем сообщение об ошибке и завершаем функцию.
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
 
     // Создаем строковый поток для формирования результата алгоритма Дейкстры
     std::stringstream result;
+    // Записываем информацию о начале выполнения алгоритма с указанной стартовой вершиной в строковый поток.
     result << "Алгоритм Дейкстры начиная с вершины " << start_vertex << ":\n";
     result << "Минимальные расстояния до вершин:\n";
 
     // Инициализируем расстояния для всех вершин как бесконечность,
     // кроме стартовой вершины, расстояние до которой равно 0
     std::vector<int> distances(TITLES.size(), std::numeric_limits<int>::max());
-    //Здесь 'A' используется для того, чтобы привести символ start_vertex к
+    // Здесь 'A' используется для того, чтобы привести символ start_vertex к
     // числовому значению, чтобы его можно было использовать как индекс в массиве distances
     distances[start_vertex - 'A'] = 0;
 
@@ -230,7 +265,10 @@ void Graph::dijkstra(char start_vertex) {
         char current_vertex = '\0';
         int min_distance = std::numeric_limits<int>::max();
         for (char v : TITLES) {
+            // Перебираем все вершины графа
             if (visited.find(v) == visited.end() && distances[v - start_vertex] < min_distance) {
+                // Если вершина v не посещена и расстояние от стартовой вершины до v меньше текущего минимального расстояния,
+                // обновляем значения current_vertex и min_distance
                 min_distance = distances[v - start_vertex];
                 current_vertex = v;
             }
@@ -249,6 +287,7 @@ void Graph::dijkstra(char start_vertex) {
             int weight = adjacent_matrix[current_vertex - start_vertex][neighbor - start_vertex];
             if (distances[current_vertex - start_vertex] != std::numeric_limits<int>::max() &&
                 distances[current_vertex - start_vertex] + weight < distances[neighbor - start_vertex]) {
+                // Если расстояние до соседней вершины меньше текущего значения, обновляем расстояние.
                 distances[neighbor - start_vertex] = distances[current_vertex - start_vertex] + weight;
             }
         }
@@ -257,28 +296,30 @@ void Graph::dijkstra(char start_vertex) {
     // Формируем строку с минимальными расстояниями только для тех вершин, до которых существует путь
     for (char v : TITLES) {
         if (distances[v - start_vertex] != std::numeric_limits<int>::max()) {
+            // Записываем информацию о минимальном расстоянии от начальной вершины до текущей вершины v.
             result << v << ": " << distances[v - start_vertex] << "\n";
         }
     }
 
-    // Выводим результат алгоритма Дейкстры в программное окно
+    // Присваиваем строковое представление потока result переменной printoutAlgorithm для вывода результата алгоритма.
     this->printoutAlgorithm = result.str();
 }
 
 void Graph::bellman_ford(char start_vertex) {
-    // Проверяем, есть ли данные о вершинах и ребрах в графе
+    // Проверяем, есть ли данные о вершинах и рёбрах в графе
     if (coords.empty()) {
+        // Если контейнер coords пуст, устанавливаем сообщение об ошибке и завершаем функцию.
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
 
     // Создаем строковый поток для формирования результата алгоритма Беллмана — Форда
     std::stringstream result;
+    // Записываем информацию о начале выполнения алгоритма с указанной стартовой вершины в строковый поток.
     result << "Алгоритм Беллмана — Форда начиная с вершины " << start_vertex << ":\n";
     result << "Минимальные расстояния до вершин:\n";
 
-    // Инициализируем расстояния для всех вершин как бесконечность,
-    // кроме стартовой вершины, расстояние до которой равно 0
+    // Инициализируем расстояния для всех вершин как бесконечность, кроме стартовой вершины, расстояние до которой равно 0
     std::vector<int> distances(TITLES.size(), std::numeric_limits<int>::max());
     distances[start_vertex - 'A'] = 0;
 
@@ -308,6 +349,7 @@ void Graph::bellman_ford(char start_vertex) {
             int weight = adjacent_matrix[v_from - 'A'][v_to - 'A'];
             if (distances[v_from - 'A'] != std::numeric_limits<int>::max() &&
                 distances[v_from - 'A'] + weight < distances[v_to - 'A']) {
+                // Если обнаружен отрицательный цикл, устанавливаем сообщение об ошибке и завершаем функцию.
                 this->printoutAlgorithm = "Ошибка: Граф содержит отрицательный цикл";
                 return;
             }
@@ -317,26 +359,33 @@ void Graph::bellman_ford(char start_vertex) {
     // Формируем строку с минимальными расстояниями
     for (char v : TITLES) {
         if (distances[v - 'A'] != std::numeric_limits<int>::max()) {
+            // Записываем информацию о минимальном расстоянии от начальной вершины до текущей вершины v.
             result << v << ": " << distances[v - 'A'] << "\n";
         }
     }
 
-    // Выводим результат алгоритма Беллмана — Форда в программное окно
+    // Присваиваем строковое представление потока result переменной printoutAlgorithm для вывода результата алгоритма.
     this->printoutAlgorithm = result.str();
 }
 
 // Вспомогательная функция для поиска корневой вершины дерева
 char Graph::find(std::map<char, char>& parent, char vertex) {
+    // Если текущая вершина не является корнем, выполняем поиск рекурсивно
     if (parent[vertex] != vertex) {
+        // Применяем сжатие пути для оптимизации: делаем родителем вершины корень её поддерева
         parent[vertex] = find(parent, parent[vertex]);
     }
+    // Возвращаем корневую вершину
     return parent[vertex];
 }
 
 // Вспомогательная функция для объединения двух деревьев
 void Graph::union_sets(std::map<char, char>& parent, char u, char v) {
+    // Находим корневую вершину для вершины u
     u = find(parent, u);
+    // Находим корневую вершину для вершины v
     v = find(parent, v);
+    // Если корни разные, объединяем деревья, делая корень v поддеревом корня u
     if (u != v) {
         parent[v] = u;
     }
@@ -356,7 +405,8 @@ void Graph::kruskal(char start_vertex) {
     for (const auto& adjacent_vertex_pair : adjacent_list) {
         char from = adjacent_vertex_pair.first;
         for (char to : adjacent_vertex_pair.second) {
-            edges.emplace_back(from, to, adjacent_matrix[from - start_vertex][to - start_vertex]);
+            // Добавляем ребро в вектор с весом, полученным из матрицы смежности
+            edges.emplace_back(from, to, adjacent_matrix[from - 'A'][to - 'A']);
         }
     }
 
@@ -365,23 +415,23 @@ void Graph::kruskal(char start_vertex) {
         return e1.weight < e2.weight;
     });
 
-    // Создание отображения для хранения родительских вершин
+    // Создание отображения для хранения родительских вершин (для алгоритма Union-Find)
     std::map<char, char> parent;
-    for (char vertex = start_vertex; vertex < start_vertex + TITLES.size(); ++vertex) {
+    for (char vertex = 'A'; vertex < 'A' + TITLES.size(); ++vertex) {
         parent[vertex] = vertex;
     }
 
-    // Создание вектора для хранения остовного дерева
+    // Создание вектора для хранения рёбер минимального остовного дерева
     std::vector<Edge> mst;
 
     // Проход по всем рёбрам в отсортированном порядке и добавление их в остовное дерево,
     // если они не создают цикл
     for (const Edge& edge : edges) {
-        char root_from = find(parent, edge.v_from);
-        char root_to = find(parent, edge.v_to);
-        if (root_from != root_to) {
+        char root_from = find(parent, edge.v_from); // Поиск корня для вершины v_from
+        char root_to = find(parent, edge.v_to);     // Поиск корня для вершины v_to
+        if (root_from != root_to) { // Если вершины не в одном множестве, добавить ребро в остовное дерево
             mst.push_back(edge);
-            union_sets(parent, root_from, root_to);
+            union_sets(parent, root_from, root_to); // Объединение множеств
         }
     }
 
@@ -390,13 +440,14 @@ void Graph::kruskal(char start_vertex) {
     result << "Минимальное остовное дерево (алгоритм Краскала):\n";
     int total_weight = 0;
     for (const Edge& edge : mst) {
+        // Добавление информации о ребре в результат
         result << edge.v_from << " - " << edge.v_to << ": " << edge.weight << "\n";
-        total_weight += edge.weight;
+        total_weight += edge.weight; // Подсчёт общего веса остовного дерева
     }
-    result << "Вес минимального остовного дерева равен: " << total_weight << "\n";
+    result << "Вес минимального остовного дерева равен: " << total_weight << "\n"; // Добавление общего веса в результат
 
     // Вывод результата в программное окно
-    this->printoutAlgorithm = result.str();
+    this->printoutAlgorithm = result.str(); // Сохранение результата в поле класса
 }
 
 void Graph::prim(char start_vertex) {
@@ -409,28 +460,28 @@ void Graph::prim(char start_vertex) {
     // Создание пустого множества для хранения посещённых вершин
     std::set<char> visited;
 
-    // Создание минимальной кучи для хранения рёбер
+    // Создание минимальной кучи для хранения рёбер (сортировка по весу)
     std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> edges;
 
     // Добавление рёбер, исходящих из стартовой вершины, в кучу
     for (char neighbor : adjacent_list[start_vertex]) {
-        int weight = adjacent_matrix[start_vertex - 'A'][neighbor - 'A']; // Используем смещение 'A' для индексации
-        edges.push(Edge(start_vertex, neighbor, weight));
+        int weight = adjacent_matrix[start_vertex - 'A'][neighbor - 'A']; // Получение веса ребра из матрицы смежности
+        edges.push(Edge(start_vertex, neighbor, weight)); // Добавление ребра в кучу
     }
 
-    // Добавление стартовой вершины в множество посещённых
+    // Добавление стартовой вершины в множество посещённых вершин
     visited.insert(start_vertex);
 
-    // Создание множества для хранения рёбер минимального остовного дерева
+    // Создание вектора для хранения рёбер минимального остовного дерева
     std::vector<Edge> mst;
 
-    // Пока не все вершины посещены
+    // Пока не все вершины посещены и в куче есть рёбра
     while (!edges.empty() && visited.size() < adjacent_list.size()) {
         // Извлечение ребра с минимальным весом из кучи
         Edge min_edge = edges.top();
         edges.pop();
 
-        // Если конечная вершина ребра уже посещена, пропустить его
+        // Если конечная вершина ребра уже посещена, пропустить это ребро
         if (visited.find(min_edge.v_to) != visited.end()) {
             continue;
         }
@@ -438,14 +489,14 @@ void Graph::prim(char start_vertex) {
         // Добавление найденного ребра в остовное дерево
         mst.push_back(min_edge);
 
-        // Добавление вершины, соединённой найденным ребром, в множество посещённых
+        // Добавление вершины, соединённой найденным ребром, в множество посещённых вершин
         visited.insert(min_edge.v_to);
 
         // Добавление всех рёбер, исходящих из новой посещённой вершины, в кучу
         for (char neighbor : adjacent_list[min_edge.v_to]) {
-            if (visited.find(neighbor) == visited.end()) {
-                int weight = adjacent_matrix[min_edge.v_to - 'A'][neighbor - 'A']; // Используем смещение 'A' для индексации
-                edges.push(Edge(min_edge.v_to, neighbor, weight));
+            if (visited.find(neighbor) == visited.end()) { // Только если вершина ещё не посещена
+                int weight = adjacent_matrix[min_edge.v_to - 'A'][neighbor - 'A']; // Получение веса ребра из матрицы смежности
+                edges.push(Edge(min_edge.v_to, neighbor, weight)); // Добавление ребра в кучу
             }
         }
     }
@@ -455,14 +506,15 @@ void Graph::prim(char start_vertex) {
     result << "Минимальное остовное дерево (алгоритм Прима):\n";
     int total_weight = 0;
     for (const Edge& edge : mst) {
-        result << edge.v_from << " - " << edge.v_to << ": " << edge.weight << "\n";
-        total_weight += edge.weight;
+        result << edge.v_from << " - " << edge.v_to << ": " << edge.weight << "\n"; // Добавление информации о ребре в результат
+        total_weight += edge.weight; // Подсчёт общего веса остовного дерева
     }
-    result << "Вес минимального остовного дерева равен: " << total_weight << "\n";
+    result << "Вес минимального остовного дерева равен: " << total_weight << "\n"; // Добавление общего веса в результат
 
     // Вывод результата в программное окно
-    this->printoutAlgorithm = result.str();
+    this->printoutAlgorithm = result.str(); // Сохранение результата в поле класса
 }
+
 
 void Graph::runAlgorithm(const std::string& algorithm) {
     if (algorithm == "BFS") {
