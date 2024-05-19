@@ -409,33 +409,45 @@ void Graph::prim(char start_vertex) {
     // Создание пустого множества для хранения посещённых вершин
     std::set<char> visited;
 
-    // Создание пустого множества для хранения рёбер минимального остовного дерева
-    std::set<Edge> mst;
+    // Создание минимальной кучи для хранения рёбер
+    std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> edges;
+
+    // Добавление рёбер, исходящих из стартовой вершины, в кучу
+    for (char neighbor : adjacent_list[start_vertex]) {
+        int weight = adjacent_matrix[start_vertex - 'A'][neighbor - 'A']; // Используем смещение 'A' для индексации
+        edges.push(Edge(start_vertex, neighbor, weight));
+    }
 
     // Добавление стартовой вершины в множество посещённых
     visited.insert(start_vertex);
 
-    // Пока не все вершины посещены
-    while (visited.size() < adjacent_list.size()) {
-        // Поиск ребра с минимальным весом, исходящего из посещённой вершины
-        int min_weight = std::numeric_limits<int>::max();
-        Edge min_edge{' ', ' ', std::numeric_limits<int>::max()};
+    // Создание множества для хранения рёбер минимального остовного дерева
+    std::vector<Edge> mst;
 
-        // Проходим по всем посещенным вершинам и ищем смежные рёбра с минимальным весом
-        for (char from : visited) {
-            for (char to : adjacent_list[from]) {
-                if (visited.find(to) == visited.end() && adjacent_matrix[from - start_vertex][to - start_vertex] < min_weight) {
-                    min_weight = adjacent_matrix[from - start_vertex][to - start_vertex];
-                    min_edge = Edge(from, to, min_weight);
-                }
-            }
+    // Пока не все вершины посещены
+    while (!edges.empty() && visited.size() < adjacent_list.size()) {
+        // Извлечение ребра с минимальным весом из кучи
+        Edge min_edge = edges.top();
+        edges.pop();
+
+        // Если конечная вершина ребра уже посещена, пропустить его
+        if (visited.find(min_edge.v_to) != visited.end()) {
+            continue;
         }
 
         // Добавление найденного ребра в остовное дерево
-        mst.insert(min_edge);
+        mst.push_back(min_edge);
 
         // Добавление вершины, соединённой найденным ребром, в множество посещённых
         visited.insert(min_edge.v_to);
+
+        // Добавление всех рёбер, исходящих из новой посещённой вершины, в кучу
+        for (char neighbor : adjacent_list[min_edge.v_to]) {
+            if (visited.find(neighbor) == visited.end()) {
+                int weight = adjacent_matrix[min_edge.v_to - 'A'][neighbor - 'A']; // Используем смещение 'A' для индексации
+                edges.push(Edge(min_edge.v_to, neighbor, weight));
+            }
+        }
     }
 
     // Формирование строки с остовным деревом и его весом
