@@ -20,11 +20,10 @@
 
 class Graph {
 private:
-    static Graph *instance;
-
+    static Graph* instance;
     Graph();
 
-    // Добавим структуру для представления ребра
+    // Структура для представления ребра
     struct Edge {
         char v_from;
         char v_to;
@@ -32,8 +31,16 @@ private:
 
         Edge(char from, char to, int w) : v_from(from), v_to(to), weight(w) {}
 
-        bool operator<(const Edge &other) const {
-            return weight > other.weight; // Меняем знак, чтобы получить минимальную кучу
+        bool operator>(const Edge& other) const {
+            return weight > other.weight;
+        }
+
+        bool operator<(const Edge& other) const {
+            return weight < other.weight;
+        }
+
+        bool operator==(const Edge& other) const {
+            return v_from == other.v_from && v_to == other.v_to && weight == other.weight;
         }
         /// акназар
         // Операторы сравнения для сравнения рёбер
@@ -46,6 +53,7 @@ private:
         }
         ///
     };
+
 
     std::string printoutAlgorithm;
 
@@ -87,7 +95,7 @@ public:
 
     std::string getPrintoutAlgorithm();
 
-    void runAlgorithm(const std::string &algorithm);
+    void runAlgorithm(const std::string& algorithm, char start_vertex = 'A');
 };
 
 

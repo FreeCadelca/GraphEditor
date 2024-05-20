@@ -8,9 +8,9 @@
 //std::string TITLES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//названия вершин
 //int ID_NEXT_TITLE = 0;//номер следующей вершины для выбора
 // !Legacy!
-Canvas *Canvas::instance = nullptr;
+Canvas* Canvas::instance = nullptr;
 
-Canvas *Canvas::getInstance() {
+Canvas* Canvas::getInstance() {
     if (instance == nullptr) {
         instance = new Canvas();
     }
@@ -38,6 +38,10 @@ Canvas::Canvas() : state(DEFAULT | VERTEX), color(0, 0, 0, 1), buffer_width(1920
     this->color_chooser_dialog = new Gtk::ColorChooserDialog;//настройка диалога выбора цвета
     this->color_chooser_dialog->set_modal(true);
     this->color_chooser_dialog->signal_response().connect(sigc::mem_fun(*this, &Canvas::choose_color_response));
+}
+
+int Canvas::getState() const {
+    return state;
 }
 
 void Canvas::choose_color_response(int response_id) {//настройка цвета, выбранного через диалог
@@ -98,7 +102,8 @@ Cairo::RefPtr <Cairo::Context> Canvas::get_context(Cairo::RefPtr <Cairo::Surface
 }
 
 void Canvas::drawing_vertex(double x, double y, char name) {
-    std::string s;
+    //функция рисования вершин (с белой подложкой для "перекрытия" наложенных на вершину рёбер)
+    std::string s;//перевод названия в тип string для "CLang-Tidy, как просит Clion)
     s.push_back(name);
 
     auto context = this->get_context(temp_buffer);
@@ -208,12 +213,13 @@ void Canvas::drawing(double x, double y) {
             // Рисование вершины
             bool can_draw = true;
             for (auto i : Graph::getInstance()->coords) {
-                if (abs(i.second.first - x) <= 80 && abs(i.second.second - y) <= 80) {
+                if (abs(i.second.first - x) <= 80 and abs(i.second.second - y) <= 80) {
                     can_draw = false;
                     break;
                 }
             }
-            if (can_draw && Graph::getInstance()->ID_NEXT_TITLE != Graph::getInstance()->TITLES.size()) {
+
+            if (can_draw and Graph::getInstance()->ID_NEXT_TITLE != Graph::getInstance()->TITLES.size()) {
                 char next_char = Graph::getInstance()->TITLES[Graph::getInstance()->ID_NEXT_TITLE];
                 Graph::getInstance()->addVertex(x, y);
                 drawing_vertex(x, y, next_char);
@@ -227,7 +233,7 @@ void Canvas::drawing(double x, double y) {
             // Рисование ребра
             char sticking_from_vertex = '-';
             for (auto i : Graph::getInstance()->coords) {
-                if (abs(i.second.first - start_x) <= 40 && abs(i.second.second - start_y) <= 40) {
+                if (abs(i.second.first - start_x) <= 40 and abs(i.second.second - start_y) <= 40) {
                     start_x = i.second.first;
                     start_y = i.second.second;
                     sticking_from_vertex = i.first;
@@ -237,14 +243,14 @@ void Canvas::drawing(double x, double y) {
             if (sticking_from_vertex != '-') {
                 char sticking_to_vertex = '-';
                 for (auto i : Graph::getInstance()->coords) {
-                    if (abs(i.second.first - x) <= 40 && abs(i.second.second - y) <= 40) {
+                    if (abs(i.second.first - x) <= 40 and abs(i.second.second - y) <= 40) {
                         x = i.second.first;
                         y = i.second.second;
                         sticking_to_vertex = i.first;
                         break;
                     }
                 }
-                if (sticking_to_vertex != sticking_from_vertex && sticking_to_vertex != '-') {
+                if (sticking_to_vertex != sticking_from_vertex and sticking_to_vertex != '-') {
                     bool edge_exist = false;
                     for (auto i : Graph::getInstance()->adjacent_list[sticking_from_vertex]) {
                         if (sticking_to_vertex == i) {
@@ -284,45 +290,45 @@ void Canvas::change_tool(int tool) {//функция смены инструме
 }
 
 //useless (просто не удаляю на всякий случай)
-void Canvas::visualize_vertex(char vertex, Color color) {
-    // Найти координаты вершины на холсте по ее метке
-    double x = Graph::getInstance()->coords[vertex].first;
-    double y = Graph::getInstance()->coords[vertex].second;
-
-    // Получить контекст рисования
-    auto context = this->get_context(temp_buffer, true);
-
-    // Установить цвет для рисования
-    context->set_source_rgba(color.r, color.g, color.b, color.a);
-
-    // Рисовать вершину
-    drawing_vertex(x, y, vertex);
-
-    // Перерисовать холст с новым содержимым
-    this->queue_draw();
-}
-
-//useless (просто не удаляю на всякий случай)
-void Canvas::animate_bfs(const std::string &bfs_result) {
-    // Очистка предыдущей анимации (если есть)
-    //clear_animation();
-
-    // Разбиение результата на посещенные вершины
-    std::vector<char> visited_vertices;
-    std::istringstream iss(bfs_result);
-    std::string token;
-    while (std::getline(iss, token, ' ')) {
-        if (!token.empty()) {
-            visited_vertices.push_back(token[0]);
-        }
-    }
-
-    // Запуск анимации посещения вершин
-    for (char vertex: visited_vertices) {
-        visualize_vertex(vertex, Color(255, 0, 0, 255));
-        usleep(500000); // Задержка в 0.5 секунды (500000 микросекунд)
-    }
-}
+//void Canvas::visualize_vertex(char vertex, Color color) {
+//    // Найти координаты вершины на холсте по ее метке
+//    double x = Graph::getInstance()->coords[vertex].first;
+//    double y = Graph::getInstance()->coords[vertex].second;
+//
+//    // Получить контекст рисования
+//    auto context = this->get_context(temp_buffer, true);
+//
+//    // Установить цвет для рисования
+//    context->set_source_rgba(color.r, color.g, color.b, color.a);
+//
+//    // Рисовать вершину
+//    drawing_vertex(x, y, vertex);
+//
+//    // Перерисовать холст с новым содержимым
+//    this->queue_draw();
+//}
+//
+////useless (просто не удаляю на всякий случай)
+//void Canvas::animate_bfs(const std::string &bfs_result) {
+//    // Очистка предыдущей анимации (если есть)
+//    //clear_animation();
+//
+//    // Разбиение результата на посещенные вершины
+//    std::vector<char> visited_vertices;
+//    std::istringstream iss(bfs_result);
+//    std::string token;
+//    while (std::getline(iss, token, ' ')) {
+//        if (!token.empty()) {
+//            visited_vertices.push_back(token[0]);
+//        }
+//    }
+//
+//    // Запуск анимации посещения вершин
+//    for (char vertex: visited_vertices) {
+//        visualize_vertex(vertex, Color(255, 0, 0, 255));
+//        usleep(500000); // Задержка в 0.5 секунды (500000 микросекунд)
+//    }
+//}
 
 void Canvas::outline_vertex(char vertex, Color outline_color) {
     // Получаем координаты вершины
