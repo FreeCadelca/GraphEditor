@@ -62,7 +62,7 @@ private:
 
     void union_sets(std::map<char, char> &parent, char u, char v);
 
-    void prim(char start_vertex);
+    void prim();
 
 public:
     std::map<char, std::vector<char>> adjacent_list; // список смежности

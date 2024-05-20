@@ -461,12 +461,15 @@ void Graph::kruskal() {
     this->printoutAlgorithm = result.str(); // Сохранение результата в поле класса
 }
 
-void Graph::prim(char start_vertex) {
+void Graph::prim() {
     // Проверка на наличие рёбер в графе
     if (adjacent_list.empty()) {
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
+
+    // Выбор первой вершины в TITLES как стартовой
+    char start_vertex = TITLES[0];
 
     // Создание пустого множества для хранения посещённых вершин
     std::set<char> visited;
@@ -539,7 +542,7 @@ void Graph::runAlgorithm(const std::string& algorithm) {
     } else if (algorithm == "Kraskal") {
         this->kruskal();
     } else if (algorithm == "Prim") {
-        this->prim('A');
+        this->prim();
     } else {
         this->printoutAlgorithm = "Sorry, not available(";
     }
