@@ -1,9 +1,7 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.27)
+project(GraphEditor)
 
-project(GraphEditor LANGUAGES CXX)
-
-find_package(PkgConfig)
-pkg_check_modules(GTKMM gtkmm-3.0)
+set(CMAKE_CXX_STANDARD 14)
 
 add_executable(
         GraphEditor
@@ -15,15 +13,16 @@ add_executable(
         Graph.cpp
         Graph.h
         Color.cpp
-        Color.h)
+        Color.h
+        WeightEntryDialog.cpp
+        WeightEntryDialog.h
+)
 
-target_compile_features(GraphEditor PRIVATE cxx_std_17)
+find_package(PkgConfig)
+pkg_check_modules(GTKMM gtkmm-3.0)
 
-target_sources(GraphEditor PRIVATE main.cpp)
+include_directories(${GTKMM_INCLUDE_DIRS})
+link_directories(${GTKMM_LIBRARY_DIRS})
 
-target_include_directories(GraphEditor PRIVATE ${GTKMM_INCLUDE_DIRS})
-
-target_link_directories(GraphEditor PRIVATE ${GTKMM_LIBRARY_DIRS})
-
-target_link_libraries(GraphEditor PRIVATE ${GTKMM_LIBRARIES})
-target_link_libraries(GraphEditor PRIVATE ${GTKMM_LIBRARIES})
+set(SOURCE_FILES main.cpp)
+target_link_libraries(${CMAKE_PROJECT_NAME} ${GTKMM_LIBRARIES})

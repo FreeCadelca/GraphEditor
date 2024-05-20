@@ -20,8 +20,7 @@
 
 class Graph {
 private:
-    static Graph *instance;
-
+    static Graph* instance;
     Graph();
 
     // Структура для представления ребра
@@ -43,6 +42,16 @@ private:
         bool operator==(const Edge& other) const {
             return v_from == other.v_from && v_to == other.v_to && weight == other.weight;
         }
+        /// акназар
+        // Операторы сравнения для сравнения рёбер
+        bool operator==(const Edge& other) const {
+            return v_from == other.v_from && v_to == other.v_to && weight == other.weight;
+        }
+
+        bool operator!=(const Edge& other) const {
+            return !(*this == other);
+        }
+        ///
     };
 
 
@@ -86,7 +95,7 @@ public:
 
     std::string getPrintoutAlgorithm();
 
-    void runAlgorithm(const std::string &algorithm);
+    void runAlgorithm(const std::string& algorithm, char start_vertex = 'A');
 };
 
 

@@ -6,10 +6,13 @@
 #define GRAPHEDITOR_GRAPHEDITORAPP_H
 
 #include <gtkmm.h>
+#include <iostream>
 #include "Canvas.h"
 #include "Graph.h"
+#include "WeightEntryDialog.h"
 
-class GraphEditorApp : public Gtk::ApplicationWindow  {
+
+class GraphEditorApp : public Gtk::ApplicationWindow {
     Gtk::Box *main_box;
     int nextWeight = 1;
 
@@ -27,8 +30,11 @@ class GraphEditorApp : public Gtk::ApplicationWindow  {
     Glib::RefPtr<Gtk::Builder> ui;
 public:
     GraphEditorApp();
+
     void on_change_weight_release();
+
     void print_graph_data();
+
     void print_algorithm();
 };
 

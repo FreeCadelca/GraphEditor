@@ -263,6 +263,9 @@ void Graph::dijkstra(char start_vertex) {
     // Множество для отслеживания посещенных вершин
     std::set<char> visited;
 
+    // Задержка между отрисовками вершин (в миллисекундах)
+    int delay_ms = 400;
+
     // Пока не все вершины посещены
     while (visited.size() < TITLES.size()) {
         // Находим вершину с минимальным расстоянием среди непосещенных
@@ -293,6 +296,22 @@ void Graph::dijkstra(char start_vertex) {
                 distances[vertex_index[current_vertex]] + weight < distances[vertex_index[neighbor]]) {
                 // Если расстояние до соседней вершины меньше текущего значения, обновляем расстояние.
                 distances[vertex_index[neighbor]] = distances[vertex_index[current_vertex]] + weight;
+
+                // Создаем таймер для отложенной анимации обновления расстояния
+                Glib::signal_timeout().connect([=]() {
+                    // Подсвечиваем обновленное ребро
+                    Canvas::getInstance()->redraw_edge(current_vertex, neighbor, Color(1, 0.6, 0.6, 1));
+                    // Подсвечиваем вершину
+                    Canvas::getInstance()->outline_vertex(neighbor, Color(0.6, 1, 0.6, 1));
+                    Glib::signal_timeout().connect([=]() {
+                        Canvas::getInstance()->outline_vertex(neighbor, Color(0.5, 0.5, 0.5, 1));
+                        return false;
+                    }, delay_ms);
+                    return false; // Отключаем таймер после одного выполнения
+                }, delay_ms);
+
+                // Увеличиваем задержку перед следующей анимацией
+                delay_ms += 400;
             }
         }
     }
@@ -459,7 +478,21 @@ void Graph::kruskal() {
 
     // Вывод результата в программное окно
     this->printoutAlgorithm = result.str(); // Сохранение результата в поле класса
+///акназар
+    // Рисуем минимальное остовное дерево
+    for (const Edge& edge : mst) {
+        // Обводим вершины зеленым цветом
+        Canvas::getInstance()->outline_vertex(edge.v_from, Color(0.5, 0, 0.0, 1.0)); // Зеленый цвет
+        Canvas::getInstance()->outline_vertex(edge.v_to, Color(0.5, 0, 0.0, 1.0));   // Зеленый цвет
+        // Рисуем ребра остовного дерева зеленым цветом
+        Canvas::getInstance()->redraw_edge(edge.v_from, edge.v_to, Color(0.7, 0, 0.0, 1.0)); // Зеленый цвет
+
+    }
+
+    // Перерисовываем холст, чтобы отобразить изменения
+    Canvas::getInstance()->queue_draw();
 }
+
 
 void Graph::prim() {
     // Проверка на наличие рёбер в графе
@@ -530,15 +563,16 @@ void Graph::prim() {
 }
 
 
-void Graph::runAlgorithm(const std::string& algorithm) {
+void Graph::runAlgorithm(const std::string& algorithm, char start_vertex) {
+    printf("ran algorithm with st vertex: %c\n", start_vertex);
     if (algorithm == "BFS") {
-        this->run_bfs('A');
+        this->run_bfs(start_vertex);
     } else if (algorithm == "DFS") {
-        this->run_dfs('A');
+        this->run_dfs(start_vertex);
     } else if (algorithm == "Djkstra") {
-        this->dijkstra('B');
+        this->dijkstra(start_vertex);
     } else if (algorithm == "Bellman-Ford") {
-        this->bellman_ford('B');
+        this->bellman_ford(start_vertex);
     } else if (algorithm == "Kraskal") {
         this->kruskal();
     } else if (algorithm == "Prim") {

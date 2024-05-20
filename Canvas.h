@@ -16,6 +16,7 @@
 #include <iostream>
 #include "Graph.h"
 #include "Color.h"
+#include "WeightEntryDialog.h"
 
 
 class Canvas : public Gtk::DrawingArea {
@@ -40,6 +41,8 @@ public:
     static const int VERTEX = 1 << 2;
     static const int EDGE = 1 << 3;
 
+    int getState() const;
+
     void drawing_arrow(const double x1, const double y1, const double x2, const double y2);
 
     void choose_color_response(int response_id);
@@ -62,17 +65,13 @@ public:
 
     void change_tool(int tool);
 
-    //useless
-    void animate_bfs(const std::string &bfs_result);
-
-    //useless
-    void visualize_vertex(char vertex, Color color);
-
     void outline_vertex(char vertex, Color outline_color);
 
     void fill_vertex(char vertex, Color fill_color);
 
-    void outline_edge(char v1, char v2, Color outline_color);
+    void redraw_edge(char vertex1, char vertex2, Color outline_color);
+
+    void draw_colored_arrow(double start_x, double start_y, double end_x, double end_y, Color outline_color);
 };
 
 
