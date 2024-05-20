@@ -103,14 +103,19 @@ void GraphEditorApp::print_graph_data() {//функция распечатыва
     }
 }
 
-void GraphEditorApp::print_algorithm() {//функция распечатывания алгоритма на графе
-    if (this->run_algorithm_button->get_label() == "Run algorithm") { //"развёртывание" лейбла с распечаткой
+void GraphEditorApp::print_algorithm() {
+    if (this->run_algorithm_button->get_label() == "Run algorithm") {
+        // "Развёртывание" лейбла с распечаткой
         std::string algorithm = this->choose_algorithm_cb->get_active_id();
         Graph::getInstance()->runAlgorithm(this->choose_algorithm_cb->get_active_id());
         this->printed_algorithm_label->set_text(Graph::getInstance()->getPrintoutAlgorithm());
         this->printed_algorithm_label->show();
         this->run_algorithm_button->set_label("Close algorithm");
-    } else { //"свёртывание" лейбла с распечаткой
+
+        // Добавление вызова clearScreenAndRestoreGraph()
+        Canvas::getInstance()->clearScreenAndRestoreGraph();
+    } else {
+        // "Свёртывание" лейбла с распечаткой
         this->printed_algorithm_label->hide();
         this->printed_algorithm_label->hide();
         this->run_algorithm_button->set_label("Run algorithm");

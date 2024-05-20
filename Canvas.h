@@ -4,7 +4,7 @@
 
 #ifndef UNTITLED_CANVAS_H
 #define UNTITLED_CANVAS_H
-
+#include <cairo.h>
 #include "gtkmm.h"
 #include "cairomm/context.h"
 #include <cstdlib>
@@ -75,6 +75,20 @@ public:
     void redraw_edge(char vertex1, char vertex2, Color outline_color);
 
     void draw_colored_arrow(double start_x, double start_y, double end_x, double end_y, Color outline_color);
+
+    void clear_screen();
+
+    void clearScreenAndRestoreGraph();
+
+    void redrawGraph();
+
+    void clear_temp_buffer();
+
+    void update_main_buffer();
+
+    void redraw_all();
+
+    void save_current_state();
 };
 
 

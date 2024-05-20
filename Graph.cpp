@@ -16,32 +16,33 @@ Graph *Graph::getInstance() {
 }
 
 void Graph::addVertex(double x, double y) {
-    this->coords[TITLES[ID_NEXT_TITLE]] = {x, y};//добавляем новую вершину туда, куда нужно
-
+    this->coords[TITLES[ID_NEXT_TITLE]] = {x, y}; // Добавляем новую вершину туда, куда нужно
     this->adjacent_list[TITLES[ID_NEXT_TITLE]] = {};
 
-//    this->adjacent_matrix[TITLES[ID_NEXT_TITLE]] = std::map<char, int> ();
     if (ID_NEXT_TITLE == 0) {
         this->adjacent_matrix = std::vector<std::vector<int>>(1, std::vector<int>(1, 0));
     } else {
-        adjacent_matrix.resize(
-                adjacent_matrix.size() + 1,
-                std::vector<int>(adjacent_matrix.size(), 0)
-        );
-        for (auto &i: adjacent_matrix) {
+        adjacent_matrix.resize(adjacent_matrix.size() + 1, std::vector<int>(adjacent_matrix.size(), 0));
+        for (auto &i : adjacent_matrix) {
             i.resize(i.size() + 1, 0);
         }
     }
     ID_NEXT_TITLE++;
+
+    // Перерисовываем все элементы
+    Canvas::getInstance()->redraw_all();
 }
 
 void Graph::addEdge(char v_from, char v_to) {
     this->adjacent_list[v_from].push_back(v_to);
-// A = 65
-    int index_v_from = (int) v_from - 65;
-    int index_v_to = (int) v_to - 65;
+    int index_v_from = (int)v_from - 65;
+    int index_v_to = (int)v_to - 65;
     this->adjacent_matrix[index_v_from][index_v_to] = this->nextWeight;
+
+    // Перерисовываем все элементы
+    Canvas::getInstance()->redraw_all();
 }
+
 
 std::string Graph::getPrintoutAdjList() {
     std::string output;
@@ -361,16 +362,12 @@ void Graph::union_sets(std::map<char, char>& parent, char u, char v) {
 }
 
 void Graph::kruskal(char start_vertex) {
-    // Проверка на наличие рёбер в графе
     if (adjacent_list.empty()) {
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
 
-    // Создание вектора для хранения всех рёбер графа
     std::vector<Edge> edges;
-
-    // Заполнение вектора рёбрами
     for (const auto& adjacent_vertex_pair : adjacent_list) {
         char from = adjacent_vertex_pair.first;
         for (char to : adjacent_vertex_pair.second) {
@@ -378,22 +375,16 @@ void Graph::kruskal(char start_vertex) {
         }
     }
 
-    // Сортировка рёбер по весу
     std::sort(edges.begin(), edges.end(), [](const Edge& e1, const Edge& e2) {
         return e1.weight < e2.weight;
     });
 
-    // Создание отображения для хранения родительских вершин
     std::map<char, char> parent;
     for (char vertex = start_vertex; vertex < start_vertex + TITLES.size(); ++vertex) {
         parent[vertex] = vertex;
     }
 
-    // Создание вектора для хранения остовного дерева
     std::vector<Edge> mst;
-
-    // Проход по всем рёбрам в отсортированном порядке и добавление их в остовное дерево,
-    // если они не создают цикл
     for (const Edge& edge : edges) {
         char root_from = find(parent, edge.v_from);
         char root_to = find(parent, edge.v_to);
@@ -403,7 +394,6 @@ void Graph::kruskal(char start_vertex) {
         }
     }
 
-    // Формирование строки с остовным деревом и его весом
     std::stringstream result;
     result << "Минимальное остовное дерево (алгоритм Краскала):\n";
     int total_weight = 0;
@@ -412,21 +402,14 @@ void Graph::kruskal(char start_vertex) {
         total_weight += edge.weight;
     }
     result << "Вес минимального остовного дерева равен: " << total_weight << "\n";
-
-    // Вывод результата в программное окно
     this->printoutAlgorithm = result.str();
-///акназар
-    // Рисуем минимальное остовное дерево
-    for (const Edge& edge : mst) {
-        // Обводим вершины зеленым цветом
-        Canvas::getInstance()->outline_vertex(edge.v_from, Color(0.5, 0, 0.0, 1.0)); // Зеленый цвет
-        Canvas::getInstance()->outline_vertex(edge.v_to, Color(0.5, 0, 0.0, 1.0));   // Зеленый цвет
-        // Рисуем ребра остовного дерева зеленым цветом
-        Canvas::getInstance()->redraw_edge(edge.v_from, edge.v_to, Color(0.7, 0, 0.0, 1.0)); // Зеленый цвет
 
+    for (const Edge& edge : mst) {
+        Canvas::getInstance()->outline_vertex(edge.v_from, Color(0.0, 0.5, 0.0, 1.0)); // Зеленый цвет
+        Canvas::getInstance()->outline_vertex(edge.v_to, Color(0.0, 0.5, 0.0, 1.0));   // Зеленый цвет
+        //Canvas::getInstance()->redraw_edge(edge.v_from, edge.v_to, Color(0.0, 0.7, 0.0, 1.0)); // Зеленый цвет
     }
 
-    // Перерисовываем холст, чтобы отобразить изменения
     Canvas::getInstance()->queue_draw();
 }
 ///
