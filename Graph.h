@@ -56,7 +56,7 @@ private:
 
     void bellman_ford(char start_vertex);
 
-    void kruskal(char start_vertex);
+    void kruskal();
 
     char find(std::map<char, char> &parent, char vertex);
 
