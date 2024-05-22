@@ -428,6 +428,7 @@ void Canvas::clear_screen() {
     context->fill();
     context->stroke();
     this->queue_draw();
+
 }
 
 

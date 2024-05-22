@@ -566,6 +566,7 @@ void Graph::prim(char start_vertex) {
         delay_ms += 400;
     }
     ///
+
     // Вывод результата в программное окно
     this->printoutAlgorithm = result.str(); // Сохранение результата в поле класса
 }
