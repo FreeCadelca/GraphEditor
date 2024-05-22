@@ -4,11 +4,11 @@
 
 #include "Graph.h"
 
-Graph* Graph::instance = nullptr;
+Graph *Graph::instance = nullptr;
 
 Graph::Graph() = default;
 
-Graph* Graph::getInstance() {
+Graph *Graph::getInstance() {
     if (instance == nullptr) {
         instance = new Graph();
     }
@@ -19,7 +19,6 @@ void Graph::addVertex(double x, double y) {
     this->coords[TITLES[ID_NEXT_TITLE]] = {x, y}; // Добавляем новую вершину туда, куда нужно
     this->adjacent_list[TITLES[ID_NEXT_TITLE]] = {};
 
-//    this->adjacent_matrix[TITLES[ID_NEXT_TITLE]] = std::map<char, int> ();
     if (ID_NEXT_TITLE == 0) {
         this->adjacent_matrix = std::vector<std::vector<int>>(1, std::vector<int>(1, 0));
     } else {
@@ -36,9 +35,8 @@ void Graph::addVertex(double x, double y) {
 
 void Graph::addEdge(char v_from, char v_to) {
     this->adjacent_list[v_from].push_back(v_to);
-// A = 65
-    int index_v_from = (int) v_from - 65;
-    int index_v_to = (int) v_to - 65;
+    int index_v_from = (int)v_from - 65;
+    int index_v_to = (int)v_to - 65;
     this->adjacent_matrix[index_v_from][index_v_to] = this->nextWeight;
 
     // Перерисовываем все элементы
@@ -464,6 +462,7 @@ void Graph::kruskal(char start_vertex) {
 ///АКНАЗАР
     // Визуальное выделение рёбер и вершин остовного дерева
     for (const Edge& edge : mst) {
+        // Добавление информации о ребре в результат
         result << edge.v_from << " - " << edge.v_to << ": " << edge.weight << "\n";
         total_weight += edge.weight;
 
