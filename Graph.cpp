@@ -236,93 +236,127 @@ void Graph::run_dfs(char start_vertex) {
     }
 }
 
+char Graph::get_target_vertex() { /// акназар
+    GtkWidget *dialog;
+    GtkWidget *content_area;
+    GtkWidget *entry;
+    GtkDialogFlags flags = GTK_DIALOG_MODAL; // Correct type for dialog flags
+
+    // Create the widgets
+    dialog = gtk_dialog_new_with_buttons("Путь куда?",
+                                         NULL,
+                                         flags,
+                                         ("OK"),
+                                         GTK_RESPONSE_OK,
+                                         ("Cancel"),
+                                         GTK_RESPONSE_CANCEL,
+                                         NULL);
+    content_area = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+    entry = gtk_entry_new();
+    gtk_container_add(GTK_CONTAINER(content_area), entry);
+    gtk_widget_show_all(dialog);
+
+    // Get the response
+    char target_vertex = '\0';
+    gint response = gtk_dialog_run(GTK_DIALOG(dialog));
+    if (response == GTK_RESPONSE_OK) {
+        const char *text = gtk_entry_get_text(GTK_ENTRY(entry));
+        if (text != NULL && strlen(text) == 1) {
+            target_vertex = text[0];
+        }
+    }
+
+    gtk_widget_destroy(dialog);
+    return target_vertex;
+}
+
 void Graph::dijkstra(char start_vertex) {
-    // Проверяем, есть ли данные о вершинах и рёбрах в графе
     if (coords.empty()) {
-        // Если контейнер coords пуст, устанавливаем сообщение об ошибке и завершаем функцию.
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
-
-    // Создаем строковый поток для формирования результата алгоритма Дейкстры
+/// акназар
+    char end_vertex = get_target_vertex();
+    if (end_vertex == '\0') {
+        this->printoutAlgorithm = "Error: No target vertex specified";
+        return;
+    }
+///
     std::stringstream result;
-    // Записываем информацию о начале выполнения алгоритма с указанной стартовой вершиной в строковый поток.
-    result << "Алгоритм Дейкстры начиная с вершины " << start_vertex << ":\n";
+    result << "Алгоритм Дейкстры начиная с вершины " << start_vertex << " до вершины " << end_vertex << ":\n";
     result << "Минимальные расстояния до вершин:\n";
 
-    // Инициализируем расстояния для всех вершин как бесконечность,
-    // кроме стартовой вершины, расстояние до которой равно 0
     std::vector<int> distances(TITLES.size(), std::numeric_limits<int>::max());
-    // Здесь 'A' используется для того, чтобы привести символ start_vertex к
-    // числовому значению, чтобы его можно было использовать как индекс в массиве distances
     distances[start_vertex - 'A'] = 0;
 
-    // Множество для отслеживания посещенных вершин
+    std::map<char, char> previous;
     std::set<char> visited;
 
-    // Задержка между отрисовками вершин (в миллисекундах)
-    int delay_ms = 400;
-
-    // Пока не все вершины посещены
     while (visited.size() < TITLES.size()) {
-        // Находим вершину с минимальным расстоянием среди непосещенных
         char current_vertex = '\0';
         int min_distance = std::numeric_limits<int>::max();
         for (char v : TITLES) {
-            // Перебираем все вершины графа
-            if (visited.find(v) == visited.end() && distances[v - start_vertex] < min_distance) {
-                // Если вершина v не посещена и расстояние от стартовой вершины до v меньше текущего минимального расстояния,
-                // обновляем значения current_vertex и min_distance
-                min_distance = distances[v - start_vertex];
+            if (visited.find(v) == visited.end() && distances[v - 'A'] < min_distance) {
+                min_distance = distances[v - 'A'];
                 current_vertex = v;
             }
         }
 
-        // Если не удалось найти непосещенный узел, выходим из цикла
         if (current_vertex == '\0') {
             break;
         }
 
-        // Помечаем текущую вершину как посещенную
         visited.insert(current_vertex);
-
-        // Обновляем расстояния до всех соседей текущей вершины
+/// изменил код сони
         for (char neighbor : adjacent_list[current_vertex]) {
-            int weight = adjacent_matrix[current_vertex - start_vertex][neighbor - start_vertex];
-            if (distances[current_vertex - start_vertex] != std::numeric_limits<int>::max() &&
-                distances[current_vertex - start_vertex] + weight < distances[neighbor - start_vertex]) {
-                // Если расстояние до соседней вершины меньше текущего значения, обновляем расстояние.
-                distances[neighbor - start_vertex] = distances[current_vertex - start_vertex] + weight;
-                // Создаем таймер для отложенной анимации обновления расстояния
-                Glib::signal_timeout().connect([=]() {
-                    // Подсвечиваем обновленное ребро
-                    Canvas::getInstance()->redraw_edge(current_vertex, neighbor, Color(1, 0.6, 0.6, 1));
-                    // Подсвечиваем вершину
-                    Canvas::getInstance()->outline_vertex(neighbor, Color(0.6, 1, 0.6, 1));
-                    Glib::signal_timeout().connect([=]() {
-                        Canvas::getInstance()->outline_vertex(neighbor, Color(0.5, 0.5, 0.5, 1));
-                        return false;
-                    }, delay_ms);
-                    return false; // Отключаем таймер после одного выполнения
-                }, delay_ms);
-
-                // Увеличиваем задержку перед следующей анимацией
-                delay_ms += 400;
+            int weight = adjacent_matrix[current_vertex - 'A'][neighbor - 'A'];
+            if (distances[current_vertex - 'A'] != std::numeric_limits<int>::max() &&
+                distances[current_vertex - 'A'] + weight < distances[neighbor - 'A']) {
+                distances[neighbor - 'A'] = distances[current_vertex - 'A'] + weight;
+                previous[neighbor] = current_vertex;
             }
         }
     }
 
-    // Формируем строку с минимальными расстояниями только для тех вершин, до которых существует путь
     for (char v : TITLES) {
-        if (distances[v - start_vertex] != std::numeric_limits<int>::max()) {
-            // Записываем информацию о минимальном расстоянии от начальной вершины до текущей вершины v.
-            result << v << ": " << distances[v - start_vertex] << "\n";
+        if (distances[v - 'A'] != std::numeric_limits<int>::max()) {
+            result << v << ": " << distances[v - 'A'] << "\n";
         }
     }
 
-    // Присваиваем строковое представление потока result переменной printoutAlgorithm для вывода результата алгоритма.
+    std::vector<char> path;
+    for (char at = end_vertex; at != '\0'; at = previous[at]) {
+        path.push_back(at);
+    }
+    std::reverse(path.begin(), path.end());
+
+    if (path.size() == 1 && path[0] == start_vertex) {
+        this->printoutAlgorithm = "Error: No path found";
+        return;
+    }
+
+    result << "Кратчайший путь: ";
+    for (char v : path) {
+        result << v << " ";
+    }
+    result << "\n";
+///
     this->printoutAlgorithm = result.str();
+/// акназар
+    // Drawing the path
+    for (size_t i = 0; i < path.size() - 1; ++i) {
+        char from = path[i];
+        char to = path[i + 1];
+        int delay_ms = 400;
+        Glib::signal_timeout().connect_once([=]() {
+            Canvas::getInstance()->redraw_edge(from, to, {1, 0, 0, 1}); // Красный цвет для выделения
+            Canvas::getInstance()->outline_vertex(from, {1, 0, 0, 1});
+            Canvas::getInstance()->outline_vertex(to, {1, 0, 0, 1});
+        }, delay_ms);
+        delay_ms += 400;
+    }
 }
+///
 
 
 void Graph::bellman_ford(char start_vertex) {
@@ -332,16 +366,24 @@ void Graph::bellman_ford(char start_vertex) {
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
-
+/// акназар
+    char end_vertex = get_target_vertex();
+    if (end_vertex == '\0') {
+        this->printoutAlgorithm = "Error: No target vertex specified";
+        return;
+    }
+///
     // Создаем строковый поток для формирования результата алгоритма Беллмана — Форда
     std::stringstream result;
     // Записываем информацию о начале выполнения алгоритма с указанной стартовой вершины в строковый поток.
-    result << "Алгоритм Беллмана — Форда начиная с вершины " << start_vertex << ":\n";
+    result << "Алгоритм Беллмана — Форда начиная с вершины " << start_vertex << " до вершины " << end_vertex << ":\n";
     result << "Минимальные расстояния до вершин:\n";
 
     // Инициализируем расстояния для всех вершин как бесконечность, кроме стартовой вершины, расстояние до которой равно 0
     std::vector<int> distances(TITLES.size(), std::numeric_limits<int>::max());
     distances[start_vertex - 'A'] = 0;
+
+    std::map<char, char> previous;
 
     // Проходимся по всем рёбрам графа |V| - 1 раз для нахождения кратчайших расстояний
     // Проходим по всем вершинам графа для обновления расстояний на каждой итерации
@@ -358,6 +400,7 @@ void Graph::bellman_ford(char start_vertex) {
                 if (distances[v_from - 'A'] != std::numeric_limits<int>::max() &&
                     distances[v_from - 'A'] + weight < distances[v_to - 'A']) {
                     distances[v_to - 'A'] = distances[v_from - 'A'] + weight;
+                    previous[v_to] = v_from;
                 }
             }
         }
@@ -383,11 +426,43 @@ void Graph::bellman_ford(char start_vertex) {
             result << v << ": " << distances[v - 'A'] << "\n";
         }
     }
+/// изменил код сони
+    // Восстанавливаем кратчайший путь
+    std::vector<char> path;
+    for (char at = end_vertex; at != start_vertex; at = previous[at]) {
+        path.push_back(at);
+    }
+    path.push_back(start_vertex);
+    std::reverse(path.begin(), path.end());
 
-    // Присваиваем строковое представление потока result переменной printoutAlgorithm для вывода результата алгоритма.
+    if (path.size() == 1 && path[0] == start_vertex) {
+        this->printoutAlgorithm = "Error: No path found";
+        return;
+    }
+
+    result << "Кратчайший путь: ";
+    for (char v : path) {
+        result << v << " ";
+    }
+    result << "\n";
+
     this->printoutAlgorithm = result.str();
+///
+/// акназар
+    // Drawing the path
+    for (size_t i = 0; i < path.size() - 1; ++i) {
+        char from = path[i];
+        char to = path[i + 1];
+        int delay_ms = 400;
+        Glib::signal_timeout().connect_once([=]() {
+            Canvas::getInstance()->redraw_edge(from, to, {1, 0, 0, 1}); // Красный цвет для выделения
+            Canvas::getInstance()->outline_vertex(from, {1, 0, 0, 1});
+            Canvas::getInstance()->outline_vertex(to, {1, 0, 0, 1});
+        }, delay_ms);
+        delay_ms += 400;
+    }
 }
-
+///
 // Вспомогательная функция для поиска корневой вершины дерева
 char Graph::find(std::map<char, char>& parent, char vertex) {
     // Если текущая вершина не является корнем, выполняем поиск рекурсивно

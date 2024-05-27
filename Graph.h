@@ -86,6 +86,8 @@ public:
     std::string getPrintoutAlgorithm();
 
     void runAlgorithm(const std::string& algorithm, char start_vertex = 'A');
+
+    char get_target_vertex();
 };
 
 
