@@ -428,6 +428,11 @@ void Graph::kruskal() {
         return;
     }
 
+    if (adjacent_list.size() == 1) {
+        this->printoutAlgorithm = "Error: Graph has only one vertex";
+        return;
+    }
+
     // Создание вектора для хранения всех рёбер графа
     std::vector<Edge> edges;
 
@@ -498,6 +503,10 @@ void Graph::prim() {
     // Проверка на наличие рёбер в графе
     if (adjacent_list.empty()) {
         this->printoutAlgorithm = "Error: Graph is empty";
+        return;
+    }
+    if (adjacent_list.size() == 1) {
+        printoutAlgorithm = "Error: Graph has only one vertex";
         return;
     }
 
