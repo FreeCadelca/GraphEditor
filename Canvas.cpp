@@ -8,9 +8,9 @@
 //std::string TITLES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//названия вершин
 //int ID_NEXT_TITLE = 0;//номер следующей вершины для выбора
 // !Legacy!
-Canvas* Canvas::instance = nullptr;
+Canvas *Canvas::instance = nullptr;
 
-Canvas* Canvas::getInstance() {
+Canvas *Canvas::getInstance() {
     if (instance == nullptr) {
         instance = new Canvas();
     }
@@ -79,13 +79,20 @@ bool Canvas::on_mouse_move(GdkEventMotion *event) {//прописывание ф
 }
 
 bool Canvas::on_mouse_release(GdkEventButton *event) {//прописывание функционала при отпускании мыши
+    printf("New edge? %c and %c\n", this->next_edge_to_append.first, this->next_edge_to_append.second);
+    if (this->state & EDGE) {
+        if (this->next_edge_to_append.first != '-' and this->next_edge_to_append.second != '-') {
+            Graph::getInstance()->addEdge(this->next_edge_to_append.first, this->next_edge_to_append.second);
+        }
+    }
+
     this->state &= ~DRAWING;//замена состояния
     this->state |= DEFAULT;
     this->drawing(event->x, event->y);
     return true;
 }
 
-Cairo::RefPtr <Cairo::Context> Canvas::get_context(Cairo::RefPtr <Cairo::Surface> &surface, bool need_clear) {
+Cairo::RefPtr<Cairo::Context> Canvas::get_context(Cairo::RefPtr<Cairo::Surface> &surface, bool need_clear) {
     //функция "вытаскивания" контекста (раньше мы называли его "cr") для рисования
     auto context = Cairo::Context::create(surface);
     if (need_clear) {//очищаем контекст при надобности
@@ -136,7 +143,7 @@ void Canvas::drawing_arrow(double start_x, double start_y, double end_x, double 
         // Определение, к каким вершинам относятся координаты начала и конца ребра
         char from_vertex = '-';
         char to_vertex = '-';
-        for (auto vertex_pair : Graph::getInstance()->coords) {
+        for (auto vertex_pair: Graph::getInstance()->coords) {
             if (abs(vertex_pair.second.first - start_x) <= 20 && abs(vertex_pair.second.second - start_y) <= 20) {
                 from_vertex = vertex_pair.first;
             }
@@ -146,7 +153,7 @@ void Canvas::drawing_arrow(double start_x, double start_y, double end_x, double 
         }
 
         // Поиск веса ребра между вершинами
-        int weight = Graph::getInstance()->adjacent_matrix[from_vertex - 'A'][to_vertex - 'A'];
+        int weight = Graph::getInstance()->nextWeight;
 
         auto context = this->get_context(temp_buffer, true);
         context->set_line_width(2);
@@ -188,25 +195,20 @@ void Canvas::drawing_arrow(double start_x, double start_y, double end_x, double 
         context->close_path();
         context->fill();
 
-// Вычисляем середину отрезка между начальной и конечной точками ребра
+        // Вычисляем середину отрезка между начальной и конечной точками ребра
         double mid_x = (start_x + end_x) / 2;
         double mid_y = (start_y + end_y) / 2;
 
-// Переносим начало координат в середину ребра для отрисовки текста
+        // Переносим начало координат в середину ребра для отрисовки текста
         context->save(); // Сохраняем текущее состояние контекста
         context->rotate(-angle); // Поворачиваем координатную систему обратно
         context->translate(-end_x, -end_y); // Возвращаем начало координат в исходное положение
 
-
-// Рисуем вес ребра в середине стрелки
+        // Рисуем вес ребра в середине стрелки
         context->set_font_size(20);
         context->move_to(mid_x, mid_y); // Перемещаемся в середину стрелки
         context->show_text(std::to_string(weight)); // Выводим вес ребра
         context->restore(); // Восстанавливаем сохраненное состояние контекста
-
-
-
-
 
         this->queue_draw();
     } else if (this->need_fix_temp_buffer) {
@@ -224,7 +226,7 @@ void Canvas::drawing(double x, double y) {
         if (this->state & VERTEX) {
             // Drawing vertex
             bool can_draw = true;
-            for (auto i : Graph::getInstance()->coords) {
+            for (auto i: Graph::getInstance()->coords) {
                 if (abs(i.second.first - x) <= 80 and abs(i.second.second - y) <= 80) {
                     can_draw = false;
                     break;
@@ -241,7 +243,7 @@ void Canvas::drawing(double x, double y) {
         if (this->state & EDGE) {
             // Drawing edge
             char sticking_from_vertex = '-';
-            for (auto i : Graph::getInstance()->coords) {
+            for (auto i: Graph::getInstance()->coords) {
                 if (abs(i.second.first - start_x) <= 40 and abs(i.second.second - start_y) <= 40) {
                     start_x = i.second.first;
                     start_y = i.second.second;
@@ -251,7 +253,7 @@ void Canvas::drawing(double x, double y) {
             }
             if (sticking_from_vertex != '-') {
                 char sticking_to_vertex = '-';
-                for (auto i : Graph::getInstance()->coords) {
+                for (auto i: Graph::getInstance()->coords) {
                     if (abs(i.second.first - x) <= 40 and abs(i.second.second - y) <= 40) {
                         x = i.second.first;
                         y = i.second.second;
@@ -261,14 +263,15 @@ void Canvas::drawing(double x, double y) {
                 }
                 if (sticking_to_vertex != sticking_from_vertex and sticking_to_vertex != '-') {
                     bool edge_exist = false;
-                    for (auto i : Graph::getInstance()->adjacent_list[sticking_from_vertex]) {
+                    for (auto i: Graph::getInstance()->adjacent_list[sticking_from_vertex]) {
                         if (sticking_to_vertex == i) {
                             edge_exist = true;
                             break;
                         }
                     }
                     if (!edge_exist) {
-                        Graph::getInstance()->addEdge(sticking_from_vertex, sticking_to_vertex);
+                        this->next_edge_to_append = {sticking_from_vertex, sticking_to_vertex};
+//                        Graph::getInstance()->addEdge(sticking_from_vertex, sticking_to_vertex);
                     }
                     drawing_arrow(start_x, start_y, x, y);
                 }
@@ -300,47 +303,6 @@ void Canvas::change_tool(int tool) {//функция смены инструме
 
     }
 }
-
-//useless (просто не удаляю на всякий случай)
-//void Canvas::visualize_vertex(char vertex, Color color) {
-//    // Найти координаты вершины на холсте по ее метке
-//    double x = Graph::getInstance()->coords[vertex].first;
-//    double y = Graph::getInstance()->coords[vertex].second;
-//
-//    // Получить контекст рисования
-//    auto context = this->get_context(temp_buffer, true);
-//
-//    // Установить цвет для рисования
-//    context->set_source_rgba(color.r, color.g, color.b, color.a);
-//
-//    // Рисовать вершину
-//    drawing_vertex(x, y, vertex);
-//
-//    // Перерисовать холст с новым содержимым
-//    this->queue_draw();
-//}
-//
-////useless (просто не удаляю на всякий случай)
-//void Canvas::animate_bfs(const std::string &bfs_result) {
-//    // Очистка предыдущей анимации (если есть)
-//    //clear_animation();
-//
-//    // Разбиение результата на посещенные вершины
-//    std::vector<char> visited_vertices;
-//    std::istringstream iss(bfs_result);
-//    std::string token;
-//    while (std::getline(iss, token, ' ')) {
-//        if (!token.empty()) {
-//            visited_vertices.push_back(token[0]);
-//        }
-//    }
-//
-//    // Запуск анимации посещения вершин
-//    for (char vertex: visited_vertices) {
-//        visualize_vertex(vertex, Color(255, 0, 0, 255));
-//        usleep(500000); // Задержка в 0.5 секунды (500000 микросекунд)
-//    }
-//}
 
 void Canvas::outline_vertex(char vertex, Color outline_color) {
     // Получаем координаты вершины
