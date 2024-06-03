@@ -10,12 +10,17 @@
   <object class="GtkImage" id="image2">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="pixbuf">..\Icons\AddEdge.png</property>
+    <property name="pixbuf">..\Icons\AddEdgeIcon.png</property>
   </object>
-  <object class="GtkLabel" id="label1">
+  <object class="GtkImage" id="image3">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="label" translatable="yes">label</property>
+    <property name="pixbuf">..\Icons\ChangeColorIcon.png</property>
+  </object>
+  <object class="GtkImage" id="image4">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="pixbuf">..\Icons\ChangeWeightIcon.png</property>
   </object>
   <object class="GtkListStore" id="liststore1">
     <columns>
@@ -95,7 +100,7 @@
                 <property name="tooltip-text" translatable="yes">Выбрать цвет обводки графа</property>
                 <property name="label" translatable="yes">Color</property>
                 <property name="use-underline">True</property>
-                <property name="stock-id">gtk-select-color</property>
+                <property name="icon-widget">image3</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -109,6 +114,26 @@
                 <property name="tooltip-text" translatable="yes">hahahahah</property>
                 <property name="label" translatable="yes">Next weight: 1</property>
                 <property name="use-underline">True</property>
+                <property name="icon-widget">image4</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolItem">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">ddd</property>
+                <child>
+                  <object class="GtkLabel" id="weight_label">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">1</property>
+                    <property name="xalign">0.05</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>

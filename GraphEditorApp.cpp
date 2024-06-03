@@ -44,6 +44,10 @@ GraphEditorApp::GraphEditorApp() : ui{Gtk::Builder::create_from_file("design_new
                 sigc::mem_fun(*this, &GraphEditorApp::on_change_weight)
         );
 
+        this->next_weight_label = Glib::RefPtr<Gtk::Label>::cast_dynamic(
+                ui->get_object("weight_label")
+        );
+
         this->print_graph_button = Glib::RefPtr<Gtk::Button>::cast_dynamic(
                 ui->get_object("print_graph_button")
         );
@@ -129,7 +133,7 @@ void GraphEditorApp::on_change_weight() {
     std::string new_weight = this->handling_new_weight(dialog.get_text());
     if (!new_weight.empty()) {
         Graph::getInstance()->nextWeight = std::stoi(new_weight);
-        this->tool_change_weight->set_label("Next weight: " + new_weight);
+        this->next_weight_label->set_label(new_weight);
         std::cout << new_weight << '\n';
     } else {
         Gtk::MessageDialog error_dialog("Entered wrong weight", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);

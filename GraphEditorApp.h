@@ -25,6 +25,7 @@ class GraphEditorApp : public Gtk::ApplicationWindow {
     Glib::RefPtr<Gtk::ToolButton> tool_add_vertex;
     Glib::RefPtr<Gtk::ToolButton> tool_add_edge;
     Glib::RefPtr<Gtk::ToolButton> tool_change_weight;
+    Glib::RefPtr<Gtk::Label> next_weight_label;
     Glib::RefPtr<Gtk::Button> print_graph_button;
     Glib::RefPtr<Gtk::Button> run_algorithm_button;
     Glib::RefPtr<Gtk::Entry> entry_for_weight;
