@@ -16,7 +16,7 @@
 #include <iostream>
 #include "Graph.h"
 #include "Color.h"
-#include "WeightEntryDialog.h"
+#include "VertexEntryDialog.h"
 
 
 class Canvas : public Gtk::DrawingArea {

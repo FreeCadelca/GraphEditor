@@ -14,8 +14,9 @@ add_executable(
         Graph.h
         Color.cpp
         Color.h
+        VertexEntryDialog.cpp
+        VertexEntryDialog.h
         WeightEntryDialog.cpp
-        WeightEntryDialog.h
 )
 
 find_package(PkgConfig)

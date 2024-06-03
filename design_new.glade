@@ -2,6 +2,21 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="pixbuf">..\Icons\AddVertexIcon.png</property>
+  </object>
+  <object class="GtkImage" id="image2">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="pixbuf">..\Icons\AddEdge.png</property>
+  </object>
+  <object class="GtkLabel" id="label1">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="label" translatable="yes">label</property>
+  </object>
   <object class="GtkListStore" id="liststore1">
     <columns>
       <!-- column-name Name_of_algorithm -->
@@ -50,9 +65,9 @@
                 <property name="can-focus">False</property>
                 <property name="can-default">True</property>
                 <property name="tooltip-text" translatable="yes">Добавить (нарисовать) вершину в графе</property>
-                <property name="label" translatable="yes">Add Verxtex</property>
+                <property name="label" translatable="yes">AddVertex</property>
                 <property name="use-underline">True</property>
-                <property name="stock-id">gtk-add</property>
+                <property name="icon-widget">image1</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -66,7 +81,7 @@
                 <property name="tooltip-text" translatable="yes">Добавить (нарисовать) ребро</property>
                 <property name="label" translatable="yes">Add Edge</property>
                 <property name="use-underline">True</property>
-                <property name="stock-id">gtk-network</property>
+                <property name="icon-widget">image2</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -88,24 +103,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolItem" id="temp_button">
-                <property name="name">jajajaja</property>
+              <object class="GtkToolButton" id="tool_change_weight">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="tooltip-text" translatable="yes">ага</property>
-                <child>
-                  <object class="GtkEntry" id="entry_for_weight">
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="tooltip-text" translatable="yes">ну типа)</property>
-                    <property name="max-length">9</property>
-                    <property name="max-width-chars">8</property>
-                    <property name="text" translatable="yes">1</property>
-                    <property name="xalign">0.10000000149011612</property>
-                    <property name="placeholder-text" translatable="yes">Введите вес</property>
-                    <property name="input-purpose">digits</property>
-                  </object>
-                </child>
+                <property name="tooltip-text" translatable="yes">hahahahah</property>
+                <property name="label" translatable="yes">Next weight: 1</property>
+                <property name="use-underline">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>

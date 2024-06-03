@@ -9,7 +9,9 @@
 #include <iostream>
 #include "Canvas.h"
 #include "Graph.h"
+#include "VertexEntryDialog.h"
 #include "WeightEntryDialog.h"
+#include <string>
 
 
 class GraphEditorApp : public Gtk::ApplicationWindow {
@@ -22,16 +24,18 @@ class GraphEditorApp : public Gtk::ApplicationWindow {
     Glib::RefPtr<Gtk::ToolButton> tool_choose_color;
     Glib::RefPtr<Gtk::ToolButton> tool_add_vertex;
     Glib::RefPtr<Gtk::ToolButton> tool_add_edge;
+    Glib::RefPtr<Gtk::ToolButton> tool_change_weight;
     Glib::RefPtr<Gtk::Button> print_graph_button;
     Glib::RefPtr<Gtk::Button> run_algorithm_button;
     Glib::RefPtr<Gtk::Entry> entry_for_weight;
     Glib::RefPtr<Gtk::ComboBox> choose_algorithm_cb;
+    std::string handling_new_weight(Glib::ustring new_weight);
 
     Glib::RefPtr<Gtk::Builder> ui;
 public:
     GraphEditorApp();
 
-    void on_change_weight_release();
+    void on_change_weight();
 
     void print_graph_data();
 

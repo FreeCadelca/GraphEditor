@@ -37,6 +37,13 @@ GraphEditorApp::GraphEditorApp() : ui{Gtk::Builder::create_from_file("design_new
                 )
         );
 
+        this->tool_change_weight = Glib::RefPtr<Gtk::ToolButton>::cast_dynamic(
+                ui->get_object("tool_change_weight")
+        );
+        this->tool_change_weight->signal_clicked().connect(
+                sigc::mem_fun(*this, &GraphEditorApp::on_change_weight)
+        );
+
         this->print_graph_button = Glib::RefPtr<Gtk::Button>::cast_dynamic(
                 ui->get_object("print_graph_button")
         );
@@ -51,12 +58,12 @@ GraphEditorApp::GraphEditorApp() : ui{Gtk::Builder::create_from_file("design_new
                 sigc::mem_fun(*this, &GraphEditorApp::print_algorithm)
         );
 
-        this->entry_for_weight = Glib::RefPtr<Gtk::Entry>::cast_dynamic(
-                ui->get_object("entry_for_weight")
-        );
-        this->entry_for_weight->signal_changed().connect(
-                sigc::mem_fun(*this, &GraphEditorApp::on_change_weight_release)
-        );
+//        this->entry_for_weight = Glib::RefPtr<Gtk::Entry>::cast_dynamic(
+//                ui->get_object("entry_for_weight")
+//        );
+//        this->entry_for_weight->signal_changed().connect(
+//                sigc::mem_fun(*this, &GraphEditorApp::on_change_weight_release)
+//        );
 
         this->choose_algorithm_cb = Glib::RefPtr<Gtk::ComboBox>::cast_dynamic(
                 ui->get_object("choose_algorithm_cb")
@@ -80,26 +87,54 @@ GraphEditorApp::GraphEditorApp() : ui{Gtk::Builder::create_from_file("design_new
     }
 }
 
-void GraphEditorApp::on_change_weight_release() {
-    Glib::ustring new_weight = this->entry_for_weight->get_text();
-//    std::cout << new_weight << "\n";
-    for (auto i: new_weight) std::cout << i << " ";
-    std::cout << '\n';
+std::string GraphEditorApp::handling_new_weight(Glib::ustring new_weight) {
+    if (new_weight.empty()) {
+        return "";
+    }
+
+    bool is_negative = false;
+    if (new_weight[0] == '-') {
+        is_negative = true;
+        new_weight.erase(0, 1);
+    }
+
     bool is_number = true;
     for (auto i: new_weight) {
-        if (i >= 58 or i <= 47) {
+        if (i <= 47 or i >= 58) {
             is_number = false;
             break;
         }
     }
-    if (new_weight.empty()) {
-        is_number = false;
+
+    if (!is_number) {
+        return "";
     }
-    if (is_number) {
-        std::cout << new_weight << "\n";
-        Graph::getInstance()->nextWeight = std::stoi(new_weight);
+    if (is_negative) {
+        return '-' + std::string(new_weight);
+    }
+    return std::string(new_weight);
+}
+
+
+void GraphEditorApp::on_change_weight() {
+    WeightEntryDialog dialog;
+    int result = dialog.run();
+    if (result == Gtk::RESPONSE_OK) {
+        std::cout << "Entered text: " << dialog.get_text() << std::endl;
     } else {
-        this->entry_for_weight->set_text(std::to_string(this->nextWeight));
+        std::cout << "Canceled" << std::endl;
+        return;
+    }
+
+    std::string new_weight = this->handling_new_weight(dialog.get_text());
+    if (!new_weight.empty()) {
+        Graph::getInstance()->nextWeight = std::stoi(new_weight);
+        this->tool_change_weight->set_label("Next weight: " + new_weight);
+        std::cout << new_weight << '\n';
+    } else {
+        Gtk::MessageDialog error_dialog("Entered wrong weight", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+        error_dialog.run();
+        return;
     }
 }
 
@@ -120,11 +155,11 @@ void GraphEditorApp::print_graph_data() {
 void GraphEditorApp::print_algorithm() {
     if (this->run_algorithm_button->get_label() == "Run algorithm") {
         if (this->choose_algorithm_cb->get_active_id() == "DFS"
-        or this->choose_algorithm_cb->get_active_id() == "BFS"
-        or this->choose_algorithm_cb->get_active_id() == "Bellman-Ford"
-        or this->choose_algorithm_cb->get_active_id() == "Djkstra") {
+            or this->choose_algorithm_cb->get_active_id() == "BFS"
+            or this->choose_algorithm_cb->get_active_id() == "Bellman-Ford"
+            or this->choose_algorithm_cb->get_active_id() == "Djkstra") {
             std::string algorithm = this->choose_algorithm_cb->get_active_id();
-            WeightEntryDialog dialog;
+            VertexEntryDialog dialog;
             int result = dialog.run();
             if (result == Gtk::RESPONSE_OK) {
                 std::cout << "Entered text: " << dialog.get_text() << std::endl;
