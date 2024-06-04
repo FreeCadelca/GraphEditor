@@ -18,10 +18,15 @@
 #include "Canvas.h"
 
 
+class GraphTestSuite;
+
+
 class Graph {
 private:
     static Graph* instance;
     Graph();
+
+
 
     // Структура для представления ребра
     struct Edge {
@@ -60,13 +65,16 @@ private:
 
     void bellman_ford(char start_vertex);
 
-    void kruskal(char start_vertex);
+    void kruskal();
 
     char find(std::map<char, char> &parent, char vertex);
 
     void union_sets(std::map<char, char> &parent, char u, char v);
 
-    void prim(char start_vertex);
+    void prim();
+
+    friend class GraphTestSuite;
+    friend class GraphTestAccessor;
 
 public:
     std::map<char, std::vector<char>> adjacent_list; // список смежности
@@ -78,7 +86,9 @@ public:
     std::map<char, std::pair<int, int>> coords; //координаты вершин
     int nextWeight = 1;
 
+
     static Graph *getInstance();
+
 
     void addVertex(double x, double y);
 
@@ -91,6 +101,35 @@ public:
     std::string getPrintoutAlgorithm();
 
     void runAlgorithm(const std::string& algorithm, char start_vertex = 'A');
+
+};
+
+class GraphTestAccessor {
+public:
+    static void run_bfs(Graph& graph, char start_vertex) {
+        graph.run_bfs(start_vertex);
+    }
+    static void run_dfs(Graph& graph, char start_vertex) {
+        graph.run_dfs(start_vertex);
+    }
+    static void dijkstra(Graph& graph, char start_vertex) {
+        graph.dijkstra(start_vertex);
+    }
+    static void bellman_ford(Graph& graph, char start_vertex) {
+        graph.bellman_ford(start_vertex);
+    }
+    static void kruskal(Graph& graph) {
+        graph.kruskal();
+    }
+    static void prim(Graph& graph) {
+        graph.prim();
+    }
+    static char find(Graph& graph, std::map<char, char> &parent, char vertex) {
+        return graph.find(parent, vertex);
+    }
+    static void union_sets(Graph& graph, std::map<char, char> &parent, char u, char v) {
+        graph.union_sets(parent, u, v);
+    }
 };
 
 

@@ -4,11 +4,11 @@
 
 #include "Graph.h"
 
-Graph* Graph::instance = nullptr;
+Graph *Graph::instance = nullptr;
 
 Graph::Graph() = default;
 
-Graph* Graph::getInstance() {
+Graph *Graph::getInstance() {
     if (instance == nullptr) {
         instance = new Graph();
     }
@@ -252,9 +252,13 @@ void Graph::dijkstra(char start_vertex) {
     // Инициализируем расстояния для всех вершин как бесконечность,
     // кроме стартовой вершины, расстояние до которой равно 0
     std::vector<int> distances(TITLES.size(), std::numeric_limits<int>::max());
-    // Здесь 'A' используется для того, чтобы привести символ start_vertex к
-    // числовому значению, чтобы его можно было использовать как индекс в массиве distances
-    distances[start_vertex - 'A'] = 0;
+    // Используем map для сопоставления символов вершин и их индексов
+    std::map<char, int> vertex_index;
+    for (int i = 0; i < TITLES.size(); ++i) {
+        vertex_index[TITLES[i]] = i;
+    }
+    // Устанавливаем расстояние до начальной вершины равным 0
+    distances[vertex_index[start_vertex]] = 0;
 
     // Множество для отслеживания посещенных вершин
     std::set<char> visited;
@@ -269,10 +273,10 @@ void Graph::dijkstra(char start_vertex) {
         int min_distance = std::numeric_limits<int>::max();
         for (char v : TITLES) {
             // Перебираем все вершины графа
-            if (visited.find(v) == visited.end() && distances[v - start_vertex] < min_distance) {
+            if (visited.find(v) == visited.end() && distances[vertex_index[v]] < min_distance) {
                 // Если вершина v не посещена и расстояние от стартовой вершины до v меньше текущего минимального расстояния,
                 // обновляем значения current_vertex и min_distance
-                min_distance = distances[v - start_vertex];
+                min_distance = distances[vertex_index[v]];
                 current_vertex = v;
             }
         }
@@ -287,11 +291,12 @@ void Graph::dijkstra(char start_vertex) {
 
         // Обновляем расстояния до всех соседей текущей вершины
         for (char neighbor : adjacent_list[current_vertex]) {
-            int weight = adjacent_matrix[current_vertex - start_vertex][neighbor - start_vertex];
-            if (distances[current_vertex - start_vertex] != std::numeric_limits<int>::max() &&
-                distances[current_vertex - start_vertex] + weight < distances[neighbor - start_vertex]) {
+            int weight = adjacent_matrix[vertex_index[current_vertex]][vertex_index[neighbor]];
+            if (distances[vertex_index[current_vertex]] != std::numeric_limits<int>::max() &&
+                distances[vertex_index[current_vertex]] + weight < distances[vertex_index[neighbor]]) {
                 // Если расстояние до соседней вершины меньше текущего значения, обновляем расстояние.
-                distances[neighbor - start_vertex] = distances[current_vertex - start_vertex] + weight;
+                distances[vertex_index[neighbor]] = distances[vertex_index[current_vertex]] + weight;
+
                 // Создаем таймер для отложенной анимации обновления расстояния
                 Glib::signal_timeout().connect([=]() {
                     // Подсвечиваем обновленное ребро
@@ -313,9 +318,9 @@ void Graph::dijkstra(char start_vertex) {
 
     // Формируем строку с минимальными расстояниями только для тех вершин, до которых существует путь
     for (char v : TITLES) {
-        if (distances[v - start_vertex] != std::numeric_limits<int>::max()) {
+        if (distances[vertex_index[v]] != std::numeric_limits<int>::max()) {
             // Записываем информацию о минимальном расстоянии от начальной вершины до текущей вершины v.
-            result << v << ": " << distances[v - start_vertex] << "\n";
+            result << v << ": " << distances[vertex_index[v]] << "\n";
         }
     }
 
@@ -327,36 +332,42 @@ void Graph::dijkstra(char start_vertex) {
 void Graph::bellman_ford(char start_vertex) {
     // Проверяем, есть ли данные о вершинах и рёбрах в графе
     if (coords.empty()) {
-        // Если контейнер coords пуст, устанавливаем сообщение об ошибке и завершаем функцию.
+        // Если контейнер coords пуст, устанавливаем сообщение об ошибке и завершаем функцию
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
 
-    // Создаем строковый поток для формирования результата алгоритма Беллмана — Форда
+    // Создаем строковый поток для формирования результата алгоритма Беллмана-Форда
     std::stringstream result;
-    // Записываем информацию о начале выполнения алгоритма с указанной стартовой вершины в строковый поток.
-    result << "Алгоритм Беллмана — Форда начиная с вершины " << start_vertex << ":\n";
+    // Записываем информацию о начале выполнения алгоритма с указанной стартовой вершины в строковый поток
+    result << "Алгоритм Беллмана-Форда начиная с вершины " << start_vertex << ":\n";
     result << "Минимальные расстояния до вершин:\n";
 
     // Инициализируем расстояния для всех вершин как бесконечность, кроме стартовой вершины, расстояние до которой равно 0
     std::vector<int> distances(TITLES.size(), std::numeric_limits<int>::max());
-    distances[start_vertex - 'A'] = 0;
+
+    // Используем map для сопоставления символов вершин и их индексов
+    std::map<char, int> vertex_index;
+    for (int i = 0; i < TITLES.size(); ++i) {
+        vertex_index[TITLES[i]] = i;
+    }
+    // Устанавливаем расстояние до начальной вершины равным 0
+    distances[vertex_index[start_vertex]] = 0;
 
     // Проходимся по всем рёбрам графа |V| - 1 раз для нахождения кратчайших расстояний
-    // Проходим по всем вершинам графа для обновления расстояний на каждой итерации
     for (int i = 0; i < TITLES.size() - 1; ++i) {
         // Внутренний цикл: перебираем все вершины графа
         for (char v_from : TITLES) {
             // Для каждой вершины перебираем все смежные с ней вершины
             for (char v_to : adjacent_list[v_from]) {
                 // Получаем вес ребра между вершинами v_from и v_to
-                int weight = adjacent_matrix[v_from - 'A'][v_to - 'A'];
+                int weight = adjacent_matrix[vertex_index[v_from]][vertex_index[v_to]];
 
                 // Проверяем, что расстояние до вершины v_from не равно бесконечности
                 // и обновляем расстояние до вершины v_to, если новое расстояние меньше текущего
-                if (distances[v_from - 'A'] != std::numeric_limits<int>::max() &&
-                    distances[v_from - 'A'] + weight < distances[v_to - 'A']) {
-                    distances[v_to - 'A'] = distances[v_from - 'A'] + weight;
+                if (distances[vertex_index[v_from]] != std::numeric_limits<int>::max() &&
+                    distances[vertex_index[v_from]] + weight < distances[vertex_index[v_to]]) {
+                    distances[vertex_index[v_to]] = distances[vertex_index[v_from]] + weight;
                 }
             }
         }
@@ -365,10 +376,10 @@ void Graph::bellman_ford(char start_vertex) {
     // Проверяем наличие отрицательных циклов
     for (char v_from : TITLES) {
         for (char v_to : adjacent_list[v_from]) {
-            int weight = adjacent_matrix[v_from - 'A'][v_to - 'A'];
-            if (distances[v_from - 'A'] != std::numeric_limits<int>::max() &&
-                distances[v_from - 'A'] + weight < distances[v_to - 'A']) {
-                // Если обнаружен отрицательный цикл, устанавливаем сообщение об ошибке и завершаем функцию.
+            int weight = adjacent_matrix[vertex_index[v_from]][vertex_index[v_to]];
+            if (distances[vertex_index[v_from]] != std::numeric_limits<int>::max() &&
+                distances[vertex_index[v_from]] + weight < distances[vertex_index[v_to]]) {
+                // Если обнаружен отрицательный цикл, устанавливаем сообщение об ошибке и завершаем функцию
                 this->printoutAlgorithm = "Ошибка: Граф содержит отрицательный цикл";
                 return;
             }
@@ -377,13 +388,13 @@ void Graph::bellman_ford(char start_vertex) {
 
     // Формируем строку с минимальными расстояниями
     for (char v : TITLES) {
-        if (distances[v - 'A'] != std::numeric_limits<int>::max()) {
-            // Записываем информацию о минимальном расстоянии от начальной вершины до текущей вершины v.
-            result << v << ": " << distances[v - 'A'] << "\n";
+        if (distances[vertex_index[v]] != std::numeric_limits<int>::max()) {
+            // Записываем информацию о минимальном расстоянии от начальной вершины до текущей вершины v
+            result << v << ": " << distances[vertex_index[v]] << "\n";
         }
     }
 
-    // Присваиваем строковое представление потока result переменной printoutAlgorithm для вывода результата алгоритма.
+    // Присваиваем строковое представление потока result переменной printoutAlgorithm для вывода результата алгоритма
     this->printoutAlgorithm = result.str();
 }
 
@@ -410,10 +421,15 @@ void Graph::union_sets(std::map<char, char>& parent, char u, char v) {
     }
 }
 
-void Graph::kruskal(char start_vertex) {
+void Graph::kruskal() {
     // Проверка на наличие рёбер в графе
     if (adjacent_list.empty()) {
         this->printoutAlgorithm = "Error: Graph is empty";
+        return;
+    }
+
+    if (adjacent_list.size() == 1) {
+        this->printoutAlgorithm = "Error: Graph has only one vertex";
         return;
     }
 
@@ -483,12 +499,19 @@ void Graph::kruskal(char start_vertex) {
 }
 
 
-void Graph::prim(char start_vertex) {
+void Graph::prim() {
     // Проверка на наличие рёбер в графе
     if (adjacent_list.empty()) {
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
+    if (adjacent_list.size() == 1) {
+        printoutAlgorithm = "Error: Graph has only one vertex";
+        return;
+    }
+
+    // Выбор первой вершины в TITLES как стартовой
+    char start_vertex = TITLES[0];
 
     // Создание пустого множества для хранения посещённых вершин
     std::set<char> visited;
@@ -560,9 +583,9 @@ void Graph::runAlgorithm(const std::string& algorithm, char start_vertex) {
     } else if (algorithm == "Bellman-Ford") {
         this->bellman_ford(start_vertex);
     } else if (algorithm == "Kraskal") {
-        this->kruskal('A');
+        this->kruskal();
     } else if (algorithm == "Prim") {
-        this->prim('A');
+        this->prim();
     } else {
         this->printoutAlgorithm = "Sorry, not available(";
     }
