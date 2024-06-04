@@ -14,9 +14,10 @@
 #include <unistd.h>
 #include <queue>
 #include <iostream>
+//#include <>
 #include "Graph.h"
 #include "Color.h"
-#include "WeightEntryDialog.h"
+#include "VertexEntryDialog.h"
 
 
 class Canvas : public Gtk::DrawingArea {
@@ -31,6 +32,7 @@ private:
     double buffer_width, buffer_height;
     double start_x, start_y;
     bool need_fix_temp_buffer;
+    std::pair<char, char> next_edge_to_append;
 
     Gtk::ColorChooserDialog *color_chooser_dialog;
 public:

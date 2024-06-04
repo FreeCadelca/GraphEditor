@@ -8,9 +8,9 @@
 //std::string TITLES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//названия вершин
 //int ID_NEXT_TITLE = 0;//номер следующей вершины для выбора
 // !Legacy!
-Canvas* Canvas::instance = nullptr;
+Canvas *Canvas::instance = nullptr;
 
-Canvas* Canvas::getInstance() {
+Canvas *Canvas::getInstance() {
     if (instance == nullptr) {
         instance = new Canvas();
     }
@@ -288,47 +288,6 @@ void Canvas::change_tool(int tool) {//функция смены инструме
 
     }
 }
-
-//useless (просто не удаляю на всякий случай)
-//void Canvas::visualize_vertex(char vertex, Color color) {
-//    // Найти координаты вершины на холсте по ее метке
-//    double x = Graph::getInstance()->coords[vertex].first;
-//    double y = Graph::getInstance()->coords[vertex].second;
-//
-//    // Получить контекст рисования
-//    auto context = this->get_context(temp_buffer, true);
-//
-//    // Установить цвет для рисования
-//    context->set_source_rgba(color.r, color.g, color.b, color.a);
-//
-//    // Рисовать вершину
-//    drawing_vertex(x, y, vertex);
-//
-//    // Перерисовать холст с новым содержимым
-//    this->queue_draw();
-//}
-//
-////useless (просто не удаляю на всякий случай)
-//void Canvas::animate_bfs(const std::string &bfs_result) {
-//    // Очистка предыдущей анимации (если есть)
-//    //clear_animation();
-//
-//    // Разбиение результата на посещенные вершины
-//    std::vector<char> visited_vertices;
-//    std::istringstream iss(bfs_result);
-//    std::string token;
-//    while (std::getline(iss, token, ' ')) {
-//        if (!token.empty()) {
-//            visited_vertices.push_back(token[0]);
-//        }
-//    }
-//
-//    // Запуск анимации посещения вершин
-//    for (char vertex: visited_vertices) {
-//        visualize_vertex(vertex, Color(255, 0, 0, 255));
-//        usleep(500000); // Задержка в 0.5 секунды (500000 микросекунд)
-//    }
-//}
 
 void Canvas::outline_vertex(char vertex, Color outline_color) {
     // Получаем координаты вершины

@@ -17,13 +17,17 @@ Graph *Graph::getInstance() {
 
 void Graph::addVertex(double x, double y) {
     this->coords[TITLES[ID_NEXT_TITLE]] = {x, y}; // Добавляем новую вершину туда, куда нужно
+
     this->adjacent_list[TITLES[ID_NEXT_TITLE]] = {};
 
     if (ID_NEXT_TITLE == 0) {
         this->adjacent_matrix = std::vector<std::vector<int>>(1, std::vector<int>(1, 0));
     } else {
-        adjacent_matrix.resize(adjacent_matrix.size() + 1, std::vector<int>(adjacent_matrix.size(), 0));
-        for (auto &i : adjacent_matrix) {
+        adjacent_matrix.resize(
+                adjacent_matrix.size() + 1,
+                std::vector<int>(adjacent_matrix.size(), 0)
+        );
+        for (auto &i: adjacent_matrix) {
             i.resize(i.size() + 1, 0);
         }
     }
@@ -35,14 +39,14 @@ void Graph::addVertex(double x, double y) {
 
 void Graph::addEdge(char v_from, char v_to) {
     this->adjacent_list[v_from].push_back(v_to);
-    int index_v_from = (int)v_from - 65;
-    int index_v_to = (int)v_to - 65;
+    // A = 65
+    int index_v_from = (int) v_from - 65;
+    int index_v_to = (int) v_to - 65;
     this->adjacent_matrix[index_v_from][index_v_to] = this->nextWeight;
 
     // Перерисовываем все элементы
     Canvas::getInstance()->redrawGraph();
 }
-
 
 std::string Graph::getPrintoutAdjList() {
     std::string output; // Инициализируем строку для вывода
@@ -272,7 +276,9 @@ char Graph::get_target_vertex() { /// акназар
 }
 
 void Graph::dijkstra(char start_vertex) {
+    // Проверяем, есть ли данные о вершинах и рёбрах в графе
     if (coords.empty()) {
+        // Если контейнер coords пуст, устанавливаем сообщение об ошибке и завершаем функцию.
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
@@ -287,64 +293,93 @@ void Graph::dijkstra(char start_vertex) {
     result << "Алгоритм Дейкстры начиная с вершины " << start_vertex << " до вершины " << end_vertex << ":\n";
     result << "Минимальные расстояния до вершин:\n";
 
+    // Инициализируем расстояния для всех вершин как бесконечность,
+    // кроме стартовой вершины, расстояние до которой равно 0
     std::vector<int> distances(TITLES.size(), std::numeric_limits<int>::max());
-    distances[start_vertex - 'A'] = 0;
+    // Используем map для сопоставления символов вершин и их индексов
+    std::map<char, int> vertex_index;
+    for (int i = 0; i < TITLES.size(); ++i) {
+        vertex_index[TITLES[i]] = i;
+    }
+    // Устанавливаем расстояние до начальной вершины равным 0
+    distances[vertex_index[start_vertex]] = 0;
 
-    std::map<char, char> previous;
+    // Множество для отслеживания посещенных вершин
     std::set<char> visited;
 
+    // Словарь для определения предков каждой вершины (восстановление ответа)
+    std::map<char, char> previous;
+
+    // Пока не все вершины посещены
     while (visited.size() < TITLES.size()) {
+        // Находим вершину с минимальным расстоянием среди не посещенных
         char current_vertex = '\0';
         int min_distance = std::numeric_limits<int>::max();
         for (char v : TITLES) {
-            if (visited.find(v) == visited.end() && distances[v - 'A'] < min_distance) {
-                min_distance = distances[v - 'A'];
+            // Перебираем все вершины графа
+            if (visited.find(v) == visited.end() && distances[vertex_index[v]] < min_distance) {
+                // Если вершина v не посещена и расстояние от стартовой вершины до v меньше текущего минимального расстояния,
+                // обновляем значения current_vertex и min_distance
+                min_distance = distances[vertex_index[v]];
                 current_vertex = v;
             }
         }
 
+        // Если не удалось найти непосещенный узел, выходим из цикла
         if (current_vertex == '\0') {
             break;
         }
 
+        // Помечаем текущую вершину как посещенную
         visited.insert(current_vertex);
-/// изменил код сони
+
+        /// изменил код сони
+        // Обновляем расстояния до всех соседей текущей вершины
         for (char neighbor : adjacent_list[current_vertex]) {
-            int weight = adjacent_matrix[current_vertex - 'A'][neighbor - 'A'];
-            if (distances[current_vertex - 'A'] != std::numeric_limits<int>::max() &&
-                distances[current_vertex - 'A'] + weight < distances[neighbor - 'A']) {
-                distances[neighbor - 'A'] = distances[current_vertex - 'A'] + weight;
+            int weight = adjacent_matrix[current_vertex - start_vertex][neighbor - start_vertex];
+            if (distances[vertex_index[current_vertex]] != std::numeric_limits<int>::max() &&
+                distances[vertex_index[current_vertex]] + weight < distances[vertex_index[neighbor]]) {
+                // Если расстояние до соседней вершины меньше текущего значения, обновляем расстояние.
+                distances[vertex_index[neighbor]] = distances[vertex_index[current_vertex]] + weight;
                 previous[neighbor] = current_vertex;
             }
         }
     }
 
+    // Формируем строку с минимальными расстояниями только для тех вершин, до которых существует путь
     for (char v : TITLES) {
-        if (distances[v - 'A'] != std::numeric_limits<int>::max()) {
-            result << v << ": " << distances[v - 'A'] << "\n";
+        if (distances[vertex_index[v]] != std::numeric_limits<int>::max()) {
+            // Записываем информацию о минимальном расстоянии от начальной вершины до текущей вершины v.
+            result << v << ": " << distances[vertex_index[v]] << "\n";
         }
     }
-
+    /// акназар
+    // Восстанавливаем ответ - собираем путь от начальной вершины до запрашиваемой
     std::vector<char> path;
     for (char at = end_vertex; at != '\0'; at = previous[at]) {
         path.push_back(at);
     }
     std::reverse(path.begin(), path.end());
 
+    // Случай, когда путь не найден
     if (path.size() == 1 && path[0] == start_vertex) {
         this->printoutAlgorithm = "Error: No path found";
         return;
     }
 
+    // Добавление информации о кратчайшем пути
     result << "Кратчайший путь: ";
     for (char v : path) {
         result << v << " ";
     }
     result << "\n";
-///
+    ///
+
+    // Присваиваем строковое представление потока result переменной printoutAlgorithm для вывода результата алгоритма.
     this->printoutAlgorithm = result.str();
-/// акназар
-    // Drawing the path
+
+    /// акназар
+    // Анимация пути
     for (size_t i = 0; i < path.size() - 1; ++i) {
         char from = path[i];
         char to = path[i + 1];
@@ -356,25 +391,25 @@ void Graph::dijkstra(char start_vertex) {
         }, delay_ms);
         delay_ms += 400;
     }
+    ///
 }
-///
 
 
 void Graph::bellman_ford(char start_vertex) {
     // Проверяем, есть ли данные о вершинах и рёбрах в графе
     if (coords.empty()) {
-        // Если контейнер coords пуст, устанавливаем сообщение об ошибке и завершаем функцию.
+        // Если контейнер coords пуст, устанавливаем сообщение об ошибке и завершаем функцию
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
-/// акназар
+    /// акназар
     char end_vertex = get_target_vertex();
     if (end_vertex == '\0') {
         this->printoutAlgorithm = "Error: No target vertex specified";
         return;
     }
-///
-    // Создаем строковый поток для формирования результата алгоритма Беллмана — Форда
+    ///
+    // Создаем строковый поток для формирования результата алгоритма Беллмана-Форда
     std::stringstream result;
     // Записываем информацию о начале выполнения алгоритма с указанной стартовой вершины в строковый поток.
     result << "Алгоритм Беллмана — Форда начиная с вершины " << start_vertex << " до вершины " << end_vertex << ":\n";
@@ -382,25 +417,32 @@ void Graph::bellman_ford(char start_vertex) {
 
     // Инициализируем расстояния для всех вершин как бесконечность, кроме стартовой вершины, расстояние до которой равно 0
     std::vector<int> distances(TITLES.size(), std::numeric_limits<int>::max());
-    distances[start_vertex - 'A'] = 0;
 
+    // Используем map для сопоставления символов вершин и их индексов
+    std::map<char, int> vertex_index;
+    for (int i = 0; i < TITLES.size(); ++i) {
+        vertex_index[TITLES[i]] = i;
+    }
+    // Устанавливаем расстояние до начальной вершины равным 0
+    distances[vertex_index[start_vertex]] = 0;
+
+    // Словарь для определения предков каждой вершины (восстановление ответа)
     std::map<char, char> previous;
 
     // Проходимся по всем рёбрам графа |V| - 1 раз для нахождения кратчайших расстояний
-    // Проходим по всем вершинам графа для обновления расстояний на каждой итерации
     for (int i = 0; i < TITLES.size() - 1; ++i) {
         // Внутренний цикл: перебираем все вершины графа
         for (char v_from : TITLES) {
             // Для каждой вершины перебираем все смежные с ней вершины
             for (char v_to : adjacent_list[v_from]) {
                 // Получаем вес ребра между вершинами v_from и v_to
-                int weight = adjacent_matrix[v_from - 'A'][v_to - 'A'];
+                int weight = adjacent_matrix[vertex_index[v_from]][vertex_index[v_to]];
 
                 // Проверяем, что расстояние до вершины v_from не равно бесконечности
                 // и обновляем расстояние до вершины v_to, если новое расстояние меньше текущего
-                if (distances[v_from - 'A'] != std::numeric_limits<int>::max() &&
-                    distances[v_from - 'A'] + weight < distances[v_to - 'A']) {
-                    distances[v_to - 'A'] = distances[v_from - 'A'] + weight;
+                if (distances[vertex_index[v_from]] != std::numeric_limits<int>::max() &&
+                    distances[vertex_index[v_from]] + weight < distances[vertex_index[v_to]]) {
+                    distances[vertex_index[v_to]] = distances[vertex_index[v_from]] + weight;
                     previous[v_to] = v_from;
                 }
             }
@@ -410,10 +452,10 @@ void Graph::bellman_ford(char start_vertex) {
     // Проверяем наличие отрицательных циклов
     for (char v_from : TITLES) {
         for (char v_to : adjacent_list[v_from]) {
-            int weight = adjacent_matrix[v_from - 'A'][v_to - 'A'];
-            if (distances[v_from - 'A'] != std::numeric_limits<int>::max() &&
-                distances[v_from - 'A'] + weight < distances[v_to - 'A']) {
-                // Если обнаружен отрицательный цикл, устанавливаем сообщение об ошибке и завершаем функцию.
+            int weight = adjacent_matrix[vertex_index[v_from]][vertex_index[v_to]];
+            if (distances[vertex_index[v_from]] != std::numeric_limits<int>::max() &&
+                distances[vertex_index[v_from]] + weight < distances[vertex_index[v_to]]) {
+                // Если обнаружен отрицательный цикл, устанавливаем сообщение об ошибке и завершаем функцию
                 this->printoutAlgorithm = "Ошибка: Граф содержит отрицательный цикл";
                 return;
             }
@@ -422,12 +464,12 @@ void Graph::bellman_ford(char start_vertex) {
 
     // Формируем строку с минимальными расстояниями
     for (char v : TITLES) {
-        if (distances[v - 'A'] != std::numeric_limits<int>::max()) {
-            // Записываем информацию о минимальном расстоянии от начальной вершины до текущей вершины v.
-            result << v << ": " << distances[v - 'A'] << "\n";
+        if (distances[vertex_index[v]] != std::numeric_limits<int>::max()) {
+            // Записываем информацию о минимальном расстоянии от начальной вершины до текущей вершины v
+            result << v << ": " << distances[vertex_index[v]] << "\n";
         }
     }
-/// изменил код сони
+    /// акназар
     // Восстанавливаем кратчайший путь
     std::vector<char> path;
     for (char at = end_vertex; at != start_vertex; at = previous[at]) {
@@ -441,16 +483,17 @@ void Graph::bellman_ford(char start_vertex) {
         return;
     }
 
+    // Собираем текст для кратчайшего пути
     result << "Кратчайший путь: ";
     for (char v : path) {
         result << v << " ";
     }
     result << "\n";
-
+    ///
+    // Присваиваем строковое представление потока result переменной printoutAlgorithm для вывода результата алгоритма
     this->printoutAlgorithm = result.str();
-///
-/// акназар
-    // Drawing the path
+    /// акназар
+    // Анимация пути
     for (size_t i = 0; i < path.size() - 1; ++i) {
         char from = path[i];
         char to = path[i + 1];
@@ -462,8 +505,9 @@ void Graph::bellman_ford(char start_vertex) {
         }, delay_ms);
         delay_ms += 400;
     }
+    ///
 }
-///
+
 // Вспомогательная функция для поиска корневой вершины дерева
 char Graph::find(std::map<char, char>& parent, char vertex) {
     // Если текущая вершина не является корнем, выполняем поиск рекурсивно
@@ -487,10 +531,15 @@ void Graph::union_sets(std::map<char, char>& parent, char u, char v) {
     }
 }
 
-void Graph::kruskal(char start_vertex) {
+void Graph::kruskal() {
     // Проверка на наличие рёбер в графе
     if (adjacent_list.empty()) {
         this->printoutAlgorithm = "Error: Graph is empty";
+        return;
+    }
+
+    if (adjacent_list.size() == 1) {
+        this->printoutAlgorithm = "Error: Graph has only one vertex";
         return;
     }
 
@@ -535,7 +584,7 @@ void Graph::kruskal(char start_vertex) {
     std::stringstream result;
     result << "Минимальное остовное дерево (алгоритм Краскала):\n";
     int total_weight = 0;
-///АКНАЗАР
+    /// акназар
     // Визуальное выделение рёбер и вершин остовного дерева
     for (const Edge& edge : mst) {
         // Добавление информации о ребре в результат
@@ -552,25 +601,32 @@ void Graph::kruskal(char start_vertex) {
 
         }, delay_ms);
         delay_ms += 400;
-
     }
-///
+    ///
     result << "Вес минимального остовного дерева равен: " << total_weight << "\n";
 
     // Вывод результата в программное окно
     this->printoutAlgorithm = result.str();
 
     // Перерисовываем холст, чтобы отобразить изменения
-    //Canvas::getInstance()->queue_draw();
+    // Canvas::getInstance()->queue_draw();
 }
 
 
-void Graph::prim(char start_vertex) {
+void Graph::prim() {
     // Проверка на наличие рёбер в графе
     if (adjacent_list.empty()) {
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
+
+    if (adjacent_list.size() == 1) {
+        printoutAlgorithm = "Error: Graph has only one vertex";
+        return;
+    }
+
+    // Выбор первой вершины в TITLES как стартовой
+    char start_vertex = TITLES[0];
 
     // Создание пустого множества для хранения посещённых вершин
     std::set<char> visited;
@@ -625,8 +681,8 @@ void Graph::prim(char start_vertex) {
         total_weight += edge.weight; // Подсчёт общего веса остовного дерева
     }
     result << "Вес минимального остовного дерева равен: " << total_weight << "\n"; // Добавление общего веса в результат
-///АКНАЗАР
-// Визуальное выделение рёбер и вершин остовного дерева
+    /// акназар
+    // Визуальное выделение рёбер и вершин остовного дерева
     for (const Edge& edge : mst) {
         result << edge.v_from << " - " << edge.v_to << ": " << edge.weight << "\n";
         total_weight += edge.weight;
@@ -642,7 +698,6 @@ void Graph::prim(char start_vertex) {
         delay_ms += 400;
     }
     ///
-
     // Вывод результата в программное окно
     this->printoutAlgorithm = result.str(); // Сохранение результата в поле класса
 }
@@ -659,9 +714,9 @@ void Graph::runAlgorithm(const std::string& algorithm, char start_vertex) {
     } else if (algorithm == "Bellman-Ford") {
         this->bellman_ford(start_vertex);
     } else if (algorithm == "Kraskal") {
-        this->kruskal('A');
+        this->kruskal();
     } else if (algorithm == "Prim") {
-        this->prim('A');
+        this->prim();
     } else {
         this->printoutAlgorithm = "Sorry, not available(";
     }
