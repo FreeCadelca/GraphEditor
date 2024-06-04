@@ -35,12 +35,12 @@ private:
     Gtk::ColorChooserDialog *color_chooser_dialog;
 public:
     static Canvas* getInstance();
-
+/// акназар
     static const int DEFAULT = 1 << 0;//состояния программы
     static const int DRAWING = 1 << 1;
     static const int VERTEX = 1 << 2;
     static const int EDGE = 1 << 3;
-
+///
     int getState() const;
 
     void drawing_arrow(const double x1, const double y1, const double x2, const double y2);

@@ -30,7 +30,7 @@ void Graph::addVertex(double x, double y) {
     ID_NEXT_TITLE++;
 
     // Перерисовываем все элементы
-    Canvas::getInstance()->redraw_all();
+    Canvas::getInstance()->redrawGraph();
 }
 
 void Graph::addEdge(char v_from, char v_to) {
@@ -40,7 +40,7 @@ void Graph::addEdge(char v_from, char v_to) {
     this->adjacent_matrix[index_v_from][index_v_to] = this->nextWeight;
 
     // Перерисовываем все элементы
-    Canvas::getInstance()->redraw_all();
+    Canvas::getInstance()->redrawGraph();
 }
 
 
@@ -127,14 +127,16 @@ void Graph::run_bfs(char start_vertex) {
     q.push(start_vertex);
     visited.insert(start_vertex);
 
-    // Отрисовка первой вершины сразу
-    Canvas::getInstance()->outline_vertex(start_vertex, Color(0.6, 1, 0.6, 1));
-    // Добавляем небольшую задержку перед началом анимации
-    usleep(400000);
-
     // Задержка между отрисовками вершин (в миллисекундах)
     int delay_ms = 400;
-
+/// акназар
+    // Отрисовка первой вершины сразу с задержкой
+    Glib::signal_timeout().connect_once([=]() {
+        // Вызываем метод outline_vertex класса Canvas для отображения стартовой вершины
+        Canvas::getInstance()->outline_vertex(start_vertex, Color(0.6, 1, 0.6, 1));
+    }, delay_ms);
+    delay_ms += 400;
+///
     // Обработка вершин с задержкой
     while (!q.empty()) {
         // Получаем текущую вершину из очереди
@@ -151,12 +153,11 @@ void Graph::run_bfs(char start_vertex) {
             if (visited.find(neighbor) == visited.end()) {
                 q.push(neighbor);
                 visited.insert(neighbor);
-
+/// акназар
                 // Создаем таймер для отложенной отрисовки вершины с задержкой
-                Glib::signal_timeout().connect([=]() {
+                Glib::signal_timeout().connect_once([=]() {
                     // Вызываем метод outline_vertex класса Canvas для отображения посещенной вершины
                     Canvas::getInstance()->outline_vertex(neighbor, Color(0.6, 1, 0.6, 1));
-                    return false; // Отключаем таймер после одного выполнения
                 }, delay_ms);
 
                 // Увеличиваем задержку перед следующей отрисовкой
@@ -164,7 +165,7 @@ void Graph::run_bfs(char start_vertex) {
             }
         }
     }
-
+///
     // Присваиваем строковое представление потока result переменной printoutAlgorithm для вывода результата обхода в ширину.
     this->printoutAlgorithm = result.str();
 }
