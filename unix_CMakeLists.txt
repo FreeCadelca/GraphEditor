@@ -1,12 +1,18 @@
-cmake_minimum_required(VERSION 3.27)
-project(GraphEditor)
+cmake_minimum_required(VERSION 3.17)
 
-set(CMAKE_CXX_STANDARD 14)
+project(GraphEditor LANGUAGES CXX)
+
+find_package(PkgConfig)
+pkg_check_modules(GTKMM gtkmm-3.0)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Установка пути к локально распакованному GoogleTest
 set(GOOGLETEST_ROOT "${CMAKE_SOURCE_DIR}/external/googletest-1.14.0")
 
 add_subdirectory(${GOOGLETEST_ROOT} googletest)
+
 
 # Подавление предупреждений о C++11 расширениях
 add_compile_options(-Wno-c++11-extensions)
@@ -22,20 +28,8 @@ add_executable(
         Graph.h
         Color.cpp
         Color.h
-        VertexEntryDialog.cpp
-        VertexEntryDialog.h
         WeightEntryDialog.cpp
-        WeightEntryDialog.h
-)
-
-find_package(PkgConfig)
-pkg_check_modules(GTKMM gtkmm-3.0)
-
-include_directories(${GTKMM_INCLUDE_DIRS})
-link_directories(${GTKMM_LIBRARY_DIRS})
-
-set(SOURCE_FILES main.cpp)
-target_link_libraries(${CMAKE_PROJECT_NAME} ${GTKMM_LIBRARIES})
+        WeightEntryDialog.h)
 
 target_compile_features(GraphEditor PRIVATE cxx_std_17)
 
@@ -45,7 +39,8 @@ target_include_directories(GraphEditor PRIVATE ${GTKMM_INCLUDE_DIRS})
 
 target_link_directories(GraphEditor PRIVATE ${GTKMM_LIBRARY_DIRS})
 
-#target_link_libraries(GraphEditor PRIVATE ${GTKMM_LIBRARIES})
+target_link_libraries(GraphEditor PRIVATE ${GTKMM_LIBRARIES})
+
 
 # Добавление тестового исполняемого файла
 add_executable(GraphTests
