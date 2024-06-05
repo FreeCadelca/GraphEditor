@@ -22,6 +22,16 @@
     <property name="can-focus">False</property>
     <property name="pixbuf">..\Icons\ChangeWeightIcon.png</property>
   </object>
+  <object class="GtkImage" id="image5">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="pixbuf">..\Icons\GetPrintoutButton.png</property>
+  </object>
+  <object class="GtkImage" id="image6">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="pixbuf">..\Icons\RunAlgorithmButton.png</property>
+  </object>
   <object class="GtkListStore" id="liststore1">
     <columns>
       <!-- column-name Name_of_algorithm -->
@@ -69,7 +79,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="can-default">True</property>
-                <property name="tooltip-text" translatable="yes">Добавить (нарисовать) вершину в графе</property>
+                <property name="tooltip-text" translatable="yes">Add vertex</property>
                 <property name="label" translatable="yes">AddVertex</property>
                 <property name="use-underline">True</property>
                 <property name="icon-widget">image1</property>
@@ -83,7 +93,7 @@
               <object class="GtkToolButton" id="tool_add_edge">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="tooltip-text" translatable="yes">Добавить (нарисовать) ребро</property>
+                <property name="tooltip-text" translatable="yes">Add edge</property>
                 <property name="label" translatable="yes">Add Edge</property>
                 <property name="use-underline">True</property>
                 <property name="icon-widget">image2</property>
@@ -97,7 +107,7 @@
               <object class="GtkToolButton" id="tool_choose_color">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="tooltip-text" translatable="yes">Выбрать цвет обводки графа</property>
+                <property name="tooltip-text" translatable="yes">Choose color for graph</property>
                 <property name="label" translatable="yes">Color</property>
                 <property name="use-underline">True</property>
                 <property name="icon-widget">image3</property>
@@ -111,7 +121,7 @@
               <object class="GtkToolButton" id="tool_change_weight">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="tooltip-text" translatable="yes">hahahahah</property>
+                <property name="tooltip-text" translatable="yes">Change weight</property>
                 <property name="label" translatable="yes">Next weight: 1</property>
                 <property name="use-underline">True</property>
                 <property name="icon-widget">image4</property>
@@ -130,8 +140,9 @@
                   <object class="GtkLabel" id="weight_label">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
+                    <property name="tooltip-text" translatable="yes">Weight for next edge</property>
                     <property name="label" translatable="yes">1</property>
-                    <property name="xalign">0.05</property>
+                    <property name="xalign">0.10000000149011612</property>
                   </object>
                 </child>
               </object>
@@ -149,10 +160,12 @@
         </child>
         <child>
           <object class="GtkButton" id="print_graph_button">
-            <property name="label" translatable="yes">Print Graph</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Print current graph as adjacent matrix and adjacent list</property>
+            <property name="label">Print Graph</property>
+            <!--            <property name="image">image6</property>-->
           </object>
           <packing>
             <property name="expand">False</property>
@@ -163,10 +176,12 @@
         </child>
         <child>
           <object class="GtkButton" id="run_algorithm_button">
-            <property name="label" translatable="yes">Run algorithm</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Run selected algorithm</property>
+            <property name="label">Run algorithm</property>
+            <!--            <property name="image">image6</property>-->
           </object>
           <packing>
             <property name="expand">False</property>
@@ -179,7 +194,7 @@
           <object class="GtkComboBox" id="choose_algorithm_cb">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="tooltip-text" translatable="yes">UwU</property>
+            <property name="tooltip-text" translatable="yes">Choose algorithm</property>
             <property name="model">liststore1</property>
             <property name="active">0</property>
             <property name="id-column">0</property>
