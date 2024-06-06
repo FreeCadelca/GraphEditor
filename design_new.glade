@@ -22,16 +22,16 @@
     <property name="can-focus">False</property>
     <property name="pixbuf">..\Icons\ChangeWeightIcon.png</property>
   </object>
-  <object class="GtkImage" id="image5">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-    <property name="pixbuf">..\Icons\GetPrintoutButton.png</property>
-  </object>
-  <object class="GtkImage" id="image6">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-    <property name="pixbuf">..\Icons\RunAlgorithmButton.png</property>
-  </object>
+<!--  <object class="GtkImage" id="image5">-->
+<!--    <property name="visible">True</property>-->
+<!--    <property name="can-focus">False</property>-->
+<!--    <property name="pixbuf">..\Icons\GetPrintoutButton.png</property>-->
+<!--  </object>-->
+<!--  <object class="GtkImage" id="image6">-->
+<!--    <property name="visible">True</property>-->
+<!--    <property name="can-focus">False</property>-->
+<!--    <property name="pixbuf">..\Icons\RunAlgorithmButton.png</property>-->
+<!--  </object>-->
   <object class="GtkListStore" id="liststore1">
     <columns>
       <!-- column-name Name_of_algorithm -->
