@@ -1,10 +1,10 @@
-#include "external/googletest-1.14.0/googletest/include/gtest/gtest.h"
-#include "Graph.h"
+#include "gtest/gtest.h"
+#include "../src/Graph/Graph.h"
 #include "gtkmm.h"
 
 class GraphTestSuite : public ::testing::Test {
 protected:
-    Graph* graph;
+    Graph *graph;
 
     void SetUp() override {
         // Получаем экземпляр графа
@@ -42,6 +42,7 @@ TEST_F(GraphTestSuite, TestBFS_SingleVertex) {
     EXPECT_NE(result.find("Обход в ширину начиная с вершины A"), std::string::npos);
     EXPECT_NE(result.find("A "), std::string::npos);
 }
+
 TEST_F(GraphTestSuite, TestBFS_LinearGraph) {
     graph->addVertex(0.0, 0.0); // A
     graph->addVertex(1.0, 0.0); // B
@@ -241,7 +242,8 @@ TEST_F(GraphTestSuite, TestKruskal_LinearGraph) {
     std::string result = graph->getPrintoutAlgorithm();
     std::cout << "Result for TestKruskal_LinearGraph: " << result << std::endl; // Debug output
     EXPECT_NE(result.find("Минимальное остовное дерево (алгоритм Краскала)"), std::string::npos);
-    EXPECT_NE(result.find("Вес минимального остовного дерева равен: 2"), std::string::npos); // Adjust weight sum if needed
+    EXPECT_NE(result.find("Вес минимального остовного дерева равен: 2"),
+              std::string::npos); // Adjust weight sum if needed
 }
 
 TEST_F(GraphTestSuite, TestKruskal_CyclicGraph) {
@@ -256,7 +258,8 @@ TEST_F(GraphTestSuite, TestKruskal_CyclicGraph) {
     std::string result = graph->getPrintoutAlgorithm();
     std::cout << "Result for TestKruskal_CyclicGraph: " << result << std::endl; // Debug output
     EXPECT_NE(result.find("Минимальное остовное дерево (алгоритм Краскала)"), std::string::npos);
-    EXPECT_NE(result.find("Вес минимального остовного дерева равен: 2"), std::string::npos); // Adjust weight sum if needed
+    EXPECT_NE(result.find("Вес минимального остовного дерева равен: 2"),
+              std::string::npos); // Adjust weight sum if needed
 }
 
 TEST_F(GraphTestSuite, TestPrim_EmptyGraph) {
@@ -285,7 +288,8 @@ TEST_F(GraphTestSuite, TestPrim_LinearGraph) {
     std::string result = graph->getPrintoutAlgorithm();
     std::cout << "Result for TestPrim_LinearGraph: " << result << std::endl; // Debug output
     EXPECT_NE(result.find("Минимальное остовное дерево (алгоритм Прима)"), std::string::npos);
-    EXPECT_NE(result.find("Вес минимального остовного дерева равен: 2"), std::string::npos); // Adjust weight sum if needed
+    EXPECT_NE(result.find("Вес минимального остовного дерева равен: 2"),
+              std::string::npos); // Adjust weight sum if needed
 }
 
 TEST_F(GraphTestSuite, TestPrim_CyclicGraph) {
@@ -300,7 +304,8 @@ TEST_F(GraphTestSuite, TestPrim_CyclicGraph) {
     std::string result = graph->getPrintoutAlgorithm();
     std::cout << "Result for TestPrim_CyclicGraph: " << result << std::endl; // Debug output
     EXPECT_NE(result.find("Минимальное остовное дерево (алгоритм Прима)"), std::string::npos);
-    EXPECT_NE(result.find("Вес минимального остовного дерева равен: 2"), std::string::npos); // Adjust weight sum if needed
+    EXPECT_NE(result.find("Вес минимального остовного дерева равен: 2"),
+              std::string::npos); // Adjust weight sum if needed
 }
 
 TEST_F(GraphTestSuite, TestFind_SingleVertex) {

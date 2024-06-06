@@ -3,11 +3,6 @@
 //
 #include "Canvas.h"
 
-//std::map<char, std::vector<char>> adjacent; //словарь смежности
-//
-//std::string TITLES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//названия вершин
-//int ID_NEXT_TITLE = 0;//номер следующей вершины для выбора
-// !Legacy!
 Canvas *Canvas::instance = nullptr;
 
 Canvas *Canvas::getInstance() {
@@ -85,7 +80,7 @@ bool Canvas::on_mouse_release(GdkEventButton *event) {//прописывание
     return true;
 }
 
-Cairo::RefPtr <Cairo::Context> Canvas::get_context(Cairo::RefPtr <Cairo::Surface> &surface, bool need_clear) {
+Cairo::RefPtr<Cairo::Context> Canvas::get_context(Cairo::RefPtr<Cairo::Surface> &surface, bool need_clear) {
     //функция "вытаскивания" контекста (раньше мы называли его "cr") для рисования
     auto context = Cairo::Context::create(surface);
     if (need_clear) {//очищаем контекст при надобности
@@ -135,7 +130,7 @@ void Canvas::drawing_arrow(double start_x, double start_y, double end_x, double 
     // Определение, к каким вершинам относятся координаты начала и конца ребра
     char from_vertex = '-';
     char to_vertex = '-';
-    for (auto vertex_pair : Graph::getInstance()->coords) {
+    for (auto vertex_pair: Graph::getInstance()->coords) {
         if (abs(vertex_pair.second.first - start_x) <= 20 && abs(vertex_pair.second.second - start_y) <= 20) {
             from_vertex = vertex_pair.first;
         }
@@ -212,7 +207,7 @@ void Canvas::drawing(double x, double y) {
         if (this->state & VERTEX) {
             // Рисование вершины
             bool can_draw = true;
-            for (auto i : Graph::getInstance()->coords) {
+            for (auto i: Graph::getInstance()->coords) {
                 if (abs(i.second.first - x) <= 80 and abs(i.second.second - y) <= 80) {
                     can_draw = false;
                     break;
@@ -232,7 +227,7 @@ void Canvas::drawing(double x, double y) {
         if (this->state & EDGE) {
             // Рисование ребра
             char sticking_from_vertex = '-';
-            for (auto i : Graph::getInstance()->coords) {
+            for (auto i: Graph::getInstance()->coords) {
                 if (abs(i.second.first - start_x) <= 40 and abs(i.second.second - start_y) <= 40) {
                     start_x = i.second.first;
                     start_y = i.second.second;
@@ -242,7 +237,7 @@ void Canvas::drawing(double x, double y) {
             }
             if (sticking_from_vertex != '-') {
                 char sticking_to_vertex = '-';
-                for (auto i : Graph::getInstance()->coords) {
+                for (auto i: Graph::getInstance()->coords) {
                     if (abs(i.second.first - x) <= 40 and abs(i.second.second - y) <= 40) {
                         x = i.second.first;
                         y = i.second.second;
@@ -252,7 +247,7 @@ void Canvas::drawing(double x, double y) {
                 }
                 if (sticking_to_vertex != sticking_from_vertex and sticking_to_vertex != '-') {
                     bool edge_exist = false;
-                    for (auto i : Graph::getInstance()->adjacent_list[sticking_from_vertex]) {
+                    for (auto i: Graph::getInstance()->adjacent_list[sticking_from_vertex]) {
                         if (sticking_to_vertex == i) {
                             edge_exist = true;
                             break;
@@ -271,8 +266,9 @@ void Canvas::drawing(double x, double y) {
         }
     }
 }
+
 ///
-bool Canvas::on_draw(const Cairo::RefPtr <Cairo::Context> &cr) {
+bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
     cr->set_source(this->buffer, 0, 0);
     cr->paint();
     if (this->state & DRAWING) {
@@ -379,7 +375,6 @@ void Canvas::redraw_edge(char vertex1, char vertex2, Color outline_color) {
 }
 
 
-
 void Canvas::clear_screen() {
     auto context = this->get_context(buffer, true);
     context->set_source_rgb(1, 1, 1); // белый цвет
@@ -387,9 +382,7 @@ void Canvas::clear_screen() {
     context->fill();
     context->stroke();
     this->queue_draw();
-
 }
-
 
 
 void Canvas::clearScreenAndRestoreGraph() {
@@ -415,10 +408,10 @@ void Canvas::redrawGraph() {
         this->state |= DRAWING;
 
         // Перерисовываем рёбра графа на холсте
-        for (const auto &edge_pair : Graph::getInstance()->adjacent_list) {
+        for (const auto &edge_pair: Graph::getInstance()->adjacent_list) {
             char from_vertex = edge_pair.first;
             const auto &adjacent_vertices = edge_pair.second;
-            for (char to_vertex : adjacent_vertices) {
+            for (char to_vertex: adjacent_vertices) {
                 double start_x = Graph::getInstance()->coords[from_vertex].first;
                 double start_y = Graph::getInstance()->coords[from_vertex].second;
                 double end_x = Graph::getInstance()->coords[to_vertex].first;
@@ -428,7 +421,7 @@ void Canvas::redrawGraph() {
         }
 
         // Перерисовываем вершины графа на холсте
-        for (const auto &vertex_pair : Graph::getInstance()->coords) {
+        for (const auto &vertex_pair: Graph::getInstance()->coords) {
             char vertex = vertex_pair.first;
             double x = vertex_pair.second.first;
             double y = vertex_pair.second.second;
@@ -445,6 +438,7 @@ void Canvas::redrawGraph() {
         this->state &= ~DRAWING;
     }
 }
+
 void Canvas::clear_temp_buffer() {
     auto context = this->get_context(temp_buffer, true);
     context->set_source_rgb(1, 1, 1); // белый цвет

@@ -8,11 +8,11 @@
 #include <gtkmm.h>
 #include <iostream>
 #include <string>
-#include "Canvas.h"
-#include "Graph.h"
-#include "VertexEntryDialog.h"
-#include "WeightEntryDialog.h"
-#include "PathEntryDialog.h"
+#include "../../src/Canvas/Canvas.h"
+#include "../Graph/Graph.h"
+#include "../Dialogs/VertexEntryDialog/VertexEntryDialog.h"
+#include "../Dialogs/WeightEntryDialog/WeightEntryDialog.h"
+#include "../Dialogs/PathEntryDialog/PathEntryDialog.h"
 #include <string>
 
 
@@ -30,12 +30,15 @@ class GraphEditorApp : public Gtk::ApplicationWindow {
     Glib::RefPtr<Gtk::Button> run_algorithm_button;
     Glib::RefPtr<Gtk::Entry> entry_for_weight;
     Glib::RefPtr<Gtk::ComboBox> choose_algorithm_cb;
+
     std::string handling_new_weight(Glib::ustring new_weight);
 
     Glib::RefPtr<Gtk::Builder> ui;
 
     std::pair<int, int> getCenterOfWindow();
+
     void run_error_dialog(std::string message);
+
 public:
     GraphEditorApp();
 

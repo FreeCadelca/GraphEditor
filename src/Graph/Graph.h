@@ -14,8 +14,8 @@
 #include <string>
 #include <cstdlib>
 #include <sstream>
-#include "Color.h"
-#include "Canvas.h"
+#include "../Color/Color.h"
+#include "../../src/Canvas/Canvas.h"
 
 
 class GraphTestSuite;
@@ -23,7 +23,8 @@ class GraphTestSuite;
 
 class Graph {
 private:
-    static Graph* instance;
+    static Graph *instance;
+
     Graph();
 
     // Структура для представления ребра
@@ -34,22 +35,21 @@ private:
 
         Edge(char from, char to, int w) : v_from(from), v_to(to), weight(w) {}
 
-        bool operator>(const Edge& other) const {
+        bool operator>(const Edge &other) const {
             return weight > other.weight;
         }
 
-        bool operator<(const Edge& other) const {
+        bool operator<(const Edge &other) const {
             return weight < other.weight;
         }
 
-        bool operator==(const Edge& other) const {
+        bool operator==(const Edge &other) const {
             return v_from == other.v_from && v_to == other.v_to && weight == other.weight;
         }
-        /// акназар
-        bool operator!=(const Edge& other) const {
+
+        bool operator!=(const Edge &other) const {
             return !(*this == other);
         }
-        ///
     };
 
 
@@ -72,13 +72,12 @@ private:
     void prim();
 
     friend class GraphTestSuite;
+
     friend class GraphTestAccessor;
 
 public:
     std::map<char, std::vector<char>> adjacent_list; // Список смежности
-//    std::map<char, std::map<char, int>> adjacent_matrix; // Матрица смежности
     std::vector<std::vector<int>> adjacent_matrix; // Матрица смежности
-//    std::vector<WeightedEdge> adjacent; // Список рёбер
     const std::string TITLES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";// Названия вершин
     int ID_NEXT_TITLE = 0;// Номер следующей вершины для выбора
     std::map<char, std::pair<int, int>> coords; // Координаты вершин
@@ -96,33 +95,40 @@ public:
 
     std::string getPrintoutAlgorithm();
 
-    void runAlgorithm(const std::string& algorithm, char start_vertex = '\n', char end_vertex = '\n');
+    void runAlgorithm(const std::string &algorithm, char start_vertex = '\n', char end_vertex = '\n');
 };
 
 class GraphTestAccessor {
 public:
-    static void run_bfs(Graph& graph, char start_vertex) {
+    static void run_bfs(Graph &graph, char start_vertex) {
         graph.run_bfs(start_vertex);
     }
-    static void run_dfs(Graph& graph, char start_vertex) {
+
+    static void run_dfs(Graph &graph, char start_vertex) {
         graph.run_dfs(start_vertex);
     }
-    static void dijkstra(Graph& graph, char start_vertex) {
+
+    static void dijkstra(Graph &graph, char start_vertex) {
         graph.dijkstra(start_vertex);
     }
-    static void bellman_ford(Graph& graph, char start_vertex) {
+
+    static void bellman_ford(Graph &graph, char start_vertex) {
         graph.bellman_ford(start_vertex);
     }
-    static void kruskal(Graph& graph) {
+
+    static void kruskal(Graph &graph) {
         graph.kruskal();
     }
-    static void prim(Graph& graph) {
+
+    static void prim(Graph &graph) {
         graph.prim();
     }
-    static char find(Graph& graph, std::map<char, char> &parent, char vertex) {
+
+    static char find(Graph &graph, std::map<char, char> &parent, char vertex) {
         return graph.find(parent, vertex);
     }
-    static void union_sets(Graph& graph, std::map<char, char> &parent, char u, char v) {
+
+    static void union_sets(Graph &graph, std::map<char, char> &parent, char u, char v) {
         graph.union_sets(parent, u, v);
     }
 };

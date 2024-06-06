@@ -1,12 +1,12 @@
 //
-// Created by Dmitriy on 02.06.2024.
+// Created by Dmitriy on 02.05.2024.
 //
 
-#include "WeightEntryDialog.h"
+#include "VertexEntryDialog.h"
 
-WeightEntryDialog::WeightEntryDialog(int center_x, int center_y) : lbl("Please enter the weight:")  {
+VertexEntryDialog::VertexEntryDialog(int center_x, int center_y) : lbl("Please enter the start vertex:") {
     get_content_area()->pack_start(lbl);
-    this->entry.set_max_length(9);
+    this->entry.set_max_length(1);
     get_content_area()->pack_start(entry);
     add_button("OK", Gtk::RESPONSE_OK);
     add_button("Cancel", Gtk::RESPONSE_CANCEL);
@@ -17,6 +17,6 @@ WeightEntryDialog::WeightEntryDialog(int center_x, int center_y) : lbl("Please e
     move(center_x - size_x / 2, center_y - size_y / 2);
 }
 
-Glib::ustring WeightEntryDialog::get_text() const {
+Glib::ustring VertexEntryDialog::get_text() const {
     return entry.get_text();
 }

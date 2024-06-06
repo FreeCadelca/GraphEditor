@@ -1,5 +1,5 @@
 #include "gtkmm.h"
-#include "GraphEditorApp.h"
+#include "GraphEditorApp/GraphEditorApp.h"
 
 
 int main(int argc, char **argv) {

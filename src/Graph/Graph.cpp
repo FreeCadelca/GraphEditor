@@ -52,13 +52,13 @@ std::string Graph::getPrintoutAdjList() {
     int count_vertexes = (int) this->adjacent_list.size(); // Получаем количество вершин в графе
 
     // Проходимся по списку смежности и формируем строку для каждой вершины
-    for (auto i : this->adjacent_list) {
+    for (auto i: this->adjacent_list) {
         char vertex = i.first; // Получаем текущую вершину
         output.push_back(vertex); // Добавляем вершину в строку
         output += ":"; // Добавляем разделитель после вершины
 
         // Добавляем смежные вершины к текущей вершине
-        for (auto edge : i.second) {
+        for (auto edge: i.second) {
             output += " "; // Добавляем пробел перед каждой смежной вершиной
             output.push_back(edge); // Добавляем смежную вершину в строку
         }
@@ -93,7 +93,7 @@ std::string Graph::getPrintoutAdjMatrix() {
         output += this->TITLES[i]; // Добавляем заголовок текущей вершины
         output += ": "; // Добавляем разделитель
         // Добавляем значения в строку, используя матрицу смежности
-        for (auto j : this->adjacent_matrix[i]) {
+        for (auto j: this->adjacent_matrix[i]) {
             output += std::to_string(j) + " "; // Преобразуем числа в строки и добавляем их в вывод
         }
         output += '\n'; // Переходим на следующую строку после строки смежности текущей вершины
@@ -152,7 +152,7 @@ void Graph::run_bfs(char start_vertex) {
         // Получаем соседей текущей вершины из таблицы смежности
         auto neighbors = this->adjacent_list[current_vertex];
         // Для каждого соседа, если он еще не посещен, добавляем его в очередь и отмечаем как посещенный
-        for (char neighbor : neighbors) {
+        for (char neighbor: neighbors) {
             if (visited.find(neighbor) == visited.end()) {
                 q.push(neighbor);
                 visited.insert(neighbor);
@@ -277,7 +277,7 @@ void Graph::dijkstra(char start_vertex, char end_vertex) {
         // Находим вершину с минимальным расстоянием среди не посещенных
         char current_vertex = '\0';
         int min_distance = std::numeric_limits<int>::max();
-        for (char v : TITLES) {
+        for (char v: TITLES) {
             // Перебираем все вершины графа
             if (visited.find(v) == visited.end() && distances[vertex_index[v]] < min_distance) {
                 // Если вершина v не посещена и расстояние от стартовой вершины до v меньше текущего минимального расстояния,
@@ -297,7 +297,7 @@ void Graph::dijkstra(char start_vertex, char end_vertex) {
 
         /// изменил код сони
         // Обновляем расстояния до всех соседей текущей вершины
-        for (char neighbor : adjacent_list[current_vertex]) {
+        for (char neighbor: adjacent_list[current_vertex]) {
             int weight = adjacent_matrix[vertex_index[current_vertex]][vertex_index[neighbor]];
             if (distances[vertex_index[current_vertex]] != std::numeric_limits<int>::max() &&
                 distances[vertex_index[current_vertex]] + weight < distances[vertex_index[neighbor]]) {
@@ -309,7 +309,7 @@ void Graph::dijkstra(char start_vertex, char end_vertex) {
     }
 
     // Формируем строку с минимальными расстояниями только для тех вершин, до которых существует путь
-    for (char v : TITLES) {
+    for (char v: TITLES) {
         if (distances[vertex_index[v]] != std::numeric_limits<int>::max()) {
             // Записываем информацию о минимальном расстоянии от начальной вершины до текущей вершины v.
             result << v << ": " << distances[vertex_index[v]] << "\n";
@@ -337,7 +337,7 @@ void Graph::dijkstra(char start_vertex, char end_vertex) {
 
     // Добавление информации о кратчайшем пути
     result << "Кратчайший путь: ";
-    for (char v : path) {
+    for (char v: path) {
         result << v << " ";
     }
     result << "\n";
@@ -397,9 +397,9 @@ void Graph::bellman_ford(char start_vertex, char end_vertex) {
     // Проходимся по всем рёбрам графа |V| - 1 раз для нахождения кратчайших расстояний
     for (int i = 0; i < TITLES.size() - 1; ++i) {
         // Внутренний цикл: перебираем все вершины графа
-        for (char v_from : TITLES) {
+        for (char v_from: TITLES) {
             // Для каждой вершины перебираем все смежные с ней вершины
-            for (char v_to : adjacent_list[v_from]) {
+            for (char v_to: adjacent_list[v_from]) {
                 // Получаем вес ребра между вершинами v_from и v_to
                 int weight = adjacent_matrix[vertex_index[v_from]][vertex_index[v_to]];
 
@@ -415,8 +415,8 @@ void Graph::bellman_ford(char start_vertex, char end_vertex) {
     }
 
     // Проверяем наличие отрицательных циклов
-    for (char v_from : TITLES) {
-        for (char v_to : adjacent_list[v_from]) {
+    for (char v_from: TITLES) {
+        for (char v_to: adjacent_list[v_from]) {
             int weight = adjacent_matrix[vertex_index[v_from]][vertex_index[v_to]];
             if (distances[vertex_index[v_from]] != std::numeric_limits<int>::max() &&
                 distances[vertex_index[v_from]] + weight < distances[vertex_index[v_to]]) {
@@ -428,7 +428,7 @@ void Graph::bellman_ford(char start_vertex, char end_vertex) {
     }
 
     // Формируем строку с минимальными расстояниями
-    for (char v : TITLES) {
+    for (char v: TITLES) {
         if (distances[vertex_index[v]] != std::numeric_limits<int>::max()) {
             // Записываем информацию о минимальном расстоянии от начальной вершины до текущей вершины v
             result << v << ": " << distances[vertex_index[v]] << "\n";
@@ -458,7 +458,7 @@ void Graph::bellman_ford(char start_vertex, char end_vertex) {
 
     // Собираем текст для кратчайшего пути
     result << "Кратчайший путь: ";
-    for (char v : path) {
+    for (char v: path) {
         result << v << " ";
     }
     result << "\n";
@@ -482,7 +482,7 @@ void Graph::bellman_ford(char start_vertex, char end_vertex) {
 }
 
 // Вспомогательная функция для поиска корневой вершины дерева
-char Graph::find(std::map<char, char>& parent, char vertex) {
+char Graph::find(std::map<char, char> &parent, char vertex) {
     // Если текущая вершина не является корнем, выполняем поиск рекурсивно
     if (parent[vertex] != vertex) {
         // Применяем сжатие пути для оптимизации: делаем родителем вершины корень её поддерева
@@ -493,7 +493,7 @@ char Graph::find(std::map<char, char>& parent, char vertex) {
 }
 
 // Вспомогательная функция для объединения двух деревьев
-void Graph::union_sets(std::map<char, char>& parent, char u, char v) {
+void Graph::union_sets(std::map<char, char> &parent, char u, char v) {
     // Находим корневую вершину для вершины u
     u = find(parent, u);
     // Находим корневую вершину для вершины v
@@ -520,16 +520,16 @@ void Graph::kruskal() {
     std::vector<Edge> edges;
 
     // Заполнение вектора рёбрами
-    for (const auto& adjacent_vertex_pair : adjacent_list) {
+    for (const auto &adjacent_vertex_pair: adjacent_list) {
         char from = adjacent_vertex_pair.first;
-        for (char to : adjacent_vertex_pair.second) {
+        for (char to: adjacent_vertex_pair.second) {
             // Добавляем ребро в вектор с весом, полученным из матрицы смежности
             edges.emplace_back(from, to, adjacent_matrix[from - 'A'][to - 'A']);
         }
     }
 
     // Сортировка рёбер по весу
-    std::sort(edges.begin(), edges.end(), [](const Edge& e1, const Edge& e2) {
+    std::sort(edges.begin(), edges.end(), [](const Edge &e1, const Edge &e2) {
         return e1.weight < e2.weight;
     });
 
@@ -544,7 +544,7 @@ void Graph::kruskal() {
 
     // Проход по всем рёбрам в отсортированном порядке и добавление их в остовное дерево,
     // если они не создают цикл
-    for (const Edge& edge : edges) {
+    for (const Edge &edge: edges) {
         char root_from = find(parent, edge.v_from); // Поиск корня для вершины v_from
         char root_to = find(parent, edge.v_to);     // Поиск корня для вершины v_to
         if (root_from != root_to) { // Если вершины не в одном множестве, добавить ребро в остовное дерево
@@ -559,7 +559,7 @@ void Graph::kruskal() {
     int total_weight = 0;
     /// акназар
     // Визуальное выделение рёбер и вершин остовного дерева
-    for (const Edge& edge : mst) {
+    for (const Edge &edge: mst) {
         // Добавление информации о ребре в результат
         result << edge.v_from << " - " << edge.v_to << ": " << edge.weight << "\n";
         total_weight += edge.weight;
@@ -608,7 +608,7 @@ void Graph::prim() {
     std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> edges;
 
     // Добавление рёбер, исходящих из стартовой вершины, в кучу
-    for (char neighbor : adjacent_list[start_vertex]) {
+    for (char neighbor: adjacent_list[start_vertex]) {
         int weight = adjacent_matrix[start_vertex - 'A'][neighbor - 'A']; // Получение веса ребра из матрицы смежности
         edges.push(Edge(start_vertex, neighbor, weight)); // Добавление ребра в кучу
     }
@@ -637,9 +637,10 @@ void Graph::prim() {
         visited.insert(min_edge.v_to);
 
         // Добавление всех рёбер, исходящих из новой посещённой вершины, в кучу
-        for (char neighbor : adjacent_list[min_edge.v_to]) {
+        for (char neighbor: adjacent_list[min_edge.v_to]) {
             if (visited.find(neighbor) == visited.end()) { // Только если вершина ещё не посещена
-                int weight = adjacent_matrix[min_edge.v_to - 'A'][neighbor - 'A']; // Получение веса ребра из матрицы смежности
+                int weight = adjacent_matrix[min_edge.v_to - 'A'][neighbor -
+                                                                  'A']; // Получение веса ребра из матрицы смежности
                 edges.push(Edge(min_edge.v_to, neighbor, weight)); // Добавление ребра в кучу
             }
         }
@@ -649,14 +650,15 @@ void Graph::prim() {
     std::stringstream result;
     result << "Минимальное остовное дерево (алгоритм Прима):\n";
     int total_weight = 0;
-    for (const Edge& edge : mst) {
-        result << edge.v_from << " - " << edge.v_to << ": " << edge.weight << "\n"; // Добавление информации о ребре в результат
+    for (const Edge &edge: mst) {
+        result << edge.v_from << " - " << edge.v_to << ": " << edge.weight
+               << "\n"; // Добавление информации о ребре в результат
         total_weight += edge.weight; // Подсчёт общего веса остовного дерева
     }
     result << "Вес минимального остовного дерева равен: " << total_weight << "\n"; // Добавление общего веса в результат
     /// акназар
     // Визуальное выделение рёбер и вершин остовного дерева
-    for (const Edge& edge : mst) {
+    for (const Edge &edge: mst) {
         result << edge.v_from << " - " << edge.v_to << ": " << edge.weight << "\n";
         total_weight += edge.weight;
 
@@ -676,7 +678,7 @@ void Graph::prim() {
 }
 
 
-void Graph::runAlgorithm(const std::string& algorithm, char start_vertex, char end_vertex) {
+void Graph::runAlgorithm(const std::string &algorithm, char start_vertex, char end_vertex) {
     printf("ran algorithm with st vertex: %c and end vertex: %c\n", start_vertex, end_vertex);
     if (algorithm == "BFS") {
         this->run_bfs(start_vertex);
