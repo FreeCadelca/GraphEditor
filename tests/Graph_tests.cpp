@@ -167,6 +167,22 @@ TEST_F(GraphTestSuite, TestDijkstra_CyclicGraph) {
     EXPECT_NE(result.find("C: 2"), std::string::npos);
 }
 
+TEST_F(GraphTestSuite, TestDijkstra_NegativeCycle) {
+    graph->addVertex(0.0, 0.0); // A
+    graph->addVertex(1.0, 0.0); // B
+    graph->addVertex(0.0, 1.0); // C
+
+    // Добавляем рёбра с весами, создающими отрицательный цикл
+    graph->addEdge('A', 'B', 1);
+    graph->addEdge('B', 'C', -1);
+    graph->addEdge('C', 'A', -1);
+
+    GraphTestAccessor::dijkstra(*graph, 'A');
+    std::string result = graph->getPrintoutAlgorithm();
+    std::cout << "Result for TestDijkstra_NegativeCycle: " << result << std::endl; // Debug output
+    EXPECT_EQ(result, "Ошибка: Граф содержит отрицательный цикл");
+}
+
 TEST_F(GraphTestSuite, TestBellmanFord_EmptyGraph) {
     GraphTestAccessor::bellman_ford(*graph, 'A');
     std::string result = graph->getPrintoutAlgorithm();
@@ -214,6 +230,22 @@ TEST_F(GraphTestSuite, TestBellmanFord_CyclicGraph) {
     EXPECT_NE(result.find("A: 0"), std::string::npos);
     EXPECT_NE(result.find("B: 1"), std::string::npos);
     EXPECT_NE(result.find("C: 2"), std::string::npos);
+}
+
+TEST_F(GraphTestSuite, TestBellmanFord_NegativeCycle) {
+    graph->addVertex(0.0, 0.0); // A
+    graph->addVertex(1.0, 0.0); // B
+    graph->addVertex(0.0, 1.0); // C
+
+    // Добавляем рёбра с весами, создающими отрицательный цикл
+    graph->addEdge('A', 'B', 1);
+    graph->addEdge('B', 'C', -1);
+    graph->addEdge('C', 'A', -1);
+
+    GraphTestAccessor::bellman_ford(*graph, 'A');
+    std::string result = graph->getPrintoutAlgorithm();
+    std::cout << "Result for TestBellmanFord_NegativeCycle: " << result << std::endl; // Debug output
+    EXPECT_EQ(result, "Ошибка: Граф содержит отрицательный цикл");
 }
 
 TEST_F(GraphTestSuite, TestKruskal_EmptyGraph) {
