@@ -88,7 +88,7 @@ public:
 
     void addVertex(double x, double y);
 
-    void addEdge(char v_from, char v_to);
+    void addEdge(char v_from, char v_to, int weight = -1000000000);
 
     std::string getPrintoutAdjList();
 

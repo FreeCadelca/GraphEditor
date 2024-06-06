@@ -121,7 +121,7 @@ std::string GraphEditorApp::handling_new_weight(Glib::ustring new_weight) {
 
 
 void GraphEditorApp::on_change_weight() {
-    WeightEntryDialog dialog;
+    WeightEntryDialog dialog(this->getCenterOfWindow().first, this->getCenterOfWindow().second);
     int result = dialog.run();
     if (result == Gtk::RESPONSE_OK) {
         std::cout << "Entered text: " << dialog.get_text() << std::endl;
@@ -136,8 +136,7 @@ void GraphEditorApp::on_change_weight() {
         this->next_weight_label->set_label(new_weight);
         std::cout << new_weight << '\n';
     } else {
-        Gtk::MessageDialog error_dialog("Entered wrong weight", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
-        error_dialog.run();
+        this->run_error_dialog("Entered wrong weight");
         return;
     }
 }
@@ -160,7 +159,7 @@ void GraphEditorApp::print_algorithm() {
     if (this->run_algorithm_button->get_label() == "Run algorithm") {
         if (this->choose_algorithm_cb->get_active_id() == "Bellman-Ford"
         or this->choose_algorithm_cb->get_active_id() == "Djkstra") {
-            PathEntryDialog dialog;
+            PathEntryDialog dialog(this->getCenterOfWindow().first, this->getCenterOfWindow().second);
             int result = dialog.run();
             if (result == Gtk::RESPONSE_OK) {
                 printf("Entered text: %s %s\n", dialog.get_vertex_from().c_str(), dialog.get_vertex_to().c_str());
@@ -171,8 +170,7 @@ void GraphEditorApp::print_algorithm() {
             char max_vertex = Graph::getInstance()->TITLES[Graph::getInstance()->ID_NEXT_TITLE - 1];
             if ((char) dialog.get_vertex_from()[0] < 'A' or (char) dialog.get_vertex_from()[0] > max_vertex
             or (char) dialog.get_vertex_to()[0] < 'A' or (char) dialog.get_vertex_to()[0] > max_vertex) {
-                Gtk::MessageDialog error_dialog("Entered wrong vertices", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
-                error_dialog.run();
+                this->run_error_dialog("Entered wrong vertices");
                 return;
             }
             Graph::getInstance()->runAlgorithm(
@@ -181,7 +179,7 @@ void GraphEditorApp::print_algorithm() {
             );
         } else if (this->choose_algorithm_cb->get_active_id() == "DFS"
         or this->choose_algorithm_cb->get_active_id() == "BFS") {
-            VertexEntryDialog dialog;
+            VertexEntryDialog dialog(this->getCenterOfWindow().first, this->getCenterOfWindow().second);
             int result = dialog.run();
             if (result == Gtk::RESPONSE_OK) {
                 std::cout << "Entered text: " << dialog.get_text() << std::endl;
@@ -191,8 +189,7 @@ void GraphEditorApp::print_algorithm() {
             }
             char max_vertex = Graph::getInstance()->TITLES[Graph::getInstance()->ID_NEXT_TITLE - 1];
             if ((char) dialog.get_text()[0] < 'A' or (char) dialog.get_text()[0] > max_vertex) {
-                Gtk::MessageDialog error_dialog("Entered wrong vertices", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
-                error_dialog.run();
+                this->run_error_dialog("Entered wrong vertices");
                 return;
             }
 
@@ -216,3 +213,23 @@ void GraphEditorApp::print_algorithm() {
     }
 }
 
+std::pair<int, int> GraphEditorApp::getCenterOfWindow() {
+    int corner_x, corner_y, size_x, size_y;
+    this->get_position(corner_x, corner_y);
+    this->get_size(size_x, size_y);
+    return {corner_x + size_x / 2, corner_y + size_y / 2};
+}
+
+void GraphEditorApp::run_error_dialog(std::string message) {
+    Gtk::MessageDialog error_dialog(
+            message,
+            false, Gtk::MESSAGE_ERROR,
+            Gtk::BUTTONS_OK, true);
+
+    int size_x, size_y;
+    error_dialog.get_size(size_x, size_y);
+    error_dialog.move(this->getCenterOfWindow().first - size_x / 2,
+                      this->getCenterOfWindow().second - size_y / 2);
+    error_dialog.run();
+    return;
+}

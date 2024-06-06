@@ -37,13 +37,12 @@ void Graph::addVertex(double x, double y) {
     Canvas::getInstance()->redrawGraph();
 }
 
-void Graph::addEdge(char v_from, char v_to) {
+void Graph::addEdge(char v_from, char v_to, int weight) {
     this->adjacent_list[v_from].push_back(v_to);
     // A = 65
     int index_v_from = (int) v_from - 65;
     int index_v_to = (int) v_to - 65;
-    this->adjacent_matrix[index_v_from][index_v_to] = this->nextWeight;
-
+    this->adjacent_matrix[index_v_from][index_v_to] = weight == -1000000000 ? this->nextWeight : weight;
     // Перерисовываем все элементы
     Canvas::getInstance()->redrawGraph();
 }

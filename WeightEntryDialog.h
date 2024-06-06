@@ -12,7 +12,7 @@ private:
     Gtk::Label lbl;
     Gtk::Entry entry;
 public:
-    WeightEntryDialog();
+    WeightEntryDialog(int center_x, int center_y);
     Glib::ustring get_text() const;
 };
 

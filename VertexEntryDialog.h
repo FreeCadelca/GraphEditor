@@ -12,7 +12,7 @@ private:
     Gtk::Label lbl;
     Gtk::Entry entry;
 public:
-    VertexEntryDialog();
+    VertexEntryDialog(int center_x, int center_y);
     Glib::ustring get_text() const;
 };
 

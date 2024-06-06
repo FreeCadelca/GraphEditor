@@ -7,6 +7,7 @@
 
 #include <gtkmm.h>
 #include <iostream>
+#include <string>
 #include "Canvas.h"
 #include "Graph.h"
 #include "VertexEntryDialog.h"
@@ -17,8 +18,6 @@
 
 class GraphEditorApp : public Gtk::ApplicationWindow {
     Gtk::Box *main_box;
-    int nextWeight = 1;
-
     Glib::RefPtr<Gtk::Label> printed_graph_label_left;
     Glib::RefPtr<Gtk::Label> printed_graph_label_right;
     Glib::RefPtr<Gtk::Label> printed_algorithm_label;
@@ -34,6 +33,9 @@ class GraphEditorApp : public Gtk::ApplicationWindow {
     std::string handling_new_weight(Glib::ustring new_weight);
 
     Glib::RefPtr<Gtk::Builder> ui;
+
+    std::pair<int, int> getCenterOfWindow();
+    void run_error_dialog(std::string message);
 public:
     GraphEditorApp();
 

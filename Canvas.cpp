@@ -458,39 +458,4 @@ void Canvas::update_main_buffer() {
     context->set_source(this->temp_buffer, 0, 0);
     context->paint();
 }
-//void Canvas::redraw_all() {
-//    auto context = this->get_context(temp_buffer);
-//    context->set_source_rgba(1, 1, 1, 1); // Белый цвет для очистки
-//    context->paint();
-//
-//    // Отрисовываем все вершины и рёбра
-//    for (const auto& vertex : Graph::getInstance()->coords) {
-//        double x = vertex.second.first;
-//        double y = vertex.second.second;
-//        this->drawing_vertex(x, y, vertex.first);
-//    }
-//
-//    for (const auto& adjacent_pair : Graph::getInstance()->adjacent_list) {
-//        char vertex1 = adjacent_pair.first;
-//        for (char vertex2 : adjacent_pair.second) {
-//            double start_x = Graph::getInstance()->coords[vertex1].first;
-//            double start_y = Graph::getInstance()->coords[vertex1].second;
-//            double end_x = Graph::getInstance()->coords[vertex2].first;
-//            double end_y = Graph::getInstance()->coords[vertex2].second;
-//            this->draw_colored_arrow(start_x, start_y, end_x, end_y, Color(0, 0, 0, 1)); // Черный цвет
-//        }
-//    }
-//
-//    // Применяем изменения из temp_buffer в основной буфер buffer
-//    save_current_state();
-//    this->queue_draw();
-//}
-
-//void Canvas::save_current_state() {
-//    auto main_context = this->get_context(buffer);
-//    main_context->set_source(temp_buffer, 0, 0);
-//    main_context->paint();
-//}
-
-
 

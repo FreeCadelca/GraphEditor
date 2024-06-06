@@ -15,7 +15,7 @@ private:
     Gtk::Entry entry1;
     Gtk::Entry entry2;
 public:
-    PathEntryDialog();
+    PathEntryDialog(int center_x, int center_y);
     Glib::ustring get_vertex_from() const;
     Glib::ustring get_vertex_to() const;
 };

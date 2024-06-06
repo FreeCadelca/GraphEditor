@@ -7,5 +7,5 @@ int main(int argc, char **argv) {
 
     GraphEditorApp graphEditorApp;
 
-    return app->run(graphEditorApp);//вызов окна
+    return app->run(graphEditorApp); // Вызов окна
 }
