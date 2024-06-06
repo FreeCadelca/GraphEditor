@@ -26,6 +26,8 @@ add_executable(
         VertexEntryDialog.h
         WeightEntryDialog.cpp
         WeightEntryDialog.h
+        PathEntryDialog.cpp
+        PathEntryDialog.h
 )
 
 find_package(PkgConfig)

@@ -59,9 +59,9 @@ private:
 
     void run_dfs(char start_vertex);
 
-    void dijkstra(char start_vertex);
+    void dijkstra(char start_vertex, char end_vertex = '\n');
 
-    void bellman_ford(char start_vertex);
+    void bellman_ford(char start_vertex, char end_vertex = '\n');
 
     void kruskal();
 
@@ -87,7 +87,6 @@ public:
 
     static Graph *getInstance();
 
-
     void addVertex(double x, double y);
 
     void addEdge(char v_from, char v_to);
@@ -98,9 +97,7 @@ public:
 
     std::string getPrintoutAlgorithm();
 
-    void runAlgorithm(const std::string& algorithm, char start_vertex = 'A');
-
-    char get_target_vertex();
+    void runAlgorithm(const std::string& algorithm, char start_vertex = '\n', char end_vertex = '\n');
 };
 
 class GraphTestAccessor {

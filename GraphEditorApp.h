@@ -11,6 +11,7 @@
 #include "Graph.h"
 #include "VertexEntryDialog.h"
 #include "WeightEntryDialog.h"
+#include "PathEntryDialog.h"
 #include <string>
 
 

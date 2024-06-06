@@ -158,11 +158,29 @@ void GraphEditorApp::print_graph_data() {
 
 void GraphEditorApp::print_algorithm() {
     if (this->run_algorithm_button->get_label() == "Run algorithm") {
-        if (this->choose_algorithm_cb->get_active_id() == "DFS"
-            or this->choose_algorithm_cb->get_active_id() == "BFS"
-            or this->choose_algorithm_cb->get_active_id() == "Bellman-Ford"
-            or this->choose_algorithm_cb->get_active_id() == "Djkstra") {
-            std::string algorithm = this->choose_algorithm_cb->get_active_id();
+        if (this->choose_algorithm_cb->get_active_id() == "Bellman-Ford"
+        or this->choose_algorithm_cb->get_active_id() == "Djkstra") {
+            PathEntryDialog dialog;
+            int result = dialog.run();
+            if (result == Gtk::RESPONSE_OK) {
+                printf("Entered text: %s %s\n", dialog.get_vertex_from().c_str(), dialog.get_vertex_to().c_str());
+            } else {
+                printf("Canceled\n");
+                return;
+            }
+
+            if ((char) dialog.get_vertex_from()[0] < 'A' or (char) dialog.get_vertex_from()[0] > 'Z'
+            or (char) dialog.get_vertex_to()[0] < 'A' or (char) dialog.get_vertex_to()[0] > 'Z') {
+                Gtk::MessageDialog error_dialog("Entered wrong vertices", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+                error_dialog.run();
+                return;
+            }
+            Graph::getInstance()->runAlgorithm(
+                    this->choose_algorithm_cb->get_active_id(),
+                    (char) dialog.get_vertex_from()[0], (char) dialog.get_vertex_to()[0]
+            );
+        } else if (this->choose_algorithm_cb->get_active_id() == "DFS"
+        or this->choose_algorithm_cb->get_active_id() == "BFS") {
             VertexEntryDialog dialog;
             int result = dialog.run();
             if (result == Gtk::RESPONSE_OK) {
@@ -171,6 +189,13 @@ void GraphEditorApp::print_algorithm() {
                 std::cout << "Canceled" << std::endl;
                 return;
             }
+
+            if ((char) dialog.get_text()[0] < 'A' or (char) dialog.get_text()[0] > 'Z') {
+                Gtk::MessageDialog error_dialog("Entered wrong vertices", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+                error_dialog.run();
+                return;
+            }
+
             Graph::getInstance()->runAlgorithm(
                     this->choose_algorithm_cb->get_active_id(),
                     (char) dialog.get_text()[0]

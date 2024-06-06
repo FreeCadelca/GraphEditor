@@ -29,7 +29,10 @@ add_executable(
         Color.cpp
         Color.h
         WeightEntryDialog.cpp
-        WeightEntryDialog.h)
+        WeightEntryDialog.h
+        PathEntryDialog.cpp
+        PathEntryDialog.h
+)
 
 target_compile_features(GraphEditor PRIVATE cxx_std_17)
 

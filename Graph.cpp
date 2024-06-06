@@ -241,57 +241,20 @@ void Graph::run_dfs(char start_vertex) {
     }
 }
 
-char Graph::get_target_vertex() { /// акназар
-    GtkWidget *dialog;
-    GtkWidget *content_area;
-    GtkWidget *entry;
-    GtkDialogFlags flags = GTK_DIALOG_MODAL; // Correct type for dialog flags
-
-    // Create the widgets
-    dialog = gtk_dialog_new_with_buttons("Путь куда?",
-                                         NULL,
-                                         flags,
-                                         ("OK"),
-                                         GTK_RESPONSE_OK,
-                                         ("Cancel"),
-                                         GTK_RESPONSE_CANCEL,
-                                         NULL);
-    content_area = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
-    entry = gtk_entry_new();
-    gtk_container_add(GTK_CONTAINER(content_area), entry);
-    gtk_widget_show_all(dialog);
-
-    // Get the response
-    char target_vertex = '\0';
-    gint response = gtk_dialog_run(GTK_DIALOG(dialog));
-    if (response == GTK_RESPONSE_OK) {
-        const char *text = gtk_entry_get_text(GTK_ENTRY(entry));
-        if (text != NULL && strlen(text) == 1) {
-            target_vertex = text[0];
-        }
-    }
-
-    gtk_widget_destroy(dialog);
-    return target_vertex;
-}
-
-void Graph::dijkstra(char start_vertex) {
+void Graph::dijkstra(char start_vertex, char end_vertex) {
     // Проверяем, есть ли данные о вершинах и рёбрах в графе
     if (coords.empty()) {
         // Если контейнер coords пуст, устанавливаем сообщение об ошибке и завершаем функцию.
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
-/// акназар
-    char end_vertex = get_target_vertex();
-    if (end_vertex == '\0') {
-        this->printoutAlgorithm = "Error: No target vertex specified";
-        return;
-    }
-///
+
     std::stringstream result;
-    result << "Алгоритм Дейкстры начиная с вершины " << start_vertex << " до вершины " << end_vertex << ":\n";
-    result << "Минимальные расстояния до вершин:\n";
+    result << "Алгоритм Дейкстры начиная с вершины " << start_vertex;
+    if (end_vertex != '\n') {
+        result << " до вершины " << end_vertex;
+    }
+    result << ":\nМинимальные расстояния до вершин:\n";
 
     // Инициализируем расстояния для всех вершин как бесконечность,
     // кроме стартовой вершины, расстояние до которой равно 0
@@ -353,6 +316,12 @@ void Graph::dijkstra(char start_vertex) {
             result << v << ": " << distances[vertex_index[v]] << "\n";
         }
     }
+    // Если это тест, то конечная вершина не задана, значит не нужно отрисовывать алгоритм
+    if (end_vertex == '\n') {
+        // Присваиваем строковое представление потока result переменной printoutAlgorithm для вывода результата алгоритма.
+        this->printoutAlgorithm = result.str();
+        return;
+    }
     /// акназар
     // Восстанавливаем ответ - собираем путь от начальной вершины до запрашиваемой
     std::vector<char> path;
@@ -395,25 +364,22 @@ void Graph::dijkstra(char start_vertex) {
 }
 
 
-void Graph::bellman_ford(char start_vertex) {
+void Graph::bellman_ford(char start_vertex, char end_vertex) {
     // Проверяем, есть ли данные о вершинах и рёбрах в графе
     if (coords.empty()) {
         // Если контейнер coords пуст, устанавливаем сообщение об ошибке и завершаем функцию
         this->printoutAlgorithm = "Error: Graph is empty";
         return;
     }
-    /// акназар
-    char end_vertex = get_target_vertex();
-    if (end_vertex == '\0') {
-        this->printoutAlgorithm = "Error: No target vertex specified";
-        return;
-    }
-    ///
+
     // Создаем строковый поток для формирования результата алгоритма Беллмана-Форда
     std::stringstream result;
     // Записываем информацию о начале выполнения алгоритма с указанной стартовой вершины в строковый поток.
-    result << "Алгоритм Беллмана — Форда начиная с вершины " << start_vertex << " до вершины " << end_vertex << ":\n";
-    result << "Минимальные расстояния до вершин:\n";
+    result << "Алгоритм Беллмана-Форда начиная с вершины " << start_vertex;
+    if (end_vertex != '\n') {
+        result << " до вершины " << end_vertex;
+    }
+    result << ":\nМинимальные расстояния до вершин:\n";
 
     // Инициализируем расстояния для всех вершин как бесконечность, кроме стартовой вершины, расстояние до которой равно 0
     std::vector<int> distances(TITLES.size(), std::numeric_limits<int>::max());
@@ -469,6 +435,14 @@ void Graph::bellman_ford(char start_vertex) {
             result << v << ": " << distances[vertex_index[v]] << "\n";
         }
     }
+
+    // Если это тест, то конечная вершина не задана, значит не нужно отрисовывать алгоритм
+    if (end_vertex == '\n') {
+        // Присваиваем строковое представление потока result переменной printoutAlgorithm для вывода результата алгоритма.
+        this->printoutAlgorithm = result.str();
+        return;
+    }
+
     /// акназар
     // Восстанавливаем кратчайший путь
     std::vector<char> path;
@@ -703,16 +677,16 @@ void Graph::prim() {
 }
 
 
-void Graph::runAlgorithm(const std::string& algorithm, char start_vertex) {
-    printf("ran algorithm with st vertex: %c\n", start_vertex);
+void Graph::runAlgorithm(const std::string& algorithm, char start_vertex, char end_vertex) {
+    printf("ran algorithm with st vertex: %c and end vertex: %c\n", start_vertex, end_vertex);
     if (algorithm == "BFS") {
         this->run_bfs(start_vertex);
     } else if (algorithm == "DFS") {
         this->run_dfs(start_vertex);
     } else if (algorithm == "Djkstra") {
-        this->dijkstra(start_vertex);
+        this->dijkstra(start_vertex, end_vertex);
     } else if (algorithm == "Bellman-Ford") {
-        this->bellman_ford(start_vertex);
+        this->bellman_ford(start_vertex, end_vertex);
     } else if (algorithm == "Kraskal") {
         this->kruskal();
     } else if (algorithm == "Prim") {

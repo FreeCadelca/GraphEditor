@@ -4,7 +4,7 @@
 
 #include "WeightEntryDialog.h"
 
-WeightEntryDialog::WeightEntryDialog() : lbl("Please enter text:")  {
+WeightEntryDialog::WeightEntryDialog() : lbl("Please enter the weight:")  {
     get_content_area()->pack_start(lbl);
     get_content_area()->pack_start(entry);
     add_button("OK", Gtk::RESPONSE_OK);

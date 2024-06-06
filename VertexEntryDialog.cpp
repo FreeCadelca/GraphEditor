@@ -4,8 +4,9 @@
 
 #include "VertexEntryDialog.h"
 
-VertexEntryDialog::VertexEntryDialog() : lbl("Please enter the weight:")  {
+VertexEntryDialog::VertexEntryDialog() : lbl("Please enter the start vertex:")  {
     get_content_area()->pack_start(lbl);
+    this->entry.set_max_length(1);
     get_content_area()->pack_start(entry);
     add_button("OK", Gtk::RESPONSE_OK);
     add_button("Cancel", Gtk::RESPONSE_CANCEL);
