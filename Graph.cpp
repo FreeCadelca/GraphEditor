@@ -307,6 +307,18 @@ void Graph::dijkstra(char start_vertex, char end_vertex) {
             }
         }
     }
+    // Проверяем наличие отрицательных циклов
+    for (char v_from : TITLES) {
+        for (char v_to : adjacent_list[v_from]) {
+            int weight = adjacent_matrix[vertex_index[v_from]][vertex_index[v_to]];
+            if (distances[vertex_index[v_from]] != std::numeric_limits<int>::max() &&
+                distances[vertex_index[v_from]] + weight < distances[vertex_index[v_to]]) {
+                // Если обнаружен отрицательный цикл, устанавливаем сообщение об ошибке и завершаем функцию
+                this->printoutAlgorithm = "Ошибка: Граф содержит отрицательный цикл";
+                return;
+            }
+        }
+    }
 
     // Формируем строку с минимальными расстояниями только для тех вершин, до которых существует путь
     for (char v : TITLES) {
