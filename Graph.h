@@ -75,15 +75,14 @@ private:
     friend class GraphTestAccessor;
 
 public:
-    std::map<char, std::vector<char>> adjacent_list; // список смежности
-//    std::map<char, std::map<char, int>> adjacent_matrix; // матрица смежности
-    std::vector<std::vector<int>> adjacent_matrix; // матрица смежности
-//    std::vector<WeightedEdge> adjacent; // список рёбер
-    const std::string TITLES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//названия вершин
-    int ID_NEXT_TITLE = 0;//номер следующей вершины для выбора
-    std::map<char, std::pair<int, int>> coords; //координаты вершин
+    std::map<char, std::vector<char>> adjacent_list; // Список смежности
+//    std::map<char, std::map<char, int>> adjacent_matrix; // Матрица смежности
+    std::vector<std::vector<int>> adjacent_matrix; // Матрица смежности
+//    std::vector<WeightedEdge> adjacent; // Список рёбер
+    const std::string TITLES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";// Названия вершин
+    int ID_NEXT_TITLE = 0;// Номер следующей вершины для выбора
+    std::map<char, std::pair<int, int>> coords; // Координаты вершин
     int nextWeight = 1;
-
 
     static Graph *getInstance();
 

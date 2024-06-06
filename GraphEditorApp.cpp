@@ -168,9 +168,9 @@ void GraphEditorApp::print_algorithm() {
                 printf("Canceled\n");
                 return;
             }
-
-            if ((char) dialog.get_vertex_from()[0] < 'A' or (char) dialog.get_vertex_from()[0] > 'Z'
-            or (char) dialog.get_vertex_to()[0] < 'A' or (char) dialog.get_vertex_to()[0] > 'Z') {
+            char max_vertex = Graph::getInstance()->TITLES[Graph::getInstance()->ID_NEXT_TITLE - 1];
+            if ((char) dialog.get_vertex_from()[0] < 'A' or (char) dialog.get_vertex_from()[0] > max_vertex
+            or (char) dialog.get_vertex_to()[0] < 'A' or (char) dialog.get_vertex_to()[0] > max_vertex) {
                 Gtk::MessageDialog error_dialog("Entered wrong vertices", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
                 error_dialog.run();
                 return;
@@ -189,8 +189,8 @@ void GraphEditorApp::print_algorithm() {
                 std::cout << "Canceled" << std::endl;
                 return;
             }
-
-            if ((char) dialog.get_text()[0] < 'A' or (char) dialog.get_text()[0] > 'Z') {
+            char max_vertex = Graph::getInstance()->TITLES[Graph::getInstance()->ID_NEXT_TITLE - 1];
+            if ((char) dialog.get_text()[0] < 'A' or (char) dialog.get_text()[0] > max_vertex) {
                 Gtk::MessageDialog error_dialog("Entered wrong vertices", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
                 error_dialog.run();
                 return;

@@ -299,7 +299,7 @@ void Graph::dijkstra(char start_vertex, char end_vertex) {
         /// изменил код сони
         // Обновляем расстояния до всех соседей текущей вершины
         for (char neighbor : adjacent_list[current_vertex]) {
-            int weight = adjacent_matrix[current_vertex - start_vertex][neighbor - start_vertex];
+            int weight = adjacent_matrix[vertex_index[current_vertex]][vertex_index[neighbor]];
             if (distances[vertex_index[current_vertex]] != std::numeric_limits<int>::max() &&
                 distances[vertex_index[current_vertex]] + weight < distances[vertex_index[neighbor]]) {
                 // Если расстояние до соседней вершины меньше текущего значения, обновляем расстояние.
