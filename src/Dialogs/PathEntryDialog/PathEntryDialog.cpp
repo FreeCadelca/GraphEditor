@@ -11,12 +11,12 @@ PathEntryDialog::PathEntryDialog(int center_x, int center_y) {
     this->lbl_left.set_label("From where?");
     this->lbl_right.set_label("Where to?");
 
-    auto* hbox_labels = new Gtk::HBox;
+    auto *hbox_labels = new Gtk::HBox;
     hbox_labels->pack_start(lbl_left);
     hbox_labels->pack_start(lbl_right);
     get_content_area()->pack_start(*hbox_labels);
 
-    auto* hbox_entries = new Gtk::HBox;
+    auto *hbox_entries = new Gtk::HBox;
     entry1.set_max_length(1);
     hbox_entries->pack_start(entry1);
     entry2.set_max_length(1);

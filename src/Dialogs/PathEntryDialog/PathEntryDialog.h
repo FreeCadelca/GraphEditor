@@ -7,7 +7,7 @@
 
 #include <gtkmm.h>
 
-class PathEntryDialog : public Gtk::Dialog  {
+class PathEntryDialog : public Gtk::Dialog {
 private:
 //    Gtk::Label lbl_question;
     Gtk::Label lbl_left;
@@ -16,10 +16,11 @@ private:
     Gtk::Entry entry2;
 public:
     PathEntryDialog(int center_x, int center_y);
+
     Glib::ustring get_vertex_from() const;
+
     Glib::ustring get_vertex_to() const;
 };
-
 
 
 #endif //GRAPHEDITOR_PATHENTRYDIALOG_H

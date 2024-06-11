@@ -7,12 +7,13 @@
 
 #include <gtkmm.h>
 
-class WeightEntryDialog : public Gtk::Dialog  {
+class WeightEntryDialog : public Gtk::Dialog {
 private:
     Gtk::Label lbl;
     Gtk::Entry entry;
 public:
     WeightEntryDialog(int center_x, int center_y);
+
     Glib::ustring get_text() const;
 };
 

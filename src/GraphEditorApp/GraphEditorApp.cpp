@@ -158,7 +158,7 @@ void GraphEditorApp::print_graph_data() {
 void GraphEditorApp::print_algorithm() {
     if (this->run_algorithm_button->get_label() == "Run algorithm") {
         if (this->choose_algorithm_cb->get_active_id() == "Bellman-Ford"
-        or this->choose_algorithm_cb->get_active_id() == "Djkstra") {
+            or this->choose_algorithm_cb->get_active_id() == "Djkstra") {
             PathEntryDialog dialog(this->getCenterOfWindow().first, this->getCenterOfWindow().second);
             int result = dialog.run();
             if (result == Gtk::RESPONSE_OK) {
@@ -169,7 +169,7 @@ void GraphEditorApp::print_algorithm() {
             }
             char max_vertex = Graph::getInstance()->TITLES[Graph::getInstance()->ID_NEXT_TITLE - 1];
             if ((char) dialog.get_vertex_from()[0] < 'A' or (char) dialog.get_vertex_from()[0] > max_vertex
-            or (char) dialog.get_vertex_to()[0] < 'A' or (char) dialog.get_vertex_to()[0] > max_vertex) {
+                or (char) dialog.get_vertex_to()[0] < 'A' or (char) dialog.get_vertex_to()[0] > max_vertex) {
                 this->run_error_dialog("Entered wrong vertices");
                 return;
             }
@@ -178,7 +178,7 @@ void GraphEditorApp::print_algorithm() {
                     (char) dialog.get_vertex_from()[0], (char) dialog.get_vertex_to()[0]
             );
         } else if (this->choose_algorithm_cb->get_active_id() == "DFS"
-        or this->choose_algorithm_cb->get_active_id() == "BFS") {
+                   or this->choose_algorithm_cb->get_active_id() == "BFS") {
             VertexEntryDialog dialog(this->getCenterOfWindow().first, this->getCenterOfWindow().second);
             int result = dialog.run();
             if (result == Gtk::RESPONSE_OK) {
