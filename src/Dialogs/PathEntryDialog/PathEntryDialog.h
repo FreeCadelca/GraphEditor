@@ -9,7 +9,6 @@
 
 class PathEntryDialog : public Gtk::Dialog {
 private:
-//    Gtk::Label lbl_question;
     Gtk::Label lbl_left;
     Gtk::Label lbl_right;
     Gtk::Entry entry1;

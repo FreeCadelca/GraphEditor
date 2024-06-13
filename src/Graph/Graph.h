@@ -19,7 +19,7 @@
 
 
 class GraphTestSuite;
-
+class AppTestSuite;
 
 class Graph {
 private:
@@ -74,6 +74,8 @@ private:
     friend class GraphTestSuite;
 
     friend class GraphTestAccessor;
+
+    friend class AppTestSuite;
 
 public:
     std::map<char, std::vector<char>> adjacent_list; // Список смежности

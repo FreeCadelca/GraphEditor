@@ -63,6 +63,30 @@ target_include_directories(GraphTests PRIVATE ${GTKMM_INCLUDE_DIRS} ${GOOGLETEST
 target_link_directories(GraphTests PRIVATE ${GTKMM_LIBRARY_DIRS})
 target_link_libraries(GraphTests PRIVATE gtest gtest_main ${GTKMM_LIBRARIES})
 
+add_executable(
+        GraphEditorAppTests
+        tests/GraphEditorApp_tests.cpp
+        src/Canvas/Canvas.h
+        src/Canvas/Canvas.cpp
+        src/GraphEditorApp/GraphEditorApp.cpp
+        src/GraphEditorApp/GraphEditorApp.h
+        src/Graph/Graph.cpp
+        src/Graph/Graph.h
+        src/Color/Color.cpp
+        src/Color/Color.h
+        src/Dialogs/VertexEntryDialog/VertexEntryDialog.cpp
+        src/Dialogs/VertexEntryDialog/VertexEntryDialog.h
+        src/Dialogs/WeightEntryDialog/WeightEntryDialog.cpp
+        src/Dialogs/WeightEntryDialog/WeightEntryDialog.h
+        src/Dialogs/PathEntryDialog/PathEntryDialog.cpp
+        src/Dialogs/PathEntryDialog/PathEntryDialog.h
+)
+
+target_include_directories(GraphEditorAppTests PRIVATE ${GTKMM_INCLUDE_DIRS} ${GOOGLETEST_ROOT}/googletest/include)
+target_link_directories(GraphEditorAppTests PRIVATE ${GTKMM_LIBRARY_DIRS})
+target_link_libraries(GraphEditorAppTests PRIVATE gtest gmock gtest_main ${GTKMM_LIBRARIES})
+
 # Включение тестирования и добавление тестов
 enable_testing()
 add_test(NAME GraphTests COMMAND GraphTests)
+add_test(NAME GraphEditorAppTests COMMAND GraphEditorAppTests)

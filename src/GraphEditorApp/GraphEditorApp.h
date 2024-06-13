@@ -31,11 +31,7 @@ class GraphEditorApp : public Gtk::ApplicationWindow {
     Glib::RefPtr<Gtk::Entry> entry_for_weight;
     Glib::RefPtr<Gtk::ComboBox> choose_algorithm_cb;
 
-    std::string handling_new_weight(Glib::ustring new_weight);
-
     Glib::RefPtr<Gtk::Builder> ui;
-
-    std::pair<int, int> getCenterOfWindow();
 
     void run_error_dialog(std::string message);
 
@@ -46,7 +42,15 @@ public:
 
     void print_graph_data();
 
-    void print_algorithm();
+    void print_algorithm(const std::string &test_input = "");
+
+    std::pair<int, int> getCenterOfWindow();
+
+    std::string handling_new_weight(Glib::ustring new_weight);
+
+    void setAlgorithmName(const std::string &algorithm);
+
+    std::string getAlgorithmName() const;
 };
 
 //

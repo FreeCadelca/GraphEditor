@@ -691,16 +691,16 @@ void Graph::prim() {
 
 
 void Graph::runAlgorithm(const std::string &algorithm, char start_vertex, char end_vertex) {
-    printf("ran algorithm with st vertex: %c and end vertex: %c\n", start_vertex, end_vertex);
+//    printf("ran algorithm with st vertex: %c and end vertex: %c\n", start_vertex, end_vertex);
     if (algorithm == "BFS") {
         this->run_bfs(start_vertex);
     } else if (algorithm == "DFS") {
         this->run_dfs(start_vertex);
-    } else if (algorithm == "Djkstra") {
+    } else if (algorithm == "Dijkstra") {
         this->dijkstra(start_vertex, end_vertex);
     } else if (algorithm == "Bellman-Ford") {
         this->bellman_ford(start_vertex, end_vertex);
-    } else if (algorithm == "Kraskal") {
+    } else if (algorithm == "Kruskal") {
         this->kruskal();
     } else if (algorithm == "Prim") {
         this->prim();
