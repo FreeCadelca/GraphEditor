@@ -86,7 +86,20 @@ target_include_directories(GraphEditorAppTests PRIVATE ${GTKMM_INCLUDE_DIRS} ${G
 target_link_directories(GraphEditorAppTests PRIVATE ${GTKMM_LIBRARY_DIRS})
 target_link_libraries(GraphEditorAppTests PRIVATE gtest gmock gtest_main ${GTKMM_LIBRARIES})
 
+add_executable(CanvasTests
+        Canvas_tests.cpp
+        Graph.cpp
+        Graph.h
+        Canvas.cpp
+        Color.cpp
+)
+
+target_include_directories(CanvasTests PRIVATE ${GTKMM_INCLUDE_DIRS} ${GOOGLETEST_ROOT}/googletest/include)
+target_link_directories(CanvasTests PRIVATE ${GTKMM_LIBRARY_DIRS})
+target_link_libraries(CanvasTests PRIVATE gtest gtest_main ${GTKMM_LIBRARIES})
+
 # Включение тестирования и добавление тестов
 enable_testing()
 add_test(NAME GraphTests COMMAND GraphTests)
 add_test(NAME GraphEditorAppTests COMMAND GraphEditorAppTests)
+add_test(NAME CanvasTests COMMAND CanvasTests)

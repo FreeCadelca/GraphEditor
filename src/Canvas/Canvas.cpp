@@ -1,10 +1,25 @@
-//
-// Created by Dmitriy on 02.04.2024.
-//
+/**
+ * @file Canvas.cpp
+ * @brief Файл реализации для класса Canvas. Содержит функции, реализующие процесс рисования графа и анимации алгоритмов.
+ */
 #include "Canvas.h"
 
+// Инициализация статических членов
+const int Canvas::DEFAULT = 1 << 0;
+const int Canvas::DRAWING = 1 << 1;
+const int Canvas::VERTEX = 1 << 2;
+const int Canvas::EDGE = 1 << 3;
+//std::map<char, std::vector<char>> adjacent; //словарь смежности
+//
+//std::string TITLES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//названия вершин
+//int ID_NEXT_TITLE = 0;//номер следующей вершины для выбора
+// !Legacy!
 Canvas *Canvas::instance = nullptr;
 
+/**
+ * @brief Получает экземпляр синглтона класса Canvas.
+ * @return Указатель на экземпляр Canvas.
+ */
 Canvas *Canvas::getInstance() {
     if (instance == nullptr) {
         instance = new Canvas();
@@ -12,6 +27,9 @@ Canvas *Canvas::getInstance() {
     return instance;
 }
 
+/**
+ * @brief Конструктор для класса Canvas, реализующий графическое представление графа и анимации алгоритмов.
+ */
 Canvas::Canvas() : state(DEFAULT | VERTEX), color(0, 0, 0, 1), buffer_width(1920), buffer_height(1080),
                    need_fix_temp_buffer(false) {
     //конструктор. В него пришлось передавать лейбл распечатки, потому что по-другому не получилось.
@@ -35,10 +53,19 @@ Canvas::Canvas() : state(DEFAULT | VERTEX), color(0, 0, 0, 1), buffer_width(1920
     this->color_chooser_dialog->signal_response().connect(sigc::mem_fun(*this, &Canvas::choose_color_response));
 }
 
+
+/**
+ * @brief Получает текущее состояние холста.
+ * @return Текущее состояние холста.
+ */
 int Canvas::getState() const {
     return state;
 }
 
+/**
+ * @brief Обрабатывает выбор цвета.
+ * @param response_id Идентификатор ответа выбора цвета.
+ */
 void Canvas::choose_color_response(int response_id) {//настройка цвета, выбранного через диалог
     if (response_id == Gtk::RESPONSE_OK) {
         auto res = this->color_chooser_dialog->get_rgba();
@@ -48,10 +75,18 @@ void Canvas::choose_color_response(int response_id) {//настройка цве
     this->color_chooser_dialog->hide();
 }
 
+/**
+ * @brief Открывает диалог выбора цвета.
+ */
 void Canvas::choose_color() {//запуск диалога выбора цвета
     this->color_chooser_dialog->run();
 }
 
+/**
+ * @brief Обрабатывает нажатие кнопки мыши.
+ * @param event Событие нажатия кнопки мыши.
+ * @return true, если событие обработано.
+ */
 bool Canvas::on_mouse_press(GdkEventButton *event) {//прописывание функционала при нажатой мыши
     this->state &= ~DEFAULT;
     this->state |= DRAWING;
@@ -62,6 +97,11 @@ bool Canvas::on_mouse_press(GdkEventButton *event) {//прописывание �
     return true;
 }
 
+/**
+ * @brief Обрабатывает движение мыши.
+ * @param event Событие движения мыши.
+ * @return true, если событие обработано.
+ */
 bool Canvas::on_mouse_move(GdkEventMotion *event) {//прописывание функционала при двигающейся мыши
     this->state &= ~DEFAULT;//замена состояния
     this->state |= DRAWING;
@@ -73,6 +113,11 @@ bool Canvas::on_mouse_move(GdkEventMotion *event) {//прописывание ф
     return true;
 }
 
+/**
+ * @brief Обрабатывает отпускание кнопки мыши.
+ * @param event Событие отпускания кнопки мыши.
+ * @return true, если событие обработано.
+ */
 bool Canvas::on_mouse_release(GdkEventButton *event) {//прописывание функционала при отпускании мыши
     this->state &= ~DRAWING;//замена состояния
     this->state |= DEFAULT;
@@ -80,6 +125,12 @@ bool Canvas::on_mouse_release(GdkEventButton *event) {//прописывание
     return true;
 }
 
+/**
+ * @brief Получает контекст рисования для указанной поверхности.
+ * @param surface Поверхность для получения контекста.
+ * @param need_clear Нужно ли очищать поверхность перед использованием.
+ * @return Контекст рисования.
+ */
 Cairo::RefPtr<Cairo::Context> Canvas::get_context(Cairo::RefPtr<Cairo::Surface> &surface, bool need_clear) {
     //функция "вытаскивания" контекста (раньше мы называли его "cr") для рисования
     auto context = Cairo::Context::create(surface);
@@ -96,6 +147,12 @@ Cairo::RefPtr<Cairo::Context> Canvas::get_context(Cairo::RefPtr<Cairo::Surface> 
     return context;
 }
 
+/**
+ * @brief Рисует вершину на холсте.
+ * @param x X-координата вершины.
+ * @param y Y-координата вершины.
+ * @param name Имя вершины.
+ */
 void Canvas::drawing_vertex(double x, double y, char name) {
     //функция рисования вершин (с белой подложкой для "перекрытия" наложенных на вершину рёбер)
     std::string s;//перевод названия в тип string для "CLang-Tidy, как просит Clion)
@@ -124,32 +181,19 @@ void Canvas::drawing_vertex(double x, double y, char name) {
     context->stroke();
 }
 
-void Canvas::drawing_arrow(double start_x, double start_y, double end_x, double end_y) {
-    this->need_fix_temp_buffer = true;
-
-    // Определение, к каким вершинам относятся координаты начала и конца ребра
-    char from_vertex = '-';
-    char to_vertex = '-';
-    for (auto vertex_pair: Graph::getInstance()->coords) {
-        if (abs(vertex_pair.second.first - start_x) <= 20 && abs(vertex_pair.second.second - start_y) <= 20) {
-            from_vertex = vertex_pair.first;
-        }
-        if (abs(vertex_pair.second.first - end_x) <= 20 && abs(vertex_pair.second.second - end_y) <= 20) {
-            to_vertex = vertex_pair.first;
-        }
-    }
-
-    // Поиск веса ребра между вершинами
-    int weight = Graph::getInstance()->adjacent_matrix[from_vertex - 'A'][to_vertex - 'A'];
-
-    auto context = this->get_context(temp_buffer, false);
-    context->set_line_width(2);
-
-    // Расстояние от начала и конца стрелки до центра вершины
-    double vertex_radius = 20;
-
+/**
+ * @brief Вычисляет скорректированные координаты для рисования стрелки.
+ * @param start_x Начальная x-координата.
+ * @param start_y Начальная y-координата.
+ * @param end_x Конечная x-координата.
+ * @param end_y Конечная y-координата.
+ * @param vertex_radius Радиус вершины.
+ * @return Кортеж, содержащий скорректированные координаты начала и конца.
+ */
+std::tuple<double, double, double, double>
+Canvas::calculateArrowCoordinates(double start_x, double start_y, double end_x, double end_y, double vertex_radius) {
     // Нормализация вектора направления ребра
-    double length = sqrt((end_x - start_x) * (end_x - start_x) + (end_y - start_y) * (end_y - start_y));
+    double length = std::sqrt((end_x - start_x) * (end_x - start_x) + (end_y - start_y) * (end_y - start_y));
     double dir_x = (end_x - start_x) / length;
     double dir_y = (end_y - start_y) / length;
 
@@ -167,6 +211,45 @@ void Canvas::drawing_arrow(double start_x, double start_y, double end_x, double 
     end_x += offset_x;
     end_y += offset_y;
 
+    return std::make_tuple(start_x, start_y, end_x, end_y);
+}
+
+/**
+ * @brief Рисует стрелку вместе с ее весом на холсте.
+ * @param x1 Начальная x-координата.
+ * @param y1 Начальная y-координата.
+ * @param x2 Конечная x-координата.
+ * @param y2 Конечная y-координата.
+ */
+void Canvas::drawing_arrow(double start_x, double start_y, double end_x, double end_y) {
+    this->need_fix_temp_buffer = true;
+    double length = std::sqrt((end_x - start_x) * (end_x - start_x) + (end_y - start_y) * (end_y - start_y));
+    double dir_x = (end_x - start_x) / length;
+    double dir_y = (end_y - start_y) / length;
+    // Определение, к каким вершинам относятся координаты начала и конца ребра
+    char from_vertex = '-';
+    char to_vertex = '-';
+    for (const auto &vertex_pair: Graph::getInstance()->coords) {
+        if (std::abs(vertex_pair.second.first - start_x) <= 20 && std::abs(vertex_pair.second.second - start_y) <= 20) {
+            from_vertex = vertex_pair.first;
+        }
+        if (std::abs(vertex_pair.second.first - end_x) <= 20 && std::abs(vertex_pair.second.second - end_y) <= 20) {
+            to_vertex = vertex_pair.first;
+        }
+    }
+
+    // Поиск веса ребра между вершинами
+    int weight = Graph::getInstance()->adjacent_matrix[from_vertex - 'A'][to_vertex - 'A'];
+
+    auto context = this->get_context(temp_buffer, false);
+    context->set_line_width(2);
+
+    // Расстояние от начала и конца стрелки до центра вершины
+    double vertex_radius = 20;
+
+    // Вычисляем новые координаты начала и конца стрелки
+    std::tie(start_x, start_y, end_x, end_y) = calculateArrowCoordinates(start_x, start_y, end_x, end_y, vertex_radius);
+
     // Рисование стрелки
     context->move_to(start_x, start_y);
     context->line_to(end_x, end_y);
@@ -174,7 +257,7 @@ void Canvas::drawing_arrow(double start_x, double start_y, double end_x, double 
 
     // Переносим начало координат в конечную точку
     context->translate(end_x, end_y);
-    double angle = atan2(dir_y, dir_x);
+    double angle = std::atan2(dir_y, dir_x);
     context->rotate(angle);
     double arrow_length = 20;
     double arrow_width = 10;
@@ -200,7 +283,11 @@ void Canvas::drawing_arrow(double start_x, double start_y, double end_x, double 
     this->queue_draw();
 }
 
-
+/**
+ * @brief Рисует элементы на холсте, используя необходимые функции рисования.
+ * @param x X-координата.
+ * @param y Y-координата.
+ */
 void Canvas::drawing(double x, double y) {
     if (this->state & DRAWING) {
         this->need_fix_temp_buffer = true;
@@ -267,7 +354,11 @@ void Canvas::drawing(double x, double y) {
     }
 }
 
-///
+/**
+ * @brief Отрисовывает текущее состояние холста.
+ * @param cr Контекст рисования.
+ * @return true, если отрисовка успешна.
+ */
 bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
     cr->set_source(this->buffer, 0, 0);
     cr->paint();
@@ -278,6 +369,10 @@ bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context> &cr) {
     return true;
 }
 
+/**
+ * @brief Меняет инструмент рисования.
+ * @param tool Новый инструмент.
+ */
 void Canvas::change_tool(int tool) {//функция смены инструмента
     this->state = Canvas::DEFAULT | tool;
     if (tool == VERTEX) {
@@ -285,6 +380,11 @@ void Canvas::change_tool(int tool) {//функция смены инструме
     }
 }
 
+/**
+ * @brief Обводит вершину указанным цветом. Необходима для анимации алгоритмов.
+ * @param vertex Вершина для обводки.
+ * @param outline_color Цвет обводки.
+ */
 void Canvas::outline_vertex(char vertex, Color outline_color) {
     // Получаем координаты вершины
     double x = Graph::getInstance()->coords[vertex].first;
@@ -308,6 +408,14 @@ void Canvas::outline_vertex(char vertex, Color outline_color) {
     this->queue_draw();
 }
 
+/**
+ * @brief Рисует цветную стрелку на холсте. Необходима для анимации алгоритмов.
+ * @param start_x Начальная x-координата.
+ * @param start_y Начальная y-координата.
+ * @param end_x Конечная x-координата.
+ * @param end_y Конечная y-координата.
+ * @param outline_color Цвет стрелки.
+ */
 void Canvas::draw_colored_arrow(double start_x, double start_y, double end_x, double end_y, Color outline_color) {
     auto context = this->get_context(temp_buffer);
     context->set_source_rgba(outline_color.r, outline_color.g, outline_color.b, outline_color.a);
@@ -363,6 +471,12 @@ void Canvas::draw_colored_arrow(double start_x, double start_y, double end_x, do
     this->queue_draw();
 }
 
+/**
+ * @brief Перерисовывает ребро между двумя вершинами указанным цветом. Необходима для анимации алгоритмов.
+ * @param vertex1 Первая вершина.
+ * @param vertex2 Вторая вершина.
+ * @param outline_color Цвет обводки.
+ */
 void Canvas::redraw_edge(char vertex1, char vertex2, Color outline_color) {
     // Получаем координаты вершин
     double start_x = Graph::getInstance()->coords[vertex1].first;
@@ -374,7 +488,9 @@ void Canvas::redraw_edge(char vertex1, char vertex2, Color outline_color) {
     draw_colored_arrow(start_x, start_y, end_x, end_y, outline_color);
 }
 
-
+/**
+ * @brief Очищает экран. Необходима при выполнении анимации нового алгоритма после выполнения другого алгоритма.
+ */
 void Canvas::clear_screen() {
     auto context = this->get_context(buffer, true);
     context->set_source_rgb(1, 1, 1); // белый цвет
@@ -382,9 +498,12 @@ void Canvas::clear_screen() {
     context->fill();
     context->stroke();
     this->queue_draw();
+
 }
 
-
+/**
+ * @brief Очищает экран и восстанавливает граф. Необходима при выполнении анимации нового алгоритма после выполнения другого алгоритма.
+ */
 void Canvas::clearScreenAndRestoreGraph() {
     // Шаг 1: Сохраняем текущее состояние матрицы смежности
     std::vector<std::vector<int>> savedAdjacentMatrix = Graph::getInstance()->adjacent_matrix;
@@ -399,6 +518,9 @@ void Canvas::clearScreenAndRestoreGraph() {
     redrawGraph();
 }
 
+/**
+ * @brief Перерисовывает граф. Необходима при выполнении анимации нового алгоритма после выполнения другого алгоритма.
+ */
 void Canvas::redrawGraph() {
     if (!Graph::getInstance()->coords.empty()) {
         // Очищаем временный буфер
@@ -439,6 +561,10 @@ void Canvas::redrawGraph() {
     }
 }
 
+
+/**
+ * @brief Очищает временный буфер, заполняя его белым цветом.
+ */
 void Canvas::clear_temp_buffer() {
     auto context = this->get_context(temp_buffer, true);
     context->set_source_rgb(1, 1, 1); // белый цвет
@@ -447,9 +573,11 @@ void Canvas::clear_temp_buffer() {
     context->stroke();
 }
 
+/**
+ * @brief Обновляет основной буфер.
+ */
 void Canvas::update_main_buffer() {
     auto context = this->get_context(buffer);
     context->set_source(this->temp_buffer, 0, 0);
     context->paint();
 }
-
