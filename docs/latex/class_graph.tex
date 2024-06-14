@@ -1,0 +1,656 @@
+\doxysection{Graph Class Reference}
+\hypertarget{class_graph}{}\label{class_graph}\index{Graph@{Graph}}
+
+
+Класс, представляющий граф и реализующий основные алгоритмы работы с графами.  
+
+
+
+
+{\ttfamily \#include $<$Graph.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_graph_1_1_edge}{Edge}}
+\begin{DoxyCompactList}\small\item\em Структура для представления ребра. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_graph_a18a8b6f93b9324aebbb91c717d4e8a2c}{add\+Vertex}} (double x, double y)
+\begin{DoxyCompactList}\small\item\em Добавление вершины в граф. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_a37366bd54911b7f2c1d36454676100eb}{add\+Edge}} (char v\+\_\+from, char v\+\_\+to, int weight=-\/1000000000)
+\begin{DoxyCompactList}\small\item\em Добавление ребра в граф. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_graph_a3756b3f119464ca5fa8e7e77b14def9b}{get\+Printout\+Adj\+List}} ()
+\begin{DoxyCompactList}\small\item\em Получение строки, представляющей список смежности графа. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_graph_a2c6e934c2461e3dc482616caeccc06da}{get\+Printout\+Adj\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Получение строки, представляющей матрицу смежности графа. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_graph_a648b52bc823140da4a8c8c89d5e8e1ac}{get\+Printout\+Algorithm}} ()
+\begin{DoxyCompactList}\small\item\em Получение строки, представляющей результат выполнения алгоритма. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_adda7d03cd8f8d6b9d5440f761137e9ea}{run\+Algorithm}} (const std\+::string \&algorithm, char start\+\_\+vertex=\textquotesingle{}\textbackslash{}n\textquotesingle{}, char end\+\_\+vertex=\textquotesingle{}\textbackslash{}n\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Выполнение указанного алгоритма. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_graph}{Graph}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph_ab3a1b6c8ee07002735e989f7abaa8106}{get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Получение единственного экземпляра класса \doxylink{class_graph}{Graph}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ char, std\+::vector$<$ char $>$ $>$ \mbox{\hyperlink{class_graph_a83c213617bc448b021fcb3b7644a0969}{adjacent\+\_\+list}}
+\begin{DoxyCompactList}\small\item\em Список смежности \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \mbox{\hyperlink{class_graph_ac4755d1464ab2f02b8760d870e724743}{adjacent\+\_\+matrix}}
+\begin{DoxyCompactList}\small\item\em Матрица смежности \end{DoxyCompactList}\item 
+const std\+::string \mbox{\hyperlink{class_graph_a10a582524d63df99928e6b1feee31a24}{TITLES}} = "{}ABCDEFGHIJKLMNOPQRSTUVWXYZ"{}
+\begin{DoxyCompactList}\small\item\em Названия вершин \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_graph_a3fc3eaf4b4f0a0c4becde65bd7b76bd8}{ID\+\_\+\+NEXT\+\_\+\+TITLE}} = 0
+\begin{DoxyCompactList}\small\item\em Номер следующей вершины для выбора \end{DoxyCompactList}\item 
+std\+::map$<$ char, std\+::pair$<$ int, int $>$ $>$ \mbox{\hyperlink{class_graph_a68773809bb43852a6dd4aaac15b6eea9}{coords}}
+\begin{DoxyCompactList}\small\item\em Координаты вершин \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_graph_aecd0824db923712f473603157339b97e}{next\+Weight}} = 1
+\begin{DoxyCompactList}\small\item\em Вес следующего ребра \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_graph_ae4c72b8ac4d693c49800a4c7e273654f}{Graph}} ()
+\begin{DoxyCompactList}\small\item\em Приватный конструктор для реализации singleton. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_aed06ed279b3734d37dbcff5430ea36d1}{run\+\_\+bfs}} (char start\+\_\+vertex)
+\begin{DoxyCompactList}\small\item\em Запуск алгоритма обхода графа в ширину (BFS) с заданной стартовой вершины. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_a643449e5fcf9b44db0fa375c5f3fe27a}{run\+\_\+dfs}} (char start\+\_\+vertex)
+\begin{DoxyCompactList}\small\item\em Запуск алгоритма обхода графа в глубину (DFS) с заданной стартовой вершины. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_afdd9e0ad6a6062af366e5fd2a1b20402}{dijkstra}} (char start\+\_\+vertex, char end\+\_\+vertex=\textquotesingle{}\textbackslash{}n\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Запуск алгоритма Дейкстры для поиска кратчайшего пути в графе. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_a601f5935c1e655b57f8376b36884cdcb}{bellman\+\_\+ford}} (char start\+\_\+vertex, char end\+\_\+vertex=\textquotesingle{}\textbackslash{}n\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Запуск алгоритма Беллмана-\/Форда для поиска кратчайших путей в графе. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_a1de36bcb031663da79fc00f5aa0eaede}{kruskal}} ()
+\begin{DoxyCompactList}\small\item\em Реализация алгоритма Краскала для поиска минимального остовного дерева в графе. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{class_graph_ad3da3461fb89b317e0385aed2bb6cfda}{find}} (std\+::map$<$ char, char $>$ \&parent, char vertex)
+\begin{DoxyCompactList}\small\item\em Вспомогательная функция для поиска корневой вершины дерева в структуре данных "{}дискретные множества"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_a7a5b0e175d30fd3d24ff37773d12b077}{union\+\_\+sets}} (std\+::map$<$ char, char $>$ \&parent, char u, char v)
+\begin{DoxyCompactList}\small\item\em Вспомогательная функция для объединения двух деревьев в структуре данных "{}дискретные множества"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_acb18a1f9d2ad51214d4211d60edf6860}{prim}} ()
+\begin{DoxyCompactList}\small\item\em Реализация алгоритма Прима для поиска минимального остовного дерева в графе. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_graph_a062427bc763104537a8b461737acc9bd}{printout\+Algorithm}}
+\begin{DoxyCompactList}\small\item\em Строка для вывода результатов алгоритмов \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_graph}{Graph}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_graph_aabdb84dfb6a0985f453cc3da65ba2770}{instance}} = nullptr
+\begin{DoxyCompactList}\small\item\em Указатель на единственный экземпляр класса (singleton) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_graph_a758b2efa0ca767374ea2157d8d76fc65}{Graph\+Test\+Suite}}
+\item 
+class \mbox{\hyperlink{class_graph_a2d8eacc7949c8a7fe17497370f0f4586}{Graph\+Test\+Accessor}}
+\item 
+class \mbox{\hyperlink{class_graph_a144ebc130cd6e4b1e2546fc33e8a8d45}{App\+Test\+Suite}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс, представляющий граф и реализующий основные алгоритмы работы с графами. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_graph_ae4c72b8ac4d693c49800a4c7e273654f}\index{Graph@{Graph}!Graph@{Graph}}
+\index{Graph@{Graph}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{Graph()}{Graph()}}
+{\footnotesize\ttfamily \label{class_graph_ae4c72b8ac4d693c49800a4c7e273654f} 
+Graph\+::\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+Приватный конструктор для реализации singleton. 
+
+Конструктор класса \doxylink{class_graph}{Graph}. Конструктор по умолчанию. Создает пустой граф. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_graph_a37366bd54911b7f2c1d36454676100eb}\index{Graph@{Graph}!addEdge@{addEdge}}
+\index{addEdge@{addEdge}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addEdge()}{addEdge()}}
+{\footnotesize\ttfamily \label{class_graph_a37366bd54911b7f2c1d36454676100eb} 
+void Graph\+::add\+Edge (\begin{DoxyParamCaption}\item[{char}]{v\+\_\+from}{, }\item[{char}]{v\+\_\+to}{, }\item[{int}]{weight}{ = {\ttfamily -\/1000000000}}\end{DoxyParamCaption})}
+
+
+
+Добавление ребра в граф. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v\+\_\+from} & Вершина, из которой исходит ребро \\
+\hline
+{\em v\+\_\+to} & Вершина, в которую входит ребро \\
+\hline
+{\em weight} & Вес ребра (по умолчанию -\/1000000000)\\
+\hline
+{\em v\+\_\+from} & Вершина, из которой выходит ребро. \\
+\hline
+{\em v\+\_\+to} & Вершина, в которую входит ребро. \\
+\hline
+{\em weight} & Вес ребра. Если значение веса равно -\/1000000000, используется значение next\+Weight.\\
+\hline
+\end{DoxyParams}
+Метод добавляет ребро между двумя вершинами в списке смежности и обновляет матрицу смежности. После добавления ребра граф перерисовывается. \Hypertarget{class_graph_a18a8b6f93b9324aebbb91c717d4e8a2c}\index{Graph@{Graph}!addVertex@{addVertex}}
+\index{addVertex@{addVertex}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{addVertex()}{addVertex()}}
+{\footnotesize\ttfamily \label{class_graph_a18a8b6f93b9324aebbb91c717d4e8a2c} 
+void Graph\+::add\+Vertex (\begin{DoxyParamCaption}\item[{double}]{x}{, }\item[{double}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Добавление вершины в граф. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Координата x вершины \\
+\hline
+{\em y} & Координата y вершины\\
+\hline
+{\em x} & Координата x вершины. \\
+\hline
+{\em y} & Координата y вершины.\\
+\hline
+\end{DoxyParams}
+Метод добавляет новую вершину в граф с указанными координатами. Вершина также добавляется в список смежности и матрицу смежности. После добавления вершины граф перерисовывается. \Hypertarget{class_graph_a601f5935c1e655b57f8376b36884cdcb}\index{Graph@{Graph}!bellman\_ford@{bellman\_ford}}
+\index{bellman\_ford@{bellman\_ford}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{bellman\_ford()}{bellman\_ford()}}
+{\footnotesize\ttfamily \label{class_graph_a601f5935c1e655b57f8376b36884cdcb} 
+void Graph\+::bellman\+\_\+ford (\begin{DoxyParamCaption}\item[{char}]{start\+\_\+vertex}{, }\item[{char}]{end\+\_\+vertex}{ = {\ttfamily \textquotesingle{}\textbackslash{}n\textquotesingle{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Запуск алгоритма Беллмана-\/Форда для поиска кратчайших путей в графе. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+vertex} & Символ, обозначающий начальную вершину. \\
+\hline
+{\em end\+\_\+vertex} & Символ, обозначающий конечную вершину. Если end\+\_\+vertex == \textquotesingle{}~\newline
+\textquotesingle{}, то считается, что конечная вершина не задана.\\
+\hline
+\end{DoxyParams}
+Алгоритм находит кратчайшие пути от начальной вершины до всех остальных вершин графа. Если граф пуст или содержит отрицательные циклы, устанавливается сообщение об ошибке. Результат работы алгоритма сохраняется в переменной printout\+Algorithm.
+
+Алгоритм использует множества и словари для отслеживания посещенных вершин, предков и расстояний. Также выполняется анимация пути для визуализации результатов.
+
+\begin{DoxyParagraph}{Пример использования\+:}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_graph_ab3a1b6c8ee07002735e989f7abaa8106}{Graph::getInstance}}()-\/>\mbox{\hyperlink{class_graph_a601f5935c1e655b57f8376b36884cdcb}{bellman\_ford}}(\textcolor{charliteral}{'A'},\ \textcolor{charliteral}{'D'});}
+\DoxyCodeLine{std::string\ result\ =\ \mbox{\hyperlink{class_graph_ab3a1b6c8ee07002735e989f7abaa8106}{Graph::getInstance}}()-\/>\mbox{\hyperlink{class_graph_a648b52bc823140da4a8c8c89d5e8e1ac}{getPrintoutAlgorithm}}();}
+\DoxyCodeLine{std::cout\ <<\ result\ <<\ std::endl;}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_graph_a648b52bc823140da4a8c8c89d5e8e1ac}{get\+Printout\+Algorithm()}
+\end{DoxySeeAlso}
+\begin{DoxyWarning}{Warning}
+Убедитесь, что объект \doxylink{class_canvas}{Canvas} создан и инициализирован перед вызовом метода. 
+\end{DoxyWarning}
+акназар\Hypertarget{class_graph_afdd9e0ad6a6062af366e5fd2a1b20402}\index{Graph@{Graph}!dijkstra@{dijkstra}}
+\index{dijkstra@{dijkstra}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{dijkstra()}{dijkstra()}}
+{\footnotesize\ttfamily \label{class_graph_afdd9e0ad6a6062af366e5fd2a1b20402} 
+void Graph\+::dijkstra (\begin{DoxyParamCaption}\item[{char}]{start\+\_\+vertex}{, }\item[{char}]{end\+\_\+vertex}{ = {\ttfamily \textquotesingle{}\textbackslash{}n\textquotesingle{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Запуск алгоритма Дейкстры для поиска кратчайшего пути в графе. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+vertex} & Символ, обозначающий начальную вершину. \\
+\hline
+{\em end\+\_\+vertex} & Символ, обозначающий конечную вершину. Если end\+\_\+vertex == \textquotesingle{}~\newline
+\textquotesingle{}, то считается, что конечная вершина не задана.\\
+\hline
+\end{DoxyParams}
+Алгоритм находит кратчайшие пути от начальной вершины до всех остальных вершин графа. Если граф пуст или содержит отрицательные циклы, устанавливается сообщение об ошибке. Результат работы алгоритма сохраняется в переменной printout\+Algorithm.
+
+Алгоритм использует множества и словари для отслеживания посещенных вершин, предков и расстояний. Также выполняется анимация пути для визуализации результатов.
+
+\begin{DoxyParagraph}{Пример использования\+:}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_graph_ab3a1b6c8ee07002735e989f7abaa8106}{Graph::getInstance}}()-\/>\mbox{\hyperlink{class_graph_afdd9e0ad6a6062af366e5fd2a1b20402}{dijkstra}}(\textcolor{charliteral}{'A'},\ \textcolor{charliteral}{'D'});}
+\DoxyCodeLine{std::string\ result\ =\ \mbox{\hyperlink{class_graph_ab3a1b6c8ee07002735e989f7abaa8106}{Graph::getInstance}}()-\/>\mbox{\hyperlink{class_graph_a648b52bc823140da4a8c8c89d5e8e1ac}{getPrintoutAlgorithm}}();}
+\DoxyCodeLine{std::cout\ <<\ result\ <<\ std::endl;}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_graph_a648b52bc823140da4a8c8c89d5e8e1ac}{get\+Printout\+Algorithm()}
+\end{DoxySeeAlso}
+\begin{DoxyWarning}{Warning}
+Убедитесь, что объект \doxylink{class_canvas}{Canvas} создан и инициализирован перед вызовом метода. 
+\end{DoxyWarning}
+\Hypertarget{class_graph_ad3da3461fb89b317e0385aed2bb6cfda}\index{Graph@{Graph}!find@{find}}
+\index{find@{find}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily \label{class_graph_ad3da3461fb89b317e0385aed2bb6cfda} 
+char Graph\+::find (\begin{DoxyParamCaption}\item[{std\+::map$<$ char, char $>$ \&}]{parent}{, }\item[{char}]{vertex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Вспомогательная функция для поиска корневой вершины дерева в структуре данных "{}дискретные множества"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Ссылка на словарь, в котором ключи -\/ вершины, а значения -\/ их родители. \\
+\hline
+{\em vertex} & Вершина, для которой необходимо найти корневую вершину.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Символ, обозначающий корневую вершину.
+\end{DoxyReturn}
+Функция реализует операцию поиска с пути сжатия (path compression) для структуры данных "{}дискретные множества"{}. Это позволяет эффективно находить корневую вершину для заданной вершины, оптимизируя дерево, что уменьшает время выполнения будущих операций. Если текущая вершина не является корнем, выполняется рекурсивный поиск до корневой вершины, при этом применяется сжатие пути для всех промежуточных вершин.
+
+\begin{DoxyParagraph}{Пример использования\+:}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::map<char,\ char>\ parent;}
+\DoxyCodeLine{parent[\textcolor{charliteral}{'A'}]\ =\ \textcolor{charliteral}{'A'};}
+\DoxyCodeLine{parent[\textcolor{charliteral}{'B'}]\ =\ \textcolor{charliteral}{'A'};}
+\DoxyCodeLine{\textcolor{keywordtype}{char}\ root\ =\ \mbox{\hyperlink{class_graph_ad3da3461fb89b317e0385aed2bb6cfda}{find}}(parent,\ \textcolor{charliteral}{'B'});\ \textcolor{comment}{//\ Вернёт\ 'A'}}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxySeeAlso}{See also}
+union() 
+\end{DoxySeeAlso}
+\Hypertarget{class_graph_ab3a1b6c8ee07002735e989f7abaa8106}\index{Graph@{Graph}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \label{class_graph_ab3a1b6c8ee07002735e989f7abaa8106} 
+\mbox{\hyperlink{class_graph}{Graph}} \texorpdfstring{$\ast$}{*} Graph\+::get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Получение единственного экземпляра класса \doxylink{class_graph}{Graph}. 
+
+Получение единственного экземпляра графа (Singleton).
+
+\begin{DoxyReturn}{Returns}
+Указатель на единственный экземпляр класса \doxylink{class_graph}{Graph}.
+
+Указатель на единственный экземпляр графа.
+\end{DoxyReturn}
+Метод реализует паттерн проектирования Singleton. Если экземпляр графа еще не создан, он создает новый экземпляр. В противном случае возвращает указатель на уже существующий экземпляр. \Hypertarget{class_graph_a3756b3f119464ca5fa8e7e77b14def9b}\index{Graph@{Graph}!getPrintoutAdjList@{getPrintoutAdjList}}
+\index{getPrintoutAdjList@{getPrintoutAdjList}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{getPrintoutAdjList()}{getPrintoutAdjList()}}
+{\footnotesize\ttfamily \label{class_graph_a3756b3f119464ca5fa8e7e77b14def9b} 
+std\+::string Graph\+::get\+Printout\+Adj\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Получение строки, представляющей список смежности графа. 
+
+Получение строкового представления списка смежности графа.
+
+\begin{DoxyReturn}{Returns}
+Строка, представляющая список смежности графа.
+
+Строковое представление списка смежности графа.
+\end{DoxyReturn}
+Метод формирует и возвращает строку, представляющую список смежности графа. Каждая вершина представлена на отдельной строке в формате "{}Вершина\+: Смежные вершины"{}. Если у вершины нет смежных вершин, добавляется "{}\+None"{}. \Hypertarget{class_graph_a2c6e934c2461e3dc482616caeccc06da}\index{Graph@{Graph}!getPrintoutAdjMatrix@{getPrintoutAdjMatrix}}
+\index{getPrintoutAdjMatrix@{getPrintoutAdjMatrix}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{getPrintoutAdjMatrix()}{getPrintoutAdjMatrix()}}
+{\footnotesize\ttfamily \label{class_graph_a2c6e934c2461e3dc482616caeccc06da} 
+std\+::string Graph\+::get\+Printout\+Adj\+Matrix (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Получение строки, представляющей матрицу смежности графа. 
+
+Получение строкового представления матрицы смежности графа.
+
+\begin{DoxyReturn}{Returns}
+Строка, представляющая матрицу смежности графа.
+
+Строковое представление матрицы смежности графа.
+\end{DoxyReturn}
+Метод формирует и возвращает строку, представляющую матрицу смежности графа. Первая строка содержит заголовки столбцов, соответствующие вершинам графа. Далее для каждой вершины графа добавляется строка, начинающаяся с обозначения вершины, за которой следуют значения смежности с другими вершинами, разделённые пробелами. \Hypertarget{class_graph_a648b52bc823140da4a8c8c89d5e8e1ac}\index{Graph@{Graph}!getPrintoutAlgorithm@{getPrintoutAlgorithm}}
+\index{getPrintoutAlgorithm@{getPrintoutAlgorithm}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{getPrintoutAlgorithm()}{getPrintoutAlgorithm()}}
+{\footnotesize\ttfamily \label{class_graph_a648b52bc823140da4a8c8c89d5e8e1ac} 
+std\+::string Graph\+::get\+Printout\+Algorithm (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Получение строки, представляющей результат выполнения алгоритма. 
+
+Получение результата последнего запущенного алгоритма.
+
+\begin{DoxyReturn}{Returns}
+Строка, представляющая результат выполнения алгоритма.
+
+Строковое представление результата последнего запущенного алгоритма.
+\end{DoxyReturn}
+Метод возвращает строку, содержащую результат последнего выполненного алгоритма, хранящуюся в переменной printout\+Algorithm. \Hypertarget{class_graph_a1de36bcb031663da79fc00f5aa0eaede}\index{Graph@{Graph}!kruskal@{kruskal}}
+\index{kruskal@{kruskal}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{kruskal()}{kruskal()}}
+{\footnotesize\ttfamily \label{class_graph_a1de36bcb031663da79fc00f5aa0eaede} 
+void Graph\+::kruskal (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Реализация алгоритма Краскала для поиска минимального остовного дерева в графе. 
+
+Алгоритм Краскала находит минимальное остовное дерево (МСТ) графа, сортируя все рёбра по весу и добавляя их в дерево, если они не образуют цикл. Для этого используется структура данных "{}дискретные множества"{}.
+
+Если граф пуст или содержит только одну вершину, устанавливается сообщение об ошибке. Результат работы алгоритма сохраняется в переменной printout\+Algorithm.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_graph_ad3da3461fb89b317e0385aed2bb6cfda}{find()}, \doxylink{class_graph_a7a5b0e175d30fd3d24ff37773d12b077}{union\+\_\+sets()} 
+\end{DoxySeeAlso}
+\Hypertarget{class_graph_acb18a1f9d2ad51214d4211d60edf6860}\index{Graph@{Graph}!prim@{prim}}
+\index{prim@{prim}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{prim()}{prim()}}
+{\footnotesize\ttfamily \label{class_graph_acb18a1f9d2ad51214d4211d60edf6860} 
+void Graph\+::prim (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Реализация алгоритма Прима для поиска минимального остовного дерева в графе. 
+
+Алгоритм Прима находит минимальное остовное дерево (МСТ) графа, начиная с произвольной стартовой вершины, добавляя рёбра минимального веса, которые соединяют посещённые и непосещённые вершины.
+
+Если граф пуст или содержит только одну вершину, устанавливается сообщение об ошибке. Результат работы алгоритма сохраняется в переменной printout\+Algorithm. \Hypertarget{class_graph_aed06ed279b3734d37dbcff5430ea36d1}\index{Graph@{Graph}!run\_bfs@{run\_bfs}}
+\index{run\_bfs@{run\_bfs}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{run\_bfs()}{run\_bfs()}}
+{\footnotesize\ttfamily \label{class_graph_aed06ed279b3734d37dbcff5430ea36d1} 
+void Graph\+::run\+\_\+bfs (\begin{DoxyParamCaption}\item[{char}]{start\+\_\+vertex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Запуск алгоритма обхода графа в ширину (BFS) с заданной стартовой вершины. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+vertex} & Символ, обозначающий начальную вершину обхода.\\
+\hline
+\end{DoxyParams}
+Метод выполняет обход графа в ширину (BFS), начиная с указанной стартовой вершины. Если граф пуст, устанавливается сообщение об ошибке. Результат обхода сохраняется в переменной printout\+Algorithm. Вершины, посещённые во время обхода, отображаются с задержкой для визуализации процесса.
+
+\begin{DoxyNote}{Note}
+Визуализация включает задержку между отображениями посещённых вершин.
+\end{DoxyNote}
+\begin{DoxyAttention}{Attention}
+Граф должен содержать хотя бы одну вершину и одно ребро для успешного выполнения.
+\end{DoxyAttention}
+\begin{DoxyParagraph}{Пример использования\+:}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_graph_ab3a1b6c8ee07002735e989f7abaa8106}{Graph::getInstance}}()-\/>\mbox{\hyperlink{class_graph_aed06ed279b3734d37dbcff5430ea36d1}{run\_bfs}}(\textcolor{charliteral}{'A'});}
+\DoxyCodeLine{std::string\ result\ =\ \mbox{\hyperlink{class_graph_ab3a1b6c8ee07002735e989f7abaa8106}{Graph::getInstance}}()-\/>\mbox{\hyperlink{class_graph_a648b52bc823140da4a8c8c89d5e8e1ac}{getPrintoutAlgorithm}}();}
+\DoxyCodeLine{std::cout\ <<\ result\ <<\ std::endl;}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & Если граф пуст.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_graph_a648b52bc823140da4a8c8c89d5e8e1ac}{get\+Printout\+Algorithm()}
+\end{DoxySeeAlso}
+\begin{DoxyWarning}{Warning}
+Визуализация требует наличия объекта \doxylink{class_canvas}{Canvas}.
+\end{DoxyWarning}
+Алгоритм работает следующим образом\+:
+\begin{DoxyEnumerate}
+\item Проверяется наличие вершин и рёбер в графе.
+\item Инициализируется очередь и множество посещённых вершин.
+\item Выполняется обход графа в ширину, начиная с заданной вершины.
+\item Для каждой посещённой вершины добавляется задержка для визуализации.
+\item Результат обхода сохраняется в переменной printout\+Algorithm.
+\end{DoxyEnumerate}
+
+\begin{DoxyParagraph}{Заметки\+:}
+
+\begin{DoxyItemize}
+\item Задержка между отрисовками вершин составляет 400 миллисекунд.
+\item Используется класс \doxylink{class_canvas}{Canvas} для визуализации.
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyRefDesc}{Bug}
+\item[\mbox{\hyperlink{bug__bug000001}{Bug}}]Неизвестные проблемы отсутствуют.\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000001}{Test}}]\end{DoxyRefDesc}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Пример\ теста\ для\ проверки\ работы\ метода\ run\_bfs}}
+\DoxyCodeLine{\mbox{\hyperlink{class_graph_ab3a1b6c8ee07002735e989f7abaa8106}{Graph::getInstance}}()-\/>\mbox{\hyperlink{class_graph_aed06ed279b3734d37dbcff5430ea36d1}{run\_bfs}}(\textcolor{charliteral}{'A'});}
+\DoxyCodeLine{ASSERT\_EQ(\mbox{\hyperlink{class_graph_ab3a1b6c8ee07002735e989f7abaa8106}{Graph::getInstance}}()-\/>\mbox{\hyperlink{class_graph_a648b52bc823140da4a8c8c89d5e8e1ac}{getPrintoutAlgorithm}}(),\ expected\_output);}
+
+\end{DoxyCode}
+
+
+\begin{DoxyWarning}{Warning}
+Убедитесь, что объект \doxylink{class_canvas}{Canvas} создан и инициализирован перед вызовом метода.
+\end{DoxyWarning}
+\begin{DoxyNote}{Note}
+Этот метод использует библиотеку Glib для таймеров задержки. 
+\end{DoxyNote}
+\Hypertarget{class_graph_a643449e5fcf9b44db0fa375c5f3fe27a}\index{Graph@{Graph}!run\_dfs@{run\_dfs}}
+\index{run\_dfs@{run\_dfs}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{run\_dfs()}{run\_dfs()}}
+{\footnotesize\ttfamily \label{class_graph_a643449e5fcf9b44db0fa375c5f3fe27a} 
+void Graph\+::run\+\_\+dfs (\begin{DoxyParamCaption}\item[{char}]{start\+\_\+vertex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Запуск алгоритма обхода графа в глубину (DFS) с заданной стартовой вершины. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+vertex} & Символ, обозначающий начальную вершину обхода.\\
+\hline
+\end{DoxyParams}
+Алгоритм выполняет обход графа в глубину (DFS), начиная с указанной стартовой вершины. Если граф пуст, устанавливается сообщение об ошибке. Результат обхода сохраняется в переменной printout\+Algorithm.
+
+Алгоритм использует стек для отслеживания вершин, которые необходимо посетить, и множество для отслеживания посещенных вершин. Также выполняется анимация посещения вершин с задержкой.
+
+\begin{DoxyParagraph}{Пример использования\+:}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_graph_ab3a1b6c8ee07002735e989f7abaa8106}{Graph::getInstance}}()-\/>\mbox{\hyperlink{class_graph_a643449e5fcf9b44db0fa375c5f3fe27a}{run\_dfs}}(\textcolor{charliteral}{'A'});}
+\DoxyCodeLine{std::string\ result\ =\ \mbox{\hyperlink{class_graph_ab3a1b6c8ee07002735e989f7abaa8106}{Graph::getInstance}}()-\/>\mbox{\hyperlink{class_graph_a648b52bc823140da4a8c8c89d5e8e1ac}{getPrintoutAlgorithm}}();}
+\DoxyCodeLine{std::cout\ <<\ result\ <<\ std::endl;}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_graph_a648b52bc823140da4a8c8c89d5e8e1ac}{get\+Printout\+Algorithm()}
+\end{DoxySeeAlso}
+\begin{DoxyWarning}{Warning}
+Убедитесь, что объект \doxylink{class_canvas}{Canvas} создан и инициализирован перед вызовом метода. 
+\end{DoxyWarning}
+\Hypertarget{class_graph_adda7d03cd8f8d6b9d5440f761137e9ea}\index{Graph@{Graph}!runAlgorithm@{runAlgorithm}}
+\index{runAlgorithm@{runAlgorithm}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{runAlgorithm()}{runAlgorithm()}}
+{\footnotesize\ttfamily \label{class_graph_adda7d03cd8f8d6b9d5440f761137e9ea} 
+void Graph\+::run\+Algorithm (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{algorithm}{, }\item[{char}]{start\+\_\+vertex}{ = {\ttfamily \textquotesingle{}\textbackslash{}n\textquotesingle{}}, }\item[{char}]{end\+\_\+vertex}{ = {\ttfamily \textquotesingle{}\textbackslash{}n\textquotesingle{}}}\end{DoxyParamCaption})}
+
+
+
+Выполнение указанного алгоритма. 
+
+Выполняет указанный алгоритм графа с заданными стартовой и конечной вершинами.
+
+
+\begin{DoxyParams}{Parameters}
+{\em algorithm} & Название алгоритма \\
+\hline
+{\em start\+\_\+vertex} & Начальная вершина (по умолчанию \textquotesingle{}~\newline
+\textquotesingle{}) \\
+\hline
+{\em end\+\_\+vertex} & Конечная вершина (по умолчанию \textquotesingle{}~\newline
+\textquotesingle{})\\
+\hline
+{\em algorithm} & Название алгоритма для выполнения. \\
+\hline
+{\em start\+\_\+vertex} & Стартовая вершина для выполнения алгоритма. \\
+\hline
+{\em end\+\_\+vertex} & Конечная вершина для выполнения алгоритма (может не использоваться в некоторых алгоритмах). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_graph_a7a5b0e175d30fd3d24ff37773d12b077}\index{Graph@{Graph}!union\_sets@{union\_sets}}
+\index{union\_sets@{union\_sets}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{union\_sets()}{union\_sets()}}
+{\footnotesize\ttfamily \label{class_graph_a7a5b0e175d30fd3d24ff37773d12b077} 
+void Graph\+::union\+\_\+sets (\begin{DoxyParamCaption}\item[{std\+::map$<$ char, char $>$ \&}]{parent}{, }\item[{char}]{u}{, }\item[{char}]{v}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Вспомогательная функция для объединения двух деревьев в структуре данных "{}дискретные множества"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Ссылка на словарь, в котором ключи -\/ вершины, а значения -\/ их родители. \\
+\hline
+{\em u} & Вершина, первая вершина для объединения. \\
+\hline
+{\em v} & Вершина, вторая вершина для объединения.\\
+\hline
+\end{DoxyParams}
+Функция объединяет два дерева, содержащие вершины u и v, в одно дерево, используя их корневые вершины. Для этого сначала находим корневые вершины для u и v, затем делаем одно дерево поддеревом другого, устанавливая родительскую вершину одной из корневых вершин равной другой корневой вершине.
+
+\begin{DoxyParagraph}{Пример использования\+:}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::map<char,\ char>\ parent;}
+\DoxyCodeLine{parent[\textcolor{charliteral}{'A'}]\ =\ \textcolor{charliteral}{'A'};}
+\DoxyCodeLine{parent[\textcolor{charliteral}{'B'}]\ =\ \textcolor{charliteral}{'A'};}
+\DoxyCodeLine{parent[\textcolor{charliteral}{'C'}]\ =\ \textcolor{charliteral}{'C'};}
+\DoxyCodeLine{\mbox{\hyperlink{class_graph_a7a5b0e175d30fd3d24ff37773d12b077}{union\_sets}}(parent,\ \textcolor{charliteral}{'B'},\ \textcolor{charliteral}{'C'});\ \textcolor{comment}{//\ Теперь\ 'C'\ будет\ поддеревом\ 'A'}}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_graph_ad3da3461fb89b317e0385aed2bb6cfda}{find()} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{class_graph_a144ebc130cd6e4b1e2546fc33e8a8d45}\index{Graph@{Graph}!AppTestSuite@{AppTestSuite}}
+\index{AppTestSuite@{AppTestSuite}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{AppTestSuite}{AppTestSuite}}
+{\footnotesize\ttfamily \label{class_graph_a144ebc130cd6e4b1e2546fc33e8a8d45} 
+friend class App\+Test\+Suite\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{class_graph_a2d8eacc7949c8a7fe17497370f0f4586}\index{Graph@{Graph}!GraphTestAccessor@{GraphTestAccessor}}
+\index{GraphTestAccessor@{GraphTestAccessor}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{GraphTestAccessor}{GraphTestAccessor}}
+{\footnotesize\ttfamily \label{class_graph_a2d8eacc7949c8a7fe17497370f0f4586} 
+friend class \mbox{\hyperlink{class_graph_test_accessor}{Graph\+Test\+Accessor}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{class_graph_a758b2efa0ca767374ea2157d8d76fc65}\index{Graph@{Graph}!GraphTestSuite@{GraphTestSuite}}
+\index{GraphTestSuite@{GraphTestSuite}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{GraphTestSuite}{GraphTestSuite}}
+{\footnotesize\ttfamily \label{class_graph_a758b2efa0ca767374ea2157d8d76fc65} 
+friend class Graph\+Test\+Suite\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_graph_a83c213617bc448b021fcb3b7644a0969}\index{Graph@{Graph}!adjacent\_list@{adjacent\_list}}
+\index{adjacent\_list@{adjacent\_list}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{adjacent\_list}{adjacent\_list}}
+{\footnotesize\ttfamily \label{class_graph_a83c213617bc448b021fcb3b7644a0969} 
+std\+::map$<$char, std\+::vector$<$char$>$ $>$ Graph\+::adjacent\+\_\+list}
+
+
+
+Список смежности 
+
+\Hypertarget{class_graph_ac4755d1464ab2f02b8760d870e724743}\index{Graph@{Graph}!adjacent\_matrix@{adjacent\_matrix}}
+\index{adjacent\_matrix@{adjacent\_matrix}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{adjacent\_matrix}{adjacent\_matrix}}
+{\footnotesize\ttfamily \label{class_graph_ac4755d1464ab2f02b8760d870e724743} 
+std\+::vector$<$std\+::vector$<$int$>$ $>$ Graph\+::adjacent\+\_\+matrix}
+
+
+
+Матрица смежности 
+
+\Hypertarget{class_graph_a68773809bb43852a6dd4aaac15b6eea9}\index{Graph@{Graph}!coords@{coords}}
+\index{coords@{coords}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{coords}{coords}}
+{\footnotesize\ttfamily \label{class_graph_a68773809bb43852a6dd4aaac15b6eea9} 
+std\+::map$<$char, std\+::pair$<$int, int$>$ $>$ Graph\+::coords}
+
+
+
+Координаты вершин 
+
+\Hypertarget{class_graph_a3fc3eaf4b4f0a0c4becde65bd7b76bd8}\index{Graph@{Graph}!ID\_NEXT\_TITLE@{ID\_NEXT\_TITLE}}
+\index{ID\_NEXT\_TITLE@{ID\_NEXT\_TITLE}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{ID\_NEXT\_TITLE}{ID\_NEXT\_TITLE}}
+{\footnotesize\ttfamily \label{class_graph_a3fc3eaf4b4f0a0c4becde65bd7b76bd8} 
+int Graph\+::\+ID\+\_\+\+NEXT\+\_\+\+TITLE = 0}
+
+
+
+Номер следующей вершины для выбора 
+
+\Hypertarget{class_graph_aabdb84dfb6a0985f453cc3da65ba2770}\index{Graph@{Graph}!instance@{instance}}
+\index{instance@{instance}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{instance}{instance}}
+{\footnotesize\ttfamily \label{class_graph_aabdb84dfb6a0985f453cc3da65ba2770} 
+\mbox{\hyperlink{class_graph}{Graph}} \texorpdfstring{$\ast$}{*} Graph\+::instance = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Указатель на единственный экземпляр класса (singleton) 
+
+\Hypertarget{class_graph_aecd0824db923712f473603157339b97e}\index{Graph@{Graph}!nextWeight@{nextWeight}}
+\index{nextWeight@{nextWeight}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{nextWeight}{nextWeight}}
+{\footnotesize\ttfamily \label{class_graph_aecd0824db923712f473603157339b97e} 
+int Graph\+::next\+Weight = 1}
+
+
+
+Вес следующего ребра 
+
+\Hypertarget{class_graph_a062427bc763104537a8b461737acc9bd}\index{Graph@{Graph}!printoutAlgorithm@{printoutAlgorithm}}
+\index{printoutAlgorithm@{printoutAlgorithm}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{printoutAlgorithm}{printoutAlgorithm}}
+{\footnotesize\ttfamily \label{class_graph_a062427bc763104537a8b461737acc9bd} 
+std\+::string Graph\+::printout\+Algorithm\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Строка для вывода результатов алгоритмов 
+
+\Hypertarget{class_graph_a10a582524d63df99928e6b1feee31a24}\index{Graph@{Graph}!TITLES@{TITLES}}
+\index{TITLES@{TITLES}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{TITLES}{TITLES}}
+{\footnotesize\ttfamily \label{class_graph_a10a582524d63df99928e6b1feee31a24} 
+const std\+::string Graph\+::\+TITLES = "{}ABCDEFGHIJKLMNOPQRSTUVWXYZ"{}}
+
+
+
+Названия вершин 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Graph/\mbox{\hyperlink{_graph_8h}{Graph.\+h}}\item 
+src/\+Graph/\mbox{\hyperlink{_graph_8cpp}{Graph.\+cpp}}\end{DoxyCompactItemize}
