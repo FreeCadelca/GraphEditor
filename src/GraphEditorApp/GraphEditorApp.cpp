@@ -1,11 +1,18 @@
-//
-// Created by Dmitriy on 19.04.2024.
-//
-
+/**
+ * @file GraphEditorApp.cpp
+ * @brief Реализация методов класса GraphEditorApp.
+ *
+ * * @authors
+ * Дмитрий Кулешов
+ */
 #include "GraphEditorApp.h"
 
-
+/**
+ * @brief Конструктор класса Graph.
+ * Создаёт окно программы, собирая все объекты из design_new.glade, подключает все функции к кнопкам.
+ */
 GraphEditorApp::GraphEditorApp() : ui{Gtk::Builder::create_from_file("design_new.glade")} {
+    main_box = nullptr;
     if (ui) {
         ui->get_widget<Gtk::Box>("main_box", this->main_box);
         this->main_box->add(*Canvas::getInstance());
@@ -88,6 +95,16 @@ GraphEditorApp::GraphEditorApp() : ui{Gtk::Builder::create_from_file("design_new
     }
 }
 
+/**
+ * @brief Обработка нового введённого веса, проверка на его корректность.
+ *
+ * @param new_weight строка, в которой записан новый вес.
+ *
+ * @return строка веса после обработки.
+ *
+ * Метод возвращает пустую строку, если новый вес некорректен - состоит не из цифр или является пустой строкой.
+ * В случае успешной проверки на корректность возвращает первоначальную строку, приведённую к типу std::string.
+ */
 std::string GraphEditorApp::handling_new_weight(Glib::ustring new_weight) {
     if (new_weight.empty()) {
         return "";
@@ -116,6 +133,11 @@ std::string GraphEditorApp::handling_new_weight(Glib::ustring new_weight) {
     return std::string(new_weight);
 }
 
+/**
+ * @brief Метод вызова смены веса.
+ *
+ * Метод подключен к кнопке смены веса, вызывается при ее нажатии
+ */
 void GraphEditorApp::on_change_weight() {
     WeightEntryDialog dialog(this->getCenterOfWindow().first, this->getCenterOfWindow().second);
     int result = dialog.run();
@@ -137,6 +159,13 @@ void GraphEditorApp::on_change_weight() {
     }
 }
 
+/**
+ * @brief Метод печати данных о графе.
+ *
+ * Метод подключен к кнопке печати графа (Print Graph / Close printout), вызывается при ее нажатии.
+ * Если распечатка графа неактивна (имя кнопки - Print Graph), то метод показывает ярлык с основными данными графа (матрица и список смежности).
+ * Если распечатка графа активна (имя кнопки - Close printout), то метод скрывает ярлык с данными графа
+ */
 void GraphEditorApp::print_graph_data() {
     if (this->print_graph_button->get_label() == "Print Graph") {
         this->printed_graph_label_left->set_text(Graph::getInstance()->getPrintoutAdjList());
@@ -150,7 +179,16 @@ void GraphEditorApp::print_graph_data() {
         this->print_graph_button->set_label("Print Graph");
     }
 }
-
+/**
+ * @brief Метод вызова алгоритма и его печать на ярлыке алгоритма.
+ *
+ * @param test_input альтернативный ввод запрашиваемых вершин для алгоритмов. Используется для тестирования метода,
+ * поэтому по умолчанию этот параметр равен пустой строке ("").
+ *
+ * Метод подключен к кнопке запуска алгоритма (Run algorithm / Close algorithm), вызывается при ее нажатии.
+ * Если распечатка алгоритма неактивна (имя кнопки - Run algorithm), то метод запускает выбранный алгоритм и показывает ярлык с текстом вывода алгоритма.
+ * Если распечатка алгоритма активна (имя кнопки - Close algorithm), то метод скрывает ярлык с текстом вывода алгоритма.
+ */
 void GraphEditorApp::print_algorithm(const std::string &test_input) {
     if (this->run_algorithm_button->get_label() == "Run algorithm") {
         if (this->choose_algorithm_cb->get_active_id() == "Bellman-Ford"
@@ -226,6 +264,14 @@ void GraphEditorApp::print_algorithm(const std::string &test_input) {
     }
 }
 
+/**
+ * @brief Метод получения координат центра окна программы.
+ *
+ * @return std::pair <int, int>, в первой переменной которой записана координата оX, во второй - координата оY
+ *
+ * Метод возвращает координаты центра окна программы.
+ * Используется для вызова всех диалогов, так как они запускаются в центре окна программы
+ */
 std::pair<int, int> GraphEditorApp::getCenterOfWindow() {
     int corner_x, corner_y, size_x, size_y;
     this->get_position(corner_x, corner_y);
@@ -233,7 +279,15 @@ std::pair<int, int> GraphEditorApp::getCenterOfWindow() {
     return {corner_x + size_x / 2, corner_y + size_y / 2};
 }
 
-void GraphEditorApp::run_error_dialog(std::string message) {
+/**
+ * @brief Метод запуска ошибки с сообщением.
+ *
+ * @param message строка, которая будет напечатана в сообщении ошибки
+ *
+ * Метод вызывается из мест, когда нужно оповестить пользователя о неверно введённых данных или неправильной работе программы.
+ * Диалог ошибки содержит поле с сообщением, в которое записывается строка message
+ */
+void GraphEditorApp::run_error_dialog(const std::string& message) {
     Gtk::MessageDialog error_dialog(
             message,
             false, Gtk::MESSAGE_ERROR,
@@ -246,6 +300,14 @@ void GraphEditorApp::run_error_dialog(std::string message) {
     error_dialog.run();
 }
 
+/**
+ * @brief Метод для установки нового алгоритма.
+ *
+ * @param new_algorithm строка, в которой записан требуемый алгоритм
+ *
+ * Метод для тестов. Устанавливает новое выбранное значение в choose_algorithm_cb.
+ * Причём параметр new_algorithm должен точно совпадать с одним из существующих в программе алгоритмов
+ */
 void GraphEditorApp::setAlgorithmName(const std::string &new_algorithm) {
     std::set<std::string> allowed_algorithms = {"BFS", "DFS", "Bellman-Ford", "Dijkstra", "Prim", "Kruskal"};
     if (allowed_algorithms.find(new_algorithm) != allowed_algorithms.end()) {
@@ -253,6 +315,13 @@ void GraphEditorApp::setAlgorithmName(const std::string &new_algorithm) {
     }
 }
 
+/**
+ * @brief Метод получения названия активного алгоритма.
+ *
+ * @return строка, в которой записан активный алгоритм
+ *
+ * Метод для тестов. Возвращает название активного алгоритма из choose_algorithm_cb
+ */
 std::string GraphEditorApp::getAlgorithmName() const {
     return this->choose_algorithm_cb->get_active_id();
-};
+}
