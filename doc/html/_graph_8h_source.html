@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.11.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>GraphEditor: Исходный файл D:/ClionProjects/GraphEditor/src/Graph/Graph.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">GraphEditor<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">grapheditor</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',false);
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7d6a65ce1b9dd88d61878b6298542596.html">Graph</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle"><div class="title">Graph.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_graph_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">//</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Created by Dmitriy on 20.04.2024.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef GRAPHEDITOR_GRAPH_H</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define GRAPHEDITOR_GRAPH_H</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;queue&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;set&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;stack&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="_color_8h.html">../Color/Color.h</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="_canvas_8h.html">../../src/Canvas/Canvas.h</a>&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">class </span>GraphTestSuite;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">class </span>AppTestSuite;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="class_graph.html">   30</a></span><span class="keyword">class </span><a class="code hl_class" href="class_graph.html">Graph</a> {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">static</span> <a class="code hl_class" href="class_graph.html">Graph</a>* instance; </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_class" href="class_graph.html">Graph</a>(); </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">struct </span>Edge {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordtype">char</span> v_from; </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordtype">char</span> v_to; </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordtype">int</span> weight; </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        Edge(<span class="keywordtype">char</span> from, <span class="keywordtype">char</span> to, <span class="keywordtype">int</span> w) : v_from(from), v_to(to), weight(w) {}</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordtype">bool</span> operator&gt;(<span class="keyword">const</span> Edge&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            <span class="keywordflow">return</span> weight &gt; other.weight;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordtype">bool</span> operator&lt;(<span class="keyword">const</span> Edge&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <span class="keywordflow">return</span> weight &lt; other.weight;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">bool</span> operator==(<span class="keyword">const</span> Edge&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            <span class="keywordflow">return</span> v_from == other.v_from &amp;&amp; v_to == other.v_to &amp;&amp; weight == other.weight;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        }</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordtype">bool</span> operator!=(<span class="keyword">const</span> Edge&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordflow">return</span> !(*<span class="keyword">this</span> == other);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    };</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    std::string printoutAlgorithm; </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordtype">void</span> run_bfs(<span class="keywordtype">char</span> start_vertex);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">void</span> run_dfs(<span class="keywordtype">char</span> start_vertex);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordtype">void</span> dijkstra(<span class="keywordtype">char</span> start_vertex, <span class="keywordtype">char</span> end_vertex = <span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">void</span> bellman_ford(<span class="keywordtype">char</span> start_vertex, <span class="keywordtype">char</span> end_vertex = <span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">void</span> kruskal();</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">char</span> find(std::map&lt;char, char&gt; &amp;parent, <span class="keywordtype">char</span> vertex);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordtype">void</span> union_sets(std::map&lt;char, char&gt; &amp;parent, <span class="keywordtype">char</span> u, <span class="keywordtype">char</span> v);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordtype">void</span> prim();</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="class_graph.html#a758b2efa0ca767374ea2157d8d76fc65">   87</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_friend" href="class_graph.html#a758b2efa0ca767374ea2157d8d76fc65">GraphTestSuite</a>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="class_graph.html#a2d8eacc7949c8a7fe17497370f0f4586">   88</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="class_graph_test_accessor.html">GraphTestAccessor</a>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="class_graph.html#a144ebc130cd6e4b1e2546fc33e8a8d45">   90</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_friend" href="class_graph.html#a144ebc130cd6e4b1e2546fc33e8a8d45">AppTestSuite</a>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="class_graph.html#a83c213617bc448b021fcb3b7644a0969">   93</a></span>    std::map&lt;char, std::vector&lt;char&gt;&gt; <a class="code hl_variable" href="class_graph.html#a83c213617bc448b021fcb3b7644a0969">adjacent_list</a>; </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">//    std::map&lt;char, std::map&lt;char, int&gt;&gt; adjacent_matrix; // Матрица смежности</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="class_graph.html#ac4755d1464ab2f02b8760d870e724743">   95</a></span>    std::vector&lt;std::vector&lt;int&gt;&gt; <a class="code hl_variable" href="class_graph.html#ac4755d1464ab2f02b8760d870e724743">adjacent_matrix</a>; </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">//    std::vector&lt;WeightedEdge&gt; adjacent; // Список рёбер</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="class_graph.html#a10a582524d63df99928e6b1feee31a24">   97</a></span>    <span class="keyword">const</span> std::string <a class="code hl_variable" href="class_graph.html#a10a582524d63df99928e6b1feee31a24">TITLES</a> = <span class="stringliteral">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="class_graph.html#a3fc3eaf4b4f0a0c4becde65bd7b76bd8">   98</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_graph.html#a3fc3eaf4b4f0a0c4becde65bd7b76bd8">ID_NEXT_TITLE</a> = 0; </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="class_graph.html#a68773809bb43852a6dd4aaac15b6eea9">   99</a></span>    std::map&lt;char, std::pair&lt;int, int&gt;&gt; <a class="code hl_variable" href="class_graph.html#a68773809bb43852a6dd4aaac15b6eea9">coords</a>; </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="class_graph.html#aecd0824db923712f473603157339b97e">  100</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_graph.html#aecd0824db923712f473603157339b97e">nextWeight</a> = 1; </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keyword">static</span> <a class="code hl_class" href="class_graph.html">Graph</a> *<a class="code hl_function" href="class_graph.html#ab3a1b6c8ee07002735e989f7abaa8106">getInstance</a>();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph.html#a18a8b6f93b9324aebbb91c717d4e8a2c">addVertex</a>(<span class="keywordtype">double</span> x, <span class="keywordtype">double</span> y);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph.html#a37366bd54911b7f2c1d36454676100eb">addEdge</a>(<span class="keywordtype">char</span> v_from, <span class="keywordtype">char</span> v_to, <span class="keywordtype">int</span> weight = -1000000000);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    std::string <a class="code hl_function" href="class_graph.html#a3756b3f119464ca5fa8e7e77b14def9b">getPrintoutAdjList</a>();</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    std::string <a class="code hl_function" href="class_graph.html#a2c6e934c2461e3dc482616caeccc06da">getPrintoutAdjMatrix</a>();</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    std::string <a class="code hl_function" href="class_graph.html#a648b52bc823140da4a8c8c89d5e8e1ac">getPrintoutAlgorithm</a>();</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph.html#adda7d03cd8f8d6b9d5440f761137e9ea">runAlgorithm</a>(<span class="keyword">const</span> std::string&amp; algorithm, <span class="keywordtype">char</span> start_vertex = <span class="charliteral">&#39;\n&#39;</span>, <span class="keywordtype">char</span> end_vertex = <span class="charliteral">&#39;\n&#39;</span>);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>};</div>
+</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="foldopen" id="foldopen00153" data-start="{" data-end="};">
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="class_graph_test_accessor.html">  153</a></span><span class="keyword">class </span><a class="code hl_class" href="class_graph_test_accessor.html">GraphTestAccessor</a> {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00155" data-start="{" data-end="}">
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="class_graph_test_accessor.html#a2f8d25fe5c8062214677b687094f4858">  155</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph_test_accessor.html#a2f8d25fe5c8062214677b687094f4858">run_bfs</a>(<a class="code hl_class" href="class_graph.html">Graph</a>&amp; graph, <span class="keywordtype">char</span> start_vertex) {</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        graph.run_bfs(start_vertex);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    }</div>
+</div>
+<div class="foldopen" id="foldopen00158" data-start="{" data-end="}">
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="class_graph_test_accessor.html#a7fbe64b24e6cc2542c19c91b62e9cad1">  158</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph_test_accessor.html#a7fbe64b24e6cc2542c19c91b62e9cad1">run_dfs</a>(<a class="code hl_class" href="class_graph.html">Graph</a>&amp; graph, <span class="keywordtype">char</span> start_vertex) {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        graph.run_dfs(start_vertex);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    }</div>
+</div>
+<div class="foldopen" id="foldopen00161" data-start="{" data-end="}">
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="class_graph_test_accessor.html#a8002311e0881576f7d6cd81d89ed4fc4">  161</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph_test_accessor.html#a8002311e0881576f7d6cd81d89ed4fc4">dijkstra</a>(<a class="code hl_class" href="class_graph.html">Graph</a>&amp; graph, <span class="keywordtype">char</span> start_vertex) {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        graph.dijkstra(start_vertex);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    }</div>
+</div>
+<div class="foldopen" id="foldopen00164" data-start="{" data-end="}">
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="class_graph_test_accessor.html#a5ef1b8f69731cea903c2446211a0a688">  164</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph_test_accessor.html#a5ef1b8f69731cea903c2446211a0a688">bellman_ford</a>(<a class="code hl_class" href="class_graph.html">Graph</a>&amp; graph, <span class="keywordtype">char</span> start_vertex) {</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        graph.bellman_ford(start_vertex);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    }</div>
+</div>
+<div class="foldopen" id="foldopen00167" data-start="{" data-end="}">
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="class_graph_test_accessor.html#abf2c2a2df44f0df985abfebc0c8250c9">  167</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph_test_accessor.html#abf2c2a2df44f0df985abfebc0c8250c9">kruskal</a>(<a class="code hl_class" href="class_graph.html">Graph</a>&amp; graph) {</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        graph.kruskal();</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    }</div>
+</div>
+<div class="foldopen" id="foldopen00170" data-start="{" data-end="}">
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="class_graph_test_accessor.html#af885b80af40e1b507efc9864407c980b">  170</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph_test_accessor.html#af885b80af40e1b507efc9864407c980b">prim</a>(<a class="code hl_class" href="class_graph.html">Graph</a>&amp; graph) {</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        graph.prim();</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    }</div>
+</div>
+<div class="foldopen" id="foldopen00173" data-start="{" data-end="}">
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno"><a class="line" href="class_graph_test_accessor.html#a9fbdc6158c3ae43d7a14fbc144b1f748">  173</a></span>    <span class="keyword">static</span> <span class="keywordtype">char</span> <a class="code hl_function" href="class_graph_test_accessor.html#a9fbdc6158c3ae43d7a14fbc144b1f748">find</a>(<a class="code hl_class" href="class_graph.html">Graph</a>&amp; graph, std::map&lt;char, char&gt; &amp;parent, <span class="keywordtype">char</span> vertex) {</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="keywordflow">return</span> graph.find(parent, vertex);</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    }</div>
+</div>
+<div class="foldopen" id="foldopen00176" data-start="{" data-end="}">
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="class_graph_test_accessor.html#a51ce2c851307003551d147b5c0bf12ba">  176</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph_test_accessor.html#a51ce2c851307003551d147b5c0bf12ba">union_sets</a>(<a class="code hl_class" href="class_graph.html">Graph</a>&amp; graph, std::map&lt;char, char&gt; &amp;parent, <span class="keywordtype">char</span> u, <span class="keywordtype">char</span> v) {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        graph.union_sets(parent, u, v);</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    }</div>
+</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>};</div>
+</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="preprocessor">#endif </span><span class="comment">//GRAPHEDITOR_GRAPH_H</span></div>
+<div class="ttc" id="a_canvas_8h_html"><div class="ttname"><a href="_canvas_8h.html">Canvas.h</a></div><div class="ttdoc">Загаловочный файл для Canvas.cpp. Содержит функции, реализующие процесс рисования графа и анимации ал...</div></div>
+<div class="ttc" id="a_color_8h_html"><div class="ttname"><a href="_color_8h.html">Color.h</a></div></div>
+<div class="ttc" id="aclass_graph_html"><div class="ttname"><a href="class_graph.html">Graph</a></div><div class="ttdoc">Класс, представляющий граф и реализующий основные алгоритмы работы с графами.</div><div class="ttdef"><b>Definition</b> Graph.h:30</div></div>
+<div class="ttc" id="aclass_graph_html_a10a582524d63df99928e6b1feee31a24"><div class="ttname"><a href="class_graph.html#a10a582524d63df99928e6b1feee31a24">Graph::TITLES</a></div><div class="ttdeci">const std::string TITLES</div><div class="ttdoc">Названия вершин</div><div class="ttdef"><b>Definition</b> Graph.h:97</div></div>
+<div class="ttc" id="aclass_graph_html_a144ebc130cd6e4b1e2546fc33e8a8d45"><div class="ttname"><a href="class_graph.html#a144ebc130cd6e4b1e2546fc33e8a8d45">Graph::AppTestSuite</a></div><div class="ttdeci">friend class AppTestSuite</div><div class="ttdef"><b>Definition</b> Graph.h:90</div></div>
+<div class="ttc" id="aclass_graph_html_a18a8b6f93b9324aebbb91c717d4e8a2c"><div class="ttname"><a href="class_graph.html#a18a8b6f93b9324aebbb91c717d4e8a2c">Graph::addVertex</a></div><div class="ttdeci">void addVertex(double x, double y)</div><div class="ttdoc">Добавление вершины в граф.</div><div class="ttdef"><b>Definition</b> Graph.cpp:46</div></div>
+<div class="ttc" id="aclass_graph_html_a2c6e934c2461e3dc482616caeccc06da"><div class="ttname"><a href="class_graph.html#a2c6e934c2461e3dc482616caeccc06da">Graph::getPrintoutAdjMatrix</a></div><div class="ttdeci">std::string getPrintoutAdjMatrix()</div><div class="ttdoc">Получение строки, представляющей матрицу смежности графа.</div><div class="ttdef"><b>Definition</b> Graph.cpp:135</div></div>
+<div class="ttc" id="aclass_graph_html_a37366bd54911b7f2c1d36454676100eb"><div class="ttname"><a href="class_graph.html#a37366bd54911b7f2c1d36454676100eb">Graph::addEdge</a></div><div class="ttdeci">void addEdge(char v_from, char v_to, int weight=-1000000000)</div><div class="ttdoc">Добавление ребра в граф.</div><div class="ttdef"><b>Definition</b> Graph.cpp:78</div></div>
+<div class="ttc" id="aclass_graph_html_a3756b3f119464ca5fa8e7e77b14def9b"><div class="ttname"><a href="class_graph.html#a3756b3f119464ca5fa8e7e77b14def9b">Graph::getPrintoutAdjList</a></div><div class="ttdeci">std::string getPrintoutAdjList()</div><div class="ttdoc">Получение строки, представляющей список смежности графа.</div><div class="ttdef"><b>Definition</b> Graph.cpp:97</div></div>
+<div class="ttc" id="aclass_graph_html_a3fc3eaf4b4f0a0c4becde65bd7b76bd8"><div class="ttname"><a href="class_graph.html#a3fc3eaf4b4f0a0c4becde65bd7b76bd8">Graph::ID_NEXT_TITLE</a></div><div class="ttdeci">int ID_NEXT_TITLE</div><div class="ttdoc">Номер следующей вершины для выбора</div><div class="ttdef"><b>Definition</b> Graph.h:98</div></div>
+<div class="ttc" id="aclass_graph_html_a648b52bc823140da4a8c8c89d5e8e1ac"><div class="ttname"><a href="class_graph.html#a648b52bc823140da4a8c8c89d5e8e1ac">Graph::getPrintoutAlgorithm</a></div><div class="ttdeci">std::string getPrintoutAlgorithm()</div><div class="ttdoc">Получение строки, представляющей результат выполнения алгоритма.</div><div class="ttdef"><b>Definition</b> Graph.cpp:171</div></div>
+<div class="ttc" id="aclass_graph_html_a68773809bb43852a6dd4aaac15b6eea9"><div class="ttname"><a href="class_graph.html#a68773809bb43852a6dd4aaac15b6eea9">Graph::coords</a></div><div class="ttdeci">std::map&lt; char, std::pair&lt; int, int &gt; &gt; coords</div><div class="ttdoc">Координаты вершин</div><div class="ttdef"><b>Definition</b> Graph.h:99</div></div>
+<div class="ttc" id="aclass_graph_html_a758b2efa0ca767374ea2157d8d76fc65"><div class="ttname"><a href="class_graph.html#a758b2efa0ca767374ea2157d8d76fc65">Graph::GraphTestSuite</a></div><div class="ttdeci">friend class GraphTestSuite</div><div class="ttdef"><b>Definition</b> Graph.h:87</div></div>
+<div class="ttc" id="aclass_graph_html_a83c213617bc448b021fcb3b7644a0969"><div class="ttname"><a href="class_graph.html#a83c213617bc448b021fcb3b7644a0969">Graph::adjacent_list</a></div><div class="ttdeci">std::map&lt; char, std::vector&lt; char &gt; &gt; adjacent_list</div><div class="ttdoc">Список смежности</div><div class="ttdef"><b>Definition</b> Graph.h:93</div></div>
+<div class="ttc" id="aclass_graph_html_ab3a1b6c8ee07002735e989f7abaa8106"><div class="ttname"><a href="class_graph.html#ab3a1b6c8ee07002735e989f7abaa8106">Graph::getInstance</a></div><div class="ttdeci">static Graph * getInstance()</div><div class="ttdoc">Получение единственного экземпляра класса Graph.</div><div class="ttdef"><b>Definition</b> Graph.cpp:29</div></div>
+<div class="ttc" id="aclass_graph_html_ac4755d1464ab2f02b8760d870e724743"><div class="ttname"><a href="class_graph.html#ac4755d1464ab2f02b8760d870e724743">Graph::adjacent_matrix</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; int &gt; &gt; adjacent_matrix</div><div class="ttdoc">Матрица смежности</div><div class="ttdef"><b>Definition</b> Graph.h:95</div></div>
+<div class="ttc" id="aclass_graph_html_adda7d03cd8f8d6b9d5440f761137e9ea"><div class="ttname"><a href="class_graph.html#adda7d03cd8f8d6b9d5440f761137e9ea">Graph::runAlgorithm</a></div><div class="ttdeci">void runAlgorithm(const std::string &amp;algorithm, char start_vertex='\n', char end_vertex='\n')</div><div class="ttdoc">Выполнение указанного алгоритма.</div><div class="ttdef"><b>Definition</b> Graph.cpp:945</div></div>
+<div class="ttc" id="aclass_graph_html_aecd0824db923712f473603157339b97e"><div class="ttname"><a href="class_graph.html#aecd0824db923712f473603157339b97e">Graph::nextWeight</a></div><div class="ttdeci">int nextWeight</div><div class="ttdoc">Вес следующего ребра</div><div class="ttdef"><b>Definition</b> Graph.h:100</div></div>
+<div class="ttc" id="aclass_graph_test_accessor_html"><div class="ttname"><a href="class_graph_test_accessor.html">GraphTestAccessor</a></div><div class="ttdoc">Класс для тестирования приватных методов класса Graph.</div><div class="ttdef"><b>Definition</b> Graph.h:153</div></div>
+<div class="ttc" id="aclass_graph_test_accessor_html_a2f8d25fe5c8062214677b687094f4858"><div class="ttname"><a href="class_graph_test_accessor.html#a2f8d25fe5c8062214677b687094f4858">GraphTestAccessor::run_bfs</a></div><div class="ttdeci">static void run_bfs(Graph &amp;graph, char start_vertex)</div><div class="ttdef"><b>Definition</b> Graph.h:155</div></div>
+<div class="ttc" id="aclass_graph_test_accessor_html_a51ce2c851307003551d147b5c0bf12ba"><div class="ttname"><a href="class_graph_test_accessor.html#a51ce2c851307003551d147b5c0bf12ba">GraphTestAccessor::union_sets</a></div><div class="ttdeci">static void union_sets(Graph &amp;graph, std::map&lt; char, char &gt; &amp;parent, char u, char v)</div><div class="ttdef"><b>Definition</b> Graph.h:176</div></div>
+<div class="ttc" id="aclass_graph_test_accessor_html_a5ef1b8f69731cea903c2446211a0a688"><div class="ttname"><a href="class_graph_test_accessor.html#a5ef1b8f69731cea903c2446211a0a688">GraphTestAccessor::bellman_ford</a></div><div class="ttdeci">static void bellman_ford(Graph &amp;graph, char start_vertex)</div><div class="ttdef"><b>Definition</b> Graph.h:164</div></div>
+<div class="ttc" id="aclass_graph_test_accessor_html_a7fbe64b24e6cc2542c19c91b62e9cad1"><div class="ttname"><a href="class_graph_test_accessor.html#a7fbe64b24e6cc2542c19c91b62e9cad1">GraphTestAccessor::run_dfs</a></div><div class="ttdeci">static void run_dfs(Graph &amp;graph, char start_vertex)</div><div class="ttdef"><b>Definition</b> Graph.h:158</div></div>
+<div class="ttc" id="aclass_graph_test_accessor_html_a8002311e0881576f7d6cd81d89ed4fc4"><div class="ttname"><a href="class_graph_test_accessor.html#a8002311e0881576f7d6cd81d89ed4fc4">GraphTestAccessor::dijkstra</a></div><div class="ttdeci">static void dijkstra(Graph &amp;graph, char start_vertex)</div><div class="ttdef"><b>Definition</b> Graph.h:161</div></div>
+<div class="ttc" id="aclass_graph_test_accessor_html_a9fbdc6158c3ae43d7a14fbc144b1f748"><div class="ttname"><a href="class_graph_test_accessor.html#a9fbdc6158c3ae43d7a14fbc144b1f748">GraphTestAccessor::find</a></div><div class="ttdeci">static char find(Graph &amp;graph, std::map&lt; char, char &gt; &amp;parent, char vertex)</div><div class="ttdef"><b>Definition</b> Graph.h:173</div></div>
+<div class="ttc" id="aclass_graph_test_accessor_html_abf2c2a2df44f0df985abfebc0c8250c9"><div class="ttname"><a href="class_graph_test_accessor.html#abf2c2a2df44f0df985abfebc0c8250c9">GraphTestAccessor::kruskal</a></div><div class="ttdeci">static void kruskal(Graph &amp;graph)</div><div class="ttdef"><b>Definition</b> Graph.h:167</div></div>
+<div class="ttc" id="aclass_graph_test_accessor_html_af885b80af40e1b507efc9864407c980b"><div class="ttname"><a href="class_graph_test_accessor.html#af885b80af40e1b507efc9864407c980b">GraphTestAccessor::prim</a></div><div class="ttdeci">static void prim(Graph &amp;graph)</div><div class="ttdef"><b>Definition</b> Graph.h:170</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.11.0
+</small></address>
+</div><!-- doc-content -->
+</body>
+</html>

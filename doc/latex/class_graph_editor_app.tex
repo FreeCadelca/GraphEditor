@@ -1,0 +1,155 @@
+\doxysection{Класс Graph\+Editor\+App}
+\hypertarget{class_graph_editor_app}{}\label{class_graph_editor_app}\index{GraphEditorApp@{GraphEditorApp}}
+
+
+Класс, реализующий главное окно программы.  
+
+
+
+
+{\ttfamily \#include $<$Graph\+Editor\+App.\+h$>$}
+
+Граф наследования\+:Graph\+Editor\+App\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_graph_editor_app}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_graph_editor_app_a27322ef115781978eaa3164956ea6674}{Graph\+Editor\+App}} ()
+\begin{DoxyCompactList}\small\item\em Конструктор класса \doxylink{class_graph}{Graph}. Создаёт окно программы, собирая все объекты из design\+\_\+new.\+glade, подключает все функции к кнопкам. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_editor_app_a29700b7c50919df9aa8b57967f54d711}{on\+\_\+change\+\_\+weight}} ()
+\begin{DoxyCompactList}\small\item\em Метод вызова смены веса. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_editor_app_ae6e09a88077be5d3f9191fc37d6bb239}{print\+\_\+graph\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Метод печати данных о графе. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_editor_app_a068a6a8ff68b79345899e6ad0831d9e1}{print\+\_\+algorithm}} (const std\+::string \&test\+\_\+input="{}"{})
+\begin{DoxyCompactList}\small\item\em Метод вызова алгоритма и его печать на ярлыке алгоритма. \end{DoxyCompactList}\item 
+std\+::pair$<$ int, int $>$ \mbox{\hyperlink{class_graph_editor_app_ac0d0b0d2e105692e0af8e8d80d1832a2}{get\+Center\+Of\+Window}} ()
+\begin{DoxyCompactList}\small\item\em Метод получения координат центра окна программы. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_graph_editor_app_a861100aa72135b6465e043063c84db3b}{handling\+\_\+new\+\_\+weight}} (Glib\+::ustring new\+\_\+weight)
+\begin{DoxyCompactList}\small\item\em Обработка нового введённого веса, проверка на его корректность. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graph_editor_app_a1d06244e22043ef8d430d8e87cbbc8e8}{set\+Algorithm\+Name}} (const std\+::string \&algorithm)
+\begin{DoxyCompactList}\small\item\em Метод для установки нового алгоритма. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_graph_editor_app_a04d7a5189e7b511b260bf30cbc566815}{get\+Algorithm\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Метод получения названия активного алгоритма. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Класс, реализующий главное окно программы. 
+
+\doxysubsection{Конструктор(ы)}
+\Hypertarget{class_graph_editor_app_a27322ef115781978eaa3164956ea6674}\index{GraphEditorApp@{GraphEditorApp}!GraphEditorApp@{GraphEditorApp}}
+\index{GraphEditorApp@{GraphEditorApp}!GraphEditorApp@{GraphEditorApp}}
+\doxysubsubsection{\texorpdfstring{GraphEditorApp()}{GraphEditorApp()}}
+{\footnotesize\ttfamily \label{class_graph_editor_app_a27322ef115781978eaa3164956ea6674} 
+Graph\+Editor\+App\+::\+Graph\+Editor\+App (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Конструктор класса \doxylink{class_graph}{Graph}. Создаёт окно программы, собирая все объекты из design\+\_\+new.\+glade, подключает все функции к кнопкам. 
+
+
+
+\doxysubsection{Методы}
+\Hypertarget{class_graph_editor_app_a04d7a5189e7b511b260bf30cbc566815}\index{GraphEditorApp@{GraphEditorApp}!getAlgorithmName@{getAlgorithmName}}
+\index{getAlgorithmName@{getAlgorithmName}!GraphEditorApp@{GraphEditorApp}}
+\doxysubsubsection{\texorpdfstring{getAlgorithmName()}{getAlgorithmName()}}
+{\footnotesize\ttfamily \label{class_graph_editor_app_a04d7a5189e7b511b260bf30cbc566815} 
+std\+::string Graph\+Editor\+App\+::get\+Algorithm\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Метод получения названия активного алгоритма. 
+
+\begin{DoxyReturn}{Возвращает}
+строка, в которой записан активный алгоритм
+\end{DoxyReturn}
+Метод для тестов. Возвращает название активного алгоритма из choose\+\_\+algorithm\+\_\+cb \Hypertarget{class_graph_editor_app_ac0d0b0d2e105692e0af8e8d80d1832a2}\index{GraphEditorApp@{GraphEditorApp}!getCenterOfWindow@{getCenterOfWindow}}
+\index{getCenterOfWindow@{getCenterOfWindow}!GraphEditorApp@{GraphEditorApp}}
+\doxysubsubsection{\texorpdfstring{getCenterOfWindow()}{getCenterOfWindow()}}
+{\footnotesize\ttfamily \label{class_graph_editor_app_ac0d0b0d2e105692e0af8e8d80d1832a2} 
+std\+::pair$<$ int, int $>$ Graph\+Editor\+App\+::get\+Center\+Of\+Window (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Метод получения координат центра окна программы. 
+
+\begin{DoxyReturn}{Возвращает}
+std\+::pair \texorpdfstring{$<$}{<}int, int\texorpdfstring{$>$}{>}, в первой переменной которой записана координата оX, во второй -\/ координата оY
+\end{DoxyReturn}
+Метод возвращает координаты центра окна программы. Используется для вызова всех диалогов, так как они запускаются в центре окна программы \Hypertarget{class_graph_editor_app_a861100aa72135b6465e043063c84db3b}\index{GraphEditorApp@{GraphEditorApp}!handling\_new\_weight@{handling\_new\_weight}}
+\index{handling\_new\_weight@{handling\_new\_weight}!GraphEditorApp@{GraphEditorApp}}
+\doxysubsubsection{\texorpdfstring{handling\_new\_weight()}{handling\_new\_weight()}}
+{\footnotesize\ttfamily \label{class_graph_editor_app_a861100aa72135b6465e043063c84db3b} 
+std\+::string Graph\+Editor\+App\+::handling\+\_\+new\+\_\+weight (\begin{DoxyParamCaption}\item[{Glib\+::ustring}]{new\+\_\+weight}{}\end{DoxyParamCaption})}
+
+
+
+Обработка нового введённого веса, проверка на его корректность. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em new\+\_\+weight} & строка, в которой записан новый вес.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Возвращает}
+строка веса после обработки.
+\end{DoxyReturn}
+Метод возвращает пустую строку, если новый вес некорректен -\/ состоит не из цифр или является пустой строкой. В случае успешной проверки на корректность возвращает первоначальную строку, приведённую к типу std\+::string. \Hypertarget{class_graph_editor_app_a29700b7c50919df9aa8b57967f54d711}\index{GraphEditorApp@{GraphEditorApp}!on\_change\_weight@{on\_change\_weight}}
+\index{on\_change\_weight@{on\_change\_weight}!GraphEditorApp@{GraphEditorApp}}
+\doxysubsubsection{\texorpdfstring{on\_change\_weight()}{on\_change\_weight()}}
+{\footnotesize\ttfamily \label{class_graph_editor_app_a29700b7c50919df9aa8b57967f54d711} 
+void Graph\+Editor\+App\+::on\+\_\+change\+\_\+weight (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Метод вызова смены веса. 
+
+Метод подключен к кнопке смены веса, вызывается при ее нажатии \Hypertarget{class_graph_editor_app_a068a6a8ff68b79345899e6ad0831d9e1}\index{GraphEditorApp@{GraphEditorApp}!print\_algorithm@{print\_algorithm}}
+\index{print\_algorithm@{print\_algorithm}!GraphEditorApp@{GraphEditorApp}}
+\doxysubsubsection{\texorpdfstring{print\_algorithm()}{print\_algorithm()}}
+{\footnotesize\ttfamily \label{class_graph_editor_app_a068a6a8ff68b79345899e6ad0831d9e1} 
+void Graph\+Editor\+App\+::print\+\_\+algorithm (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{test\+\_\+input}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
+
+
+
+Метод вызова алгоритма и его печать на ярлыке алгоритма. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em test\+\_\+input} & альтернативный ввод запрашиваемых вершин для алгоритмов. Используется для тестирования метода, поэтому по умолчанию этот параметр равен пустой строке ("{}"{}).\\
+\hline
+\end{DoxyParams}
+Метод подключен к кнопке запуска алгоритма (Run algorithm / Close algorithm), вызывается при ее нажатии. Если распечатка алгоритма неактивна (имя кнопки -\/ Run algorithm), то метод запускает выбранный алгоритм и показывает ярлык с текстом вывода алгоритма. Если распечатка алгоритма активна (имя кнопки -\/ Close algorithm), то метод скрывает ярлык с текстом вывода алгоритма. \Hypertarget{class_graph_editor_app_ae6e09a88077be5d3f9191fc37d6bb239}\index{GraphEditorApp@{GraphEditorApp}!print\_graph\_data@{print\_graph\_data}}
+\index{print\_graph\_data@{print\_graph\_data}!GraphEditorApp@{GraphEditorApp}}
+\doxysubsubsection{\texorpdfstring{print\_graph\_data()}{print\_graph\_data()}}
+{\footnotesize\ttfamily \label{class_graph_editor_app_ae6e09a88077be5d3f9191fc37d6bb239} 
+void Graph\+Editor\+App\+::print\+\_\+graph\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Метод печати данных о графе. 
+
+Метод подключен к кнопке печати графа (Print \doxylink{class_graph}{Graph} / Close printout), вызывается при ее нажатии. Если распечатка графа неактивна (имя кнопки -\/ Print \doxylink{class_graph}{Graph}), то метод показывает ярлык с основными данными графа (матрица и список смежности). Если распечатка графа активна (имя кнопки -\/ Close printout), то метод скрывает ярлык с данными графа \Hypertarget{class_graph_editor_app_a1d06244e22043ef8d430d8e87cbbc8e8}\index{GraphEditorApp@{GraphEditorApp}!setAlgorithmName@{setAlgorithmName}}
+\index{setAlgorithmName@{setAlgorithmName}!GraphEditorApp@{GraphEditorApp}}
+\doxysubsubsection{\texorpdfstring{setAlgorithmName()}{setAlgorithmName()}}
+{\footnotesize\ttfamily \label{class_graph_editor_app_a1d06244e22043ef8d430d8e87cbbc8e8} 
+void Graph\+Editor\+App\+::set\+Algorithm\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{new\+\_\+algorithm}{}\end{DoxyParamCaption})}
+
+
+
+Метод для установки нового алгоритма. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em new\+\_\+algorithm} & строка, в которой записан требуемый алгоритм\\
+\hline
+\end{DoxyParams}
+Метод для тестов. Устанавливает новое выбранное значение в choose\+\_\+algorithm\+\_\+cb. Причём параметр new\+\_\+algorithm должен точно совпадать с одним из существующих в программе алгоритмов 
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Clion\+Projects/\+Graph\+Editor/src/\+Graph\+Editor\+App/\mbox{\hyperlink{_graph_editor_app_8h}{Graph\+Editor\+App.\+h}}\item 
+D\+:/\+Clion\+Projects/\+Graph\+Editor/src/\+Graph\+Editor\+App/\mbox{\hyperlink{_graph_editor_app_8cpp}{Graph\+Editor\+App.\+cpp}}\end{DoxyCompactItemize}
