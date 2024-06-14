@@ -1,5 +1,5 @@
 /**
- * @file PathEntryDialog
+ * @file PathEntryDialog.cpp
  * @brief Реализация методов класса PathEntryDialog.
  *
  * * @authors

@@ -1,6 +1,10 @@
-//
-// Created by Dmitriy on 02.05.2024.
-//
+/**
+ * @file VertexEntryDialog.h
+ * @brief Заголовочный файл класса VertexEntryDialog.
+ *
+ * * @authors
+ * Дмитрий Кулешов
+ */
 
 #ifndef GRAPHEDITOR_VERTEXENTRYDIALOG_H
 #define GRAPHEDITOR_VERTEXENTRYDIALOG_H

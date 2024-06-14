@@ -1,3 +1,11 @@
+/**
+ * @file main.cpp
+ * @brief Главный файл, запускающий работу программы.
+ *
+ * * @authors
+ * Дмитрий Кулешов
+ */
+
 #include "gtkmm.h"
 #include "GraphEditorApp/GraphEditorApp.h"
 
