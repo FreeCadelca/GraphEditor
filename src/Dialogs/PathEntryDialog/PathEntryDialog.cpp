@@ -1,13 +1,21 @@
-//
-// Created by Dmitriy on 06.06.2024.
-//
+/**
+ * @file PathEntryDialog
+ * @brief Реализация методов класса PathEntryDialog.
+ *
+ * * @authors
+ * Дмитрий Кулешов
+ */
 
 #include "PathEntryDialog.h"
 
+/**
+ * @brief Конструктор, вызывающий диалог с центром в указанных координатах
+ *
+ * @param center_x центр диалога по оси оX
+ *
+ * @param center_y центр диалога по оси оY
+ */
 PathEntryDialog::PathEntryDialog(int center_x, int center_y) {
-//    this->lbl_question.set_label("Enter the vertices of the beginning and end of the path");
-//    get_content_area()->pack_start(lbl_question);
-
     this->lbl_left.set_label("From where?");
     this->lbl_right.set_label("Where to?");
 
@@ -32,10 +40,20 @@ PathEntryDialog::PathEntryDialog(int center_x, int center_y) {
     move(center_x - size_x / 2, center_y - size_y / 2);
 }
 
+/**
+ * @brief метод извлечения текста из левого поля ввода
+ *
+ * @return строка из левого поля ввода
+ */
 Glib::ustring PathEntryDialog::get_vertex_from() const {
     return entry1.get_text();
 }
 
+/**
+ * @brief метод извлечения текста из правого поля ввода
+ *
+ * @return строка из правого поля ввода
+ */
 Glib::ustring PathEntryDialog::get_vertex_to() const {
     return entry2.get_text();
 }

@@ -7,10 +7,13 @@
 
 #include <gtkmm.h>
 
+/**
+ * @brief Класс, реализующий диалог для ввода веса
+ */
 class WeightEntryDialog : public Gtk::Dialog {
 private:
-    Gtk::Label lbl;
-    Gtk::Entry entry;
+    Gtk::Label lbl; ///< Ярлык с запросом
+    Gtk::Entry entry; ///< Поле для ввода
 public:
     WeightEntryDialog(int center_x, int center_y);
 

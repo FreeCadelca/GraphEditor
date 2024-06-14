@@ -1,9 +1,20 @@
-//
-// Created by Dmitriy on 02.06.2024.
-//
+/**
+ * @file WeightEntryDialog
+ * @brief Реализация методов класса WeightEntryDialog.
+ *
+ * * @authors
+ * Дмитрий Кулешов
+ */
 
 #include "WeightEntryDialog.h"
 
+/**
+ * @brief Конструктор, вызывающий диалог с центром в указанных координатах
+ *
+ * @param center_x центр диалога по оси оX
+ *
+ * @param center_y центр диалога по оси оY
+ */
 WeightEntryDialog::WeightEntryDialog(int center_x, int center_y) : lbl("Please enter the weight:") {
     get_content_area()->pack_start(lbl);
     this->entry.set_max_length(9);
@@ -17,6 +28,11 @@ WeightEntryDialog::WeightEntryDialog(int center_x, int center_y) : lbl("Please e
     move(center_x - size_x / 2, center_y - size_y / 2);
 }
 
+/**
+ * @brief метод извлечения текста из поля ввода
+ *
+ * @return строка из поля ввода
+ */
 Glib::ustring WeightEntryDialog::get_text() const {
     return entry.get_text();
 }
