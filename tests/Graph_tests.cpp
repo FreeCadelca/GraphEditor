@@ -1,6 +1,5 @@
 #include "gtest/gtest.h"
 #include "../src/Graph/Graph.h"
-#include "gtkmm.h"
 
 class GraphTestSuite : public ::testing::Test {
 protected:

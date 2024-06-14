@@ -935,9 +935,6 @@ void Graph::prim() {
     this->printoutAlgorithm = result.str(); // Сохранение результата в поле класса
 }
 
-
-void Graph::runAlgorithm(const std::string &algorithm, char start_vertex, char end_vertex) {
-//    printf("ran algorithm with st vertex: %c and end vertex: %c\n", start_vertex, end_vertex);
 /**
  * @brief Выполняет указанный алгоритм графа с заданными стартовой и конечной вершинами.
  *
@@ -946,7 +943,7 @@ void Graph::runAlgorithm(const std::string &algorithm, char start_vertex, char e
  * @param end_vertex Конечная вершина для выполнения алгоритма (может не использоваться в некоторых алгоритмах).
  */
 void Graph::runAlgorithm(const std::string& algorithm, char start_vertex, char end_vertex) {
-    printf("ran algorithm with st vertex: %c and end vertex: %c\n", start_vertex, end_vertex);
+//    printf("ran algorithm with st vertex: %c and end vertex: %c\n", start_vertex, end_vertex);
     // Определяем, какой алгоритм выполнить на основе переданного названия
     if (algorithm == "BFS") {
         this->run_bfs(start_vertex);

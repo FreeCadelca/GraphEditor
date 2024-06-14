@@ -1,5 +1,5 @@
-#include "external/googletest-1.14.0/googletest/include/gtest/gtest.h"
-#include "Canvas.h"
+#include "../external/googletest-1.14.0/googletest/include/gtest/gtest.h"
+#include "../src/Canvas/Canvas.h"
 
 class CanvasTestSuite : public ::testing::Test {
 protected:

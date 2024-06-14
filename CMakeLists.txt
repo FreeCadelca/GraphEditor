@@ -49,7 +49,6 @@ target_link_directories(GraphEditor PRIVATE ${GTKMM_LIBRARY_DIRS})
 
 #target_link_libraries(GraphEditor PRIVATE ${GTKMM_LIBRARIES})
 
-# Добавление тестового исполняемого файла
 add_executable(
         GraphTests
         tests/Graph_tests.cpp
@@ -86,12 +85,15 @@ target_include_directories(GraphEditorAppTests PRIVATE ${GTKMM_INCLUDE_DIRS} ${G
 target_link_directories(GraphEditorAppTests PRIVATE ${GTKMM_LIBRARY_DIRS})
 target_link_libraries(GraphEditorAppTests PRIVATE gtest gmock gtest_main ${GTKMM_LIBRARIES})
 
-add_executable(CanvasTests
-        Canvas_tests.cpp
-        Graph.cpp
-        Graph.h
-        Canvas.cpp
-        Color.cpp
+add_executable(
+        CanvasTests
+        tests/Canvas_tests.cpp
+        src/Graph/Graph.cpp
+        src/Graph/Graph.h
+        src/Color/Color.cpp
+        src/Color/Color.h
+        src/Canvas/Canvas.h
+        src/Canvas/Canvas.cpp
 )
 
 target_include_directories(CanvasTests PRIVATE ${GTKMM_INCLUDE_DIRS} ${GOOGLETEST_ROOT}/googletest/include)
