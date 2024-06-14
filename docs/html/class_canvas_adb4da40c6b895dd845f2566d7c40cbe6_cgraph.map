@@ -1,0 +1,5 @@
+<map id="Canvas::update_main_buffer" name="Canvas::update_main_buffer">
+<area shape="rect" id="Node000001" title="Обновляет основной буфер." alt="" coords="5,5,154,46"/>
+<area shape="rect" id="Node000002" href="$class_canvas.html#ae9acb271c74d9be4b9cf424f68c39491" title="Получает контекст рисования для указанной поверхности." alt="" coords="202,13,344,39"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,23,186,23,186,28,154,28"/>
+</map>

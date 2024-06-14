@@ -1,0 +1,10 @@
+<map id="GraphEditorApp::run_error_dialog" name="GraphEditorApp::run_error_dialog">
+<area shape="rect" id="Node000001" title="Метод запуска ошибки с сообщением." alt="" coords="461,39,600,79"/>
+<area shape="rect" id="Node000002" href="$class_graph_editor_app.html#a29700b7c50919df9aa8b57967f54d711" title="Метод вызова смены веса." alt="" coords="272,5,408,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="445,47,407,40,408,35,446,42"/>
+<area shape="rect" id="Node000004" href="$class_graph_editor_app.html#a068a6a8ff68b79345899e6ad0831d9e1" title="Метод вызова алгоритма и его печать на ярлыке алгоритма." alt="" coords="267,71,413,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="446,76,414,81,413,76,445,71"/>
+<area shape="rect" id="Node000003" href="$class_graph_editor_app.html#a27322ef115781978eaa3164956ea6674" title="Конструктор класса Graph. Создаёт окно программы, собирая все объекты из design_new...." alt="" coords="5,46,219,72"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="257,40,205,48,204,43,256,35"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="251,81,208,75,209,70,251,76"/>
+</map>

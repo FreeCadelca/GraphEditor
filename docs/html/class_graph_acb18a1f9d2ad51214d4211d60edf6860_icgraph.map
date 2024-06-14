@@ -1,0 +1,11 @@
+<map id="Graph::prim" name="Graph::prim">
+<area shape="rect" id="Node000001" title="Реализация алгоритма Прима для поиска минимального остовного дерева в графе." alt="" coords="678,31,768,56"/>
+<area shape="rect" id="Node000002" href="$class_graph_test_accessor.html#af885b80af40e1b507efc9864407c980b" title=" " alt="" coords="461,5,630,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="663,38,631,33,631,28,663,32"/>
+<area shape="rect" id="Node000003" href="$class_graph.html#adda7d03cd8f8d6b9d5440f761137e9ea" title="Выполнение указанного алгоритма." alt="" coords="477,55,614,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="663,54,615,61,614,56,663,49"/>
+<area shape="rect" id="Node000004" href="$class_graph_editor_app.html#a068a6a8ff68b79345899e6ad0831d9e1" title="Метод вызова алгоритма и его печать на ярлыке алгоритма." alt="" coords="267,47,413,88"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="462,70,413,70,413,65,462,65"/>
+<area shape="rect" id="Node000005" href="$class_graph_editor_app.html#a27322ef115781978eaa3164956ea6674" title="Конструктор класса Graph. Создаёт окно программы, собирая все объекты из design_new...." alt="" coords="5,55,219,80"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="251,70,219,70,219,65,251,65"/>
+</map>

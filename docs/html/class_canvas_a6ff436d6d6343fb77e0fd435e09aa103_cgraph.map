@@ -1,0 +1,5 @@
+<map id="Canvas::clear_screen" name="Canvas::clear_screen">
+<area shape="rect" id="Node000001" title="Очищает экран. Необходима при выполнении анимации нового алгоритма после выполнения другого алгоритма..." alt="" coords="5,5,154,31"/>
+<area shape="rect" id="Node000002" href="$class_canvas.html#ae9acb271c74d9be4b9cf424f68c39491" title="Получает контекст рисования для указанной поверхности." alt="" coords="202,5,344,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,16,186,16,186,21,154,21"/>
+</map>

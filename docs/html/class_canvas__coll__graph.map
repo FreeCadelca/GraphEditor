@@ -1,0 +1,8 @@
+<map id="Canvas" name="Canvas">
+<area shape="rect" id="Node000001" title="Класс, реализующий графическое представление графа и анимации алгоритмов." alt="" coords="91,94,157,120"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="174,98,184,107,175,116,158,118,157,112,173,111,179,107,171,102"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,131,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,43,119,92,114,95,82,46"/>
+<area shape="rect" id="Node000003" href="$class_color.html" title="Класс, реализующий цвета (RGBa)." alt="" coords="155,5,208,31"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="167,45,134,95,130,92,163,42"/>
+</map>

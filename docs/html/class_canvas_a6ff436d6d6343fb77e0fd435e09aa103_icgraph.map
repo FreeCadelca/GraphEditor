@@ -1,0 +1,9 @@
+<map id="Canvas::clear_screen" name="Canvas::clear_screen">
+<area shape="rect" id="Node000001" title="Очищает экран. Необходима при выполнении анимации нового алгоритма после выполнения другого алгоритма..." alt="" coords="721,13,870,39"/>
+<area shape="rect" id="Node000002" href="$class_canvas.html#aef68a810008686785fd8178ceeed10f4" title="Очищает экран и восстанавливает граф. Необходима при выполнении анимации нового алгоритма после выпол..." alt="" coords="461,5,673,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="706,28,674,28,674,23,706,23"/>
+<area shape="rect" id="Node000003" href="$class_graph_editor_app.html#a068a6a8ff68b79345899e6ad0831d9e1" title="Метод вызова алгоритма и его печать на ярлыке алгоритма." alt="" coords="267,5,413,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="446,28,413,28,413,23,446,23"/>
+<area shape="rect" id="Node000004" href="$class_graph_editor_app.html#a27322ef115781978eaa3164956ea6674" title="Конструктор класса Graph. Создаёт окно программы, собирая все объекты из design_new...." alt="" coords="5,13,219,39"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="251,28,219,28,219,23,251,23"/>
+</map>

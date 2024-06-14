@@ -1,0 +1,5 @@
+<map id="Graph::getInstance" name="Graph::getInstance">
+<area shape="rect" id="Node000001" title="Получение единственного экземпляра класса Graph." alt="" coords="5,5,138,31"/>
+<area shape="rect" id="Node000002" href="$class_graph.html#ae4c72b8ac4d693c49800a4c7e273654f" title="Приватный конструктор для реализации singleton." alt="" coords="186,5,285,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,16,170,16,170,21,138,21"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="GraphTestAccessor::union_sets" name="GraphTestAccessor::union_sets">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,22,150,63"/>
+<area shape="rect" id="Node000002" href="$class_graph.html#a7a5b0e175d30fd3d24ff37773d12b077" title="Вспомогательная функция для объединения двух деревьев в структуре данных &quot;дискретные множества&quot;." alt="" coords="198,29,325,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="150,40,182,40,182,45,150,45"/>
+<area shape="rect" id="Node000003" href="$class_graph.html#ad3da3461fb89b317e0385aed2bb6cfda" title="Вспомогательная функция для поиска корневой вершины дерева в структуре данных &quot;дискретные множества&quot;." alt="" coords="373,29,458,55"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="325,40,358,40,358,45,325,45"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="389,30,384,21,387,11,398,5,416,3,435,5,445,12,442,16,433,10,416,8,400,10,391,15,389,20,394,28"/>
+</map>

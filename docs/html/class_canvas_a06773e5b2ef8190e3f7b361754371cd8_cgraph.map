@@ -1,0 +1,11 @@
+<map id="Canvas::drawing_arrow" name="Canvas::drawing_arrow">
+<area shape="rect" id="Node000001" title="Рисует стрелку вместе с ее весом на холсте." alt="" coords="5,55,164,80"/>
+<area shape="rect" id="Node000002" href="$class_canvas.html#afd8e4fde77f2d03f89765a5318fc20e5" title="Вычисляет скорректированные координаты для рисования стрелки." alt="" coords="212,5,442,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,51,245,32,246,37,152,57"/>
+<area shape="rect" id="Node000003" href="$class_canvas.html#ae9acb271c74d9be4b9cf424f68c39491" title="Получает контекст рисования для указанной поверхности." alt="" coords="256,55,398,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="164,65,240,65,240,70,164,70"/>
+<area shape="rect" id="Node000004" href="$class_graph.html#ab3a1b6c8ee07002735e989f7abaa8106" title="Получение единственного экземпляра класса Graph." alt="" coords="261,104,393,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="152,78,246,98,245,103,151,84"/>
+<area shape="rect" id="Node000005" href="$class_graph.html#ae4c72b8ac4d693c49800a4c7e273654f" title="Приватный конструктор для реализации singleton." alt="" coords="490,104,589,130"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="394,114,475,114,475,120,394,120"/>
+</map>
