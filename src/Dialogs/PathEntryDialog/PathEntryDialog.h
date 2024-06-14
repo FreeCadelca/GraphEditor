@@ -1,6 +1,10 @@
-//
-// Created by Dmitriy on 06.06.2024.
-//
+/**
+ * @file PathEntryDialog.h
+ * @brief Заголовочный файл класса PathEntryDialog.
+ *
+ * * @authors
+ * Дмитрий Кулешов
+ */
 
 #ifndef GRAPHEDITOR_PATHENTRYDIALOG_H
 #define GRAPHEDITOR_PATHENTRYDIALOG_H

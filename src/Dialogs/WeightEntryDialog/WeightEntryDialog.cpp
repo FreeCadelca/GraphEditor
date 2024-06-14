@@ -1,5 +1,5 @@
 /**
- * @file WeightEntryDialog
+ * @file WeightEntryDialog.cpp
  * @brief Реализация методов класса WeightEntryDialog.
  *
  * * @authors

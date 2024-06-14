@@ -1,6 +1,10 @@
-//
-// Created by Dmitriy on 19.04.2024.
-//
+/**
+ * @file GraphEditorApp.h
+ * @brief Заголовочный файл класса GraphEditorApp.
+ *
+ * * @authors
+ * Дмитрий Кулешов
+ */
 
 #ifndef GRAPHEDITOR_GRAPHEDITORAPP_H
 #define GRAPHEDITOR_GRAPHEDITORAPP_H

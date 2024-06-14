@@ -1,5 +1,5 @@
 /**
- * @file VertexEntryDialog
+ * @file VertexEntryDialog.cpp
  * @brief Реализация методов класса VertexEntryDialog.
  *
  * * @authors

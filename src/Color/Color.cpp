@@ -1,6 +1,6 @@
 /**
  * @file Color.cpp
- * @brief Реализация методов Color.
+ * @brief Реализация методов класса Color.
  *
  * * @authors
  * Дмитрий Кулешов

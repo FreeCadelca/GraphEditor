@@ -1,6 +1,10 @@
-//
-// Created by Dmitriy on 01.05.2024.
-//
+/**
+ * @file Color.h
+ * @brief Заголовочный файл класса Color.
+ *
+ * * @authors
+ * Дмитрий Кулешов
+ */
 
 #ifndef GRAPHEDITOR_COLOR_H
 #define GRAPHEDITOR_COLOR_H

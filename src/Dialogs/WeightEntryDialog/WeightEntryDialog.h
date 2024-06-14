@@ -1,6 +1,10 @@
-//
-// Created by Dmitriy on 02.06.2024.
-//
+/**
+ * @file WeightEntryDialog.h
+ * @brief Заголовочный файл класса WeightEntryDialog.
+ *
+ * * @authors
+ * Дмитрий Кулешов
+ */
 
 #ifndef GRAPHEDITOR_WEIGHTENTRYDIALOG_H
 #define GRAPHEDITOR_WEIGHTENTRYDIALOG_H
