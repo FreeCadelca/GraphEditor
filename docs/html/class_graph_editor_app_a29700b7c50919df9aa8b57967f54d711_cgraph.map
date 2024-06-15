@@ -1,0 +1,16 @@
+<map id="GraphEditorApp::on_change_weight" name="GraphEditorApp::on_change_weight">
+<area shape="rect" id="Node000001" title="Метод вызова смены веса." alt="" coords="5,113,141,154"/>
+<area shape="rect" id="Node000002" href="$class_weight_entry_dialog.html#a1d0cdf056247bfa0ed1e0dfc9ce6309a" title="метод извлечения текста из поля ввода" alt="" coords="205,5,342,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,111,141,83,187,55,197,50,200,55,190,60,144,87,103,115"/>
+<area shape="rect" id="Node000003" href="$class_graph_editor_app.html#ac0d0b0d2e105692e0af8e8d80d1832a2" title="Метод получения координат центра окна программы." alt="" coords="406,177,584,218"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,133,244,141,358,156,416,170,415,175,358,162,244,146,141,139"/>
+<area shape="rect" id="Node000004" href="$class_graph.html#ab3a1b6c8ee07002735e989f7abaa8106" title="Получение единственного экземпляра класса Graph." alt="" coords="207,70,340,96"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="141,114,204,98,206,103,142,119"/>
+<area shape="rect" id="Node000006" href="$class_graph_editor_app.html#a861100aa72135b6465e043063c84db3b" title="Обработка нового введённого веса, проверка на его корректность." alt="" coords="189,171,358,211"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="142,151,186,163,184,168,141,156"/>
+<area shape="rect" id="Node000007" href="$class_graph_editor_app.html#ae1ab6186138d28dced627ab1ab3878e3" title="Метод запуска ошибки с сообщением." alt="" coords="204,236,343,277"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="99,153,140,187,190,221,201,227,199,231,187,225,137,191,95,157"/>
+<area shape="rect" id="Node000005" href="$class_graph.html#ae4c72b8ac4d693c49800a4c7e273654f" title="Приватный конструктор для реализации singleton." alt="" coords="446,70,545,96"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="340,80,430,80,430,86,340,86"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="343,235,400,220,402,225,344,241"/>
+</map>

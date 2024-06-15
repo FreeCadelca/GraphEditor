@@ -1,0 +1,5 @@
+<map id="GraphEditorApp::run_error_dialog" name="GraphEditorApp::run_error_dialog">
+<area shape="rect" id="Node000001" title="Метод запуска ошибки с сообщением." alt="" coords="5,5,145,46"/>
+<area shape="rect" id="Node000002" href="$class_graph_editor_app.html#ac0d0b0d2e105692e0af8e8d80d1832a2" title="Метод получения координат центра окна программы." alt="" coords="193,5,371,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,23,177,23,177,28,145,28"/>
+</map>

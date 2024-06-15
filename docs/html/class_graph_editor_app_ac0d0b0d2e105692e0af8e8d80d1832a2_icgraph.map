@@ -1,0 +1,14 @@
+<map id="GraphEditorApp::getCenterOfWindow" name="GraphEditorApp::getCenterOfWindow">
+<area shape="rect" id="Node000001" title="Метод получения координат центра окна программы." alt="" coords="648,37,827,78"/>
+<area shape="rect" id="Node000002" href="$class_graph_editor_app.html#a29700b7c50919df9aa8b57967f54d711" title="Метод вызова смены веса." alt="" coords="272,5,408,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="646,36,600,28,499,23,408,24,408,19,500,17,601,23,646,31"/>
+<area shape="rect" id="Node000004" href="$class_graph_editor_app.html#a068a6a8ff68b79345899e6ad0831d9e1" title="Метод вызова алгоритма и его печать на ярлыке алгоритма." alt="" coords="267,71,413,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="646,85,601,92,503,98,413,98,414,92,503,93,600,87,646,79"/>
+<area shape="rect" id="Node000005" href="$class_graph_editor_app.html#ae1ab6186138d28dced627ab1ab3878e3" title="Метод запуска ошибки с сообщением." alt="" coords="461,37,600,78"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="633,60,601,60,601,55,633,55"/>
+<area shape="rect" id="Node000003" href="$class_graph_editor_app.html#a27322ef115781978eaa3164956ea6674" title="Конструктор класса Graph. Создаёт окно программы, собирая все объекты из design_new...." alt="" coords="5,46,219,72"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="257,40,205,48,204,43,256,35"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="251,81,208,75,209,70,251,76"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="445,46,407,40,408,34,446,41"/>
+<area shape="poly" id="edge7_Node000005_Node000004" title=" " alt="" coords="446,75,414,81,413,76,445,70"/>
+</map>

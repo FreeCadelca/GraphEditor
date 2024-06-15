@@ -1,0 +1,17 @@
+# Doxyfile 1.9.1
+
+PROJECT_NAME           = "GraphEditor"
+OUTPUT_DIRECTORY       = ./docs
+INPUT                  = src mainpage.dox
+RECURSIVE              = YES
+FILE_PATTERNS          = *.cpp *.h
+GENERATE_HTML            = YES
+WARNINGS               = YES
+QUIET                  = NO
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+EXTRACT_ALL = YES
+EXTRACT_PRIVATE = YES
+EXTRACT_STATIC  = YES
+LANGUAGE               = Russian
+HTML_EXTRA_STYLESHEET  = custom_styles.css

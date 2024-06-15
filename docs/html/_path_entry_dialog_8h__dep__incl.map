@@ -1,0 +1,11 @@
+<map id="src/Dialogs/PathEntryDialog/PathEntryDialog.h" name="src/Dialogs/PathEntryDialog/PathEntryDialog.h">
+<area shape="rect" id="Node000001" title="Заголовочный файл класса PathEntryDialog." alt="" coords="97,5,284,46"/>
+<area shape="rect" id="Node000002" href="$_path_entry_dialog_8cpp.html" title="Реализация методов класса PathEntryDialog." alt="" coords="5,94,192,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,59,121,96,117,92,157,55"/>
+<area shape="rect" id="Node000003" href="$_graph_editor_app_8h.html" title="Заголовочный файл класса GraphEditorApp." alt="" coords="216,94,352,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="225,55,265,92,261,96,221,59"/>
+<area shape="rect" id="Node000004" href="$_graph_editor_app_8cpp.html" title="Реализация методов класса GraphEditorApp." alt="" coords="141,183,283,223"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="260,149,230,184,226,181,256,145"/>
+<area shape="rect" id="Node000005" href="$main_8cpp.html" title="Главный файл, запускающий работу программы." alt="" coords="308,190,404,216"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="312,145,348,188,344,192,308,148"/>
+</map>

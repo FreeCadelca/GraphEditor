@@ -1,0 +1,100 @@
+<map id="Canvas::get_context" name="Canvas::get_context">
+<area shape="rect" id="Node000001" title="Получает контекст рисования для указанной поверхности." alt="" coords="2333,238,2475,264"/>
+<area shape="rect" id="Node000002" href="$class_canvas.html#a6ff436d6d6343fb77e0fd435e09aa103" title="Очищает экран. Необходима при выполнении анимации нового алгоритма после выполнения другого алгоритма..." alt="" coords="1926,21,2075,47"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="2390,225,2373,192,2350,154,2320,116,2284,85,2233,61,2178,45,2124,37,2075,34,2075,29,2125,32,2180,40,2235,56,2286,81,2324,112,2355,151,2378,189,2394,223"/>
+<area shape="rect" id="Node000006" href="$class_canvas.html#a1de3e7accb9c531f4b71461b5e7dc7b6" title="Очищает временный буфер, заполняя его белым цветом." alt="" coords="2135,95,2273,135"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="2378,229,2336,189,2284,149,2263,138,2265,133,2286,145,2340,185,2382,225"/>
+<area shape="rect" id="Node000027" href="$class_canvas.html#a534629c7e50c03f31c83baf06d06b975" title="Обрабатывает нажатие кнопки мыши." alt="" coords="1240,321,1414,347"/>
+<area shape="poly" id="edge54_Node000001_Node000027" title=" " alt="" coords="2371,275,2331,296,2286,314,2208,332,2145,339,2002,339,1771,339,1414,337,1414,332,1771,334,2002,334,2145,334,2207,327,2284,308,2329,291,2368,270"/>
+<area shape="rect" id="Node000029" href="$class_canvas.html#a3743889533ff791eb307f9be0cc13176" title="Рисует цветную стрелку на холсте. Необходима для анимации алгоритмов." alt="" coords="1467,424,1618,465"/>
+<area shape="poly" id="edge42_Node000001_Node000029" title=" " alt="" coords="2393,280,2377,311,2353,347,2323,381,2286,408,2200,445,2109,469,2015,483,1922,488,1833,487,1751,481,1618,463,1619,457,1751,476,1833,482,1922,483,2015,478,2108,464,2198,440,2284,403,2320,377,2349,344,2372,308,2389,277"/>
+<area shape="rect" id="Node000031" href="$class_canvas.html#a06773e5b2ef8190e3f7b361754371cd8" title="Рисует стрелку вместе с ее весом на холсте." alt="" coords="2125,209,2283,235"/>
+<area shape="poly" id="edge48_Node000001_Node000031" title=" " alt="" coords="2317,241,2283,236,2284,231,2318,236"/>
+<area shape="rect" id="Node000032" href="$class_canvas.html#a2e754e59308b6b6c354cdc0495a7e048" title="Рисует вершину на холсте." alt="" coords="2123,160,2285,185"/>
+<area shape="poly" id="edge51_Node000001_Node000032" title=" " alt="" coords="2362,233,2284,199,2253,188,2255,183,2286,194,2365,229"/>
+<area shape="rect" id="Node000033" href="$class_canvas.html#ade59b493b47014109e25d5917f6d5f94" title="Обводит вершину указанным цветом. Необходима для анимации алгоритмов." alt="" coords="865,374,1020,400"/>
+<area shape="poly" id="edge55_Node000001_Node000033" title=" " alt="" coords="2382,277,2340,313,2314,331,2286,345,2210,374,2148,387,2083,390,2002,390,1326,390,1020,390,1020,384,1326,384,2002,384,2083,385,2147,381,2209,369,2284,341,2311,326,2337,309,2378,272"/>
+<area shape="rect" id="Node000034" href="$class_canvas.html#adb4da40c6b895dd845f2566d7c40cbe6" title="Обновляет основной буфер." alt="" coords="2130,259,2278,299"/>
+<area shape="poly" id="edge62_Node000001_Node000034" title=" " alt="" coords="2318,266,2279,271,2278,266,2317,260"/>
+<area shape="rect" id="Node000003" href="$class_canvas.html#aef68a810008686785fd8178ceeed10f4" title="Очищает экран и восстанавливает граф. Необходима при выполнении анимации нового алгоритма после выпол..." alt="" coords="1666,5,1878,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1911,33,1879,32,1879,27,1911,28"/>
+<area shape="rect" id="Node000004" href="$class_graph_editor_app.html#a068a6a8ff68b79345899e6ad0831d9e1" title="Метод вызова алгоритма и его печать на ярлыке алгоритма." alt="" coords="267,104,413,145"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1650,30,1328,32,746,32,648,40,551,59,465,83,395,106,394,101,463,78,550,54,647,35,746,27,1328,27,1650,25"/>
+<area shape="rect" id="Node000005" href="$class_graph_editor_app.html#a27322ef115781978eaa3164956ea6674" title="Конструктор класса Graph. Создаёт окно программы, собирая все объекты из design_new...." alt="" coords="5,141,219,167"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="251,138,217,143,216,138,251,133"/>
+<area shape="rect" id="Node000007" href="$class_canvas.html#ae23503a0c329f7adabb36a0314d4cb01" title="Перерисовывает граф. Необходима при выполнении анимации нового алгоритма после выполнения другого алг..." alt="" coords="1926,121,2075,147"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="2119,125,2075,130,2075,124,2119,120"/>
+<area shape="poly" id="edge41_Node000007_Node000003" title=" " alt="" coords="1964,115,1877,67,1834,49,1836,44,1879,62,1967,110"/>
+<area shape="rect" id="Node000008" href="$class_graph.html#a37366bd54911b7f2c1d36454676100eb" title="Добавление ребра в граф." alt="" coords="1715,121,1830,147"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="1911,136,1830,136,1830,131,1911,131"/>
+<area shape="rect" id="Node000013" href="$class_graph.html#a18a8b6f93b9324aebbb91c717d4e8a2c" title="Добавление вершины в граф." alt="" coords="686,68,809,93"/>
+<area shape="poly" id="edge40_Node000007_Node000013" title=" " alt="" coords="1928,120,1878,111,1711,90,1544,86,1126,86,810,84,810,78,1126,80,1544,80,1712,85,1879,106,1929,115"/>
+<area shape="rect" id="Node000009" href="$class_canvas.html#a38274033e8a3600db480cda6417ebd1c" title="Рисует элементы на холсте, используя необходимые функции рисования." alt="" coords="1483,222,1602,248"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="1705,154,1667,168,1611,196,1566,224,1563,219,1609,192,1665,163,1704,149"/>
+<area shape="rect" id="Node000010" href="$class_canvas.html#a03ec6bd2744a5ad30faadd4ed2cd0690" title="Обрабатывает движение мыши." alt="" coords="1240,222,1414,248"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="1467,238,1414,238,1414,232,1467,232"/>
+<area shape="poly" id="edge36_Node000009_Node000027" title=" " alt="" coords="1512,259,1469,287,1420,312,1389,323,1388,318,1418,307,1467,282,1509,255"/>
+<area shape="rect" id="Node000028" href="$class_canvas.html#a4d2a5e1b773c2b5b81b7e9805a03a7a5" title="Обрабатывает отпускание кнопки мыши." alt="" coords="1235,272,1419,297"/>
+<area shape="poly" id="edge38_Node000009_Node000028" title=" " alt="" coords="1469,255,1387,273,1386,268,1467,249"/>
+<area shape="rect" id="Node000011" href="$class_canvas.html#a5fce53f080ad6540094901f9768805a8" title="Конструктор для класса Canvas, реализующий графическое представление графа и анимации алгоритмов." alt="" coords="1068,272,1187,297"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="1258,255,1183,273,1182,268,1256,250"/>
+<area shape="rect" id="Node000012" href="$class_canvas.html#a9017480b03d7ec6fff264ea26a3c4249" title="Получает экземпляр синглтона класса Canvas." alt="" coords="871,272,1014,297"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="1052,287,1014,287,1014,282,1052,282"/>
+<area shape="poly" id="edge29_Node000012_Node000004" title=" " alt="" coords="921,261,878,210,848,185,816,165,764,146,711,132,656,122,601,116,499,114,414,118,413,113,499,108,602,111,657,117,712,126,766,141,818,161,851,181,881,206,926,257"/>
+<area shape="poly" id="edge22_Node000012_Node000005" title=" " alt="" coords="896,268,816,240,655,205,492,182,342,167,219,160,219,154,342,162,492,176,656,200,817,235,898,263"/>
+<area shape="poly" id="edge12_Node000012_Node000008" title=" " alt="" coords="1004,264,1111,235,1235,207,1369,183,1503,163,1714,137,1715,142,1503,168,1370,188,1236,212,1112,241,1005,269"/>
+<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="921,260,815,114,785,96,787,92,818,110,925,257"/>
+<area shape="rect" id="Node000014" href="$class_graph.html#a601f5935c1e655b57f8376b36884cdcb" title="Запуск алгоритма Беллмана&#45;Форда для поиска кратчайших путей в графе." alt="" coords="678,448,817,473"/>
+<area shape="poly" id="edge15_Node000012_Node000014" title=" " alt="" coords="917,310,867,363,853,384,845,403,836,420,818,438,800,449,798,445,815,434,832,417,841,400,849,382,863,360,913,306"/>
+<area shape="rect" id="Node000017" href="$class_graph.html#afdd9e0ad6a6062af366e5fd2a1b20402" title="Запуск алгоритма Дейкстры для поиска кратчайшего пути в графе." alt="" coords="694,497,801,523"/>
+<area shape="poly" id="edge19_Node000012_Node000017" title=" " alt="" coords="915,309,890,334,867,363,852,397,847,427,840,457,832,472,818,488,803,499,800,494,815,484,827,469,835,455,842,426,847,395,862,360,886,330,911,306"/>
+<area shape="rect" id="Node000019" href="$class_graph.html#a1de36bcb031663da79fc00f5aa0eaede" title="Реализация алгоритма Краскала для поиска минимального остовного дерева в графе." alt="" coords="694,349,801,375"/>
+<area shape="poly" id="edge23_Node000012_Node000019" title=" " alt="" coords="898,306,818,340,789,351,787,346,816,335,896,301"/>
+<area shape="rect" id="Node000021" href="$class_graph.html#acb18a1f9d2ad51214d4211d60edf6860" title="Реализация алгоритма Прима для поиска минимального остовного дерева в графе." alt="" coords="703,398,792,424"/>
+<area shape="poly" id="edge26_Node000012_Node000021" title=" " alt="" coords="919,310,874,350,818,389,794,401,791,396,815,385,871,346,916,306"/>
+<area shape="rect" id="Node000023" href="$class_graph.html#aed06ed279b3734d37dbcff5430ea36d1" title="Запуск алгоритма обхода графа в ширину (BFS) с заданной стартовой вершины." alt="" coords="694,300,801,325"/>
+<area shape="poly" id="edge30_Node000012_Node000023" title=" " alt="" coords="856,299,802,307,801,302,855,294"/>
+<area shape="rect" id="Node000025" href="$class_graph.html#a643449e5fcf9b44db0fa375c5f3fe27a" title="Запуск алгоритма обхода графа в глубину (DFS) с заданной стартовой вершины." alt="" coords="694,250,801,276"/>
+<area shape="poly" id="edge33_Node000012_Node000025" title=" " alt="" coords="855,277,802,272,802,266,856,272"/>
+<area shape="poly" id="edge14_Node000013_Node000009" title=" " alt="" coords="825,92,1419,207,1483,220,1482,225,1418,212,824,97"/>
+<area shape="rect" id="Node000015" href="$class_graph_test_accessor.html#a5ef1b8f69731cea903c2446211a0a688" title=" " alt="" coords="474,513,618,554"/>
+<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="694,481,679,487,603,515,601,510,677,482,693,476"/>
+<area shape="rect" id="Node000016" href="$class_graph.html#adda7d03cd8f8d6b9d5440f761137e9ea" title="Выполнение указанного алгоритма." alt="" coords="477,414,614,440"/>
+<area shape="poly" id="edge17_Node000014_Node000016" title=" " alt="" coords="663,449,614,441,615,436,664,444"/>
+<area shape="poly" id="edge18_Node000016_Node000004" title=" " alt="" coords="465,408,459,404,431,374,408,340,389,304,373,267,352,198,342,146,347,145,357,196,378,265,394,302,413,337,435,371,463,400,468,404"/>
+<area shape="poly" id="edge21_Node000017_Node000016" title=" " alt="" coords="687,493,677,488,653,470,629,453,603,443,605,438,632,449,656,466,680,483,689,488"/>
+<area shape="rect" id="Node000018" href="$class_graph_test_accessor.html#a8002311e0881576f7d6cd81d89ed4fc4" title=" " alt="" coords="474,579,618,619"/>
+<area shape="poly" id="edge20_Node000017_Node000018" title=" " alt="" coords="707,532,631,568,602,580,600,576,629,563,705,527"/>
+<area shape="poly" id="edge25_Node000019_Node000016" title=" " alt="" coords="696,382,631,404,593,416,592,411,630,399,694,377"/>
+<area shape="rect" id="Node000020" href="$class_graph_test_accessor.html#abf2c2a2df44f0df985abfebc0c8250c9" title=" " alt="" coords="474,349,618,390"/>
+<area shape="poly" id="edge24_Node000019_Node000020" title=" " alt="" coords="679,367,619,369,618,364,679,362"/>
+<area shape="poly" id="edge28_Node000021_Node000016" title=" " alt="" coords="688,418,615,424,615,419,687,413"/>
+<area shape="rect" id="Node000022" href="$class_graph_test_accessor.html#af885b80af40e1b507efc9864407c980b" title=" " alt="" coords="461,464,630,489"/>
+<area shape="poly" id="edge27_Node000021_Node000022" title=" " alt="" coords="695,432,679,438,631,455,596,465,595,460,629,450,677,432,693,427"/>
+<area shape="poly" id="edge32_Node000023_Node000016" title=" " alt="" coords="685,335,680,338,665,354,657,370,648,387,632,404,609,416,607,411,629,400,644,384,652,368,661,351,677,334,682,330"/>
+<area shape="rect" id="Node000024" href="$class_graph_test_accessor.html#a2f8d25fe5c8062214677b687094f4858" title=" " alt="" coords="474,284,618,325"/>
+<area shape="poly" id="edge31_Node000023_Node000024" title=" " alt="" coords="678,312,618,310,619,305,678,307"/>
+<area shape="poly" id="edge35_Node000025_Node000016" title=" " alt="" coords="683,287,680,289,669,303,662,317,657,345,652,374,645,389,632,404,613,416,611,411,629,400,640,386,647,373,652,344,657,315,664,300,676,285,679,283"/>
+<area shape="rect" id="Node000026" href="$class_graph_test_accessor.html#a7fbe64b24e6cc2542c19c91b62e9cad1" title=" " alt="" coords="474,219,618,259"/>
+<area shape="poly" id="edge34_Node000025_Node000026" title=" " alt="" coords="678,257,618,250,619,245,679,252"/>
+<area shape="poly" id="edge37_Node000027_Node000011" title=" " alt="" coords="1256,319,1182,300,1183,295,1258,314"/>
+<area shape="poly" id="edge39_Node000028_Node000011" title=" " alt="" coords="1220,287,1187,287,1187,282,1220,282"/>
+<area shape="rect" id="Node000030" href="$class_canvas.html#a2593278c8870c911257c2b001b1e5b0e" title="Перерисовывает ребро между двумя вершинами указанным цветом. Необходима для анимации алгоритмов." alt="" coords="868,432,1017,457"/>
+<area shape="poly" id="edge43_Node000029_Node000030" title=" " alt="" coords="1451,447,1017,447,1017,442,1451,442"/>
+<area shape="poly" id="edge44_Node000030_Node000014" title=" " alt="" coords="853,454,817,457,817,452,852,449"/>
+<area shape="poly" id="edge45_Node000030_Node000017" title=" " alt="" coords="888,465,789,499,787,494,886,460"/>
+<area shape="poly" id="edge46_Node000030_Node000019" title=" " alt="" coords="892,428,863,415,816,388,789,378,791,373,818,383,866,410,894,423"/>
+<area shape="poly" id="edge47_Node000030_Node000021" title=" " alt="" coords="852,432,792,421,793,416,853,426"/>
+<area shape="poly" id="edge50_Node000031_Node000007" title=" " alt="" coords="2137,206,2122,200,2068,174,2023,149,2025,145,2070,170,2124,195,2139,201"/>
+<area shape="poly" id="edge49_Node000031_Node000009" title=" " alt="" coords="2109,226,1602,236,1602,231,2109,221"/>
+<area shape="poly" id="edge53_Node000032_Node000007" title=" " alt="" coords="2118,159,2071,150,2072,145,2119,153"/>
+<area shape="poly" id="edge52_Node000032_Node000009" title=" " alt="" coords="2107,179,1904,191,1666,215,1603,225,1602,220,1666,210,1904,186,2107,174"/>
+<area shape="poly" id="edge56_Node000033_Node000014" title=" " alt="" coords="896,408,818,439,789,449,787,444,816,434,894,403"/>
+<area shape="poly" id="edge57_Node000033_Node000017" title=" " alt="" coords="885,409,866,421,851,437,843,454,835,471,818,488,799,499,797,494,815,484,830,468,839,451,847,434,863,417,882,405"/>
+<area shape="poly" id="edge58_Node000033_Node000019" title=" " alt="" coords="849,378,801,371,801,366,850,372"/>
+<area shape="poly" id="edge59_Node000033_Node000021" title=" " alt="" coords="850,401,793,408,792,403,849,396"/>
+<area shape="poly" id="edge60_Node000033_Node000023" title=" " alt="" coords="895,370,816,339,787,328,789,323,818,334,897,365"/>
+<area shape="poly" id="edge61_Node000033_Node000025" title=" " alt="" coords="915,365,870,327,815,289,792,279,795,274,818,285,873,323,918,361"/>
+<area shape="poly" id="edge64_Node000034_Node000007" title=" " alt="" coords="2129,254,2121,249,2087,224,2056,197,2011,149,2015,145,2060,193,2091,220,2124,245,2131,249"/>
+<area shape="poly" id="edge63_Node000034_Node000009" title=" " alt="" coords="2114,276,1602,242,1603,236,2114,270"/>
+</map>

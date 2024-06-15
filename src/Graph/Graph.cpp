@@ -703,6 +703,10 @@ void Graph::bellman_ford(char start_vertex, char end_vertex) {
  * @see union()
  */
 char Graph::find(std::map<char, char>& parent, char vertex) {
+    // Проверка, существует ли вершина в карте
+    if (parent.find(vertex) == parent.end()) {
+        throw std::invalid_argument("Vertex not found in parent map");
+    }
     // Если текущая вершина не является корнем, выполняем поиск рекурсивно
     if (parent[vertex] != vertex) {
         // Применяем сжатие пути для оптимизации: делаем родителем вершины корень её поддерева

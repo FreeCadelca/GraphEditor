@@ -1,0 +1,119 @@
+\doxysection{Graph\+::Edge Struct Reference}
+\hypertarget{struct_graph_1_1_edge}{}\label{struct_graph_1_1_edge}\index{Graph::Edge@{Graph::Edge}}
+
+
+Структура для представления ребра.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_graph_1_1_edge_a3c443ac20be467fce9a69f67de9c76eb}{Edge}} (char from, char to, int w)
+\begin{DoxyCompactList}\small\item\em Конструктор структуры \doxylink{struct_graph_1_1_edge}{Edge}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{struct_graph_1_1_edge_a5aa638c8f76426279f97cb7e98df2015}{operator$>$}} (const \mbox{\hyperlink{struct_graph_1_1_edge}{Edge}} \&other) const
+\item 
+bool \mbox{\hyperlink{struct_graph_1_1_edge_ab3ef233f76bfbe50e179ad7871d0856d}{operator$<$}} (const \mbox{\hyperlink{struct_graph_1_1_edge}{Edge}} \&other) const
+\item 
+bool \mbox{\hyperlink{struct_graph_1_1_edge_a33c84a26a065ce4da7f3ac0f5c416a87}{operator==}} (const \mbox{\hyperlink{struct_graph_1_1_edge}{Edge}} \&other) const
+\item 
+bool \mbox{\hyperlink{struct_graph_1_1_edge_a0c11a590028de1328eeea94e772f4987}{operator!=}} (const \mbox{\hyperlink{struct_graph_1_1_edge}{Edge}} \&other) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{struct_graph_1_1_edge_a8ab52e344bc9a6b28c79d7ed0bcb368b}{v\+\_\+from}}
+\begin{DoxyCompactList}\small\item\em Вершина, из которой исходит ребро \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{struct_graph_1_1_edge_a52b32552e782050aff035839baecec4a}{v\+\_\+to}}
+\begin{DoxyCompactList}\small\item\em Вершина, в которую входит ребро \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{struct_graph_1_1_edge_af90c3d708007073e0fcd9280d9d53b17}{weight}}
+\begin{DoxyCompactList}\small\item\em Вес ребра \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Структура для представления ребра. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{struct_graph_1_1_edge_a3c443ac20be467fce9a69f67de9c76eb}\index{Graph::Edge@{Graph::Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!Graph::Edge@{Graph::Edge}}
+\doxysubsubsection{\texorpdfstring{Edge()}{Edge()}}
+{\footnotesize\ttfamily \label{struct_graph_1_1_edge_a3c443ac20be467fce9a69f67de9c76eb} 
+Graph\+::\+Edge\+::\+Edge (\begin{DoxyParamCaption}\item[{char}]{from}{, }\item[{char}]{to}{, }\item[{int}]{w}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Конструктор структуры \doxylink{struct_graph_1_1_edge}{Edge}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & Вершина, из которой исходит ребро \\
+\hline
+{\em to} & Вершина, в которую входит ребро \\
+\hline
+{\em w} & Вес ребра \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_graph_1_1_edge_a0c11a590028de1328eeea94e772f4987}\index{Graph::Edge@{Graph::Edge}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Graph::Edge@{Graph::Edge}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{struct_graph_1_1_edge_a0c11a590028de1328eeea94e772f4987} 
+bool Graph\+::\+Edge\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_graph_1_1_edge}{Edge}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{struct_graph_1_1_edge_ab3ef233f76bfbe50e179ad7871d0856d}\index{Graph::Edge@{Graph::Edge}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Graph::Edge@{Graph::Edge}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \label{struct_graph_1_1_edge_ab3ef233f76bfbe50e179ad7871d0856d} 
+bool Graph\+::\+Edge\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_graph_1_1_edge}{Edge}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{struct_graph_1_1_edge_a33c84a26a065ce4da7f3ac0f5c416a87}\index{Graph::Edge@{Graph::Edge}!operator==@{operator==}}
+\index{operator==@{operator==}!Graph::Edge@{Graph::Edge}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{struct_graph_1_1_edge_a33c84a26a065ce4da7f3ac0f5c416a87} 
+bool Graph\+::\+Edge\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_graph_1_1_edge}{Edge}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{struct_graph_1_1_edge_a5aa638c8f76426279f97cb7e98df2015}\index{Graph::Edge@{Graph::Edge}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!Graph::Edge@{Graph::Edge}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily \label{struct_graph_1_1_edge_a5aa638c8f76426279f97cb7e98df2015} 
+bool Graph\+::\+Edge\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_graph_1_1_edge}{Edge}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_graph_1_1_edge_a8ab52e344bc9a6b28c79d7ed0bcb368b}\index{Graph::Edge@{Graph::Edge}!v\_from@{v\_from}}
+\index{v\_from@{v\_from}!Graph::Edge@{Graph::Edge}}
+\doxysubsubsection{\texorpdfstring{v\_from}{v\_from}}
+{\footnotesize\ttfamily \label{struct_graph_1_1_edge_a8ab52e344bc9a6b28c79d7ed0bcb368b} 
+char Graph\+::\+Edge\+::v\+\_\+from}
+
+
+
+Вершина, из которой исходит ребро 
+
+\Hypertarget{struct_graph_1_1_edge_a52b32552e782050aff035839baecec4a}\index{Graph::Edge@{Graph::Edge}!v\_to@{v\_to}}
+\index{v\_to@{v\_to}!Graph::Edge@{Graph::Edge}}
+\doxysubsubsection{\texorpdfstring{v\_to}{v\_to}}
+{\footnotesize\ttfamily \label{struct_graph_1_1_edge_a52b32552e782050aff035839baecec4a} 
+char Graph\+::\+Edge\+::v\+\_\+to}
+
+
+
+Вершина, в которую входит ребро 
+
+\Hypertarget{struct_graph_1_1_edge_af90c3d708007073e0fcd9280d9d53b17}\index{Graph::Edge@{Graph::Edge}!weight@{weight}}
+\index{weight@{weight}!Graph::Edge@{Graph::Edge}}
+\doxysubsubsection{\texorpdfstring{weight}{weight}}
+{\footnotesize\ttfamily \label{struct_graph_1_1_edge_af90c3d708007073e0fcd9280d9d53b17} 
+int Graph\+::\+Edge\+::weight}
+
+
+
+Вес ребра 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Graph/\mbox{\hyperlink{_graph_8h}{Graph.\+h}}\end{DoxyCompactItemize}

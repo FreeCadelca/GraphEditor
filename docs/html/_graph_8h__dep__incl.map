@@ -1,0 +1,17 @@
+<map id="src/Graph/Graph.h" name="src/Graph/Graph.h">
+<area shape="rect" id="Node000001" title="Загаловочный файл для Graph.cpp. Реализация методов класса Graph." alt="" coords="140,5,268,31"/>
+<area shape="rect" id="Node000002" href="$_canvas_8h.html" title="Загаловочный файл для Canvas.cpp. Содержит функции, реализующие процесс рисования графа и анимации ал..." alt="" coords="74,79,222,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,44,152,80,148,77,175,41"/>
+<area shape="rect" id="Node000004" href="$_graph_editor_app_8h.html" title="Заголовочный файл класса GraphEditorApp." alt="" coords="192,153,328,193"/>
+<area shape="poly" id="edge8_Node000001_Node000004" title=" " alt="" coords="221,43,237,78,258,151,253,153,232,80,216,46"/>
+<area shape="rect" id="Node000007" href="$_graph_8cpp.html" title="Реализация методов класса Graph." alt="" coords="297,79,439,105"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="247,35,341,76,339,81,245,40"/>
+<area shape="poly" id="edge3_Node000002_Node000001" title=" " alt="" coords="172,66,199,30,204,33,177,69"/>
+<area shape="rect" id="Node000003" href="$_canvas_8cpp.html" title="Файл реализации для класса Canvas. Содержит функции, реализующие процесс рисования графа и анимации а..." alt="" coords="5,160,168,186"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="131,119,98,161,94,158,127,115"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="179,112,234,150,231,154,176,116"/>
+<area shape="rect" id="Node000005" href="$_graph_editor_app_8cpp.html" title="Реализация методов класса GraphEditorApp." alt="" coords="117,241,259,282"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="236,207,206,243,202,239,232,204"/>
+<area shape="rect" id="Node000006" href="$main_8cpp.html" title="Главный файл, запускающий работу программы." alt="" coords="284,249,380,275"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="288,204,324,247,320,250,284,207"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="Canvas::choose_color" name="Canvas::choose_color">
+<area shape="rect" id="Node000001" title="Открывает диалог выбора цвета." alt="" coords="267,5,418,31"/>
+<area shape="rect" id="Node000002" href="$class_graph_editor_app.html#a27322ef115781978eaa3164956ea6674" title="Конструктор класса Graph. Создаёт окно программы, собирая все объекты из design_new...." alt="" coords="5,5,219,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="251,21,219,21,219,16,251,16"/>
+</map>

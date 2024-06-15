@@ -347,6 +347,13 @@ TEST_F(GraphTestSuite, TestFind_SingleVertex) {
     EXPECT_EQ(root, 'A');
 }
 
+TEST_F(GraphTestSuite, TestFind_InvalidVertex) {
+    std::map<char, char> parent;
+    parent['A'] = 'A';
+
+    EXPECT_THROW(GraphTestAccessor::find(*graph, parent, 'B'), std::invalid_argument);
+}
+
 TEST_F(GraphTestSuite, TestFind_TwoVertices_SeparateSets) {
     std::map<char, char> parent;
     parent['A'] = 'A';

@@ -1,0 +1,57 @@
+\doxysection{Graph\+Editor\+App.\+h}
+\hypertarget{_graph_editor_app_8h_source}{}\label{_graph_editor_app_8h_source}\index{src/GraphEditorApp/GraphEditorApp.h@{src/GraphEditorApp/GraphEditorApp.h}}
+\mbox{\hyperlink{_graph_editor_app_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ GRAPHEDITOR\_GRAPHEDITORAPP\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ GRAPHEDITOR\_GRAPHEDITORAPP\_H}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <gtkmm.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_canvas_8h}{../../src/Canvas/Canvas.h}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{../Graph/Graph.h}}"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vertex_entry_dialog_8h}{../Dialogs/VertexEntryDialog/VertexEntryDialog.h}}"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_weight_entry_dialog_8h}{../Dialogs/WeightEntryDialog/WeightEntryDialog.h}}"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_path_entry_dialog_8h}{../Dialogs/PathEntryDialog/PathEntryDialog.h}}"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_graph_editor_app}{GraphEditorApp}}\ :\ \textcolor{keyword}{public}\ Gtk::ApplicationWindow\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ Gtk::Box\ *\mbox{\hyperlink{class_graph_editor_app_af407069fda3478af1f16e11ab683e36d}{main\_box}};\ }
+\DoxyCodeLine{00027\ \ \ \ \ Glib::RefPtr<Gtk::Label>\ \mbox{\hyperlink{class_graph_editor_app_a4c2193c23d9cce9219bd023f21a30b47}{printed\_graph\_label\_left}};\ }
+\DoxyCodeLine{00028\ \ \ \ \ Glib::RefPtr<Gtk::Label>\ \mbox{\hyperlink{class_graph_editor_app_ae9b65bf8579bdc26750fd2add090c07c}{printed\_graph\_label\_right}};\ }
+\DoxyCodeLine{00029\ \ \ \ \ Glib::RefPtr<Gtk::Label>\ \mbox{\hyperlink{class_graph_editor_app_a562f1f96712f96510420e8184642cfe4}{printed\_algorithm\_label}};\ }
+\DoxyCodeLine{00030\ \ \ \ \ Glib::RefPtr<Gtk::ToolButton>\ \mbox{\hyperlink{class_graph_editor_app_a1c55165c2bdada0f93a19a221148bd5a}{tool\_choose\_color}};\ }
+\DoxyCodeLine{00031\ \ \ \ \ Glib::RefPtr<Gtk::ToolButton>\ \mbox{\hyperlink{class_graph_editor_app_ae696f90f4de93c634eb46d91b77d9876}{tool\_add\_vertex}};\ }
+\DoxyCodeLine{00032\ \ \ \ \ Glib::RefPtr<Gtk::ToolButton>\ \mbox{\hyperlink{class_graph_editor_app_a2a32ac4d2ac9aec789f643fe181d0390}{tool\_add\_edge}};\ }
+\DoxyCodeLine{00033\ \ \ \ \ Glib::RefPtr<Gtk::ToolButton>\ \mbox{\hyperlink{class_graph_editor_app_a38dc81097a24dd1c266d22c5a939f95a}{tool\_change\_weight}};\ }
+\DoxyCodeLine{00034\ \ \ \ \ Glib::RefPtr<Gtk::Label>\ \mbox{\hyperlink{class_graph_editor_app_a6c3d8f54601a57adcaf82a8972e22d25}{next\_weight\_label}};\ }
+\DoxyCodeLine{00035\ \ \ \ \ Glib::RefPtr<Gtk::Button>\ \mbox{\hyperlink{class_graph_editor_app_ae37c251c546d8cd04fb92b1ae062e663}{print\_graph\_button}};\ }
+\DoxyCodeLine{00036\ \ \ \ \ Glib::RefPtr<Gtk::Button>\ \mbox{\hyperlink{class_graph_editor_app_a21ad2fce8b492a14efd79acc5516ef51}{run\_algorithm\_button}};\ }
+\DoxyCodeLine{00037\ \ \ \ \ Glib::RefPtr<Gtk::ComboBox>\ \mbox{\hyperlink{class_graph_editor_app_ac03796d6cd4b5c818aaeaac7a4b83ba7}{choose\_algorithm\_cb}};\ }
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ Glib::RefPtr<Gtk::Builder>\ \mbox{\hyperlink{class_graph_editor_app_a4bb8726b08738904dd052a1cf832cf96}{ui}};\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_graph_editor_app_ae1ab6186138d28dced627ab1ab3878e3}{run\_error\_dialog}}(\textcolor{keyword}{const}\ std::string\ \&message);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{class_graph_editor_app_a27322ef115781978eaa3164956ea6674}{GraphEditorApp}}();}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_graph_editor_app_a29700b7c50919df9aa8b57967f54d711}{on\_change\_weight}}();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_graph_editor_app_ae6e09a88077be5d3f9191fc37d6bb239}{print\_graph\_data}}();}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_graph_editor_app_a068a6a8ff68b79345899e6ad0831d9e1}{print\_algorithm}}(\textcolor{keyword}{const}\ std::string\ \&test\_input\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{class_graph_editor_app_ac0d0b0d2e105692e0af8e8d80d1832a2}{getCenterOfWindow}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ std::string\ \mbox{\hyperlink{class_graph_editor_app_a861100aa72135b6465e043063c84db3b}{handling\_new\_weight}}(Glib::ustring\ new\_weight);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_graph_editor_app_a1d06244e22043ef8d430d8e87cbbc8e8}{setAlgorithmName}}(\textcolor{keyword}{const}\ std::string\ \&algorithm);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ std::string\ \mbox{\hyperlink{class_graph_editor_app_a04d7a5189e7b511b260bf30cbc566815}{getAlgorithmName}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00061\ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{comment}{//}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GRAPHEDITOR\_GRAPHEDITORAPP\_H}}
+
+\end{DoxyCode}

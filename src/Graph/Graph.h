@@ -1,6 +1,10 @@
-//
-// Created by Dmitriy on 20.04.2024.
-//
+/**
+ * @file Graph.h
+ * @brief Загаловочный файл для Graph.cpp. Реализация методов класса Graph.
+ *
+ * * @authors
+ * София Бердус: Алгоритмы, матрица смежности, таблица смежности, список ребёр.
+ */
 
 #ifndef GRAPHEDITOR_GRAPH_H
 #define GRAPHEDITOR_GRAPH_H

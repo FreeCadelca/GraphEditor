@@ -1,0 +1,7 @@
+<map id="WeightEntryDialog::get_text" name="WeightEntryDialog::get_text">
+<area shape="rect" id="Node000001" title="метод извлечения текста из поля ввода" alt="" coords="450,5,587,46"/>
+<area shape="rect" id="Node000002" href="$class_graph_editor_app.html#a29700b7c50919df9aa8b57967f54d711" title="Метод вызова смены веса." alt="" coords="267,5,402,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="435,28,402,28,402,23,435,23"/>
+<area shape="rect" id="Node000003" href="$class_graph_editor_app.html#a27322ef115781978eaa3164956ea6674" title="Конструктор класса Graph. Создаёт окно программы, собирая все объекты из design_new...." alt="" coords="5,13,219,39"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="251,28,219,28,219,23,251,23"/>
+</map>

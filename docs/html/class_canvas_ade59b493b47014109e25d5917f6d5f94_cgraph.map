@@ -1,0 +1,9 @@
+<map id="Canvas::outline_vertex" name="Canvas::outline_vertex">
+<area shape="rect" id="Node000001" title="Обводит вершину указанным цветом. Необходима для анимации алгоритмов." alt="" coords="5,31,161,56"/>
+<area shape="rect" id="Node000002" href="$class_canvas.html#ae9acb271c74d9be4b9cf424f68c39491" title="Получает контекст рисования для указанной поверхности." alt="" coords="209,5,351,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,31,193,27,194,32,161,36"/>
+<area shape="rect" id="Node000003" href="$class_graph.html#ab3a1b6c8ee07002735e989f7abaa8106" title="Получение единственного экземпляра класса Graph." alt="" coords="214,55,346,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="161,50,199,55,198,60,161,56"/>
+<area shape="rect" id="Node000004" href="$class_graph.html#ae4c72b8ac4d693c49800a4c7e273654f" title="Приватный конструктор для реализации singleton." alt="" coords="399,55,498,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="346,65,384,65,384,70,346,70"/>
+</map>

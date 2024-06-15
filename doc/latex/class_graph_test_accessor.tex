@@ -1,0 +1,89 @@
+\doxysection{Класс Graph\+Test\+Accessor}
+\hypertarget{class_graph_test_accessor}{}\label{class_graph_test_accessor}\index{GraphTestAccessor@{GraphTestAccessor}}
+
+
+Класс для тестирования приватных методов класса \doxylink{class_graph}{Graph}.  
+
+
+
+
+{\ttfamily \#include $<$Graph.\+h$>$}
+
+\doxysubsubsection*{Открытые статические члены}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_graph_test_accessor_a2f8d25fe5c8062214677b687094f4858}{run\+\_\+bfs}} (\mbox{\hyperlink{class_graph}{Graph}} \&graph, char start\+\_\+vertex)
+\item 
+static void \mbox{\hyperlink{class_graph_test_accessor_a7fbe64b24e6cc2542c19c91b62e9cad1}{run\+\_\+dfs}} (\mbox{\hyperlink{class_graph}{Graph}} \&graph, char start\+\_\+vertex)
+\item 
+static void \mbox{\hyperlink{class_graph_test_accessor_a8002311e0881576f7d6cd81d89ed4fc4}{dijkstra}} (\mbox{\hyperlink{class_graph}{Graph}} \&graph, char start\+\_\+vertex)
+\item 
+static void \mbox{\hyperlink{class_graph_test_accessor_a5ef1b8f69731cea903c2446211a0a688}{bellman\+\_\+ford}} (\mbox{\hyperlink{class_graph}{Graph}} \&graph, char start\+\_\+vertex)
+\item 
+static void \mbox{\hyperlink{class_graph_test_accessor_abf2c2a2df44f0df985abfebc0c8250c9}{kruskal}} (\mbox{\hyperlink{class_graph}{Graph}} \&graph)
+\item 
+static void \mbox{\hyperlink{class_graph_test_accessor_af885b80af40e1b507efc9864407c980b}{prim}} (\mbox{\hyperlink{class_graph}{Graph}} \&graph)
+\item 
+static char \mbox{\hyperlink{class_graph_test_accessor_a9fbdc6158c3ae43d7a14fbc144b1f748}{find}} (\mbox{\hyperlink{class_graph}{Graph}} \&graph, std\+::map$<$ char, char $>$ \&parent, char vertex)
+\item 
+static void \mbox{\hyperlink{class_graph_test_accessor_a51ce2c851307003551d147b5c0bf12ba}{union\+\_\+sets}} (\mbox{\hyperlink{class_graph}{Graph}} \&graph, std\+::map$<$ char, char $>$ \&parent, char u, char v)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Класс для тестирования приватных методов класса \doxylink{class_graph}{Graph}. 
+
+\doxysubsection{Методы}
+\Hypertarget{class_graph_test_accessor_a5ef1b8f69731cea903c2446211a0a688}\index{GraphTestAccessor@{GraphTestAccessor}!bellman\_ford@{bellman\_ford}}
+\index{bellman\_ford@{bellman\_ford}!GraphTestAccessor@{GraphTestAccessor}}
+\doxysubsubsection{\texorpdfstring{bellman\_ford()}{bellman\_ford()}}
+{\footnotesize\ttfamily \label{class_graph_test_accessor_a5ef1b8f69731cea903c2446211a0a688} 
+static void Graph\+Test\+Accessor\+::bellman\+\_\+ford (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}} \&}]{graph}{, }\item[{char}]{start\+\_\+vertex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_graph_test_accessor_a8002311e0881576f7d6cd81d89ed4fc4}\index{GraphTestAccessor@{GraphTestAccessor}!dijkstra@{dijkstra}}
+\index{dijkstra@{dijkstra}!GraphTestAccessor@{GraphTestAccessor}}
+\doxysubsubsection{\texorpdfstring{dijkstra()}{dijkstra()}}
+{\footnotesize\ttfamily \label{class_graph_test_accessor_a8002311e0881576f7d6cd81d89ed4fc4} 
+static void Graph\+Test\+Accessor\+::dijkstra (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}} \&}]{graph}{, }\item[{char}]{start\+\_\+vertex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_graph_test_accessor_a9fbdc6158c3ae43d7a14fbc144b1f748}\index{GraphTestAccessor@{GraphTestAccessor}!find@{find}}
+\index{find@{find}!GraphTestAccessor@{GraphTestAccessor}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily \label{class_graph_test_accessor_a9fbdc6158c3ae43d7a14fbc144b1f748} 
+static char Graph\+Test\+Accessor\+::find (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}} \&}]{graph}{, }\item[{std\+::map$<$ char, char $>$ \&}]{parent}{, }\item[{char}]{vertex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_graph_test_accessor_abf2c2a2df44f0df985abfebc0c8250c9}\index{GraphTestAccessor@{GraphTestAccessor}!kruskal@{kruskal}}
+\index{kruskal@{kruskal}!GraphTestAccessor@{GraphTestAccessor}}
+\doxysubsubsection{\texorpdfstring{kruskal()}{kruskal()}}
+{\footnotesize\ttfamily \label{class_graph_test_accessor_abf2c2a2df44f0df985abfebc0c8250c9} 
+static void Graph\+Test\+Accessor\+::kruskal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}} \&}]{graph}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_graph_test_accessor_af885b80af40e1b507efc9864407c980b}\index{GraphTestAccessor@{GraphTestAccessor}!prim@{prim}}
+\index{prim@{prim}!GraphTestAccessor@{GraphTestAccessor}}
+\doxysubsubsection{\texorpdfstring{prim()}{prim()}}
+{\footnotesize\ttfamily \label{class_graph_test_accessor_af885b80af40e1b507efc9864407c980b} 
+static void Graph\+Test\+Accessor\+::prim (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}} \&}]{graph}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_graph_test_accessor_a2f8d25fe5c8062214677b687094f4858}\index{GraphTestAccessor@{GraphTestAccessor}!run\_bfs@{run\_bfs}}
+\index{run\_bfs@{run\_bfs}!GraphTestAccessor@{GraphTestAccessor}}
+\doxysubsubsection{\texorpdfstring{run\_bfs()}{run\_bfs()}}
+{\footnotesize\ttfamily \label{class_graph_test_accessor_a2f8d25fe5c8062214677b687094f4858} 
+static void Graph\+Test\+Accessor\+::run\+\_\+bfs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}} \&}]{graph}{, }\item[{char}]{start\+\_\+vertex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_graph_test_accessor_a7fbe64b24e6cc2542c19c91b62e9cad1}\index{GraphTestAccessor@{GraphTestAccessor}!run\_dfs@{run\_dfs}}
+\index{run\_dfs@{run\_dfs}!GraphTestAccessor@{GraphTestAccessor}}
+\doxysubsubsection{\texorpdfstring{run\_dfs()}{run\_dfs()}}
+{\footnotesize\ttfamily \label{class_graph_test_accessor_a7fbe64b24e6cc2542c19c91b62e9cad1} 
+static void Graph\+Test\+Accessor\+::run\+\_\+dfs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}} \&}]{graph}{, }\item[{char}]{start\+\_\+vertex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_graph_test_accessor_a51ce2c851307003551d147b5c0bf12ba}\index{GraphTestAccessor@{GraphTestAccessor}!union\_sets@{union\_sets}}
+\index{union\_sets@{union\_sets}!GraphTestAccessor@{GraphTestAccessor}}
+\doxysubsubsection{\texorpdfstring{union\_sets()}{union\_sets()}}
+{\footnotesize\ttfamily \label{class_graph_test_accessor_a51ce2c851307003551d147b5c0bf12ba} 
+static void Graph\+Test\+Accessor\+::union\+\_\+sets (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_graph}{Graph}} \&}]{graph}{, }\item[{std\+::map$<$ char, char $>$ \&}]{parent}{, }\item[{char}]{u}{, }\item[{char}]{v}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Объявления и описания членов класса находятся в файле\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Graph/\mbox{\hyperlink{_graph_8h}{Graph.\+h}}\end{DoxyCompactItemize}

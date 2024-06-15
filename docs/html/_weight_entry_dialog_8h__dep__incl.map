@@ -1,0 +1,11 @@
+<map id="src/Dialogs/WeightEntryDialog/WeightEntryDialog.h" name="src/Dialogs/WeightEntryDialog/WeightEntryDialog.h">
+<area shape="rect" id="Node000001" title="Заголовочный файл класса WeightEntryDialog." alt="" coords="101,5,301,46"/>
+<area shape="rect" id="Node000002" href="$_weight_entry_dialog_8cpp.html" title="Реализация методов класса WeightEntryDialog." alt="" coords="5,94,205,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,59,128,96,125,92,166,55"/>
+<area shape="rect" id="Node000003" href="$_graph_editor_app_8h.html" title="Заголовочный файл класса GraphEditorApp." alt="" coords="229,94,365,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="236,55,277,92,274,96,232,59"/>
+<area shape="rect" id="Node000004" href="$_graph_editor_app_8cpp.html" title="Реализация методов класса GraphEditorApp." alt="" coords="154,183,296,223"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="273,149,243,184,239,181,269,145"/>
+<area shape="rect" id="Node000005" href="$main_8cpp.html" title="Главный файл, запускающий работу программы." alt="" coords="321,190,417,216"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="325,145,361,188,357,192,321,148"/>
+</map>

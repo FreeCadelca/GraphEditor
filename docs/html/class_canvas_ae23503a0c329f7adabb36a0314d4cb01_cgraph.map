@@ -1,0 +1,23 @@
+<map id="Canvas::redrawGraph" name="Canvas::redrawGraph">
+<area shape="rect" id="Node000001" title="Перерисовывает граф. Необходима при выполнении анимации нового алгоритма после выполнения другого алг..." alt="" coords="5,128,154,153"/>
+<area shape="rect" id="Node000002" href="$class_canvas.html#a1de3e7accb9c531f4b71461b5e7dc7b6" title="Очищает временный буфер, заполняя его белым цветом." alt="" coords="214,5,352,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,125,142,91,200,55,210,50,212,55,203,60,145,96,99,129"/>
+<area shape="rect" id="Node000004" href="$class_canvas.html#a06773e5b2ef8190e3f7b361754371cd8" title="Рисует стрелку вместе с ее весом на холсте." alt="" coords="204,185,362,211"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="129,151,221,178,219,183,127,156"/>
+<area shape="rect" id="Node000006" href="$class_graph.html#ab3a1b6c8ee07002735e989f7abaa8106" title="Получение единственного экземпляра класса Graph." alt="" coords="461,234,593,260"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="96,151,141,188,171,206,203,220,264,237,328,246,390,250,445,250,445,255,390,255,328,252,263,242,201,226,168,211,138,192,93,156"/>
+<area shape="rect" id="Node000008" href="$class_canvas.html#a2e754e59308b6b6c354cdc0495a7e048" title="Рисует вершину на холсте." alt="" coords="202,70,364,96"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="127,124,219,98,221,103,129,129"/>
+<area shape="rect" id="Node000009" href="$class_canvas.html#adb4da40c6b895dd845f2566d7c40cbe6" title="Обновляет основной буфер." alt="" coords="209,120,357,161"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="154,138,193,138,193,143,154,143"/>
+<area shape="rect" id="Node000003" href="$class_canvas.html#ae9acb271c74d9be4b9cf424f68c39491" title="Получает контекст рисования для указанной поверхности." alt="" coords="456,100,598,125"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="344,44,475,91,474,96,342,49"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="327,182,363,170,476,129,478,134,365,175,329,187"/>
+<area shape="rect" id="Node000005" href="$class_canvas.html#afd8e4fde77f2d03f89765a5318fc20e5" title="Вычисляет скорректированные координаты для рисования стрелки." alt="" coords="412,185,642,211"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="363,195,396,195,396,200,363,200"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="351,209,446,228,445,233,350,214"/>
+<area shape="rect" id="Node000007" href="$class_graph.html#ae4c72b8ac4d693c49800a4c7e273654f" title="Приватный конструктор для реализации singleton." alt="" coords="690,234,790,260"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="594,244,675,244,675,250,594,250"/>
+<area shape="poly" id="edge9_Node000008_Node000003" title=" " alt="" coords="365,90,441,99,440,105,364,95"/>
+<area shape="poly" id="edge12_Node000009_Node000003" title=" " alt="" coords="357,129,440,120,441,125,358,135"/>
+</map>

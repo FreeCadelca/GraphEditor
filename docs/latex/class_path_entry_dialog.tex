@@ -1,0 +1,138 @@
+\doxysection{Path\+Entry\+Dialog Class Reference}
+\hypertarget{class_path_entry_dialog}{}\label{class_path_entry_dialog}\index{PathEntryDialog@{PathEntryDialog}}
+
+
+Класс, реализующий диалог ввода двух вершин  
+
+
+
+
+{\ttfamily \#include $<$Path\+Entry\+Dialog.\+h$>$}
+
+Inheritance diagram for Path\+Entry\+Dialog\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_path_entry_dialog}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_path_entry_dialog_af94e50b07eb16527b5a86da6f3c7a2cc}{Path\+Entry\+Dialog}} (int center\+\_\+x, int center\+\_\+y)
+\begin{DoxyCompactList}\small\item\em Конструктор, вызывающий диалог с центром в указанных координатах \end{DoxyCompactList}\item 
+Glib\+::ustring \mbox{\hyperlink{class_path_entry_dialog_a75111c3b94b84c7f1e24d1f5d3c7e2e1}{get\+\_\+vertex\+\_\+from}} () const
+\begin{DoxyCompactList}\small\item\em метод извлечения текста из левого поля ввода \end{DoxyCompactList}\item 
+Glib\+::ustring \mbox{\hyperlink{class_path_entry_dialog_aa05fd28ff5e9b3ec49c04d72f86c8442}{get\+\_\+vertex\+\_\+to}} () const
+\begin{DoxyCompactList}\small\item\em метод извлечения текста из правого поля ввода \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Gtk\+::\+Label \mbox{\hyperlink{class_path_entry_dialog_a18191f81905016bc8e3e484ba29da3ed}{lbl\+\_\+left}}
+\begin{DoxyCompactList}\small\item\em Левый ярлык \end{DoxyCompactList}\item 
+Gtk\+::\+Label \mbox{\hyperlink{class_path_entry_dialog_a77ca7670469e8f3f3251d39d035a2a91}{lbl\+\_\+right}}
+\begin{DoxyCompactList}\small\item\em Правый ярлык \end{DoxyCompactList}\item 
+Gtk\+::\+Entry \mbox{\hyperlink{class_path_entry_dialog_aeed38b41d4156c25542ccfbc9108dd0a}{entry1}}
+\begin{DoxyCompactList}\small\item\em Левое поле ввода \end{DoxyCompactList}\item 
+Gtk\+::\+Entry \mbox{\hyperlink{class_path_entry_dialog_a7e57b8385d203ead30e73bd23c4feede}{entry2}}
+\begin{DoxyCompactList}\small\item\em Правое поле ввода \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс, реализующий диалог ввода двух вершин 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_path_entry_dialog_af94e50b07eb16527b5a86da6f3c7a2cc}\index{PathEntryDialog@{PathEntryDialog}!PathEntryDialog@{PathEntryDialog}}
+\index{PathEntryDialog@{PathEntryDialog}!PathEntryDialog@{PathEntryDialog}}
+\doxysubsubsection{\texorpdfstring{PathEntryDialog()}{PathEntryDialog()}}
+{\footnotesize\ttfamily \label{class_path_entry_dialog_af94e50b07eb16527b5a86da6f3c7a2cc} 
+Path\+Entry\+Dialog\+::\+Path\+Entry\+Dialog (\begin{DoxyParamCaption}\item[{int}]{center\+\_\+x}{, }\item[{int}]{center\+\_\+y}{}\end{DoxyParamCaption})}
+
+
+
+Конструктор, вызывающий диалог с центром в указанных координатах 
+
+
+\begin{DoxyParams}{Parameters}
+{\em center\+\_\+x} & центр диалога по оси оX\\
+\hline
+{\em center\+\_\+y} & центр диалога по оси оY \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_path_entry_dialog_a75111c3b94b84c7f1e24d1f5d3c7e2e1}\index{PathEntryDialog@{PathEntryDialog}!get\_vertex\_from@{get\_vertex\_from}}
+\index{get\_vertex\_from@{get\_vertex\_from}!PathEntryDialog@{PathEntryDialog}}
+\doxysubsubsection{\texorpdfstring{get\_vertex\_from()}{get\_vertex\_from()}}
+{\footnotesize\ttfamily \label{class_path_entry_dialog_a75111c3b94b84c7f1e24d1f5d3c7e2e1} 
+Glib\+::ustring Path\+Entry\+Dialog\+::get\+\_\+vertex\+\_\+from (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+метод извлечения текста из левого поля ввода 
+
+\begin{DoxyReturn}{Returns}
+строка из левого поля ввода 
+\end{DoxyReturn}
+\Hypertarget{class_path_entry_dialog_aa05fd28ff5e9b3ec49c04d72f86c8442}\index{PathEntryDialog@{PathEntryDialog}!get\_vertex\_to@{get\_vertex\_to}}
+\index{get\_vertex\_to@{get\_vertex\_to}!PathEntryDialog@{PathEntryDialog}}
+\doxysubsubsection{\texorpdfstring{get\_vertex\_to()}{get\_vertex\_to()}}
+{\footnotesize\ttfamily \label{class_path_entry_dialog_aa05fd28ff5e9b3ec49c04d72f86c8442} 
+Glib\+::ustring Path\+Entry\+Dialog\+::get\+\_\+vertex\+\_\+to (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+метод извлечения текста из правого поля ввода 
+
+\begin{DoxyReturn}{Returns}
+строка из правого поля ввода 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_path_entry_dialog_aeed38b41d4156c25542ccfbc9108dd0a}\index{PathEntryDialog@{PathEntryDialog}!entry1@{entry1}}
+\index{entry1@{entry1}!PathEntryDialog@{PathEntryDialog}}
+\doxysubsubsection{\texorpdfstring{entry1}{entry1}}
+{\footnotesize\ttfamily \label{class_path_entry_dialog_aeed38b41d4156c25542ccfbc9108dd0a} 
+Gtk\+::\+Entry Path\+Entry\+Dialog\+::entry1\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Левое поле ввода 
+
+\Hypertarget{class_path_entry_dialog_a7e57b8385d203ead30e73bd23c4feede}\index{PathEntryDialog@{PathEntryDialog}!entry2@{entry2}}
+\index{entry2@{entry2}!PathEntryDialog@{PathEntryDialog}}
+\doxysubsubsection{\texorpdfstring{entry2}{entry2}}
+{\footnotesize\ttfamily \label{class_path_entry_dialog_a7e57b8385d203ead30e73bd23c4feede} 
+Gtk\+::\+Entry Path\+Entry\+Dialog\+::entry2\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Правое поле ввода 
+
+\Hypertarget{class_path_entry_dialog_a18191f81905016bc8e3e484ba29da3ed}\index{PathEntryDialog@{PathEntryDialog}!lbl\_left@{lbl\_left}}
+\index{lbl\_left@{lbl\_left}!PathEntryDialog@{PathEntryDialog}}
+\doxysubsubsection{\texorpdfstring{lbl\_left}{lbl\_left}}
+{\footnotesize\ttfamily \label{class_path_entry_dialog_a18191f81905016bc8e3e484ba29da3ed} 
+Gtk\+::\+Label Path\+Entry\+Dialog\+::lbl\+\_\+left\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Левый ярлык 
+
+\Hypertarget{class_path_entry_dialog_a77ca7670469e8f3f3251d39d035a2a91}\index{PathEntryDialog@{PathEntryDialog}!lbl\_right@{lbl\_right}}
+\index{lbl\_right@{lbl\_right}!PathEntryDialog@{PathEntryDialog}}
+\doxysubsubsection{\texorpdfstring{lbl\_right}{lbl\_right}}
+{\footnotesize\ttfamily \label{class_path_entry_dialog_a77ca7670469e8f3f3251d39d035a2a91} 
+Gtk\+::\+Label Path\+Entry\+Dialog\+::lbl\+\_\+right\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Правый ярлык 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Dialogs/\+Path\+Entry\+Dialog/\mbox{\hyperlink{_path_entry_dialog_8h}{Path\+Entry\+Dialog.\+h}}\item 
+src/\+Dialogs/\+Path\+Entry\+Dialog/\mbox{\hyperlink{_path_entry_dialog_8cpp}{Path\+Entry\+Dialog.\+cpp}}\end{DoxyCompactItemize}

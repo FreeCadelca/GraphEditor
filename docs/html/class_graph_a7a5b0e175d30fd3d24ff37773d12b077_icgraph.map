@@ -1,0 +1,15 @@
+<map id="Graph::union_sets" name="Graph::union_sets">
+<area shape="rect" id="Node000001" title="Вспомогательная функция для объединения двух деревьев в структуре данных &quot;дискретные множества&quot;." alt="" coords="846,70,973,96"/>
+<area shape="rect" id="Node000002" href="$class_graph.html#a1de36bcb031663da79fc00f5aa0eaede" title="Реализация алгоритма Краскала для поиска минимального остовного дерева в графе." alt="" coords="672,41,779,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="830,73,778,65,779,59,831,68"/>
+<area shape="rect" id="Node000007" href="$class_graph_test_accessor.html#a51ce2c851307003551d147b5c0bf12ba" title=" " alt="" coords="653,91,798,131"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="831,98,799,103,798,97,830,92"/>
+<area shape="rect" id="Node000003" href="$class_graph_test_accessor.html#abf2c2a2df44f0df985abfebc0c8250c9" title=" " alt="" coords="461,5,605,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="657,46,605,39,606,34,657,41"/>
+<area shape="rect" id="Node000004" href="$class_graph.html#adda7d03cd8f8d6b9d5440f761137e9ea" title="Выполнение указанного алгоритма." alt="" coords="465,70,602,96"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="657,67,603,75,602,70,656,61"/>
+<area shape="rect" id="Node000005" href="$class_graph_editor_app.html#a068a6a8ff68b79345899e6ad0831d9e1" title="Метод вызова алгоритма и его печать на ярлыке алгоритма." alt="" coords="267,63,413,103"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="449,86,413,86,413,80,449,80"/>
+<area shape="rect" id="Node000006" href="$class_graph_editor_app.html#a27322ef115781978eaa3164956ea6674" title="Конструктор класса Graph. Создаёт окно программы, собирая все объекты из design_new...." alt="" coords="5,70,219,96"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="251,86,219,86,219,80,251,80"/>
+</map>
