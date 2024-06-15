@@ -14,12 +14,13 @@
 /**
  * @brief Класс, реализующий диалог ввода одной вершины
  */
-class VertexEntryDialog : public Gtk::Dialog  {
+class VertexEntryDialog : public Gtk::Dialog {
 private:
     Gtk::Label lbl; ///< Ярлык с запросом
     Gtk::Entry entry; ///< Поле для ввода
 public:
     VertexEntryDialog(int center_x, int center_y);
+
     Glib::ustring get_text() const;
 };
 

@@ -36,11 +36,13 @@ private:
     std::pair<char, char> next_edge_to_append;
 
     Gtk::ColorChooserDialog *color_chooser_dialog;
+
     friend class GraphTestSuite;
+
     friend class GraphTestAccessor;
 
 public:
-    static Canvas* getInstance();
+    static Canvas *getInstance();
 
     static const int DEFAULT;
     static const int DRAWING;
@@ -100,7 +102,7 @@ public:
      * @param need_clear Нужно ли очищать поверхность перед использованием.
      * @return Контекст рисования.
      */
-    Cairo::RefPtr <Cairo::Context> get_context(Cairo::RefPtr <Cairo::Surface> &surface, bool need_clear = false);
+    Cairo::RefPtr<Cairo::Context> get_context(Cairo::RefPtr<Cairo::Surface> &surface, bool need_clear = false);
 
     /**
      * @brief Рисует вершину на холсте.
@@ -122,7 +124,7 @@ public:
      * @param cr Контекст рисования.
      * @return true, если отрисовка успешна.
      */
-    bool on_draw(const Cairo::RefPtr <Cairo::Context> &cr) override;
+    bool on_draw(const Cairo::RefPtr<Cairo::Context> &cr) override;
 
     /**
      * @brief Меняет инструмент рисования.
@@ -181,8 +183,8 @@ public:
     void update_main_buffer();
 
 
-    Cairo::RefPtr <Cairo::Surface> temp_buffer;
-    Cairo::RefPtr <Cairo::Surface> buffer;
+    Cairo::RefPtr<Cairo::Surface> temp_buffer;
+    Cairo::RefPtr<Cairo::Surface> buffer;
 
     std::tuple<double, double, double, double>
     calculateArrowCoordinates(double start_x, double start_y, double end_x, double end_y, double vertex_radius);

@@ -179,6 +179,7 @@ void GraphEditorApp::print_graph_data() {
         this->print_graph_button->set_label("Print Graph");
     }
 }
+
 /**
  * @brief Метод вызова алгоритма и его печать на ярлыке алгоритма.
  *
@@ -287,7 +288,7 @@ std::pair<int, int> GraphEditorApp::getCenterOfWindow() {
  * Метод вызывается из мест, когда нужно оповестить пользователя о неверно введённых данных или неправильной работе программы.
  * Диалог ошибки содержит поле с сообщением, в которое записывается строка message
  */
-void GraphEditorApp::run_error_dialog(const std::string& message) {
+void GraphEditorApp::run_error_dialog(const std::string &message) {
     Gtk::MessageDialog error_dialog(
             message,
             false, Gtk::MESSAGE_ERROR,

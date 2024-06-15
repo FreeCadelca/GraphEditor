@@ -25,6 +25,7 @@
  * @brief Класс для тестирования приватных методов класса Graph.
  */
 class GraphTestSuite;
+
 class AppTestSuite;
 
 
@@ -33,7 +34,7 @@ class AppTestSuite;
  */
 class Graph {
 private:
-    static Graph* instance; ///< Указатель на единственный экземпляр класса (singleton)
+    static Graph *instance; ///< Указатель на единственный экземпляр класса (singleton)
     Graph(); ///< Приватный конструктор для реализации singleton
 
     /**
@@ -52,19 +53,19 @@ private:
          */
         Edge(char from, char to, int w) : v_from(from), v_to(to), weight(w) {}
 
-        bool operator>(const Edge& other) const {
+        bool operator>(const Edge &other) const {
             return weight > other.weight;
         }
 
-        bool operator<(const Edge& other) const {
+        bool operator<(const Edge &other) const {
             return weight < other.weight;
         }
 
-        bool operator==(const Edge& other) const {
+        bool operator==(const Edge &other) const {
             return v_from == other.v_from && v_to == other.v_to && weight == other.weight;
         }
 
-        bool operator!=(const Edge& other) const {
+        bool operator!=(const Edge &other) const {
             return !(*this == other);
         }
     };
@@ -89,6 +90,7 @@ private:
     void prim();
 
     friend class GraphTestSuite;
+
     friend class GraphTestAccessor;
 
     friend class AppTestSuite;
@@ -148,7 +150,7 @@ public:
      * @param start_vertex Начальная вершина (по умолчанию '\n')
      * @param end_vertex Конечная вершина (по умолчанию '\n')
      */
-    void runAlgorithm(const std::string& algorithm, char start_vertex = '\n', char end_vertex = '\n');
+    void runAlgorithm(const std::string &algorithm, char start_vertex = '\n', char end_vertex = '\n');
 };
 
 /**
@@ -156,28 +158,35 @@ public:
  */
 class GraphTestAccessor {
 public:
-    static void run_bfs(Graph& graph, char start_vertex) {
+    static void run_bfs(Graph &graph, char start_vertex) {
         graph.run_bfs(start_vertex);
     }
-    static void run_dfs(Graph& graph, char start_vertex) {
+
+    static void run_dfs(Graph &graph, char start_vertex) {
         graph.run_dfs(start_vertex);
     }
-    static void dijkstra(Graph& graph, char start_vertex) {
+
+    static void dijkstra(Graph &graph, char start_vertex) {
         graph.dijkstra(start_vertex);
     }
-    static void bellman_ford(Graph& graph, char start_vertex) {
+
+    static void bellman_ford(Graph &graph, char start_vertex) {
         graph.bellman_ford(start_vertex);
     }
-    static void kruskal(Graph& graph) {
+
+    static void kruskal(Graph &graph) {
         graph.kruskal();
     }
-    static void prim(Graph& graph) {
+
+    static void prim(Graph &graph) {
         graph.prim();
     }
-    static char find(Graph& graph, std::map<char, char> &parent, char vertex) {
+
+    static char find(Graph &graph, std::map<char, char> &parent, char vertex) {
         return graph.find(parent, vertex);
     }
-    static void union_sets(Graph& graph, std::map<char, char> &parent, char u, char v) {
+
+    static void union_sets(Graph &graph, std::map<char, char> &parent, char u, char v) {
         graph.union_sets(parent, u, v);
     }
 };
